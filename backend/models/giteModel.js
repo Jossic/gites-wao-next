@@ -37,7 +37,7 @@ const giteSchema = mongoose.Schema(
 			data: Buffer,
 			contentType: String,
 		},
-		imagesCarrousel: {
+		autresImages: {
 			data: Buffer,
 			contentType: String,
 		},
@@ -63,6 +63,9 @@ const giteSchema = mongoose.Schema(
 		reviews: [reviewSchema],
 		capacite: {
 			type: Number,
+		},
+		CalendrierLink: {
+			type: String,
 		},
 	},
 	{
