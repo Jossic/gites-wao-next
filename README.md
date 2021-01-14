@@ -1,4 +1,7 @@
 # gites-wao-next
 
-frontend
+##frontend
 npm i reactstrap bootstrap google-map-react
+
+##backend
+npm i express dotenv colors morgan
