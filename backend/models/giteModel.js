@@ -17,4 +17,6 @@ const giteSchema = mongoose.Schema(
 	}
 );
 
-module.exports = mongoose.model('Gite', giteSchema);
+const Gite = mongoose.model('Gite', giteSchema);
+
+export default Gite;

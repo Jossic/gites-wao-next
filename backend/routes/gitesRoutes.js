@@ -1,8 +1,9 @@
 import express from 'express';
 const router = express.Router();
-import { getGites } from '../controllers/giteController.js';
+import { getGites, getGiteByNom } from '../controllers/giteController.js';
 
 router.get('/');
-router.get('/gite/:nom', getGites);
+router.get('/gite/', getGites);
+router.get('/gite/:slug', getGiteByNom);
 
 export default router;
