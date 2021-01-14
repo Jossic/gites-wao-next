@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import connectDB from './config/db.js';
 
 import gitesRoutes from './routes/gitesRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json());
 
 app.use('/api', gitesRoutes);
+app.use('/api', userRoutes);
 
 // app.get('/api/config/paypal', (req, res) =>
 // 	res.send(process.env.PAYPAL_CLIENT_ID)
