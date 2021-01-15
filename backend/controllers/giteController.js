@@ -130,9 +130,9 @@ const createGite = asyncHandler(async (req, res) => {
 // @route     PUT /api/gites/:slug
 // @access    Private/Admin
 const updateGite = asyncHandler(async (req, res) => {
-	const slugAdresse = req.params.slug.toLowerCase();
+	const slug = req.params.slug.toLowerCase();
 
-	(await Gite.findOne([slugAdresse])).exec((err, ancienGite) => {
+	Gite.findOne({ slug }).exec((err, ancienGite) => {
 		if (err) {
 			return res.status(400).json({
 				error: err,
@@ -148,58 +148,83 @@ const updateGite = asyncHandler(async (req, res) => {
 					error: "Impossible d'uploader l'image",
 				});
 			}
+
+			let slugBeforeMerge = ancienGite.slug;
+			ancienGite = _.merge(ancienGite, fields);
+
+			ancienGite.slug = slugBeforeMerge;
+
+			const {
+				nom,
+				mtitle,
+				presGiteSEO,
+				slug,
+				mdesc,
+				logoGite,
+				imagesCarrousel,
+				autresImages,
+				couleur1,
+				couleur2,
+				videoLink,
+				texte1,
+				detailGite,
+				reviews,
+				capacite,
+				calendrierLink,
+				pdf,
+			} = fields;
+
+			if (presGiteSEO) {
+				ancienGite.mdesc = stripHtml(presGiteSEO.substring(0, 160));
+			}
+
+			if (nom) {
+				ancienGite.slug = slugify(nom).toLowerCase();
+			}
+			if (files.logoGite) {
+				if (files.logoGite.size > 10000000) {
+					return res.status(400).json({
+						error: "L'image est trop lourde (>1Mb)",
+					});
+				}
+				ancienGite.logoGite.data = fs.readFileSync(files.logoGite.path);
+				ancienGite.logoGite.contentType = files.logoGite.type;
+			}
+
+			if (files.imagesCarrousel) {
+				if (files.imagesCarrousel.size > 10000000) {
+					return res.status(400).json({
+						error: "L'image est trop lourde (>1Mb)",
+					});
+				}
+				ancienGite.imagesCarrousel.data = fs.readFileSync(
+					files.imagesCarrousel.path
+				);
+				ancienGite.imagesCarrousel.contentType =
+					files.imagesCarrousel.type;
+			}
+			if (files.autresImages) {
+				if (files.autresImages.size > 10000000) {
+					return res.status(400).json({
+						error: "L'image est trop lourde (>1Mb)",
+					});
+				}
+				ancienGite.autresImages.data = fs.readFileSync(
+					files.autresImages.path
+				);
+				ancienGite.autresImages.contentType = files.autresImages.type;
+			}
+
+			ancienGite.save((err, result) => {
+				if (err) {
+					return res.status(400).json({
+						error: err,
+					});
+				}
+				res.json(result);
+			});
 		});
 	});
-
-	console.log(slugAdresse);
-	const {
-		nom,
-		mtitle,
-		presGiteSEO,
-		slug,
-		mdesc,
-		logoGite,
-		imagesCarrousel,
-		autresImages,
-		couleur1,
-		couleur2,
-		videoLink,
-		texte1,
-		detailGite,
-		reviews,
-		capacite,
-		calendrierLink,
-		pdf,
-	} = req.body;
-
-	const gite = await Gite.findOne({ slugAdresse });
-
-	console.log(req.body);
-	if (gite) {
-		gite.nom = nom;
-		gite.mtitle = mtitle;
-		gite.slug = slugify(nom).toLowerCase();
-		gite.presGiteSEO = presGiteSEO;
-		gite.mdesc = stripHtml(presGiteSEO.substring(0, 160));
-		gite.logoGite = logoGite;
-		gite.imagesCarrousel = imagesCarrousel;
-		gite.autresImages = autresImages;
-		gite.couleur1 = couleur1;
-		gite.couleur2 = couleur2;
-		gite.videoLink = videoLink;
-		gite.texte1 = texte1;
-		gite.detailGite = detailGite;
-		gite.reviews = reviews;
-		gite.capacite = capacite;
-		gite.calendrierLink = calendrierLink;
-		gite.pdf = pdf;
-
-		const updatedGite = await Gite.save();
-		res.json(updatedGite);
-	} else {
-		res.status(404);
-		throw new Error('Gite non trouvé');
-	}
 });
 
 export { getGites, getGiteByNom, deleteGite, createGite, updateGite };
