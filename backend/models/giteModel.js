@@ -26,8 +26,16 @@ const giteSchema = mongoose.Schema(
 		mtitle: {
 			type: String,
 		},
+		presGiteSEO: {
+			type: String,
+		},
 		mdesc: {
 			type: {},
+		},
+		slug: {
+			type: String,
+			unique: true,
+			index: true,
 		},
 		logoGite: {
 			data: Buffer,
@@ -47,7 +55,7 @@ const giteSchema = mongoose.Schema(
 		couleur2: {
 			type: String,
 		},
-		vidéoLink: {
+		videoLink: {
 			type: String,
 		},
 		texte1: {
@@ -64,9 +72,10 @@ const giteSchema = mongoose.Schema(
 		capacite: {
 			type: Number,
 		},
-		CalendrierLink: {
+		calendrierLink: {
 			type: String,
 		},
+		pdf: {},
 	},
 	{
 		timestamps: true,

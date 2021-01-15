@@ -35,8 +35,8 @@ const admin = (req, res, next) => {
 		next();
 	} else {
 		res.status(401);
-		throw new Error('Non autorisé, non admin');
+		throw new Error("Non autorisé, vous n'êtes pas admin");
 	}
 };
 
-export { admin };
+export { protect, admin };
