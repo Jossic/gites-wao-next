@@ -29,10 +29,11 @@ const getGiteByNom = asyncHandler(async (req, res) => {
 const deleteGite = asyncHandler(async (req, res) => {
 	const slug = req.params.slug.toLowerCase();
 	const gite = await Gite.findOne({ slug });
+	console.log(gite);
 
 	if (gite) {
 		await gite.remove();
-		res.json({ message: 'Gite supprimé' });
+		res.json({ message: 'Ce gîte a bien été supprimé' });
 	} else {
 		res.status(404);
 		throw new Error('Gite non trouvé');
@@ -154,25 +155,7 @@ const updateGite = asyncHandler(async (req, res) => {
 
 			ancienGite.slug = slugBeforeMerge;
 
-			const {
-				nom,
-				mtitle,
-				presGiteSEO,
-				slug,
-				mdesc,
-				logoGite,
-				imagesCarrousel,
-				autresImages,
-				couleur1,
-				couleur2,
-				videoLink,
-				texte1,
-				detailGite,
-				reviews,
-				capacite,
-				calendrierLink,
-				pdf,
-			} = fields;
+			const { nom, presGiteSEO } = fields;
 
 			if (presGiteSEO) {
 				ancienGite.mdesc = stripHtml(presGiteSEO.substring(0, 160));
