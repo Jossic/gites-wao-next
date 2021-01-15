@@ -19,6 +19,7 @@
 		"express-async-handler": "^1.1.4",
 		"formidable": "^1.2.2",
 		"jsonwebtoken": "^8.5.1",
+		"lodash": "^4.17.20",
 		"mongoose": "^5.11.11",
 		"morgan": "^1.10.0",
 		"slugify": "^1.4.6",

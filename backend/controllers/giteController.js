@@ -4,6 +4,7 @@ import slugify from 'slugify';
 import stripHtml from 'string-strip-html';
 import formidable from 'formidable';
 import fs from 'fs';
+import _ from 'lodash';
 
 // @desc      Fetch all gites
 // @route     GET /api/gites
@@ -130,6 +131,27 @@ const createGite = asyncHandler(async (req, res) => {
 // @access    Private/Admin
 const updateGite = asyncHandler(async (req, res) => {
 	const slugAdresse = req.params.slug.toLowerCase();
+
+	(await Gite.findOne([slugAdresse])).exec((err, ancienGite) => {
+		if (err) {
+			return res.status(400).json({
+				error: err,
+			});
+		}
+
+		let form = new formidable.IncomingForm();
+		form.keepExtensions = true;
+
+		form.parse(req, (err, fields, files) => {
+			if (err) {
+				return res.status(400).json({
+					error: "Impossible d'uploader l'image",
+				});
+			}
+		});
+	});
+
+	console.log(slugAdresse);
 	const {
 		nom,
 		mtitle,
@@ -152,6 +174,7 @@ const updateGite = asyncHandler(async (req, res) => {
 
 	const gite = await Gite.findOne({ slugAdresse });
 
+	console.log(req.body);
 	if (gite) {
 		gite.nom = nom;
 		gite.mtitle = mtitle;
@@ -175,7 +198,7 @@ const updateGite = asyncHandler(async (req, res) => {
 		res.json(updatedGite);
 	} else {
 		res.status(404);
-		throw new Error('Produit non trouvé');
+		throw new Error('Gite non trouvé');
 	}
 });
 
