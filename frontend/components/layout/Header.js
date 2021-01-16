@@ -3,7 +3,7 @@ import { useState } from 'react';
 import NProgress from 'nprogress';
 import 'bootstrap/dist/css/bootstrap.css';
 import Link from 'next/link';
-import gites from '../../data';
+// import gites from '../../data';
 import Image from 'next/image';
 import {
 	Collapse,
@@ -19,6 +19,7 @@ import {
 	DropdownItem,
 	NavbarText,
 } from 'reactstrap';
+import { listGites } from '../../actions/giteActions';
 import Router from 'next/router';
 
 import '../../node_modules/nprogress/nprogress.css';
@@ -32,13 +33,19 @@ const Header = () => {
 
 	const toggle = () => setIsOpen(!isOpen);
 
-	const listGite = () => {
-		for (const key in gites) {
-			console.log(gites[key]);
-		}
-
-		console.log(gites[0]);
+	const gites = () => {
+		listGites().then((data) => {
+			// console.log('data vaut ==>', data);
+			if (data.error) {
+				console.log(data.error);
+			} else {
+				let listNom = Object.values(data);
+				console.log(listNom);
+				return { listNom };
+			}
+		});
 	};
+
 	return (
 		<div>
 			<Navbar color='dark' dark expand='md'>
@@ -52,11 +59,13 @@ const Header = () => {
 				<NavbarToggler onClick={toggle} />
 				<Collapse isOpen={isOpen} navbar>
 					<Nav className='mr-auto' navbar>
+						{gites()}
+						{/* {console.log('gites vaut =>', gites())} */}
 						{/* {gites.map((gite, i) => (
 							<Link href='/' key={i}>
 								<NavItem>
 									<NavLink style={{ cursor: 'pointer' }}>
-										{gite}
+										{gite[0].nom}
 									</NavLink>
 								</NavItem>
 							</Link>

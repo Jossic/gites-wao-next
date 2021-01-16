@@ -45,7 +45,7 @@ const Gite = ({ gite, query }) => {
 };
 
 Gite.getInitialProps = ({ query }) => {
-	console.log(query);
+	// console.log(query);
 	return listGiteDetails(query.slug).then((data) => {
 		if (data.error) {
 			console.log(data.error);

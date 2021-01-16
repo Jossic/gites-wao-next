@@ -14,9 +14,27 @@ export const listGiteDetails = async (slug) => {
 
 	try {
 		const { data } = await axios.get(`${API}/gite/${slug}`);
-		console.log(data);
+		// console.log(data);
 		return data;
 	} catch (error) {
 		console.error(error);
 	}
+};
+
+export const listGites = () => {
+	return fetch(`${API}/gite`, {
+		method: 'GET',
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+
+	// try {
+	// 	const { data } = await axios.get(`${API}/gite`);
+	// 	// console.log(data);
+	// 	return data;
+	// } catch (error) {
+	// 	console.error(error);
+	// }
 };

@@ -10,7 +10,7 @@ import _ from 'lodash';
 // @route     GET /api/gites
 // @access    Public
 const getGites = asyncHandler(async (req, res) => {
-	const gites = await Gite.find({});
+	const gites = await Gite.find({}).select('nom');
 	res.json(gites);
 });
 
