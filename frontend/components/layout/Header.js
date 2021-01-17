@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { APP_NAME } from '../config';
 import NProgress from 'nprogress';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -30,21 +30,7 @@ Router.onRouteChangeError = (url) => NProgress.done();
 
 const Header = () => {
 	const [isOpen, setIsOpen] = useState(false);
-
 	const toggle = () => setIsOpen(!isOpen);
-
-	const gites = () => {
-		listGites().then((data) => {
-			// console.log('data vaut ==>', data);
-			if (data.error) {
-				console.log(data.error);
-			} else {
-				let listNom = Object.values(data);
-				console.log(listNom);
-				return { listNom };
-			}
-		});
-	};
 
 	return (
 		<div>
@@ -59,13 +45,11 @@ const Header = () => {
 				<NavbarToggler onClick={toggle} />
 				<Collapse isOpen={isOpen} navbar>
 					<Nav className='mr-auto' navbar>
-						{gites()}
-						{/* {console.log('gites vaut =>', gites())} */}
 						{/* {gites.map((gite, i) => (
 							<Link href='/' key={i}>
 								<NavItem>
 									<NavLink style={{ cursor: 'pointer' }}>
-										{gite[0].nom}
+										{gite.nom}
 									</NavLink>
 								</NavItem>
 							</Link>

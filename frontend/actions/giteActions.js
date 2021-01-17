@@ -32,7 +32,6 @@ export const listGites = () => {
 
 	// try {
 	// 	const { data } = await axios.get(`${API}/gite`);
-	// 	// console.log(data);
 	// 	return data;
 	// } catch (error) {
 	// 	console.error(error);
