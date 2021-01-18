@@ -26,24 +26,27 @@ const SigninComponent = () => {
 	} = values;
 
 	useEffect(() => {
-		isAuth() && Router.push('/');
+		isAdmin && Router.push('/');
 	}, []);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		setvalues({ ...values, loading: true, error: false });
-		const user = { email, password };
+		const user = { email, password, isAdmin };
 
 		login(user).then((data) => {
 			if (data.error) {
 				setvalues({ ...values, error: data.error, loading: false });
 			} else {
 				authenticate(data, () => {
-					if (isAuth() && isAdmin) {
+					if (isAuth() && data.isAdmin) {
 						Router.push('/admin');
 					} else {
-						Router.push('/user');
+						console.log(
+							'Vous devez avoir les droits admin pour pouvoir vous connecter'
+						);
+						Router.push('/');
 					}
 				});
 			}

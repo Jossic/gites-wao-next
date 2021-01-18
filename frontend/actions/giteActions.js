@@ -21,8 +21,8 @@ export const listGiteDetails = async (slug) => {
 	}
 };
 
-export const listGites = () => {
-	return fetch(`${API}/gite`, {
+export const listGitesNoms = () => {
+	return fetch(`${API}/gites/noms`, {
 		method: 'GET',
 	})
 		.then((response) => {

@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Link from 'next/link';
 // import gites from '../../data';
 import Image from 'next/image';
+import fetch from 'isomorphic-fetch';
 import {
 	Collapse,
 	Navbar,
@@ -19,7 +20,7 @@ import {
 	DropdownItem,
 	NavbarText,
 } from 'reactstrap';
-import { listGites } from '../../actions/giteActions';
+import { listGitesNoms } from '../../actions/giteActions';
 import Router from 'next/router';
 
 import '../../node_modules/nprogress/nprogress.css';
@@ -31,6 +32,23 @@ Router.onRouteChangeError = (url) => NProgress.done();
 const Header = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const toggle = () => setIsOpen(!isOpen);
+
+	const [gites, setGites] = useState([]);
+
+	const listDesGites = () => {
+		listGitesNoms().then((data) => {
+			if (data.error) {
+				console.log(error);
+			} else {
+				console.log('on est ok');
+				setGites(...gites, data);
+			}
+		});
+	};
+
+	useEffect(() => {
+		listDesGites();
+	}, []);
 
 	return (
 		<div>
@@ -45,17 +63,17 @@ const Header = () => {
 				<NavbarToggler onClick={toggle} />
 				<Collapse isOpen={isOpen} navbar>
 					<Nav className='mr-auto' navbar>
-						{/* {gites.map((gite, i) => (
-							<Link href='/' key={i}>
+						{gites.map((gite, i) => (
+							<Link href={`/gite/${gite.slug}`} key={i}>
 								<NavItem>
 									<NavLink style={{ cursor: 'pointer' }}>
 										{gite.nom}
 									</NavLink>
 								</NavItem>
 							</Link>
-						))} */}
+						))}
 
-						<Link href='/gite/manola'>
+						{/* <Link href='/gite/manola'>
 							<NavItem>
 								<NavLink style={{ cursor: 'pointer' }}>
 									Manola
@@ -84,7 +102,7 @@ const Header = () => {
 									Petit Nay
 								</NavLink>
 							</NavItem>
-						</Link>
+						</Link> */}
 
 						<Link href='/tarifs'>
 							<NavItem>

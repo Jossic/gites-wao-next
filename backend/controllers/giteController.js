@@ -10,7 +10,15 @@ import _ from 'lodash';
 // @route     GET /api/gites
 // @access    Public
 const getGites = asyncHandler(async (req, res) => {
-	const gites = await Gite.find({}).select('nom');
+	const gites = await Gite.find({});
+	res.json(gites);
+});
+
+// @desc      Fetch all gites name
+// @route     GET /api/gites
+// @access    Public
+const getGitesNoms = asyncHandler(async (req, res) => {
+	const gites = await Gite.find({}).select('nom slug');
 	res.json(gites);
 });
 
@@ -210,4 +218,11 @@ const updateGite = asyncHandler(async (req, res) => {
 	});
 });
 
-export { getGites, getGiteByNom, deleteGite, createGite, updateGite };
+export {
+	getGites,
+	getGiteByNom,
+	deleteGite,
+	createGite,
+	updateGite,
+	getGitesNoms,
+};

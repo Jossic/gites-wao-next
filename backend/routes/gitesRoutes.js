@@ -6,11 +6,13 @@ import {
 	createGite,
 	updateGite,
 	deleteGite,
+	getGitesNoms,
 } from '../controllers/giteController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
 router.get('/');
-router.get('/gite/', getGites);
+router.get('/gites/', getGites);
+router.get('/gites/noms', getGitesNoms);
 router.get('/gite/:slug', getGiteByNom);
 
 // Routes espaces admin
