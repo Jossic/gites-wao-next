@@ -73,37 +73,6 @@ const Header = () => {
 							</Link>
 						))}
 
-						{/* <Link href='/gite/manola'>
-							<NavItem>
-								<NavLink style={{ cursor: 'pointer' }}>
-									Manola
-								</NavLink>
-							</NavItem>
-						</Link>
-						<Link href='/gite/brinchette'>
-							<NavItem>
-								<NavLink style={{ cursor: 'pointer' }}>
-									Brinchette
-								</NavLink>
-							</NavItem>
-						</Link>
-
-						<Link href='/gite/lauberoye'>
-							<NavItem>
-								<NavLink style={{ cursor: 'pointer' }}>
-									Lauberoye
-								</NavLink>
-							</NavItem>
-						</Link>
-
-						<Link href='/gite/petit-nay'>
-							<NavItem>
-								<NavLink style={{ cursor: 'pointer' }}>
-									Petit Nay
-								</NavLink>
-							</NavItem>
-						</Link> */}
-
 						<Link href='/tarifs'>
 							<NavItem>
 								<NavLink style={{ cursor: 'pointer' }}>
