@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "google-map-react": "^2.1.9",

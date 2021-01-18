@@ -1,7 +1,7 @@
 import AdminLayout from '../../components/layout/AdminLayout';
 
 const index = () => {
-	return <AdminLayout></AdminLayout>;
+	return <AdminLayout>Accueil</AdminLayout>;
 };
 
 export default index;

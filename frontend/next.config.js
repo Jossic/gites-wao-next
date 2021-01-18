@@ -1,3 +1,4 @@
+
 module.exports = {
 	publicRuntimeConfig: {
 		APP_NAME: 'Gites-Wao',

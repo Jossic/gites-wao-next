@@ -1,7 +1,7 @@
 import AdminHeader from './AdminHeader';
 import Footer from './Footer';
 
-const Layout = ({ children }) => {
+const AdminLayout = ({ children }) => {
 	return (
 		<>
 			<AdminHeader />
@@ -10,4 +10,4 @@ const Layout = ({ children }) => {
 	);
 };
 
-export default Layout;
+export default AdminLayout;
