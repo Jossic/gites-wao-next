@@ -2,6 +2,7 @@ import { Table } from 'reactstrap';
 import { listeDesGites } from '../../actions/giteActions';
 import { useEffect, useState } from 'react';
 import { API } from '../../config';
+import Link from 'next/link';
 
 const ListGites = () => {
 	const [gites, setGites] = useState([]);
@@ -20,6 +21,16 @@ const ListGites = () => {
 	useEffect(() => {
 		listerLesGites();
 	}, []);
+
+	const deleteConfirm = (slug) => {
+		let answer = window.confirm(
+			'Cette opération est irréversible, Etes-vous sur de vouloir supprimer cet article ?'
+		);
+		if (answer) {
+			// deleteGite(slug);
+			console.log('Suppression');
+		}
+	};
 
 	return (
 		<>
@@ -50,10 +61,22 @@ const ListGites = () => {
 							</th>
 							<th>{gite.capacite}</th>
 							<th>
-								<i class='fas fa-pencil-ruler'></i>
+								<Link href={`/admin/crud/gite/${gite.slug}`}>
+									<a>
+										<i
+											class='fas fa-pencil-ruler'
+											style={{ color: 'orange' }}></i>
+									</a>
+								</Link>
 							</th>
 							<th>
-								<i class='fas fa-trash-alt'></i>
+								<i
+									onClick={() => deleteConfirm(gite.slug)}
+									class='fas fa-trash-alt'
+									style={{
+										color: 'red',
+										cursor: 'pointer',
+									}}></i>
 							</th>
 						</tr>
 					))}

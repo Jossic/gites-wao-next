@@ -38,3 +38,51 @@ export const listGitesNoms = () => {
 	// 	console.error(error);
 	// }
 };
+
+export const createGite = (gite, token) => {
+	return fetch(`${API}/gite`, {
+		method: 'POST',
+		headers: {
+			Accept: 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: gite,
+	})
+		.then((response) => {
+			// handleResponse(response);
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
+export const deleteGite = (slug, token) => {
+	return fetch(`${API}/gite/${slug}`, {
+		method: 'DELETE',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+	})
+		.then((response) => {
+			// handleResponse(response);
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
+export const updateGite = (gite, slug, token) => {
+	return fetch(`${API}/gite/${slug}`, {
+		method: 'PUT',
+		headers: {
+			Accept: 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: gite,
+	})
+		.then((response) => {
+			// handleResponse(response);
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};

@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
-  "/admin/gestionPages": "pages/admin/gestionPages.js"
+  "/admin/gestionPages": "pages/admin/gestionPages.js",
+  "/admin/crud/gite/create": "pages/admin/crud/gite/create.js"
 }

@@ -57,4 +57,11 @@ const registerUser = asyncHandler(async (req, res) => {
 	}
 });
 
-export { authUser, registerUser };
+const logout = (req, res) => {
+	res.clearCookie('token');
+	res.json({
+		message: 'Vous êtes maintenant deconnecté.',
+	});
+};
+
+export { authUser, registerUser, logout };
