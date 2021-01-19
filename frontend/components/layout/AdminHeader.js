@@ -28,8 +28,27 @@ const AdminHeader = ({ children }) => {
 					<div className='sidebar-heading text-white'>
 						Les Gîtes WAO
 					</div>
-					<div className='sidebar-heading text-white'>
-						Utilisateur
+					<div className='sidebar-header'>
+						<div className='user-pic'>
+							<img
+								className='img-responsive img-rounded'
+								src='/images/logov4-1024x496.png'
+								alt='User picture'
+							/>
+						</div>
+						<div className='user-info text-white text-center pb-3'>
+							<span className='user-name'>
+								Prénom
+								<strong> Nom</strong>
+							</span>
+							<br />
+							<span className='user-role'>Administrateur</span>
+							<br />
+							<span className='user-status'>
+								<i className='fa fa-circle'></i>
+								<span>Connecté</span>
+							</span>
+						</div>
 					</div>
 					<div className='list-group list-group-flush'>
 						<Link href='/admin'>
@@ -76,7 +95,7 @@ const AdminHeader = ({ children }) => {
 						</Link>
 						<Link href='/admin'>
 							<a className='list-group-item list-group-item-action text-white bg-dark'>
-								<i class='fas fa-user-tag'></i> Gestion des
+								<i className='fas fa-user-tag'></i> Gestion des
 								clients
 							</a>
 						</Link>

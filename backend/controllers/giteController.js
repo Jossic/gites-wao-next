@@ -15,7 +15,7 @@ const getGites = asyncHandler(async (req, res) => {
 });
 
 // @desc      Fetch all gites name
-// @route     GET /api/gites
+// @route     GET /api/gites/noms
 // @access    Public
 const getGitesNoms = asyncHandler(async (req, res) => {
 	const gites = await Gite.find({}).select('nom slug');

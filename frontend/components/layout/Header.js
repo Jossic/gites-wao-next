@@ -40,7 +40,6 @@ const Header = () => {
 			if (data.error) {
 				console.log(error);
 			} else {
-				console.log('on est ok');
 				setGites(...gites, data);
 			}
 		});

@@ -3,15 +3,6 @@ import fetch from 'isomorphic-fetch';
 import { API } from '../config';
 
 export const listGiteDetails = async (slug) => {
-	// return fetch(`${API}/gite/${slug}`, {
-	// 	method: 'GET',
-	// })
-	// 	.then((response) => {
-	// 		console.log(response);
-	// 		return response.json();
-	// 	})
-	// 	.catch((err) => console.log(err));
-
 	try {
 		const { data } = await axios.get(`${API}/gite/${slug}`);
 		// console.log(data);
@@ -19,6 +10,16 @@ export const listGiteDetails = async (slug) => {
 	} catch (error) {
 		console.error(error);
 	}
+};
+
+export const listeDesGites = () => {
+	return fetch(`${API}/gites`, {
+		method: 'GET',
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
 };
 
 export const listGitesNoms = () => {

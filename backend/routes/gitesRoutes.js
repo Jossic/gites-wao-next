@@ -11,7 +11,7 @@ import {
 import { protect, admin } from '../middleware/authMiddleware.js';
 
 router.get('/');
-router.get('/gites/', getGites);
+router.get('/gites', getGites);
 router.get('/gites/noms', getGitesNoms);
 router.get('/gite/:slug', getGiteByNom);
 

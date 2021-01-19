@@ -1,9 +1,9 @@
-import AdminLayout from '../../components/layout/AdminLayout';
+import AdminHeader from '../../components/layout/AdminHeader';
 
 const gestionDivers = () => {
 	return (
 		<>
-			<AdminLayout>Gestion des pages diverses</AdminLayout>
+			<AdminHeader>Gestion des pages diverses</AdminHeader>
 		</>
 	);
 };
