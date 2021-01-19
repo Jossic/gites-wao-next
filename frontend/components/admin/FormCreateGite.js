@@ -1,12 +1,104 @@
+import { get } from 'js-cookie';
+import { useEffect, useState } from 'react';
 import { createGite } from '../../actions/giteActions';
+import { getCookie } from '../../actions/authActions';
+import router from '../../../backend/routes/gitesRoutes';
 
 const FormCreateGite = () => {
-	const handleChange = () => {
-		//
+	const [values, setValues] = useState({
+		nom: '',
+		mtitle: '',
+		presGiteSEO: '',
+		texte1: '',
+		detailGite: '',
+		capacite: '',
+		giteLogo: '',
+		imagesCarrousel: '',
+		autresImages: '',
+		videoLink: '',
+		calendrierLink: '',
+		pdf: '',
+		couleur1: '',
+		couleur2: '',
+		error: '',
+		success: '',
+		loading: false,
+		formData: '',
+	});
+
+	const token = getCookie('token');
+	const {
+		nom,
+		mtitle,
+		presGiteSEO,
+		texte1,
+		detailGite,
+		capacite,
+		giteLogo,
+		imagesCarrousel,
+		autresImages,
+		videoLink,
+		calendrierLink,
+		pdf,
+		couleur1,
+		couleur2,
+		error,
+		success,
+		loading,
+		formData,
+	} = values;
+
+	useEffect(() => {
+		setValues({ ...values, formData: new FormData() });
+	}, []);
+
+	const handleChange = (name) => (e) => {
+		console.log(e.target.value);
+		let value;
+		if (
+			name === 'giteLogo' ||
+			name === 'imagesCarrousel' ||
+			name === 'autresImages'
+		) {
+			value = e.target.file[0];
+		} else {
+			value = e.target.value.toString();
+		}
+
+		formData.set(name, value);
+		setValues({ ...values, [name]: value, formData, error: '' });
 	};
 
 	const creerGite = (e) => {
 		e.preventDefault();
+		setValues({ ...values, loading: true });
+		createGite(formData, token).then((data) => {
+			if (data.error) {
+				setValues({ ...values, error: data.error });
+			} else {
+				setValues({
+					...values,
+					nom: '',
+					mtitle: '',
+					presGiteSEO: '',
+					texte1: '',
+					detailGite: '',
+					capacite: '',
+					giteLogo: '',
+					imagesCarrousel: '',
+					autresImages: '',
+					videoLink: '',
+					calendrierLink: '',
+					pdf: '',
+					couleur1: '',
+					couleur2: '',
+					error: '',
+					success: `Le gite "${data.nom}" a bien été ajouté`,
+					loading: false,
+				});
+				// router.push('/admin/gestionPages')
+			}
+		});
 	};
 	return (
 		<>
@@ -18,7 +110,6 @@ const FormCreateGite = () => {
 							<input
 								type='text'
 								className='form-control'
-								value={'nom'}
 								onChange={handleChange('nom')}
 							/>
 						</div>
@@ -27,7 +118,6 @@ const FormCreateGite = () => {
 							<input
 								type='text'
 								className='form-control'
-								value={'mtitle'}
 								onChange={handleChange('mtitle')}
 							/>
 						</div>
@@ -39,7 +129,6 @@ const FormCreateGite = () => {
 							<textarea
 								type='text'
 								className='form-control'
-								value={'presGiteSEO'}
 								onChange={handleChange('presGiteSEO')}
 								cols='30'
 								rows='4'></textarea>
@@ -47,123 +136,132 @@ const FormCreateGite = () => {
 
 						<div className='form-group'>
 							<label className='text-muted'>Texte du gîte</label>
-							<input
+							<textarea
 								type='text'
 								className='form-control'
-								value={'texte1'}
 								onChange={handleChange('texte1')}
-							/>
+								cols='30'
+								rows='4'></textarea>
 						</div>
 						<div className='form-group'>
 							<label className='text-muted'>Détail du gîte</label>
-							<input
+							<textarea
 								type='text'
 								className='form-control'
-								value={'detailGite'}
 								onChange={handleChange('detailGite')}
-							/>
+								cols='30'
+								rows='4'></textarea>
 						</div>
 						<div className='form-group'>
 							<label className='text-muted'>
 								Capacité du gîte
 							</label>
 							<input
-								type='text'
+								type='number'
 								className='form-control'
-								value={'capacite'}
 								onChange={handleChange('capacite')}
 							/>
 						</div>
 					</div>
 					<div className='col-md-4'>
-						<div className='form-group'>
-							<label className='btn btn-outline-info'>
-								Vignette du gîte
+						<fieldset className='border p-2'>
+							<legend className='w-auto'>Images</legend>
+							<div className='form-group'>
+								<label className='btn btn-outline-info'>
+									Vignette du gîte
+									<input
+										onChange={handleChange('giteLogo')}
+										type='file'
+										accept='image/*'
+										hidden
+									/>
+								</label>
+							</div>
+							<div className='form-group'>
+								<label className='btn btn-outline-info'>
+									Images du Carrousel
+									<input
+										onChange={handleChange(
+											'imagesCarrousel'
+										)}
+										type='file'
+										accept='image/*'
+										hidden
+									/>
+								</label>
+							</div>
+							<div className='form-group'>
+								<label className='btn btn-outline-info'>
+									Les autres images
+									<input
+										onChange={handleChange('autresImages')}
+										type='file'
+										accept='image/*'
+										hidden
+									/>
+								</label>
+							</div>
+						</fieldset>
+						<fieldset className='border p-2'>
+							<legend className='w-auto'>Liens</legend>
+							<div className='form-group'>
+								<label className='text-muted'>
+									Lien vidéo YouTube
+								</label>
 								<input
-									onChange={handleChange('giteLogo')}
-									type='file'
-									accept='image/*'
-									hidden
+									type='text'
+									className='form-control'
+									onChange={handleChange('videoLink')}
 								/>
-							</label>
-						</div>
-						<div className='form-group'>
-							<label className='btn btn-outline-info'>
-								Images du Carrousel
+							</div>
+							<div className='form-group'>
+								<label className='text-muted'>
+									Lien du calendrier
+								</label>
 								<input
-									onChange={handleChange('imagesCarrousel')}
-									type='file'
-									accept='image/*'
-									hidden
+									type='text'
+									className='form-control'
+									onChange={handleChange('calendrierLink')}
 								/>
-							</label>
-						</div>
-						<div className='form-group'>
-							<label className='btn btn-outline-info'>
-								Les autres images
+							</div>
+						</fieldset>
+						<fieldset className='border p-2'>
+							<legend className='w-auto'>Fichiers</legend>
+							<div className='form-group'>
+								<label className='btn btn-outline-info'>
+									Fichiers PDF
+									<input
+										onChange={handleChange('pdf')}
+										type='file'
+										accept='image/*'
+										hidden
+									/>
+								</label>
+							</div>
+						</fieldset>
+						<fieldset className='border p-2'>
+							<legend className='w-auto'>Couleurs</legend>
+							<div className='form-group'>
+								<label className='text-muted'>
+									Couleur de fond
+								</label>
 								<input
-									onChange={handleChange('autresImages')}
-									type='file'
-									accept='image/*'
-									hidden
+									type='color'
+									className='form-control'
+									onChange={handleChange('couleur1')}
 								/>
-							</label>
-						</div>
-						<div className='form-group'>
-							<label className='text-muted'>
-								Lien vidéo YouTube
-							</label>
-							<input
-								type='text'
-								className='form-control'
-								value={'videoLink'}
-								onChange={handleChange('videoLink')}
-							/>
-						</div>
-						<div className='form-group'>
-							<label className='text-muted'>
-								Lien du calendrier
-							</label>
-							<input
-								type='text'
-								className='form-control'
-								value={'calendrierLink'}
-								onChange={handleChange('calendrierLink')}
-							/>
-						</div>
-						<div className='form-group'>
-							<label className='btn btn-outline-info'>
-								Fichiers PDF
+							</div>
+							<div className='form-group'>
+								<label className='text-muted'>
+									Couleur du texte (noir)
+								</label>
 								<input
-									onChange={handleChange('pdf')}
-									type='file'
-									accept='image/*'
-									hidden
+									type='color'
+									className='form-control'
+									onChange={handleChange('couleur2')}
 								/>
-							</label>
-						</div>
-						<div className='form-group'>
-							<label className='text-muted'>
-								Couleur de fond
-							</label>
-							<input
-								type='color'
-								className='form-control'
-								value={'couleur1'}
-								onChange={handleChange('couleur1')}
-							/>
-						</div>
-						<div className='form-group'>
-							<label className='text-muted'>
-								Couleur du texte (noir)
-							</label>
-							<input
-								type='color'
-								className='form-control'
-								value={'couleur2'}
-								onChange={handleChange('couleur2')}
-							/>
-						</div>
+							</div>
+						</fieldset>
 					</div>
 				</div>
 				<div>
