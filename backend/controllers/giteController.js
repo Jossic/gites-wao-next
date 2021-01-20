@@ -86,12 +86,9 @@ const createGite = asyncHandler(async (req, res) => {
 		gite.presGiteSEO = presGiteSEO;
 		gite.mdesc = stripHtml(presGiteSEO.substring(0, 160));
 		gite.slug = slugify(nom).toLowerCase();
-		gite.logoGite = logoGite;
-		gite.imagesCarrousel = imagesCarrousel;
-		gite.autresImages = autresImages;
 		gite.couleur1 = couleur1;
 		gite.couleur2 = couleur2;
-		gite.vidéoLink = vidéoLink;
+		gite.videoLink = videoLink;
 		gite.texte1 = texte1;
 		gite.detailGite = detailGite;
 		gite.reviews = reviews;
@@ -99,35 +96,14 @@ const createGite = asyncHandler(async (req, res) => {
 		gite.calendrierLink = calendrierLink;
 		gite.pdf = pdf;
 
-		if (files.logoGite) {
-			if (files.logoGite.size > 10000000) {
+		if (files.photos) {
+			if (files.photos.size > 10000000) {
 				return res.status(400).json({
 					error: "L'image est trop lourde (>1Mb)",
 				});
 			}
-			gite.logoGite.data = fs.readFileSync(files.logoGite.path);
-			gite.logoGite.contentType = files.logoGite.type;
-		}
-
-		if (files.imagesCarrousel) {
-			if (files.imagesCarrousel.size > 10000000) {
-				return res.status(400).json({
-					error: "L'image est trop lourde (>1Mb)",
-				});
-			}
-			gite.imagesCarrousel.data = fs.readFileSync(
-				files.imagesCarrousel.path
-			);
-			gite.imagesCarrousel.contentType = files.imagesCarrousel.type;
-		}
-		if (files.autresImages) {
-			if (files.autresImages.size > 10000000) {
-				return res.status(400).json({
-					error: "L'image est trop lourde (>1Mb)",
-				});
-			}
-			gite.autresImages.data = fs.readFileSync(files.autresImages.path);
-			gite.autresImages.contentType = files.autresImages.type;
+			gite.photos.data = fs.readFileSync(files.photos.path);
+			gite.photos.contentType = files.photos.type;
 		}
 
 		const createdGite = await gite.save();

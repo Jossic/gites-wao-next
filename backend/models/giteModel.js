@@ -37,18 +37,13 @@ const giteSchema = mongoose.Schema(
 			unique: true,
 			index: true,
 		},
-		logoGite: {
-			data: Buffer,
-			contentType: String,
-		},
-		imagesCarrousel: {
-			data: Buffer,
-			contentType: String,
-		},
-		autresImages: {
-			data: Buffer,
-			contentType: String,
-		},
+		photos: [
+			{
+				nom: String,
+				alt: String,
+				href: String,
+			},
+		],
 		couleur1: {
 			type: String,
 		},
@@ -75,7 +70,12 @@ const giteSchema = mongoose.Schema(
 		calendrierLink: {
 			type: String,
 		},
-		pdf: {},
+		pdf: [
+			{
+				nom: String,
+				href: String,
+			},
+		],
 	},
 	{
 		timestamps: true,

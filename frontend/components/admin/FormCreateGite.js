@@ -1,4 +1,3 @@
-import { get } from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { createGite } from '../../actions/giteActions';
 import { getCookie } from '../../actions/authActions';
@@ -33,9 +32,7 @@ const FormCreateGite = () => {
 		texte1,
 		detailGite,
 		capacite,
-		giteLogo,
-		imagesCarrousel,
-		autresImages,
+		photos,
 		videoLink,
 		calendrierLink,
 		pdf,
@@ -54,11 +51,8 @@ const FormCreateGite = () => {
 	const handleChange = (name) => (e) => {
 		console.log(e.target.value);
 		let value;
-		if (
-			name === 'giteLogo' ||
-			name === 'imagesCarrousel' ||
-			name === 'autresImages'
-		) {
+		if (name === 'photos') {
+			console.log(e.target);
 			value = e.target.file[0];
 		} else {
 			value = e.target.value;
@@ -83,9 +77,7 @@ const FormCreateGite = () => {
 					texte1: '',
 					detailGite: '',
 					capacite: '',
-					giteLogo: '',
-					imagesCarrousel: '',
-					autresImages: '',
+					photos: '',
 					videoLink: '',
 					calendrierLink: '',
 					pdf: '',
@@ -166,35 +158,12 @@ const FormCreateGite = () => {
 							<legend className='w-auto'>Images</legend>
 							<div className='form-group'>
 								<label className='btn btn-outline-info'>
-									Vignette du gîte
+									Photos
 									<input
 										onChange={handleChange('giteLogo')}
 										type='file'
 										accept='image/*'
-										hidden
-									/>
-								</label>
-							</div>
-							<div className='form-group'>
-								<label className='btn btn-outline-info'>
-									Images du Carrousel
-									<input
-										onChange={handleChange(
-											'imagesCarrousel'
-										)}
-										type='file'
-										accept='image/*'
-										hidden
-									/>
-								</label>
-							</div>
-							<div className='form-group'>
-								<label className='btn btn-outline-info'>
-									Les autres images
-									<input
-										onChange={handleChange('autresImages')}
-										type='file'
-										accept='image/*'
+										multiple
 										hidden
 									/>
 								</label>
@@ -231,7 +200,7 @@ const FormCreateGite = () => {
 									<input
 										onChange={handleChange('pdf')}
 										type='file'
-										accept='image/*'
+										accept='.pdf'
 										hidden
 									/>
 								</label>
