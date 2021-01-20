@@ -84,7 +84,7 @@ const createGite = asyncHandler(async (req, res) => {
 		gite.nom = nom;
 		gite.mtitle = mtitle;
 		gite.presGiteSEO = presGiteSEO;
-		gite.mdesc = presGiteSEO;
+		gite.mdesc = stripHtml(presGiteSEO.substring(0, 160));
 		gite.slug = slugify(nom).toLowerCase();
 		gite.logoGite = logoGite;
 		gite.imagesCarrousel = imagesCarrousel;

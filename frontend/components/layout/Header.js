@@ -6,6 +6,7 @@ import Link from 'next/link';
 // import gites from '../../data';
 import Image from 'next/image';
 import fetch from 'isomorphic-fetch';
+import { isAuth, logout } from '../../actions/authActions';
 import {
 	Collapse,
 	Navbar,
@@ -118,13 +119,24 @@ const Header = () => {
 								<DropdownItem>Labels</DropdownItem>
 							</DropdownMenu>
 						</UncontrolledDropdown>
-						<Link href='/login'>
-							<NavItem>
-								<NavLink style={{ cursor: 'pointer' }}>
-									Connexion
-								</NavLink>
-							</NavItem>
-						</Link>
+						{!isAuth() && (
+							<Link href='/login'>
+								<NavItem>
+									<NavLink style={{ cursor: 'pointer' }}>
+										Connexion
+									</NavLink>
+								</NavItem>
+							</Link>
+						)}
+						{isAuth() && isAuth().isAdmin && (
+							<Link href='/admin'>
+								<NavItem>
+									<NavLink style={{ cursor: 'pointer' }}>
+										Admin
+									</NavLink>
+								</NavItem>
+							</Link>
+						)}
 					</Nav>
 					<NavbarText>Les Gites Wao</NavbarText>
 				</Collapse>

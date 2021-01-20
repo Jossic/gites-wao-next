@@ -2,7 +2,6 @@ import { get } from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { createGite } from '../../actions/giteActions';
 import { getCookie } from '../../actions/authActions';
-import router from '../../../backend/routes/gitesRoutes';
 
 const FormCreateGite = () => {
 	const [values, setValues] = useState({
@@ -62,7 +61,7 @@ const FormCreateGite = () => {
 		) {
 			value = e.target.file[0];
 		} else {
-			value = e.target.value.toString();
+			value = e.target.value;
 		}
 
 		formData.set(name, value);
@@ -96,7 +95,6 @@ const FormCreateGite = () => {
 					success: `Le gite "${data.nom}" a bien été ajouté`,
 					loading: false,
 				});
-				// router.push('/admin/gestionPages')
 			}
 		});
 	};
