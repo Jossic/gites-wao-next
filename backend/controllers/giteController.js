@@ -52,9 +52,17 @@ const deleteGite = asyncHandler(async (req, res) => {
 // @route     POST /api/gite
 // @access    Private/Admin
 const createGite = asyncHandler(async (req, res) => {
+	let photos = [];
+
+	if (req.files.length > 0) {
+		photos = req.files.map((file) => {
+			return { img: file.location };
+		});
+	}
 	let form = new formidable.IncomingForm();
 	form.keepExtensions = true;
 	form.parse(req, async (err, fields, files) => {
+		console.log(files);
 		if (err) {
 			return res.status(400).json({
 				error: "Impossible d'uploader l'image",
@@ -65,9 +73,6 @@ const createGite = asyncHandler(async (req, res) => {
 			nom,
 			mtitle,
 			presGiteSEO,
-			logoGite,
-			imagesCarrousel,
-			autresImages,
 			couleur1,
 			couleur2,
 			vidéoLink,
@@ -79,22 +84,23 @@ const createGite = asyncHandler(async (req, res) => {
 			pdf,
 		} = fields;
 
-		let gite = new Gite();
-
-		gite.nom = nom;
-		gite.mtitle = mtitle;
-		gite.presGiteSEO = presGiteSEO;
-		gite.mdesc = stripHtml(presGiteSEO.substring(0, 160));
-		gite.slug = slugify(nom).toLowerCase();
-		gite.couleur1 = couleur1;
-		gite.couleur2 = couleur2;
-		gite.videoLink = videoLink;
-		gite.texte1 = texte1;
-		gite.detailGite = detailGite;
-		gite.reviews = reviews;
-		gite.capacite = capacite;
-		gite.calendrierLink = calendrierLink;
-		gite.pdf = pdf;
+		let gite = new Gite({
+			nom,
+			mtitle,
+			presGiteSEO,
+			photos,
+			mdesc: stripHtml(presGiteSEO.substring(0, 160)),
+			slug: slugify(nom).toLowerCase(),
+			couleur1,
+			couleur2,
+			videoLink,
+			texte1,
+			detailGite,
+			reviews,
+			capacite,
+			calendrierLink,
+			pdf,
+		});
 
 		if (files.photos) {
 			if (files.photos.size > 10000000) {

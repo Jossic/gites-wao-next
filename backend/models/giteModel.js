@@ -39,9 +39,9 @@ const giteSchema = mongoose.Schema(
 		},
 		photos: [
 			{
-				nom: String,
-				alt: String,
-				href: String,
+				img: {
+					type: String,
+				},
 			},
 		],
 		couleur1: {

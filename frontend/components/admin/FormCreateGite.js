@@ -160,7 +160,7 @@ const FormCreateGite = () => {
 								<label className='btn btn-outline-info'>
 									Photos
 									<input
-										onChange={handleChange('giteLogo')}
+										onChange={handleChange('photos')}
 										type='file'
 										accept='image/*'
 										multiple
