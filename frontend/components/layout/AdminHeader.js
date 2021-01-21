@@ -66,7 +66,18 @@ const AdminHeader = ({ children }) => {
 						<Link href='/admin/gestionPages'>
 							<a className='list-group-item list-group-item-action text-white bg-dark'>
 								<i className='fas fa-igloo'></i> Gestion des
-								gîtes - Dropdown - Gestion des images, gestion
+								gîtes
+							</a>
+						</Link>
+						<Link href='/admin/gestionImages'>
+							<a className='list-group-item list-group-item-action text-white bg-dark'>
+								<i className='fas fa-arrow-right'></i> Gestion
+								des images
+							</a>
+						</Link>
+						<Link href='/admin/gestionFichiers'>
+							<a className='list-group-item list-group-item-action text-white bg-dark'>
+								<i className='fas fa-arrow-right'></i> Gestion
 								des fichiers
 							</a>
 						</Link>

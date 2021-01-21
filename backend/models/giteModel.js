@@ -72,8 +72,7 @@ const giteSchema = mongoose.Schema(
 		},
 		pdf: [
 			{
-				nom: String,
-				href: String,
+				type: String,
 			},
 		],
 	},

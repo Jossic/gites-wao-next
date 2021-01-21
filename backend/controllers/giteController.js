@@ -51,31 +51,17 @@ const deleteGite = asyncHandler(async (req, res) => {
 // @desc      Create a Gite
 // @route     POST /api/gite
 // @access    Private/Admin
-const createGite = asyncHandler(async (req, res) => {
-	let photos = [];
-
-	if (req.files.length > 0) {
-		photos = req.files.map((file) => {
-			return { img: file.location };
-		});
-	}
+const createGite = (req, res) => {
 	let form = new formidable.IncomingForm();
 	form.keepExtensions = true;
-	form.parse(req, async (err, fields, files) => {
-		console.log(files);
-		if (err) {
-			return res.status(400).json({
-				error: "Impossible d'uploader l'image",
-			});
-		}
-
+	form.parse(req, (err, fields, files) => {
 		const {
 			nom,
 			mtitle,
 			presGiteSEO,
 			couleur1,
 			couleur2,
-			vidéoLink,
+			videoLink,
 			texte1,
 			detailGite,
 			reviews,
@@ -84,11 +70,10 @@ const createGite = asyncHandler(async (req, res) => {
 			pdf,
 		} = fields;
 
-		let gite = new Gite({
-			nom,
+		const gite = new Gite({
+			nom: nom,
 			mtitle,
 			presGiteSEO,
-			photos,
 			mdesc: stripHtml(presGiteSEO.substring(0, 160)),
 			slug: slugify(nom).toLowerCase(),
 			couleur1,
@@ -102,20 +87,29 @@ const createGite = asyncHandler(async (req, res) => {
 			pdf,
 		});
 
-		if (files.photos) {
-			if (files.photos.size > 10000000) {
-				return res.status(400).json({
-					error: "L'image est trop lourde (>1Mb)",
-				});
-			}
-			gite.photos.data = fs.readFileSync(files.photos.path);
-			gite.photos.contentType = files.photos.type;
-		}
+		console.log('Données enregistrée', gite);
 
-		const createdGite = await gite.save();
-		res.status(201).json(createdGite);
+		gite.save((error, gite) => {
+			if (error) return res.status(400).json({ error });
+			if (gite) {
+				res.status(201).json({ gite, files: req.files });
+			}
+		});
 	});
-});
+};
+
+const savePhotos = (req, res) => {
+	console.log('req.files => ', req.files);
+	// if (req.files.length > 0) {
+	// 	productPictures = req.files.map((file) => {
+	// 		return { img: file.location };
+	// 	});
+	// }
+};
+
+const saveFiles = (req, res) => {
+	//
+};
 
 // @desc      Update a Gite
 // @route     PUT /api/gites/:slug
@@ -207,4 +201,6 @@ export {
 	createGite,
 	updateGite,
 	getGitesNoms,
+	savePhotos,
+	saveFiles,
 };

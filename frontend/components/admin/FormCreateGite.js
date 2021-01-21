@@ -154,7 +154,7 @@ const FormCreateGite = () => {
 						</div>
 					</div>
 					<div className='col-md-4'>
-						<fieldset className='border p-2'>
+						{/* <fieldset className='border p-2'>
 							<legend className='w-auto'>Images</legend>
 							<div className='form-group'>
 								<label className='btn btn-outline-info'>
@@ -168,7 +168,7 @@ const FormCreateGite = () => {
 									/>
 								</label>
 							</div>
-						</fieldset>
+						</fieldset> */}
 						<fieldset className='border p-2'>
 							<legend className='w-auto'>Liens</legend>
 							<div className='form-group'>
@@ -192,7 +192,7 @@ const FormCreateGite = () => {
 								/>
 							</div>
 						</fieldset>
-						<fieldset className='border p-2'>
+						{/* <fieldset className='border p-2'>
 							<legend className='w-auto'>Fichiers</legend>
 							<div className='form-group'>
 								<label className='btn btn-outline-info'>
@@ -205,7 +205,7 @@ const FormCreateGite = () => {
 									/>
 								</label>
 							</div>
-						</fieldset>
+						</fieldset> */}
 						<fieldset className='border p-2'>
 							<legend className='w-auto'>Couleurs</legend>
 							<div className='form-group'>

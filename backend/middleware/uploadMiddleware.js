@@ -10,15 +10,15 @@ AWS.config.getCredentials(function (err) {
 	if (err) console.log(err.stack);
 	// credentials not loaded
 	else {
-		console.log('Access key:', AWS.config.credentials.accessKeyId);
-		console.log('Region: ', AWS.config.region);
+		// console.log('Access key:', AWS.config.credentials.accessKeyId);
+		// console.log('Region: ', AWS.config.region);
 	}
 });
 
 const accessKeyId = process.env.ACCESS_KEY_ID;
 const secretAccessKey = process.env.SECRET_ACCESS_KEY;
 
-console.log(process.env.BUCKET_NAME);
+// console.log(process.env.BUCKET_NAME);
 const s3 = new AWS.S3({
 	accessKeyId,
 	secretAccessKey,
