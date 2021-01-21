@@ -1,9 +1,20 @@
 import { useEffect, useState } from 'react';
 import { createGite } from '../../actions/giteActions';
 import { getCookie } from '../../actions/authActions';
+import Router from 'next/router';
 
 const FormCreateGite = () => {
 	const [values, setValues] = useState({
+		nom: '',
+		mtitle: '',
+		presGiteSEO: '',
+		texte1: '',
+		detailGite: '',
+		capacite: '',
+		videoLink: '',
+		calendrierLink: '',
+		couleur1: '#AAAAAA',
+		couleur2: '#111111',
 		error: '',
 		success: '',
 		loading: false,
@@ -11,7 +22,23 @@ const FormCreateGite = () => {
 	});
 
 	const token = getCookie('token');
-	const { error, success, loading, formData } = values;
+	const {
+		nom,
+		mtitle,
+		presGiteSEO,
+		texte1,
+		detailGite,
+		capacite,
+		videoLink,
+		calendrierLink,
+		pdf,
+		couleur1,
+		couleur2,
+		error,
+		success,
+		loading,
+		formData,
+	} = values;
 
 	useEffect(() => {
 		setValues({ ...values, formData: new FormData() });
@@ -41,12 +68,15 @@ const FormCreateGite = () => {
 					videoLink: '',
 					calendrierLink: '',
 					pdf: '',
-					couleur1: '',
-					couleur2: '',
+					couleur1: '#FFFFFF',
+					couleur2: '#111111',
 					error: '',
 					success: 'Le gîte a bien été ajouté',
 					loading: false,
 				});
+				setTimeout(() => {
+					Router.push('/admin/gestionPages');
+				}, 3000);
 			}
 		});
 	};
@@ -59,6 +89,7 @@ const FormCreateGite = () => {
 							<label className='text-muted'>Nom du gîte</label>
 							<input
 								type='text'
+								value={nom}
 								className='form-control'
 								onChange={handleChange('nom')}
 							/>
@@ -67,6 +98,7 @@ const FormCreateGite = () => {
 							<label className='text-muted'>Meta Title</label>
 							<input
 								type='text'
+								value={mtitle}
 								className='form-control'
 								onChange={handleChange('mtitle')}
 							/>
@@ -78,6 +110,7 @@ const FormCreateGite = () => {
 							</label>
 							<textarea
 								type='text'
+								value={presGiteSEO}
 								className='form-control'
 								onChange={handleChange('presGiteSEO')}
 								cols='30'
@@ -88,6 +121,7 @@ const FormCreateGite = () => {
 							<label className='text-muted'>Texte du gîte</label>
 							<textarea
 								type='text'
+								value={texte1}
 								className='form-control'
 								onChange={handleChange('texte1')}
 								cols='30'
@@ -97,6 +131,7 @@ const FormCreateGite = () => {
 							<label className='text-muted'>Détail du gîte</label>
 							<textarea
 								type='text'
+								value={detailGite}
 								className='form-control'
 								onChange={handleChange('detailGite')}
 								cols='30'
@@ -108,6 +143,7 @@ const FormCreateGite = () => {
 							</label>
 							<input
 								type='number'
+								value={capacite}
 								className='form-control'
 								onChange={handleChange('capacite')}
 							/>
@@ -137,6 +173,7 @@ const FormCreateGite = () => {
 								</label>
 								<input
 									type='text'
+									value={videoLink}
 									className='form-control'
 									onChange={handleChange('videoLink')}
 								/>
@@ -147,6 +184,7 @@ const FormCreateGite = () => {
 								</label>
 								<input
 									type='text'
+									value={calendrierLink}
 									className='form-control'
 									onChange={handleChange('calendrierLink')}
 								/>
@@ -174,16 +212,18 @@ const FormCreateGite = () => {
 								</label>
 								<input
 									type='color'
+									value={couleur1}
 									className='form-control'
 									onChange={handleChange('couleur1')}
 								/>
 							</div>
 							<div className='form-group'>
 								<label className='text-muted'>
-									Couleur du texte (noir)
+									Couleur du texte (noir par défault)
 								</label>
 								<input
 									type='color'
+									value={couleur2}
 									className='form-control'
 									onChange={handleChange('couleur2')}
 								/>
