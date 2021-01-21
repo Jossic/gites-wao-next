@@ -22,6 +22,16 @@ export const listeDesGites = () => {
 		.catch((err) => console.log(err));
 };
 
+export const listeDesImagesParGite = () => {
+	return fetch(`${API}/gites`, {
+		method: 'GET',
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
 export const listGitesNoms = () => {
 	return fetch(`${API}/gites/noms`, {
 		method: 'GET',

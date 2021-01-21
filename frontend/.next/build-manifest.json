@@ -24,20 +24,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/crud/gite/create": [
+    "/admin/crud/images/add": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/crud/gite/create.js"
-    ],
-    "/admin/gestionPages": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/admin/gestionPages.js"
-    ],
-    "/next/dist/pages/_error": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/next/dist/pages/_error.js"
+      "static/chunks/pages/admin/crud/images/add.js"
     ]
   },
   "ampFirstPages": []

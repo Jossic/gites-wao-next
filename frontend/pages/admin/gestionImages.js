@@ -1,6 +1,6 @@
 import AdminHeader from '../../components/layout/AdminHeader';
 import Link from 'next/link';
-// import ListGites from '../../components/admin/ListGites';
+import ListImages from '../../components/admin/ListImages';
 import Admin from '../../components/auth/Admin';
 
 const gestionPages = () => {
@@ -17,7 +17,7 @@ const gestionPages = () => {
 					</Link>
 					<hr />
 					<h3>Liste des images</h3>
-					{/* <ListGites /> */}
+					<ListImages />
 				</Admin>
 			</AdminHeader>
 		</>
