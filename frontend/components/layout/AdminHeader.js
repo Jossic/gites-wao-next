@@ -38,8 +38,8 @@ const AdminHeader = ({ children }) => {
 						</div>
 						<div className='user-info text-white text-center pb-3'>
 							<span className='user-name'>
-								Prénom
-								<strong> Nom</strong>
+								Martine
+								<strong> Lapierre</strong>
 							</span>
 							<br />
 							<span className='user-role'>Administrateur</span>
@@ -63,6 +63,105 @@ const AdminHeader = ({ children }) => {
 								d'ensemble
 							</a>
 						</Link>
+
+						<div className='accordion' id='accordionExample'>
+							<div className='card text-white bg-dark'>
+								<div className='card-header' id='headingOne'>
+									<h2 className='mb-0'>
+										<button
+											className='btn btn-link btn-block text-left text-white'
+											type='button'
+											data-toggle='collapse'
+											data-target='#collapseOne'
+											aria-expanded='false'
+											aria-controls='collapseOne'>
+											<i className='fas fa-igloo'></i>{' '}
+											Gestion des gîtes
+										</button>
+									</h2>
+								</div>
+
+								<div
+									id='collapseOne'
+									className='collapse show'
+									aria-labelledby='headingOne'
+									data-parent='#accordionExample'>
+									{/* <div className='card-body'> */}
+									<Link href='/admin/gestionPages'>
+										<a className='list-group-item list-group-item-action text-white bg-secondary'>
+											<i className='fas fa-arrow-right'></i>{' '}
+											Gestion des gîtes
+										</a>
+									</Link>
+									<Link href='/admin/gestionImages'>
+										<a className='list-group-item list-group-item-action text-white bg-secondary'>
+											<i className='fas fa-arrow-right'></i>{' '}
+											Gestion des images
+										</a>
+									</Link>
+									<Link href='/admin/gestionFichiers'>
+										<a className='list-group-item list-group-item-action text-white bg-secondary'>
+											<i className='fas fa-arrow-right'></i>{' '}
+											Gestion des fichiers
+										</a>
+									</Link>
+									{/* </div> */}
+								</div>
+							</div>
+							<div className='card text-white bg-dark'>
+								<div className='card-header' id='headingTwo'>
+									<h2 className='mb-0'>
+										<button
+											className='btn btn-link btn-block text-left collapsed'
+											type='button'
+											data-toggle='collapse'
+											data-target='#collapseTwo'
+											aria-expanded='false'
+											aria-controls='collapseTwo'>
+											Gestion des pages
+										</button>
+									</h2>
+								</div>
+								<div
+									id='collapseTwo'
+									className='collapse'
+									aria-labelledby='headingTwo'
+									data-parent='#accordionExample'>
+									<div className='card-body'>
+										Some placeholder content for the second
+										accordion panel. This panel is hidden by
+										default.
+									</div>
+								</div>
+							</div>
+							<div className='card text-white bg-dark'>
+								<div className='card-header' id='headingThree'>
+									<h2 className='mb-0'>
+										<button
+											className='btn btn-link btn-block text-left collapsed'
+											type='button'
+											data-toggle='collapse'
+											data-target='#collapseThree'
+											aria-expanded='false'
+											aria-controls='collapseThree'>
+											Gestion des locations
+										</button>
+									</h2>
+								</div>
+								<div
+									id='collapseThree'
+									className='collapse'
+									aria-labelledby='headingThree'
+									data-parent='#accordionExample'>
+									<div className='card-body'>
+										And lastly, the placeholder content for
+										the third and final accordion panel.
+										This panel is hidden by default.
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<Link href='/admin/gestionPages'>
 							<a className='list-group-item list-group-item-action text-white bg-dark'>
 								<i className='fas fa-igloo'></i> Gestion des

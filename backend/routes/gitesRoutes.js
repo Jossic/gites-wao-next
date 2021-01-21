@@ -19,15 +19,15 @@ router.get('/gites/noms', getGitesNoms);
 router.get('/gite/:slug', getGiteByNom);
 
 // Routes espaces admin
-router.post('/gite', protect, admin, uploadS3.array('photos'), createGite);
-router.post(
-	'/upload-images',
-	protect,
-	admin,
-	uploadS3.array('photos'),
-	savePhotos
-);
-router.post('/upload-files', protect, admin, uploadS3.array('pdf'), saveFiles);
+router.post('/gite', protect, admin, createGite);
+// router.put(
+// 	'/upload-images',
+// 	protect,
+// 	admin,
+// 	uploadS3.array('photos'),
+// 	savePhotos
+// );
+// router.put('/upload-files', protect, admin, uploadS3.array('pdf'), saveFiles);
 router.put('/gite/:slug', protect, admin, updateGite);
 router.delete('/gite/:slug', protect, admin, deleteGite);
 

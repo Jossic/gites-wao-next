@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { savePhotos } from '../../actions/giteActions';
+import { updateGite } from '../../actions/giteActions';
 import { getCookie } from '../../actions/authActions';
 import { useForm } from 'react-hook-form';
 import { listGitesNoms } from '../../actions/giteActions';
-import Image from 'next/image';
+import { Spinner, Alert } from 'reactstrap';
 
 const FormCreateGite = () => {
 	const [selectedFiles, setSelectedFiles] = useState([]);
@@ -43,6 +43,13 @@ const FormCreateGite = () => {
 	const { register, handleSubmit, formState } = useForm();
 	const { isSubmitting } = formState;
 
+	const [values, setValues] = useState({
+		success: '',
+		loading: false,
+		error: '',
+	});
+
+	const { loading, success, error } = values;
 	const [gites, setGites] = useState([]);
 
 	const listDesGites = () => {
@@ -61,38 +68,24 @@ const FormCreateGite = () => {
 
 	const token = getCookie('token');
 
-	// const handleChange = (name) => (e) => {
-	// 	formData.set(name, e.target.files);
-	// 	setValues({
-	// 		...values,
-	// 		photos: e.target.files[0],
-	// 		formData,
-	// 		error: '',
-	// 	});
-	// };
-
 	const onSubmit = (data) => {
-		console.log(data);
-	};
-
-	const envoiPhoto = (e) => {
-		// e.preventDefault();
-		// setValues({ ...values, loading: true });
-		// console.log(formData);
-		// savePhotos(formData, token).then((data) => {
-		// 	if (data.error) {
-		// 		setValues({ ...values, error: data.error });
-		// 	} else {
-		// 		setValues({
-		// 			...values,
-		// 			nom: '',
-		// 			error: '',
-		// 			photos: '',
-		// 			success: `Les photos ont bien été envoyées`,
-		// 			loading: false,
-		// 		});
-		// 	}
-		// });
+		setValues({ ...values, loading: true });
+		console.log('data.photos vaut =>', data.photos);
+		console.log('data.gite vaut =>', data.gite);
+		updateGite(data.photos, data.gite, token).then((result) => {
+			if (result.error) {
+				setValues({ ...values, error: result.error });
+			} else {
+				setValues({
+					...values,
+					success: 'Les photos ont bien été envoyées',
+					loading: false,
+				});
+				setTimeout(() => {
+					Router.push('/admin/gestionImages');
+				}, 3000);
+			}
+		});
 	};
 
 	return (
@@ -115,7 +108,7 @@ const FormCreateGite = () => {
 									id='inlineFormCustomSelect'>
 									<option selected>Selection...</option>
 									{gites.map((gite, i) => (
-										<option key={i} value={gite.nom}>
+										<option key={i} value={gite.slug}>
 											{gite.nom}
 										</option>
 									))}
@@ -152,6 +145,10 @@ const FormCreateGite = () => {
 					</button>
 				</div>
 			</form>
+			{loading && <Spinner color='dark' />}
+			{success && (
+				<Alert color='success'>Les photos ont bien été envoyées</Alert>
+			)}
 			<div className='result'>{renderPhotos(selectedFiles)}</div>
 		</>
 	);
