@@ -43,7 +43,7 @@ export const createGite = (gite, token) => {
 	return fetch(`${API}/gite`, {
 		method: 'POST',
 		headers: {
-			Accept: 'application/json',
+			Accept: 'multipart/form-data',
 			Authorization: `Bearer ${token}`,
 		},
 		body: gite,

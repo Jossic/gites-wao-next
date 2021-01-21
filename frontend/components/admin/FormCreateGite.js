@@ -4,20 +4,6 @@ import { getCookie } from '../../actions/authActions';
 
 const FormCreateGite = () => {
 	const [values, setValues] = useState({
-		nom: '',
-		mtitle: '',
-		presGiteSEO: '',
-		texte1: '',
-		detailGite: '',
-		capacite: '',
-		giteLogo: '',
-		imagesCarrousel: '',
-		autresImages: '',
-		videoLink: '',
-		calendrierLink: '',
-		pdf: '',
-		couleur1: '',
-		couleur2: '',
 		error: '',
 		success: '',
 		loading: false,
@@ -25,38 +11,14 @@ const FormCreateGite = () => {
 	});
 
 	const token = getCookie('token');
-	const {
-		nom,
-		mtitle,
-		presGiteSEO,
-		texte1,
-		detailGite,
-		capacite,
-		photos,
-		videoLink,
-		calendrierLink,
-		pdf,
-		couleur1,
-		couleur2,
-		error,
-		success,
-		loading,
-		formData,
-	} = values;
+	const { error, success, loading, formData } = values;
 
 	useEffect(() => {
 		setValues({ ...values, formData: new FormData() });
 	}, []);
 
 	const handleChange = (name) => (e) => {
-		console.log(e.target.value);
-		let value;
-		if (name === 'photos') {
-			console.log(e.target);
-			value = e.target.file[0];
-		} else {
-			value = e.target.value;
-		}
+		let value = e.target.value;
 
 		formData.set(name, value);
 		setValues({ ...values, [name]: value, formData, error: '' });
@@ -70,21 +32,19 @@ const FormCreateGite = () => {
 				setValues({ ...values, error: data.error });
 			} else {
 				setValues({
-					...values,
 					nom: '',
 					mtitle: '',
 					presGiteSEO: '',
 					texte1: '',
 					detailGite: '',
 					capacite: '',
-					photos: '',
 					videoLink: '',
 					calendrierLink: '',
 					pdf: '',
 					couleur1: '',
 					couleur2: '',
 					error: '',
-					success: `Le gite "${data.nom}" a bien été ajouté`,
+					success: 'Le gîte a bien été ajouté',
 					loading: false,
 				});
 			}
@@ -231,6 +191,17 @@ const FormCreateGite = () => {
 						</fieldset>
 					</div>
 				</div>
+				{success && (
+					<div className='alert alert-success'>
+						Le gîte a bien été ajouté
+					</div>
+				)}
+				{loading && (
+					<div className='alert alert-success'>
+						Chargement en cours...
+					</div>
+				)}
+				{error && <div className='alert alert-danger'>{error}</div>}
 				<div>
 					<button type='submit' className='btn btn-info'>
 						Créer ce gîte

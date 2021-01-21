@@ -19,7 +19,7 @@ router.get('/gites/noms', getGitesNoms);
 router.get('/gite/:slug', getGiteByNom);
 
 // Routes espaces admin
-router.post('/gite', protect, admin, createGite);
+router.post('/gite', protect, admin, uploadS3.array('photos'), createGite);
 router.post(
 	'/upload-images',
 	protect,

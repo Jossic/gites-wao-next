@@ -52,59 +52,65 @@ const deleteGite = asyncHandler(async (req, res) => {
 // @route     POST /api/gite
 // @access    Private/Admin
 const createGite = (req, res) => {
-	let form = new formidable.IncomingForm();
-	form.keepExtensions = true;
-	form.parse(req, (err, fields, files) => {
-		const {
-			nom,
-			mtitle,
-			presGiteSEO,
-			couleur1,
-			couleur2,
-			videoLink,
-			texte1,
-			detailGite,
-			reviews,
-			capacite,
-			calendrierLink,
-			pdf,
-		} = fields;
+	// console.log('req.body.photos =>', req.body.photos);
+	// console.log('req.files =>', req.files);
+	// let photos = [];
+	// if (req.files.length > 0) {
+	// 	req.files.map((file) => {
+	// 		console.log('location =>', file.location);
+	// 		return { img: file.location };
+	// 	});
+	// }
 
-		const gite = new Gite({
-			nom: nom,
-			mtitle,
-			presGiteSEO,
-			mdesc: stripHtml(presGiteSEO.substring(0, 160)),
-			slug: slugify(nom).toLowerCase(),
-			couleur1,
-			couleur2,
-			videoLink,
-			texte1,
-			detailGite,
-			reviews,
-			capacite,
-			calendrierLink,
-			pdf,
-		});
+	const {
+		nom,
+		mtitle,
+		presGiteSEO,
+		couleur1,
+		couleur2,
+		videoLink,
+		texte1,
+		detailGite,
+		reviews,
+		capacite,
+		calendrierLink,
+	} = req.body;
 
-		console.log('Données enregistrée', gite);
+	const gite = new Gite({
+		nom,
+		mtitle,
+		presGiteSEO,
+		mdesc: stripHtml(presGiteSEO.substring(0, 160)),
+		slug: slugify(nom).toLowerCase(),
+		couleur1,
+		couleur2,
+		videoLink,
+		texte1,
+		detailGite,
+		reviews,
+		capacite,
+		calendrierLink,
+	});
 
-		gite.save((error, gite) => {
-			if (error) return res.status(400).json({ error });
-			if (gite) {
-				res.status(201).json({ gite, files: req.files });
-			}
-		});
+	console.log('gite dans le back', gite);
+
+	gite.save((error, gite) => {
+		if (error) return res.status(400).json({ error });
+		if (gite) {
+			res.status(201).json({ gite, message: 'Le gîte a bien été créé' });
+		}
 	});
 };
 
 const savePhotos = (req, res) => {
 	console.log('req.files => ', req.files);
-	// if (req.files.length > 0) {
-	// 	productPictures = req.files.map((file) => {
-	// 		return { img: file.location };
-	// 	});
-	// }
+	const photos = [];
+	if (req.files.length > 0) {
+		photos = req.files.map((file) => {
+			console.log('location =>', file.location);
+			return { img: file.location };
+		});
+	}
 };
 
 const saveFiles = (req, res) => {

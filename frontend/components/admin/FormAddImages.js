@@ -21,7 +21,12 @@ const FormCreateGite = () => {
 
 	const handleChange = (name) => (e) => {
 		formData.set(name, e.target.files);
-		setValues({ ...values, photos: e.target.files, formData, error: '' });
+		setValues({
+			...values,
+			photos: e.target.files[0],
+			formData,
+			error: '',
+		});
 	};
 
 	const envoiPhoto = (e) => {
@@ -43,14 +48,16 @@ const FormCreateGite = () => {
 			}
 		});
 	};
+
 	return (
 		<>
 			<form onSubmit={envoiPhoto}>
 				<div className='row'>
-					<div className='col-md-8'></div>
+					{/* <div className='col-md-8'></div> */}
 					<div className='col-md-4'>
 						<fieldset className='border p-2'>
 							<legend className='w-auto'>Images</legend>
+
 							<div className='form-group'>
 								<label className='btn btn-outline-info'>
 									Photos
