@@ -65,21 +65,6 @@ export const createGite = (gite, token) => {
 		.catch((err) => console.log(err));
 };
 
-// export const savePhotos = (photos, token) => {
-// 	return fetch(`${API}/upload-images`, {
-// 		method: 'PUT',
-// 		headers: {
-// 			Accept: 'multipart/form-data',
-// 			Authorization: `Bearer ${token}`,
-// 		},
-// 		body: photos,
-// 	})
-// 		.then((response) => {
-// 			return response.json();
-// 		})
-// 		.catch((err) => console.log(err));
-// };
-
 export const deleteGite = (slug, token) => {
 	return fetch(`${API}/gite/${slug}`, {
 		method: 'DELETE',
@@ -100,7 +85,7 @@ export const updateGite = (gite, slug, token) => {
 	return fetch(`${API}/gite/${slug}`, {
 		method: 'PUT',
 		headers: {
-			Accept: 'multipart/form-data',
+			// Accept: 'multipart/form-data',
 			Authorization: `Bearer ${token}`,
 		},
 		body: gite,

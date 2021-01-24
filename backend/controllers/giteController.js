@@ -52,16 +52,6 @@ const deleteGite = asyncHandler(async (req, res) => {
 // @route     POST /api/gite
 // @access    Private/Admin
 const createGite = (req, res) => {
-	// console.log('req.body.photos =>', req.body.photos);
-	// console.log('req.files =>', req.files);
-	// let photos = [];
-	// if (req.files.length > 0) {
-	// 	req.files.map((file) => {
-	// 		console.log('location =>', file.location);
-	// 		return { img: file.location };
-	// 	});
-	// }
-
 	const {
 		nom,
 		mtitle,
@@ -102,18 +92,14 @@ const createGite = (req, res) => {
 	});
 };
 
-const savePhotos = (req, res) => {
+// @desc      Add an Image
+// @route     POST /api/upload-image
+// @access    Private/Admin
+const savePhoto = (req, res) => {
 	console.log('req.files => ', req.files);
-	const photos = [];
-	if (req.files.length > 0) {
-		photos = req.files.map((file) => {
-			console.log('location =>', file.location);
-			return { img: file.location };
-		});
-	}
 };
 
-const saveFiles = (req, res) => {
+const saveFile = (req, res) => {
 	//
 };
 
@@ -154,39 +140,6 @@ const updateGite = asyncHandler(async (req, res) => {
 			if (nom) {
 				ancienGite.slug = slugify(nom).toLowerCase();
 			}
-			if (files.logoGite) {
-				if (files.logoGite.size > 10000000) {
-					return res.status(400).json({
-						error: "L'image est trop lourde (>1Mb)",
-					});
-				}
-				ancienGite.logoGite.data = fs.readFileSync(files.logoGite.path);
-				ancienGite.logoGite.contentType = files.logoGite.type;
-			}
-
-			if (files.imagesCarrousel) {
-				if (files.imagesCarrousel.size > 10000000) {
-					return res.status(400).json({
-						error: "L'image est trop lourde (>1Mb)",
-					});
-				}
-				ancienGite.imagesCarrousel.data = fs.readFileSync(
-					files.imagesCarrousel.path
-				);
-				ancienGite.imagesCarrousel.contentType =
-					files.imagesCarrousel.type;
-			}
-			if (files.autresImages) {
-				if (files.autresImages.size > 10000000) {
-					return res.status(400).json({
-						error: "L'image est trop lourde (>1Mb)",
-					});
-				}
-				ancienGite.autresImages.data = fs.readFileSync(
-					files.autresImages.path
-				);
-				ancienGite.autresImages.contentType = files.autresImages.type;
-			}
 
 			ancienGite.save((err, result) => {
 				if (err) {
@@ -207,6 +160,6 @@ export {
 	createGite,
 	updateGite,
 	getGitesNoms,
-	savePhotos,
-	saveFiles,
+	savePhoto,
+	saveFile,
 };

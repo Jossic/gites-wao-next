@@ -25,7 +25,7 @@ const FormCreateGite = () => {
 	};
 
 	const renderPhotos = (source) => {
-		console.log('source: ', source);
+		// console.log('source: ', source);
 		return source.map((photo) => {
 			return (
 				<img
@@ -68,11 +68,12 @@ const FormCreateGite = () => {
 
 	const token = getCookie('token');
 
-	const onSubmit = (data) => {
+	const onSubmit = async (data) => {
 		setValues({ ...values, loading: true });
-		console.log('data.photos vaut =>', data.photos);
-		console.log('data.gite vaut =>', data.gite);
-		updateGite(data.photos, data.gite, token).then((result) => {
+
+		// console.log('formData vaut =>', formData);
+
+		updateGite(formData, slug, token).then((result) => {
 			if (result.error) {
 				setValues({ ...values, error: result.error });
 			} else {
@@ -93,47 +94,112 @@ const FormCreateGite = () => {
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className='row'>
 					{/* <div className='col-md-8'></div> */}
-					<div className='col-md-4'>
+					<div className='col-md-6'>
 						<div className='form-row align-items-center'>
 							<div className='col-auto my-1'>
-								<label
-									className='mr-sm-2'
-									htmlFor='inlineFormCustomSelect'>
-									Gîte/Section concerné
-								</label>
-								<select
-									name='gite'
-									ref={register({ required: true })}
-									className='custom-select mr-sm-2'
-									id='inlineFormCustomSelect'>
-									<option selected>Selection...</option>
-									{gites.map((gite, i) => (
-										<option key={i} value={gite.slug}>
-											{gite.nom}
+								<fieldset className='border p-2 mt-3'>
+									<legend className='w-auto'>
+										Ajout d'images
+									</legend>
+
+									<div className='form-group'>
+										<label className='btn btn-outline-info'>
+											Photos
+											<input
+												onChange={handleImageChange}
+												ref={register({
+													required: true,
+												})}
+												name='photo'
+												type='file'
+												accept='image/*'
+												hidden
+											/>
+										</label>
+									</div>
+								</fieldset>
+								<fieldset className='border p-2 mt-3'>
+									<legend className='w-auto'>
+										Concerne la page et section
+									</legend>
+									<label
+										className='mr-sm-2 pt-2'
+										htmlFor='inlineFormCustomSelect'>
+										Page associée
+									</label>
+									<select
+										name='page'
+										ref={register({ required: true })}
+										className='custom-select mr-sm-2'
+										id='inlineFormCustomSelect'>
+										<option selected>Selection...</option>
+										{gites.map((gite, i) => (
+											<option key={i} value={gite.slug}>
+												{gite.nom}
+											</option>
+										))}
+										<option value='Autre'>
+											Autres pages
 										</option>
-									))}
-									<option value='Autre'>Autres pages</option>
-								</select>
+									</select>
+									<label
+										className='mr-sm-2 pt-2'
+										htmlFor='inlineFormCustomSelect'>
+										Section associée
+									</label>
+									<select
+										name='section'
+										ref={register({ required: true })}
+										className='custom-select mr-sm-2'
+										id='inlineFormCustomSelect'>
+										<option selected>Selection...</option>
+										<option value='Autre'>
+											Autres sections
+										</option>
+										<option value='Autre'>
+											Présentation
+										</option>
+										<option value='Autre'>Piscine</option>
+										<option value='Autre'>Intérieur</option>
+									</select>
+								</fieldset>
+								<fieldset className='border p-2 mt-3'>
+									<legend className='w-auto'>
+										Infos de l'image
+									</legend>
+									<div className='form-group'>
+										<label className='text-muted'>
+											Nom de l'image
+										</label>
+										<input
+											className='form-control'
+											ref={register}
+											type='text'
+											name='nom'
+										/>
+									</div>
+									<div className='form-group'>
+										<label className='text-muted'>
+											Texte alternatif
+										</label>
+										<input
+											className='form-control'
+											ref={register}
+											type='text'
+											name='alt'
+										/>
+									</div>
+								</fieldset>
 							</div>
 						</div>
-						<fieldset className='border p-2 mt-3'>
-							<legend className='w-auto'>Ajout d'images</legend>
-
-							<div className='form-group'>
-								<label className='btn btn-outline-info'>
-									Photos
-									<input
-										onChange={handleImageChange}
-										ref={register({ required: true })}
-										name='photos'
-										type='file'
-										accept='image/*'
-										multiple
-										hidden
-									/>
-								</label>
-							</div>
-						</fieldset>
+					</div>
+					<div className='result col-md-6'>
+						{renderPhotos(selectedFiles)}
+						{/* 
+						<p>Nom de la photo</p>
+						<p>Texte alternatif</p>
+						<p>Concerne la page</p>
+						<p>Concerne la section</p> */}
 					</div>
 				</div>
 				<div>
@@ -149,7 +215,6 @@ const FormCreateGite = () => {
 			{success && (
 				<Alert color='success'>Les photos ont bien été envoyées</Alert>
 			)}
-			<div className='result'>{renderPhotos(selectedFiles)}</div>
 		</>
 	);
 };

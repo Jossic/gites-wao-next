@@ -7,8 +7,6 @@ import {
 	updateGite,
 	deleteGite,
 	getGitesNoms,
-	savePhotos,
-	saveFiles,
 } from '../controllers/giteController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 import { uploadS3 } from '../middleware/uploadMiddleware.js';
@@ -20,15 +18,7 @@ router.get('/gite/:slug', getGiteByNom);
 
 // Routes espaces admin
 router.post('/gite', protect, admin, createGite);
-// router.put(
-// 	'/upload-images',
-// 	protect,
-// 	admin,
-// 	uploadS3.array('photos'),
-// 	savePhotos
-// );
-// router.put('/upload-files', protect, admin, uploadS3.array('pdf'), saveFiles);
-router.put('/gite/:slug', protect, admin, updateGite);
+router.put('/gite/:slug', protect, admin, uploadS3.array('photos'), updateGite);
 router.delete('/gite/:slug', protect, admin, deleteGite);
 
 export default router;
