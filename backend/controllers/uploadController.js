@@ -11,6 +11,10 @@ import _ from 'lodash';
 // @access    Private/Admin
 const savePhoto = (req, res) => {
 	console.log('req.files => ', req.files);
+	// console.log('req.body => ', req.body);
+};
+const savePhotoData = (req, res) => {
+	// console.log('req.files => ', req.files);
 	console.log('req.body => ', req.body);
 };
 
@@ -18,13 +22,4 @@ const saveFile = (req, res) => {
 	//
 };
 
-export {
-	getGites,
-	getGiteByNom,
-	deleteGite,
-	createGite,
-	updateGite,
-	getGitesNoms,
-	savePhoto,
-	saveFile,
-};
+export { savePhoto, saveFile, savePhotoData };

@@ -92,17 +92,6 @@ const createGite = (req, res) => {
 	});
 };
 
-// @desc      Add an Image
-// @route     POST /api/upload-image
-// @access    Private/Admin
-const savePhoto = (req, res) => {
-	console.log('req.files => ', req.files);
-};
-
-const saveFile = (req, res) => {
-	//
-};
-
 // @desc      Update a Gite
 // @route     PUT /api/gites/:slug
 // @access    Private/Admin
@@ -160,6 +149,4 @@ export {
 	createGite,
 	updateGite,
 	getGitesNoms,
-	savePhoto,
-	saveFile,
 };

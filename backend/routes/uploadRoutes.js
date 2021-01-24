@@ -1,15 +1,10 @@
 import express from 'express';
 const router = express.Router();
 import {
-	getGites,
-	getGiteByNom,
-	createGite,
-	updateGite,
-	deleteGite,
-	getGitesNoms,
 	savePhoto,
 	saveFile,
-} from '../controllers/giteController.js';
+	savePhotoData,
+} from '../controllers/uploadController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 import { uploadS3 } from '../middleware/uploadMiddleware.js';
 
@@ -22,6 +17,7 @@ router.post(
 	uploadS3.single('photo'),
 	savePhoto
 );
+router.post('/upload-image-data', protect, admin, savePhotoData);
 // router.put('/upload-files', protect, admin, uploadS3.single('pdf'), saveFile);
 
 export default router;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { updateGite } from '../../actions/giteActions';
+import { uploadPhoto, uploadPhotoData } from '../../actions/uploadActions';
 import { getCookie } from '../../actions/authActions';
 import { useForm } from 'react-hook-form';
 import { listGitesNoms } from '../../actions/giteActions';
@@ -68,24 +68,39 @@ const FormCreateGite = () => {
 
 	const token = getCookie('token');
 
-	const onSubmit = async (data) => {
+	const onSubmit = (data) => {
 		setValues({ ...values, loading: true });
+		let formDataImage = new FormData();
+		let formDataImageInfo = new FormData();
+		// formData.append('photo', data.photo[0]);
+		formDataImageInfo.append('alt', data.alt);
+		formDataImageInfo.append('nom', data.nom);
+		formDataImageInfo.append('page', data.page);
+		formDataImageInfo.append('section', data.section);
+		formDataImage.append('photo', data.photo[0]);
 
-		// console.log('formData vaut =>', formData);
-
-		updateGite(formData, slug, token).then((result) => {
+		uploadPhotoData(formDataImageInfo, token).then((result) => {
 			if (result.error) {
 				setValues({ ...values, error: result.error });
 			} else {
 				setValues({
 					...values,
-					success: 'Les photos ont bien été envoyées',
-					loading: false,
+					success: 'Les informations ont bien été envoyées',
 				});
-				setTimeout(() => {
-					Router.push('/admin/gestionImages');
-				}, 3000);
 			}
+		});
+		uploadPhoto(formDataImage, token).then((result2) => {
+			if (result2.error) {
+				setValues({ ...values, error: result2.error });
+			}
+			setValues({
+				...values,
+				success: 'La photo a bien été envoyée',
+				loading: false,
+			});
+			setTimeout(() => {
+				Router.push('/admin/gestionImages');
+			}, 3000);
 		});
 	};
 
@@ -99,12 +114,12 @@ const FormCreateGite = () => {
 							<div className='col-auto my-1'>
 								<fieldset className='border p-2 mt-3'>
 									<legend className='w-auto'>
-										Ajout d'images
+										Ajout d'image
 									</legend>
 
 									<div className='form-group'>
 										<label className='btn btn-outline-info'>
-											Photos
+											Photo
 											<input
 												onChange={handleImageChange}
 												ref={register({
@@ -156,11 +171,13 @@ const FormCreateGite = () => {
 										<option value='Autre'>
 											Autres sections
 										</option>
-										<option value='Autre'>
+										<option value='presentation'>
 											Présentation
 										</option>
-										<option value='Autre'>Piscine</option>
-										<option value='Autre'>Intérieur</option>
+										<option value='piscine'>Piscine</option>
+										<option value='interieur'>
+											Intérieur
+										</option>
 									</select>
 								</fieldset>
 								<fieldset className='border p-2 mt-3'>
@@ -213,7 +230,7 @@ const FormCreateGite = () => {
 			</form>
 			{loading && <Spinner color='dark' />}
 			{success && (
-				<Alert color='success'>Les photos ont bien été envoyées</Alert>
+				<Alert color='success'>La photo a bien été envoyée</Alert>
 			)}
 		</>
 	);
