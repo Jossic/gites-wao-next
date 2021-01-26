@@ -3,6 +3,9 @@ const { ObjectId } = mongoose.Schema;
 
 const photoSchema = mongoose.Schema(
 	{
+		data: {
+			type: String,
+		},
 		nom: {
 			type: String,
 			unique: true,
@@ -10,13 +13,13 @@ const photoSchema = mongoose.Schema(
 		alt: {
 			type: String,
 		},
-		lien: {
+		location: {
 			type: String,
 		},
-		pageAssociée: {
+		pageAssociee: {
 			type: String,
 		},
-		sectionAssociée: {
+		sectionAssociee: {
 			type: String,
 		},
 	},

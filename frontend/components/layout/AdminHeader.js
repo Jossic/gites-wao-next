@@ -69,7 +69,7 @@ const AdminHeader = ({ children }) => {
 								<div className='card-header' id='headingOne'>
 									<h2 className='mb-0'>
 										<button
-											className='btn btn-link btn-block text-left text-white'
+											className='btn btn-link btn-block text-left text-white collapsed'
 											type='button'
 											data-toggle='collapse'
 											data-target='#collapseOne'
@@ -112,12 +112,13 @@ const AdminHeader = ({ children }) => {
 								<div className='card-header' id='headingTwo'>
 									<h2 className='mb-0'>
 										<button
-											className='btn btn-link btn-block text-left collapsed'
+											className='btn btn-link btn-block text-left text-white collapsed'
 											type='button'
 											data-toggle='collapse'
 											data-target='#collapseTwo'
 											aria-expanded='false'
 											aria-controls='collapseTwo'>
+											<i className='far fa-file-alt'></i>{' '}
 											Gestion des pages
 										</button>
 									</h2>
@@ -127,23 +128,30 @@ const AdminHeader = ({ children }) => {
 									className='collapse'
 									aria-labelledby='headingTwo'
 									data-parent='#accordionExample'>
-									<div className='card-body'>
+									{/* <div className='card-body'>
 										Some placeholder content for the second
 										accordion panel. This panel is hidden by
 										default.
-									</div>
+									</div> */}
+									<Link href='/admin/gestionDivers'>
+										<a className='list-group-item list-group-item-action text-white bg-secondary'>
+											<i className='fas fa-arrow-right'></i>{' '}
+											Gestion des pages
+										</a>
+									</Link>
 								</div>
 							</div>
 							<div className='card text-white bg-dark'>
 								<div className='card-header' id='headingThree'>
 									<h2 className='mb-0'>
 										<button
-											className='btn btn-link btn-block text-left collapsed'
+											className='btn btn-link btn-block text-left text-white collapsed'
 											type='button'
 											data-toggle='collapse'
 											data-target='#collapseThree'
 											aria-expanded='false'
 											aria-controls='collapseThree'>
+											<i className='fas fa-bed'></i>{' '}
 											Gestion des locations
 										</button>
 									</h2>
@@ -153,46 +161,21 @@ const AdminHeader = ({ children }) => {
 									className='collapse'
 									aria-labelledby='headingThree'
 									data-parent='#accordionExample'>
-									<div className='card-body'>
+									{/* <div className='card-body'>
 										And lastly, the placeholder content for
 										the third and final accordion panel.
 										This panel is hidden by default.
-									</div>
+									</div> */}
+									<Link href='/admin'>
+										<a className='list-group-item list-group-item-action text-white bg-secondary'>
+											<i className='fas fa-arrow-right'></i>{' '}
+											Gestion des locations
+										</a>
+									</Link>
 								</div>
 							</div>
 						</div>
 
-						<Link href='/admin/gestionPages'>
-							<a className='list-group-item list-group-item-action text-white bg-dark'>
-								<i className='fas fa-igloo'></i> Gestion des
-								gîtes
-							</a>
-						</Link>
-						<Link href='/admin/gestionImages'>
-							<a className='list-group-item list-group-item-action text-white bg-dark'>
-								<i className='fas fa-arrow-right'></i> Gestion
-								des images
-							</a>
-						</Link>
-						<Link href='/admin/gestionFichiers'>
-							<a className='list-group-item list-group-item-action text-white bg-dark'>
-								<i className='fas fa-arrow-right'></i> Gestion
-								des fichiers
-							</a>
-						</Link>
-						<Link href='/admin/gestionDivers'>
-							<a className='list-group-item list-group-item-action text-white bg-dark'>
-								<i className='far fa-file-alt'></i> Gestion des
-								pages
-							</a>
-						</Link>
-
-						<Link href='/admin'>
-							<a className='list-group-item list-group-item-action text-white bg-dark'>
-								<i className='fas fa-bed'></i> Gestion des
-								locations
-							</a>
-						</Link>
 						<Link href='/admin'>
 							<a className='list-group-item list-group-item-action text-white bg-dark'>
 								<i className='fas fa-user-friends'></i> Gestion

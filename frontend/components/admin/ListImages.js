@@ -1,21 +1,21 @@
 import { Table } from 'reactstrap';
-import { listeDesImagesParGite } from '../../actions/giteActions';
+import { listeDesImages } from '../../actions/giteActions';
 import { useEffect, useState } from 'react';
 import { API } from '../../config';
 import Link from 'next/link';
 
 const ListImages = () => {
-	const [gites, setGites] = useState([]);
+	const [photos, setPhotos] = useState([]);
 
 	const listerLesImages = () => {
-		// listeDesImagesParGite().then((data) => {
-		// 	if (data.error) {
-		// 		console.log(error);
-		// 	} else {
-		// 		console.log('on est ok');
-		// 		setGites(...gites, data);
-		// 	}
-		// });
+		listeDesImages().then((data) => {
+			if (data.error) {
+				console.log(error);
+			} else {
+				console.log('on est ok');
+				setPhotos(...photos, data);
+			}
+		});
 	};
 
 	useEffect(() => {

@@ -1,4 +1,5 @@
 import Gite from '../models/giteModel.js';
+import Photo from '../models/photoModel.js';
 import asyncHandler from 'express-async-handler';
 import slugify from 'slugify';
 import stripHtml from 'string-strip-html';
@@ -142,6 +143,14 @@ const updateGite = asyncHandler(async (req, res) => {
 	});
 });
 
+// @desc      Fetch all photos
+// @route     GET /api/photos
+// @access    Public
+const getAllPhotos = asyncHandler(async (req, res) => {
+	const photos = await Photo.find({});
+	res.json(photos);
+});
+
 export {
 	getGites,
 	getGiteByNom,
@@ -149,4 +158,5 @@ export {
 	createGite,
 	updateGite,
 	getGitesNoms,
+	getAllPhotos,
 };

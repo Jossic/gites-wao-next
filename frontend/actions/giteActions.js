@@ -22,8 +22,8 @@ export const listeDesGites = () => {
 		.catch((err) => console.log(err));
 };
 
-export const listeDesImagesParGite = () => {
-	return fetch(`${API}/gites`, {
+export const listeDesImages = () => {
+	return fetch(`${API}/photos`, {
 		method: 'GET',
 	})
 		.then((response) => {

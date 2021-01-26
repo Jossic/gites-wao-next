@@ -6,10 +6,12 @@ import morgan from 'morgan';
 import connectDB from './config/db.js';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
+import bodyParser from 'body-parser';
 
 import gitesRoutes from './routes/gitesRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
+// import AWS from 'aws-sdk';
 
 dotenv.config();
 
@@ -20,6 +22,10 @@ const app = express();
 if (process.env.NODE_ENV === 'development') {
 	app.use(morgan('dev'));
 }
+
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
 	fileUpload({

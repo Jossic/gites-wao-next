@@ -2,14 +2,14 @@ import axios from 'axios';
 import fetch from 'isomorphic-fetch';
 import { API } from '../config';
 
-export const uploadPhoto = (infos, token) => {
-	return fetch(`${API}/upload-image`, {
+export const uploadPhoto = (photos, token) => {
+	return fetch(`${API}/upload-images`, {
 		method: 'POST',
 		headers: {
-			Accept: 'multipart/form-data',
+			// Accept: 'application/json',
 			Authorization: `Bearer ${token}`,
 		},
-		body: infos,
+		body: photos,
 	})
 		.then((response) => {
 			return response.json();
