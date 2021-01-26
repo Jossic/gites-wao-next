@@ -1,26 +1,40 @@
 import { Table } from 'reactstrap';
-import { listeDesImages } from '../../actions/giteActions';
+import { listeDesImages, listGitesNoms } from '../../actions/giteActions';
 import { useEffect, useState } from 'react';
 import { API } from '../../config';
 import Link from 'next/link';
+import { useForm } from 'react-hook-form';
 import { getCookie } from '../../actions/authActions';
 
 const ListImages = () => {
 	const [photos, setPhotos] = useState([]);
 	const token = getCookie('token');
+	const { register, handleSubmit, watch, errors } = useForm();
+
+	const [gites, setGites] = useState([]);
+
+	const listDesGites = () => {
+		listGitesNoms().then((data) => {
+			if (data.error) {
+				console.log(error);
+			} else {
+				setGites(...gites, data);
+			}
+		});
+	};
 
 	const listerLesImages = () => {
 		listeDesImages(token).then((data) => {
 			if (data.error) {
 				console.log(error);
 			} else {
-				console.log('on est ok');
 				setPhotos(...photos, data);
 			}
 		});
 	};
 
 	useEffect(() => {
+		listDesGites();
 		listerLesImages();
 	}, []);
 
@@ -33,55 +47,110 @@ const ListImages = () => {
 			console.log('Suppression');
 		}
 	};
+	const onSubmit = (data) => console.log(data);
 
 	return (
 		<>
-			<Table>
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Nom</th>
-						<th>Vignette</th>
-						<th>Capacité</th>
-						<th colSpan='2'>Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					{photos.map((photo) => (
-						<tr className='mt-5'>
-							<th>{photo._id}</th>
-							<th>
-								<img
-									src={photo.location}
-									style={{ maxHeight: 'auto', width: '100%' }}
-									className='img img-fluid'
-									alt={photo.name}
-								/>
-							</th>
-							<th></th>
-							<th></th>
-							<th>
-								<Link href={`/admin/crud/gite/${photo}`}>
-									<a>
-										<i
-											class='fas fa-pencil-ruler'
-											style={{ color: 'orange' }}></i>
-									</a>
-								</Link>
-							</th>
-							<th>
-								<i
-									onClick={() => deleteConfirm(photo)}
-									class='fas fa-trash-alt'
-									style={{
-										color: 'red',
-										cursor: 'pointer',
-									}}></i>
-							</th>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<Table>
+					<thead>
+						<tr>
+							<th>Nom</th>
+							<th>Photo</th>
+							<th>Alt</th>
+							<th>Page concernée</th>
+							<th>Section concerné</th>
+							<th colSpan='2'>Actions</th>
 						</tr>
-					))}
-				</tbody>
-			</Table>
+					</thead>
+					<tbody>
+						{photos.map((photo, i) => (
+							<tr key={i} className='mt-5'>
+								<th>{photo.nom}</th>
+								<th>
+									<img
+										src={photo.location}
+										style={{
+											maxHeight: 'auto',
+											width: '80px',
+										}}
+										className='img img-fluid'
+										alt={photo.name}
+									/>
+								</th>
+								<th>
+									<input
+										className='form-control'
+										onChange={(e) => setAlt(e.target.value)}
+										type='text'
+										name='alt'
+										value={photo.alt}
+										ref={register}
+									/>
+								</th>
+								<th>
+									<select
+										ref={register}
+										name='page'
+										className='custom-select mr-sm-2'
+										id='inlineFormCustomSelect'>
+										<option defaultValue>
+											Selection...
+										</option>
+										{gites.map((gite, i) => (
+											<option key={i} value={gite.slug}>
+												{gite.nom}
+											</option>
+										))}
+										<option value='Autre'>
+											Autres pages
+										</option>
+									</select>
+								</th>
+								<th>
+									<select
+										ref={register}
+										name='section'
+										className='custom-select mr-sm-2'
+										id='inlineFormCustomSelect'>
+										<option defaultValue>
+											Selection...
+										</option>
+										<option value='Autre'>
+											Autres sections
+										</option>
+										<option value='presentation'>
+											Présentation
+										</option>
+										<option value='piscine'>Piscine</option>
+										<option value='interieur'>
+											Intérieur
+										</option>
+									</select>
+								</th>
+								<th>
+									<Link href={`/admin/crud/gite/${photo}`}>
+										<a>
+											<i
+												className='fas fa-pencil-ruler'
+												style={{ color: 'orange' }}></i>
+										</a>
+									</Link>
+								</th>
+								<th>
+									<i
+										onClick={() => deleteConfirm(photo)}
+										className='fas fa-trash-alt'
+										style={{
+											color: 'red',
+											cursor: 'pointer',
+										}}></i>
+								</th>
+							</tr>
+						))}
+					</tbody>
+				</Table>
+			</form>
 		</>
 	);
 };

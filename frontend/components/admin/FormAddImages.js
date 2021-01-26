@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { uploadPhoto } from '../../actions/uploadActions';
 import { getCookie } from '../../actions/authActions';
-
+import Router from 'next/router';
 import { Spinner, Alert } from 'reactstrap';
 
 const FormCreateGite = () => {
@@ -72,9 +72,9 @@ const FormCreateGite = () => {
 					success: true,
 					loading: false,
 				});
-				// setTimeout(() => {
-				// 	Router.push('/admin/gestionImages');
-				// }, 3000);
+				setTimeout(() => {
+					Router.push('/admin/gestionImages');
+				}, 3000);
 			}
 		});
 	};
