@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/admin/gestionDivers": "pages/admin/gestionDivers.js",
+  "/admin": "pages/admin.js",
   "/admin/gestionImages": "pages/admin/gestionImages.js"
 }

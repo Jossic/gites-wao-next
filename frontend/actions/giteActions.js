@@ -22,9 +22,12 @@ export const listeDesGites = () => {
 		.catch((err) => console.log(err));
 };
 
-export const listeDesImages = () => {
+export const listeDesImages = (token) => {
 	return fetch(`${API}/photos`, {
 		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
 	})
 		.then((response) => {
 			return response.json();

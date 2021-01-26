@@ -3,12 +3,14 @@ import { listeDesImages } from '../../actions/giteActions';
 import { useEffect, useState } from 'react';
 import { API } from '../../config';
 import Link from 'next/link';
+import { getCookie } from '../../actions/authActions';
 
 const ListImages = () => {
 	const [photos, setPhotos] = useState([]);
+	const token = getCookie('token');
 
 	const listerLesImages = () => {
-		listeDesImages().then((data) => {
+		listeDesImages(token).then((data) => {
 			if (data.error) {
 				console.log(error);
 			} else {
@@ -45,23 +47,21 @@ const ListImages = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{gites.map((gite) => (
-						<tr
-							style={{ backgroundColor: gite.couleur1 }}
-							className='mt-5'>
-							<th>{gite._id}</th>
-							<th>{gite.nom}</th>
+					{photos.map((photo) => (
+						<tr className='mt-5'>
+							<th>{photo._id}</th>
 							<th>
 								<img
-									src={`${API}/gite/photo/${gite.slug}`}
+									src={photo.location}
 									style={{ maxHeight: 'auto', width: '100%' }}
 									className='img img-fluid'
-									alt={gite.nom}
+									alt={photo.name}
 								/>
 							</th>
-							<th>{gite.capacite}</th>
+							<th></th>
+							<th></th>
 							<th>
-								<Link href={`/admin/crud/gite/${gite.slug}`}>
+								<Link href={`/admin/crud/gite/${photo}`}>
 									<a>
 										<i
 											class='fas fa-pencil-ruler'
@@ -71,7 +71,7 @@ const ListImages = () => {
 							</th>
 							<th>
 								<i
-									onClick={() => deleteConfirm(gite.slug)}
+									onClick={() => deleteConfirm(photo)}
 									class='fas fa-trash-alt'
 									style={{
 										color: 'red',

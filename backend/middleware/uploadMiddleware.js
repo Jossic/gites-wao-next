@@ -48,7 +48,7 @@ const uploadAWSS3 = async (req, res) => {
 	// console.log(req.files.photos);
 	let params;
 	let photosLocation = [];
-	const photo = new Photo();
+	let photo = new Photo();
 
 	// const boucle = async (photosLocation) => {
 	for (let i = 0; i < req.files.photos.length; i++) {
@@ -57,24 +57,15 @@ const uploadAWSS3 = async (req, res) => {
 			Key: shortid.generate() + '-' + req.files.photos[i].name,
 			Body: req.files.photos[i].data,
 		};
-		s3.upload(params, async (err, data) => {
+		s3.upload(params, (err, data) => {
 			if (err) {
 				console.log('erreur =>', err);
+				return;
 			} else {
 				photo.location = data.Location;
-				photo.save((error, image) => {
-					if (error) return res.status(400).json({ error });
-					if (image) {
-						res.status(201).json({
-							location: image,
-							message: 'La photo a bien été ajoutée',
-						});
-					}
-				});
-				// console.log('data =>', data.Location);
-				// photosLocation = await photosLocation.push({
-				// 	location: data.Location,
-				// });
+				photo.nom = req.files.photos[i].name;
+				photo.save();
+				photo = new Photo();
 			}
 		});
 	}
