@@ -133,7 +133,7 @@ const AdminHeader = ({ children }) => {
 										accordion panel. This panel is hidden by
 										default.
 									</div> */}
-									<Link href='/admin/gestionDivers'>
+									<Link href='/admin/gestionPages'>
 										<a className='list-group-item list-group-item-action text-white bg-secondary'>
 											<i className='fas fa-arrow-right'></i>{' '}
 											Gestion des pages
@@ -218,16 +218,16 @@ const AdminHeader = ({ children }) => {
 							id='navbarSupportedContent'>
 							<ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
 								<li className='nav-item active'>
-									<a className='nav-link' href='#'>
-										Home{' '}
+									<a className='nav-link' href='/admin'>
+										Admin{' '}
 										<span className='sr-only'>
 											(current)
 										</span>
 									</a>
 								</li>
 								<li className='nav-item'>
-									<a className='nav-link' href='#'>
-										Link
+									<a className='nav-link' href='/'>
+										Voir le site
 									</a>
 								</li>
 								<li className='nav-item dropdown'>

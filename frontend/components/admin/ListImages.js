@@ -1,4 +1,4 @@
-import { Table } from 'reactstrap';
+import { Table, Button } from 'reactstrap';
 import { listeDesImages, listGitesNoms } from '../../actions/giteActions';
 import { useEffect, useState } from 'react';
 import { API } from '../../config';
@@ -57,7 +57,7 @@ const ListImages = () => {
 						<tr>
 							<th>Nom</th>
 							<th>Photo</th>
-							<th>Alt</th>
+							<th>Texte alternatif</th>
 							<th>Page concernée</th>
 							<th>Section concerné</th>
 							<th colSpan='2'>Actions</th>
@@ -81,16 +81,15 @@ const ListImages = () => {
 								<th>
 									<input
 										className='form-control'
-										onChange={(e) => setAlt(e.target.value)}
 										type='text'
 										name='alt'
 										value={photo.alt}
-										ref={register}
+										ref={register({ required: true })}
 									/>
 								</th>
 								<th>
 									<select
-										ref={register}
+										ref={register({ required: true })}
 										name='page'
 										className='custom-select mr-sm-2'
 										id='inlineFormCustomSelect'>
@@ -109,7 +108,7 @@ const ListImages = () => {
 								</th>
 								<th>
 									<select
-										ref={register}
+										ref={register({ required: true })}
 										name='section'
 										className='custom-select mr-sm-2'
 										id='inlineFormCustomSelect'>
@@ -125,6 +124,10 @@ const ListImages = () => {
 										<option value='piscine'>Piscine</option>
 										<option value='interieur'>
 											Intérieur
+										</option>
+										<option value='avatar'>Avatar</option>
+										<option value='avatar'>
+											Vignettes
 										</option>
 									</select>
 								</th>
@@ -150,6 +153,7 @@ const ListImages = () => {
 						))}
 					</tbody>
 				</Table>
+				<Button color='success'>Valider ces infos</Button>
 			</form>
 		</>
 	);

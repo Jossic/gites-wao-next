@@ -2,6 +2,7 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/admin/crud/images/add": "pages/admin/crud/images/add.js",
-  "/admin/gestionImages": "pages/admin/gestionImages.js"
+  "/admin/gestionPages": "pages/admin/gestionPages.js",
+  "/": "pages/index.js",
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js"
 }
