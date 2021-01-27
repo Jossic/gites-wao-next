@@ -106,9 +106,10 @@ export const createQR = (qr, token) => {
 		method: 'POST',
 		headers: {
 			Accept: 'application/json',
+			'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`,
 		},
-		body: qr,
+		body: JSON.stringify(qr),
 	})
 		.then((response) => {
 			// handleResponse(response);

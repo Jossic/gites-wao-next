@@ -18,9 +18,9 @@ const FormCreateGite = () => {
 	});
 	const { question, reponse, success, loading, error } = values;
 
-	const onSubmit = (data) => {
+	const onSubmit = async (data) => {
 		setValues({ ...values, loading: true });
-		console.log(data);
+		console.log('data vaut =>', data);
 		createQR(data, token).then((result) => {
 			console.log('result vaut =>', result);
 			if (result.error) {
@@ -72,7 +72,8 @@ const FormCreateGite = () => {
 				</div>
 				{success && (
 					<div className='alert alert-success'>
-						La question/réponse à bien été ajoutée
+						La question/réponse à bien été ajoutée, redirection en
+						cours...
 					</div>
 				)}
 				{loading && (
