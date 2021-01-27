@@ -187,6 +187,31 @@ const createQR = (req, res) => {
 	});
 };
 
+// @desc      Delete a QR
+// @route     GET /api/qr
+// @access    Private/Admin
+const removeQR = asyncHandler(async (req, res) => {
+	const qr = await QR.findById(req.params.id);
+	if (qr) {
+		await qr.remove();
+		res.json({
+			message: 'Q/R correctement supprimée',
+		});
+	} else {
+		return res.json({
+			error: err,
+		});
+	}
+});
+
+// @desc      Update a QR
+// @route     GET /api/qr
+// @access    Private/Admin
+const updateQR = asyncHandler(async (req, res) => {
+	const qrs = await QR.find({});
+	res.json(qrs);
+});
+
 export {
 	getGites,
 	getGiteByNom,
@@ -197,4 +222,6 @@ export {
 	getAllPhotos,
 	getAllQR,
 	createQR,
+	removeQR,
+	updateQR,
 };

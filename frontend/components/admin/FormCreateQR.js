@@ -36,7 +36,7 @@ const FormCreateGite = () => {
 				});
 				setTimeout(() => {
 					Router.push('/admin/gestionDivers/FAQ');
-				}, 3000);
+				}, 2000);
 			}
 		});
 	};
