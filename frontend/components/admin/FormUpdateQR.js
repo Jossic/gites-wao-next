@@ -1,24 +1,15 @@
 import { useEffect, useState } from 'react';
-import { createQR } from '../../actions/giteActions';
+import { updateQR } from '../../actions/giteActions';
 import { Spinner } from 'reactstrap';
 import { getCookie } from '../../actions/authActions';
 import { useForm } from 'react-hook-form';
 import Router from 'next/router';
 import { withRouter } from 'next/router';
 
-const FormUpdateQR = ({ router }) => {
+const FormUpdateQR = ({ preloadedValues, router }) => {
 	const token = getCookie('token');
 
-	useEffect(() => {
-		initQR();
-	}, [router]);
-
-	const initQR = (params) => {
-		if (router.query.id) {
-		}
-	};
-
-	const { register, handleSubmit, watch, errors } = useForm({
+	const { register, handleSubmit } = useForm({
 		defaultValues: preloadedValues,
 	});
 
@@ -29,12 +20,12 @@ const FormUpdateQR = ({ router }) => {
 		loading: false,
 		error: '',
 	});
-	const { question, reponse, success, loading, error } = values;
+	const { success, loading, error } = values;
 
 	const onSubmit = async (data) => {
 		setValues({ ...values, loading: true });
 		console.log('data vaut =>', data);
-		updateQR(data, token).then((result) => {
+		updateQR(data, router.query.id, token).then((result) => {
 			console.log('result vaut =>', result);
 			if (result.error) {
 				console.log('une grosse erreur');
@@ -65,7 +56,6 @@ const FormUpdateQR = ({ router }) => {
 								type='text'
 								name='question'
 								ref={register({ required: true })}
-								// value={question}
 								className='form-control'
 								cols='30'
 								rows='2'></textarea>
@@ -76,7 +66,6 @@ const FormUpdateQR = ({ router }) => {
 								type='text'
 								name='reponse'
 								ref={register({ required: true })}
-								// value={reponse}
 								className='form-control'
 								cols='30'
 								rows='5'></textarea>
@@ -85,7 +74,7 @@ const FormUpdateQR = ({ router }) => {
 				</div>
 				{success && (
 					<div className='alert alert-success'>
-						La question/réponse à bien été ajoutée, redirection en
+						La question/réponse à bien été modifiée, redirection en
 						cours...
 					</div>
 				)}
@@ -97,7 +86,7 @@ const FormUpdateQR = ({ router }) => {
 				{error && <div className='alert alert-danger'>{error}</div>}
 				<div>
 					<button type='submit' className='btn btn-info'>
-						Créer cette q/r
+						Modifier cette q/r
 					</button>
 				</div>
 			</form>

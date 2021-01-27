@@ -1,6 +1,6 @@
 import AdminHeader from '../../../../components/layout/AdminHeader';
 import Link from 'next/link';
-import ListQR from '../../../../components/admin/ListQR';
+import ListQR from '../../../../components/admin/lists/ListQR';
 import Admin from '../../../../components/auth/Admin';
 
 const FAQ = () => {

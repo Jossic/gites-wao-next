@@ -230,7 +230,7 @@ const updateQR = asyncHandler(async (req, res) => {
 		qr.question = question;
 		qr.reponse = reponse;
 
-		const updatedQr = await product.save();
+		const updatedQr = await qr.save();
 		res.json(updatedQr);
 	} else {
 		res.status(404);

@@ -88,7 +88,7 @@ const ListGites = () => {
 							<th>{QR.question}</th>
 							<th>{QR.reponse}</th>
 							<th>
-								<Link href={`/admin/crud/qr/${QR._id}`}>
+								<Link href={`/admin/crud/divers/qr/${QR._id}`}>
 									<a>
 										<i
 											class='fas fa-pencil-ruler'
