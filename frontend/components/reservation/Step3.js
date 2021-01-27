@@ -1,4 +1,6 @@
-const Step3 = () => {
+import { Button } from 'reactstrap';
+
+const Step3 = ({ precedent, suivant }) => {
 	return (
 		<div className='d-none'>
 			<h2>Vos coordonnées</h2>
@@ -71,6 +73,8 @@ const Step3 = () => {
 					/>
 				</div>
 			</div>
+			<Button onClick={precedent}>Précédent</Button>
+			<Button onClick={suivant}>Suivant</Button>
 		</div>
 	);
 };

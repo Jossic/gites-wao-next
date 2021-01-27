@@ -75,7 +75,7 @@ const ListPages = () => {
 						<th></th>
 						<th></th>
 						<th>
-							<Link href={`/admin/crud/gite/${''}`}>
+							<Link href={`/admin/gestionDivers/FAQ`}>
 								<a>
 									<i
 										className='fas fa-pencil-ruler'

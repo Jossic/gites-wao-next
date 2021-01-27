@@ -1,4 +1,6 @@
-const Step2 = () => {
+import { Button } from 'reactstrap';
+
+const Step2 = ({ precedent, suivant }) => {
 	return (
 		<div className='d-none'>
 			<h2>Informations supplémentaires</h2>
@@ -22,7 +24,7 @@ const Step2 = () => {
 							/>
 							<label
 								className='form-check-label'
-								for='defaultCheck1'>
+								htmlFor='defaultCheck1'>
 								Mail
 							</label>
 						</div>
@@ -37,7 +39,7 @@ const Step2 = () => {
 							/>
 							<label
 								className='form-check-label'
-								for='defaultCheck1'>
+								htmlFor='defaultCheck1'>
 								Téléphone
 							</label>
 						</div>
@@ -52,7 +54,7 @@ const Step2 = () => {
 							/>
 							<label
 								className='form-check-label'
-								for='defaultCheck1'>
+								htmlFor='defaultCheck1'>
 								Abritel
 							</label>
 						</div>
@@ -67,7 +69,7 @@ const Step2 = () => {
 							/>
 							<label
 								className='form-check-label'
-								for='defaultCheck1'>
+								htmlFor='defaultCheck1'>
 								Leboncoin
 							</label>
 						</div>
@@ -82,7 +84,7 @@ const Step2 = () => {
 							/>
 							<label
 								className='form-check-label'
-								for='defaultCheck1'>
+								htmlFor='defaultCheck1'>
 								Autre
 							</label>
 						</div>
@@ -119,7 +121,9 @@ const Step2 = () => {
 						value='option1'
 						checked
 					/>
-					<label className='form-check-label' for='exampleRadios1'>
+					<label
+						className='form-check-label'
+						htmlFor='exampleRadios1'>
 						Oui
 					</label>
 				</div>
@@ -131,11 +135,15 @@ const Step2 = () => {
 						id='exampleRadios2'
 						value='option2'
 					/>
-					<label className='form-check-label' for='exampleRadios2'>
+					<label
+						className='form-check-label'
+						htmlFor='exampleRadios2'>
 						Non
 					</label>
 				</div>
 			</fieldset>
+			<Button onClick={precedent}>Précédent</Button>
+			<Button onClick={suivant}>Suivant</Button>
 		</div>
 	);
 };

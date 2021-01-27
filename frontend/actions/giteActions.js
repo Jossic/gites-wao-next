@@ -99,3 +99,7 @@ export const updateGite = (gite, slug, token) => {
 		})
 		.catch((err) => console.log(err));
 };
+
+export const listeDesQR = () => {
+	//
+};

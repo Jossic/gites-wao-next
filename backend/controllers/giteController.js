@@ -6,6 +6,7 @@ import stripHtml from 'string-strip-html';
 import formidable from 'formidable';
 import fs from 'fs';
 import _ from 'lodash';
+import QR from '../models/QRModel.js';
 
 // @desc      Fetch all gites
 // @route     GET /api/gites
@@ -151,6 +152,14 @@ const getAllPhotos = asyncHandler(async (req, res) => {
 	res.json(photos);
 });
 
+// @desc      Fetch all QR
+// @route     GET /api/qr
+// @access    Public
+const getAllQR = asyncHandler(async (req, res) => {
+	const qrs = await QR.find({});
+	res.json(qrs);
+});
+
 export {
 	getGites,
 	getGiteByNom,
@@ -159,4 +168,5 @@ export {
 	updateGite,
 	getGitesNoms,
 	getAllPhotos,
+	getAllQR,
 };

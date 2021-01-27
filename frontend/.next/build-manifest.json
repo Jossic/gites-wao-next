@@ -24,15 +24,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/login": [
+    "/admin/crud/divers/qr/create": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/login.js"
+      "static/chunks/pages/admin/crud/divers/qr/create.js"
     ],
-    "/reservation": [
+    "/admin/gestionDivers/FAQ": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/reservation.js"
+      "static/chunks/pages/admin/gestionDivers/FAQ.js"
     ]
   },
   "ampFirstPages": []

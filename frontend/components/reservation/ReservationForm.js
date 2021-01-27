@@ -1,4 +1,5 @@
 import { listGitesNoms } from '../../actions/giteActions';
+import React from 'react';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
@@ -18,16 +19,13 @@ const ReservationForm = () => {
 		});
 	};
 
-	const [components, setComponents] = useState({
-		Step1: <Step1 />,
-		Step2: <Step2 />,
-		Step3: <Step3 />,
-		Recap: <Recap />,
-	});
+	const ref = React.createRef();
 
-	const showComponent = (components) => {
-		setComponents({ displayedTable: components });
-	};
+	const [components, setComponents] = useState('Step 1');
+
+	const handlePrec = (comp) => {};
+
+	const handleSuiv = (comp) => {};
 
 	useEffect(() => {
 		listDesGites();
@@ -36,11 +34,30 @@ const ReservationForm = () => {
 	return (
 		<div className='container'>
 			<form>
-				{components[displayedTable]}
-				{/* <Step1 gites={gites} />
-				<Step2 />
-				<Step3 />
-				<Recap /> */}
+				{components === 'Step 1' && (
+					<Step1
+						ref={ref}
+						gites={gites}
+						suivant={handleSuiv('Step 2')}
+					/>
+				)}
+				{components === 'Step 2' && (
+					<Step2
+						ref={ref}
+						precedent={handlePrec('Step 1')}
+						suivant={handleSuiv('Step 3')}
+					/>
+				)}
+				{components === 'Step 3' && (
+					<Step3
+						ref={ref}
+						precedent={handlePrec('Step 2')}
+						suivant={handleSuiv('Recap')}
+					/>
+				)}
+				{components === 'Recap' && (
+					<Recap ref={ref} precedent={handlePrec('Step 3')} />
+				)}
 			</form>
 		</div>
 	);

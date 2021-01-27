@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/login": "pages/login.js",
-  "/reservation": "pages/reservation.js"
+  "/admin/crud/divers/qr/create": "pages/admin/crud/divers/qr/create.js",
+  "/admin/gestionDivers/FAQ": "pages/admin/gestionDivers/FAQ.js"
 }
