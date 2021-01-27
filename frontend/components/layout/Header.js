@@ -81,7 +81,7 @@ const Header = () => {
 							</NavItem>
 						</Link>
 
-						<Link href='/reserver'>
+						<Link href='/reservation'>
 							<NavItem>
 								<NavLink style={{ cursor: 'pointer' }}>
 									Réserver

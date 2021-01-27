@@ -133,7 +133,7 @@ const AdminHeader = ({ children }) => {
 										accordion panel. This panel is hidden by
 										default.
 									</div> */}
-									<Link href='/admin/gestionPages'>
+									<Link href='/admin/gestionDivers'>
 										<a className='list-group-item list-group-item-action text-white bg-secondary'>
 											<i className='fas fa-arrow-right'></i>{' '}
 											Gestion des pages
