@@ -160,6 +160,20 @@ const getAllQR = asyncHandler(async (req, res) => {
 	res.json(qrs);
 });
 
+// @desc      Fetch one QR by Id
+// @route     GET /api/qr/:id
+// @access    Private/Admin
+const getQRById = asyncHandler(async (req, res) => {
+	const qr = await QR.findById(req.params.id);
+
+	if (qr) {
+		res.json(qr);
+	} else {
+		res.status(404);
+		throw new Error('Q/R non trouvé');
+	}
+});
+
 // @desc      Create a QR
 // @route     POST /api/qr
 // @access    Private/Admin
@@ -208,8 +222,20 @@ const removeQR = asyncHandler(async (req, res) => {
 // @route     GET /api/qr
 // @access    Private/Admin
 const updateQR = asyncHandler(async (req, res) => {
-	const qrs = await QR.find({});
-	res.json(qrs);
+	const { question, reponse } = req.body;
+
+	const qr = await QR.findById(req.params.id);
+
+	if (qr) {
+		qr.question = question;
+		qr.reponse = reponse;
+
+		const updatedQr = await product.save();
+		res.json(updatedQr);
+	} else {
+		res.status(404);
+		throw new Error('Q/R non trouvée');
+	}
 });
 
 export {
@@ -220,6 +246,7 @@ export {
 	updateGite,
 	getGitesNoms,
 	getAllPhotos,
+	getQRById,
 	getAllQR,
 	createQR,
 	removeQR,

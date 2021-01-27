@@ -88,7 +88,7 @@ export const updateGite = (gite, slug, token) => {
 	return fetch(`${API}/gite/${slug}`, {
 		method: 'PUT',
 		headers: {
-			// Accept: 'multipart/form-data',
+			'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`,
 		},
 		body: gite,
@@ -118,6 +118,19 @@ export const createQR = (qr, token) => {
 		.catch((err) => console.log(err));
 };
 
+export const listeOneQR = (id, token) => {
+	return fetch(`${API}/qr/${id}`, {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
 export const listeDesQR = (token) => {
 	return fetch(`${API}/qr`, {
 		method: 'GET',
@@ -141,6 +154,22 @@ export const removeQR = (id, token) => {
 		},
 	})
 		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
+export const updateQR = (qr, id, token) => {
+	return fetch(`${API}/qr/${id}`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify(qr),
+	})
+		.then((response) => {
+			// handleResponse(response);
 			return response.json();
 		})
 		.catch((err) => console.log(err));

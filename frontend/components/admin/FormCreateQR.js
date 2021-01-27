@@ -5,7 +5,7 @@ import { getCookie } from '../../actions/authActions';
 import { useForm } from 'react-hook-form';
 import Router from 'next/router';
 
-const FormCreateGite = () => {
+const FormCreateQR = () => {
 	const token = getCookie('token');
 	const { register, handleSubmit, watch, errors } = useForm();
 
@@ -92,4 +92,4 @@ const FormCreateGite = () => {
 	);
 };
 
-export default FormCreateGite;
+export default FormCreateQR;
