@@ -146,7 +146,7 @@ const updateGite = asyncHandler(async (req, res) => {
 
 // @desc      Fetch all photos
 // @route     GET /api/photos
-// @access    Public
+// @access    Private/Admin
 const getAllPhotos = asyncHandler(async (req, res) => {
 	const photos = await Photo.find({});
 	res.json(photos);
@@ -154,10 +154,34 @@ const getAllPhotos = asyncHandler(async (req, res) => {
 
 // @desc      Fetch all QR
 // @route     GET /api/qr
-// @access    Public
+// @access    Private/Admin
 const getAllQR = asyncHandler(async (req, res) => {
 	const qrs = await QR.find({});
 	res.json(qrs);
+});
+
+// @desc      Create a QR
+// @route     POST /api/qr
+// @access    Private/Admin
+const createQR = asyncHandler(async (req, res) => {
+	const { question, reponse } = req.body;
+
+	const qr = new QR({
+		question,
+		reponse,
+	});
+
+	console.log('QR dans le back', qr);
+
+	qr.save((error, qr) => {
+		if (error) return res.status(400).json({ error });
+		if (qr) {
+			res.status(201).json({
+				qr,
+				message: 'La Question/Réponse a bien été créée',
+			});
+		}
+	});
 });
 
 export {
@@ -169,4 +193,5 @@ export {
 	getGitesNoms,
 	getAllPhotos,
 	getAllQR,
+	createQR,
 };

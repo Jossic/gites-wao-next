@@ -8,7 +8,10 @@ import {
 	deleteGite,
 	getGitesNoms,
 	getAllPhotos,
+	createQR,
 	getAllQR,
+	// updateQR,
+	// deleteQR
 } from '../controllers/giteController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
@@ -23,5 +26,8 @@ router.put('/gite/:slug', protect, admin, updateGite);
 router.delete('/gite/:slug', protect, admin, deleteGite);
 router.get('/photos', protect, admin, getAllPhotos);
 router.get('/qr', protect, admin, getAllQR);
+router.post('/qr', protect, admin, createQR);
+// router.put('/qr', protect, admin, updateQR);
+// router.delete('/qr', protect, admin, deleteQR);
 
 export default router;

@@ -7,7 +7,7 @@ const qrSchema = mongoose.Schema(
 			type: String,
 			unique: true,
 		},
-		réponse: {
+		reponse: {
 			type: String,
 		},
 	},
