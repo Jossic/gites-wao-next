@@ -7,7 +7,7 @@ const gestionPages = () => {
 		<>
 			<AdminHeader>
 				<Admin>
-					<h2>Formulaire de création d'un gîte</h2>
+					<h2>Formulaire de création d'une question/réponse</h2>
 					<FormCreateQR />
 				</Admin>
 			</AdminHeader>

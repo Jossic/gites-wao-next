@@ -163,9 +163,12 @@ const getAllQR = asyncHandler(async (req, res) => {
 // @desc      Create a QR
 // @route     POST /api/qr
 // @access    Private/Admin
-const createQR = asyncHandler(async (req, res) => {
+const createQR = (req, res) => {
 	const { question, reponse } = req.body;
 
+	// console.log('req', req);
+	console.log('question', question);
+	console.log('reponse', reponse);
 	const qr = new QR({
 		question,
 		reponse,
@@ -182,7 +185,7 @@ const createQR = asyncHandler(async (req, res) => {
 			});
 		}
 	});
-});
+};
 
 export {
 	getGites,

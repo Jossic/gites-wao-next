@@ -3,24 +3,27 @@ import { listeDesGites } from '../../actions/giteActions';
 import { useEffect, useState } from 'react';
 import { API } from '../../config';
 import Link from 'next/link';
+import { getCookie } from '../../actions/authActions';
 
 const ListPages = () => {
-	const [gites, setGites] = useState([]);
+	// const [gites, setGites] = useState([]);
 
-	const listerLesGites = () => {
-		listeDesGites().then((data) => {
-			if (data.error) {
-				console.log(error);
-			} else {
-				console.log('on est ok');
-				setGites(...gites, data);
-			}
-		});
-	};
+	// const token = getCookie('token');
 
-	useEffect(() => {
-		listerLesGites();
-	}, []);
+	// const listerLesGites = () => {
+	// 	listeDesGites().then((data) => {
+	// 		if (data.error) {
+	// 			console.log(error);
+	// 		} else {
+	// 			console.log('on est ok');
+	// 			setGites(...gites, data);
+	// 		}
+	// 	});
+	// };
+
+	// useEffect(() => {
+	// 	listerLesGites();
+	// }, []);
 
 	const deleteConfirm = (slug) => {
 		let answer = window.confirm(
@@ -290,16 +293,5 @@ const ListPages = () => {
 		</>
 	);
 };
-
-export async function getStaticProps(context) {
-	const res = await fetch('http://localhost:8000/api/gites');
-	const gites = await res.json();
-
-	return {
-		props: {
-			gites,
-		},
-	};
-}
 
 export default ListPages;

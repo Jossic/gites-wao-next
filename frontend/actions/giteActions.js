@@ -100,6 +100,32 @@ export const updateGite = (gite, slug, token) => {
 		.catch((err) => console.log(err));
 };
 
-export const listeDesQR = () => {
-	//
+export const createQR = (qr, token) => {
+	console.log('dan action', qr);
+	return fetch(`${API}/qr`, {
+		method: 'POST',
+		headers: {
+			Accept: 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: qr,
+	})
+		.then((response) => {
+			// handleResponse(response);
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
+export const listeDesQR = (token) => {
+	return fetch(`${API}/qr`, {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
 };

@@ -8,8 +8,8 @@ import {
 	deleteGite,
 	getGitesNoms,
 	getAllPhotos,
-	createQR,
 	getAllQR,
+	createQR,
 	// updateQR,
 	// deleteQR
 } from '../controllers/giteController.js';

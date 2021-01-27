@@ -1,58 +1,89 @@
 import { useEffect, useState } from 'react';
-import { createGite } from '../../actions/giteActions';
+import { createQR } from '../../actions/giteActions';
+import { Spinner } from 'reactstrap';
 import { getCookie } from '../../actions/authActions';
+import { useForm } from 'react-hook-form';
 import Router from 'next/router';
 
 const FormCreateGite = () => {
 	const token = getCookie('token');
+	const { register, handleSubmit, watch, errors } = useForm();
+
+	const [values, setValues] = useState({
+		question: '',
+		reponse: '',
+		success: '',
+		loading: false,
+		error: '',
+	});
+	const { question, reponse, success, loading, error } = values;
+
+	const onSubmit = (data) => {
+		setValues({ ...values, loading: true });
+		console.log(data);
+		createQR(data, token).then((result) => {
+			console.log('result vaut =>', result);
+			if (result.error) {
+				console.log('une grosse erreur');
+				setValues({ ...values, error: result.error });
+			} else {
+				setValues({
+					...values,
+					question: '',
+					reponse: '',
+					success: true,
+					loading: false,
+				});
+				setTimeout(() => {
+					Router.push('/admin/gestionDivers/FAQ');
+				}, 3000);
+			}
+		});
+	};
 
 	return (
 		<>
-			<form>
+			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className='row'>
-					<div className='col-md-8'>
+					<div className='col-md-12'>
 						<div className='form-group'>
-							<label className='text-muted'>
-								Méta-Description (présentation SEO du gîte pour
-								Google)
-							</label>
+							<label className='text-muted'>Question</label>
 							<textarea
 								type='text'
-								value={presGiteSEO}
+								name='question'
+								ref={register({ required: true })}
+								// value={question}
 								className='form-control'
-								onChange={handleChange('presGiteSEO')}
 								cols='30'
-								rows='4'></textarea>
+								rows='2'></textarea>
 						</div>
 						<div className='form-group'>
-							<label className='text-muted'>
-								Méta-Description (présentation SEO du gîte pour
-								Google)
-							</label>
+							<label className='text-muted'>Réponse</label>
 							<textarea
 								type='text'
-								value={presGiteSEO}
+								name='reponse'
+								ref={register({ required: true })}
+								// value={reponse}
 								className='form-control'
-								onChange={handleChange('presGiteSEO')}
 								cols='30'
-								rows='4'></textarea>
+								rows='5'></textarea>
 						</div>
 					</div>
 				</div>
 				{success && (
 					<div className='alert alert-success'>
-						Le gîte a bien été ajouté
+						La question/réponse à bien été ajoutée
 					</div>
 				)}
 				{loading && (
 					<div className='alert alert-success'>
-						Chargement en cours...
+						<Spinner />
 					</div>
 				)}
 				{error && <div className='alert alert-danger'>{error}</div>}
 				<div>
 					<button type='submit' className='btn btn-info'>
-						Créer ce gîte
+						Créer cette q/r
 					</button>
 				</div>
 			</form>
