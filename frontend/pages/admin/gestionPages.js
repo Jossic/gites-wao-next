@@ -1,7 +1,7 @@
 import AdminHeader from '../../components/layout/AdminHeader';
 import Link from 'next/link';
 import { Button } from 'reactstrap';
-import ListGites from '../../components/admin/ListGites';
+import ListGites from '../../components/admin/lists/ListGites';
 import Admin from '../../components/auth/Admin';
 
 const gestionPages = () => {

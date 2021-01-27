@@ -1,6 +1,6 @@
 import AdminHeader from '../../components/layout/AdminHeader';
 import Link from 'next/link';
-import ListImages from '../../components/admin/ListImages';
+import ListImages from '../../components/admin/lists/ListImages';
 import Admin from '../../components/auth/Admin';
 
 const gestionPages = () => {
