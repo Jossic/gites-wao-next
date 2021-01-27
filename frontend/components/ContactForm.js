@@ -21,45 +21,45 @@ const ContactForm = () => {
 				</div>
 				<div className='col-md-7'>
 					<form>
-						<div class='form-group'>
+						<div className='form-group'>
 							<label for='exampleFormControlInput1'>
 								Email address
 							</label>
 							<input
 								type='text'
-								class='form-control'
+								className='form-control'
 								id='exampleFormControlInput1'
 								placeholder='name@example.com'
 							/>
 						</div>
-						<div class='form-group'>
+						<div className='form-group'>
 							<label for='exampleFormControlInput1'>
 								Email address
 							</label>
 							<input
 								type='email'
-								class='form-control'
+								className='form-control'
 								id='exampleFormControlInput1'
 								placeholder='name@example.com'
 							/>
 						</div>
-						<div class='form-group'>
+						<div className='form-group'>
 							<label for='exampleFormControlInput1'>
 								Email address
 							</label>
 							<input
 								type='text'
-								class='form-control'
+								className='form-control'
 								id='exampleFormControlInput1'
 								placeholder='name@example.com'
 							/>
 						</div>
-						<div class='form-group'>
+						<div className='form-group'>
 							<label for='exampleFormControlTextarea1'>
 								Example textarea
 							</label>
 							<textarea
-								class='form-control'
+								className='form-control'
 								id='exampleFormControlTextarea1'
 								rows='3'></textarea>
 						</div>
