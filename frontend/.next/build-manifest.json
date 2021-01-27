@@ -14,6 +14,11 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
+    "/": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/index.js"
+    ],
     "/_app": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
@@ -24,15 +29,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/crud/divers/qr/[id]": [
+    "/divers/FAQ": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/crud/divers/qr/[id].js"
-    ],
-    "/admin/gestionDivers/FAQ": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/admin/gestionDivers/FAQ.js"
+      "static/chunks/pages/divers/FAQ.js"
     ],
     "/next/dist/pages/_error": [
       "static/chunks/main.js",

@@ -21,7 +21,7 @@ const ListGites = () => {
 	const token = getCookie('token');
 
 	const listerLesQR = () => {
-		listeDesQR(token).then((data) => {
+		listeDesQR().then((data) => {
 			if (data.error) {
 				console.log(error);
 			} else {

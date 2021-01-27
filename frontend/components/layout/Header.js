@@ -103,7 +103,19 @@ const Header = () => {
 							</DropdownToggle>
 							<DropdownMenu right>
 								<DropdownItem>Alentours</DropdownItem>
-								<DropdownItem>F.A.Q.</DropdownItem>
+								<DropdownItem>
+									<Link href='/divers/FAQ'>
+										<NavItem>
+											<NavLink
+												style={{
+													cursor: 'pointer',
+													color: 'black',
+												}}>
+												F.A.Q.
+											</NavLink>
+										</NavItem>
+									</Link>
+								</DropdownItem>
 							</DropdownMenu>
 						</UncontrolledDropdown>
 

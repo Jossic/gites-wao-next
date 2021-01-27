@@ -20,13 +20,13 @@ router.get('/');
 router.get('/gites', getGites);
 router.get('/gites/noms', getGitesNoms);
 router.get('/gite/:slug', getGiteByNom);
+router.get('/qr', getAllQR);
 
 // Routes espaces admin
 router.post('/gite', protect, admin, createGite);
 router.put('/gite/:slug', protect, admin, updateGite);
 router.delete('/gite/:slug', protect, admin, deleteGite);
 router.get('/photos', protect, admin, getAllPhotos);
-router.get('/qr', protect, admin, getAllQR);
 router.get('/qr/:id', protect, admin, getQRById);
 router.post('/qr', protect, admin, createQR);
 router.put('/qr/:id', protect, admin, updateQR);

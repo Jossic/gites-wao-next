@@ -131,12 +131,9 @@ export const listeOneQR = (id, token) => {
 		.catch((err) => console.log(err));
 };
 
-export const listeDesQR = (token) => {
+export const listeDesQR = () => {
 	return fetch(`${API}/qr`, {
 		method: 'GET',
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
 	})
 		.then((response) => {
 			return response.json();

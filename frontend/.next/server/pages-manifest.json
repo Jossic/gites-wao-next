@@ -2,7 +2,7 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/admin/gestionDivers/FAQ": "pages/admin/gestionDivers/FAQ.js",
+  "/": "pages/index.js",
   "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
-  "/admin/crud/divers/qr/[id]": "pages/admin/crud/divers/qr/[id].js"
+  "/divers/FAQ": "pages/divers/FAQ.js"
 }
