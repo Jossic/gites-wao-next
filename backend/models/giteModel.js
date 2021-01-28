@@ -37,13 +37,7 @@ const giteSchema = mongoose.Schema(
 			unique: true,
 			index: true,
 		},
-		photos: [
-			{
-				img: {
-					type: String,
-				},
-			},
-		],
+
 		couleur1: {
 			type: String,
 		},
@@ -53,7 +47,31 @@ const giteSchema = mongoose.Schema(
 		videoLink: {
 			type: String,
 		},
-		texte1: {
+		texteExterieur: {
+			type: {},
+			min: 20,
+			max: 2000000,
+		},
+		equipementExterieur: {
+			type: [],
+		},
+		texteInterieur: {
+			type: {},
+			min: 20,
+			max: 2000000,
+		},
+		equipementInterieur: {
+			type: [],
+		},
+		textePiscine: {
+			type: {},
+			min: 20,
+			max: 2000000,
+		},
+		equipementPiscine: {
+			type: [],
+		},
+		texte: {
 			type: {},
 			min: 20,
 			max: 2000000,
@@ -70,11 +88,6 @@ const giteSchema = mongoose.Schema(
 		calendrierLink: {
 			type: String,
 		},
-		pdf: [
-			{
-				type: String,
-			},
-		],
 	},
 	{
 		timestamps: true,

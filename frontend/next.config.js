@@ -1,5 +1,7 @@
-
 module.exports = {
+	images: {
+		domains: ['https://gites-wao.s3.amazonaws.com'],
+	},
 	publicRuntimeConfig: {
 		APP_NAME: 'Gites-Wao',
 		API_DEVELOPMENT: 'http://localhost:8000/api',

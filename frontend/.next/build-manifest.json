@@ -24,20 +24,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin": [
+    "/admin/crud/gite/create": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin.js"
+      "static/chunks/pages/admin/crud/gite/create.js"
     ],
-    "/admin/gestionDivers/FAQ": [
+    "/gite/[slug]": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/gestionDivers/FAQ.js"
-    ],
-    "/divers/FAQ": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/divers/FAQ.js"
+      "static/chunks/pages/gite/[slug].js"
     ],
     "/next/dist/pages/_error": [
       "static/chunks/main.js",

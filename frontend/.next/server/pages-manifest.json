@@ -2,8 +2,7 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/divers/FAQ": "pages/divers/FAQ.js",
-  "/admin/gestionDivers/FAQ": "pages/admin/gestionDivers/FAQ.js",
+  "/gite/[slug]": "pages/gite/[slug].js",
   "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
-  "/admin": "pages/admin.js"
+  "/admin/crud/gite/create": "pages/admin/crud/gite/create.js"
 }

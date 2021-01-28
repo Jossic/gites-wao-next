@@ -8,7 +8,13 @@ const FormCreateGite = () => {
 		nom: '',
 		mtitle: '',
 		presGiteSEO: '',
-		texte1: '',
+		texteExterieur: '',
+		equipementExterieur: '',
+		texteInterieur: '',
+		equipementInterieur: '',
+		textePiscine: '',
+		equipementPiscine: '',
+		texte: '',
 		detailGite: '',
 		capacite: '',
 		videoLink: '',
@@ -26,12 +32,17 @@ const FormCreateGite = () => {
 		nom,
 		mtitle,
 		presGiteSEO,
-		texte1,
+		texteExterieur,
+		equipementExterieur,
+		texteInterieur,
+		equipementInterieur,
+		textePiscine,
+		equipementPiscine,
+		texte,
 		detailGite,
 		capacite,
 		videoLink,
 		calendrierLink,
-		pdf,
 		couleur1,
 		couleur2,
 		error,
@@ -62,7 +73,13 @@ const FormCreateGite = () => {
 					nom: '',
 					mtitle: '',
 					presGiteSEO: '',
-					texte1: '',
+					texte: '',
+					texteExterieur: '',
+					equipementExterieur: '',
+					texteInterieur: '',
+					equipementInterieur: '',
+					textePiscine: '',
+					equipementPiscine: '',
 					detailGite: '',
 					capacite: '',
 					videoLink: '',
@@ -121,9 +138,45 @@ const FormCreateGite = () => {
 							<label className='text-muted'>Texte du gîte</label>
 							<textarea
 								type='text'
-								value={texte1}
+								value={texte}
 								className='form-control'
-								onChange={handleChange('texte1')}
+								onChange={handleChange('texte')}
+								cols='30'
+								rows='4'></textarea>
+						</div>
+						<div className='form-group'>
+							<label className='text-muted'>
+								Texte de l'extérieur
+							</label>
+							<textarea
+								type='text'
+								value={texteExterieur}
+								className='form-control'
+								onChange={handleChange('texteExterieur')}
+								cols='30'
+								rows='4'></textarea>
+						</div>
+						<div className='form-group'>
+							<label className='text-muted'>
+								Texte de l'intérieur
+							</label>
+							<textarea
+								type='text'
+								value={texteInterieur}
+								className='form-control'
+								onChange={handleChange('texteInterieur')}
+								cols='30'
+								rows='4'></textarea>
+						</div>
+						<div className='form-group'>
+							<label className='text-muted'>
+								Texte de la piscine
+							</label>
+							<textarea
+								type='text'
+								value={textePiscine}
+								className='form-control'
+								onChange={handleChange('textePiscine')}
 								cols='30'
 								rows='4'></textarea>
 						</div>
@@ -146,6 +199,39 @@ const FormCreateGite = () => {
 								value={capacite}
 								className='form-control'
 								onChange={handleChange('capacite')}
+							/>
+						</div>
+						<div className='form-group'>
+							<label className='text-muted'>
+								Equipement extérieur (séparer par une virgule)
+							</label>
+							<input
+								type='text'
+								value={equipementExterieur}
+								className='form-control'
+								onChange={handleChange('equipementExterieur')}
+							/>
+						</div>
+						<div className='form-group'>
+							<label className='text-muted'>
+								Equipement intérieur (séparer par une virgule)
+							</label>
+							<input
+								type='text'
+								value={equipementInterieur}
+								className='form-control'
+								onChange={handleChange('equipementInterieur')}
+							/>
+						</div>
+						<div className='form-group'>
+							<label className='text-muted'>
+								Equipement Piscine (séparer par une virgule)
+							</label>
+							<input
+								type='text'
+								value={equipementPiscine}
+								className='form-control'
+								onChange={handleChange('equipementPiscine')}
 							/>
 						</div>
 					</div>
