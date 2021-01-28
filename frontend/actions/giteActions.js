@@ -52,6 +52,22 @@ export const listeDesImages = (token) => {
 		.catch((err) => console.log(err));
 };
 
+export const saveImageData = (photos, token) => {
+	return fetch(`${API}/upload-images`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify(photos),
+	})
+		.then((response) => {
+			// handleResponse(response);
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
 export const listGitesNoms = () => {
 	return fetch(`${API}/gites/noms`, {
 		method: 'GET',

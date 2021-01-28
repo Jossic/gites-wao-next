@@ -7,81 +7,48 @@ import fs from 'fs';
 import _ from 'lodash';
 import { uploadAWSS3 } from '../middleware/uploadMiddleware.js';
 
-// @desc      Add an Image
-// @route     POST /api/upload-image
+// @desc      Update an image after added it
+// @route     PUT /api/save-images-data/:nom
 // @access    Private/Admin
-const savePhotos = asyncHandler(async (req, res) => {
-	// console.log('req.files', req.files);
-	// console.log('req.body', req.body);
-	// uploadAWSS3(req, res, (error, photoLoc) => {
-	// 	const files = req.files;
-	// 	console.log('files', req.files);
-	// 	console.log('req', req);
-	// 	console.log(photoLoc);
-	// 	// console.log('req', req);
-	// 	// console.log('res', res);
-	// 	if (error) {
-	// 		console.log('errors', error);
-	// 		res.status(500).json({
-	// 			status: 'fail',
-	// 			error: error,
-	// 		});
-	// 	} else {
-	// 		// If File not found
-	// 		if (files === undefined) {
-	// 			console.log('uploadProductsImages Error: No File Selected!');
-	// 			res.status(500).json({
-	// 				status: 'fail',
-	// 				message: 'Error: No File Selected',
-	// 			});
-	// 		} else {
-	// 			// If Success
-	// 			let fileArray = files.photos,
-	// 				fileLocation;
-	// 			console.log('file Array length =>', fileArray.length);
-	// 			const images = [];
-	// 			for (let i = 0; i < fileArray.length; i++) {
-	// 				fileLocation = fileArray[i].location;
-	// 				console.log('filenm', fileLocation);
-	// 				images.push(fileLocation);
-	// 			}
-	// 			// console.log('locationArray', fileLocation);
-	// 			const photo = new Photo({
-	// 				location: fileLocation,
-	// 			});
-	// 			const result = await photo.insertMany(fileLocation, {
-	// 				ordered: true,
-	// 			});
-	// 			// Save the file name into database
-	// 			res.status(200).json({
-	// 				status: 'ok',
-	// 				filesArray: fileArray,
-	// 				locationArray: images,
-	// 			});
-	// 		}
-	// 	}
-	// });
-	// const photo = new Photo({
-	// 	data: img,
-	// 	nom,
-	// 	alt,
-	// 	pageAssociee: page,
-	// 	sectionAssociee: section,
-	// });
-	// console.log('photo dans le back', photo);
-	// photo.save((error, image) => {
-	// 	if (error) return res.status(400).json({ error });
-	// 	if (image) {
-	// 		res.status(201).json({
-	// 			image,
-	// 			message: 'La photo a bien été ajoutée',
-	// 		});
-	// 	}
-	// });
+const savePhotosData = asyncHandler(async (req, res) => {
+	// console.log('req.body', req.body.items);
+	const photos = req.body.items;
+	photos.map(async (photo, index) => {
+		const {
+			nom,
+			alt,
+			pageAssociee,
+			sectionAssociee,
+			titreCarousel,
+			texteCarousel,
+		} = photo;
+		const image = await Photo.findOne({ nom });
+		if (image) {
+			image.nom = nom;
+			image.alt = alt;
+			image.pageAssociee = pageAssociee;
+			image.sectionAssociee = sectionAssociee;
+			image.titreCarousel = titreCarousel;
+			image.texteCarousel = texteCarousel;
+
+			const updatedImage = await image.save();
+		} else {
+			res.status(404);
+			throw new Error('Image non trouvée');
+		}
+
+		// for (const i in photo) {
+		// 	console.log(
+		// 		`photo à l'index ${index} => ${photo} - ${i} : ${photo[i]}`
+		// 	);
+	});
+	res.json({
+		message: 'Images envoyées',
+	});
 });
 
 const saveFile = (req, res) => {
 	//
 };
 
-export { savePhotos, saveFile };
+export { savePhotosData, saveFile };

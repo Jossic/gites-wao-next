@@ -1,15 +1,36 @@
-import { Table, Button } from 'reactstrap';
-import { listeDesImages, listGitesNoms } from '../../../actions/giteActions';
+import { Table, Button, Spinner } from 'reactstrap';
+import {
+	listeDesImages,
+	listGitesNoms,
+	saveImageData,
+} from '../../../actions/giteActions';
 import { useEffect, useState } from 'react';
 import { API } from '../../../config';
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { getCookie } from '../../../actions/authActions';
 
 const ListImages = () => {
 	const [photos, setPhotos] = useState([]);
 	const token = getCookie('token');
-	const { register, handleSubmit, watch, errors } = useForm();
+	const { register, handleSubmit, control, errors } = useForm();
+	const { fields, append, remove } = useFieldArray({
+		control,
+		name: 'items',
+	});
+
+	const [values, setValues] = useState({
+		nom: '',
+		alt: '',
+		titreCarousel: '',
+		texteCarousel: '',
+		page: '',
+		section: '',
+		success: '',
+		loading: false,
+		error: '',
+	});
+	const { success, loading, error } = values;
 
 	const [gites, setGites] = useState([]);
 
@@ -47,7 +68,33 @@ const ListImages = () => {
 			console.log('Suppression');
 		}
 	};
-	const onSubmit = (data) => console.log(data);
+	const onSubmit = (data) => {
+		setValues({ ...values, loading: true });
+		console.log('data vaut =>', data);
+
+		saveImageData(data, token).then((result) => {
+			console.log('result vaut =>', result);
+			if (result.error) {
+				console.log('une grosse erreur');
+				setValues({ ...values, error: result.error });
+			} else {
+				setValues({
+					...values,
+					nom: '',
+					alt: '',
+					titreCarousel: '',
+					texteCarousel: '',
+					page: '',
+					section: '',
+					success: true,
+					loading: false,
+				});
+				// setTimeout(() => {
+				// 	Router.push('/admin/gestionDivers/FAQ');
+				// }, 2000);
+			}
+		});
+	};
 
 	return (
 		<>
@@ -66,9 +113,17 @@ const ListImages = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{photos.map((photo, i) => (
-							<tr key={i} className='mt-5'>
-								<th>{photo.nom}</th>
+						{photos.map((photo, index) => (
+							<tr key={index} className='mt-5'>
+								<th>
+									<input
+										className='form-control'
+										type='text'
+										name={`items[${index}].nom`}
+										value={photo.nom}
+										ref={register({ required: true })}
+									/>
+								</th>
 								<th>
 									<img
 										src={photo.location}
@@ -84,7 +139,7 @@ const ListImages = () => {
 									<input
 										className='form-control'
 										type='text'
-										name='alt'
+										name={`items[${index}].alt`}
 										value={photo.alt}
 										ref={register({ required: true })}
 									/>
@@ -93,7 +148,7 @@ const ListImages = () => {
 									<input
 										className='form-control'
 										type='text'
-										name='titreCarousel'
+										name={`items[${index}].titreCarousel`}
 										value={photo.titreCarousel}
 										ref={register({ required: true })}
 									/>
@@ -102,7 +157,7 @@ const ListImages = () => {
 									<input
 										className='form-control'
 										type='text'
-										name='texteCarousel'
+										name={`items[${index}].texteCarousel`}
 										value={photo.texteCarousel}
 										ref={register({ required: true })}
 									/>
@@ -110,7 +165,7 @@ const ListImages = () => {
 								<th>
 									<select
 										ref={register({ required: true })}
-										name='page'
+										name={`items[${index}].page`}
 										className='custom-select mr-sm-2'
 										id='inlineFormCustomSelect'>
 										<option defaultValue>
@@ -129,7 +184,7 @@ const ListImages = () => {
 								<th>
 									<select
 										ref={register({ required: true })}
-										name='section'
+										name={`items[${index}].section`}
 										className='custom-select mr-sm-2'
 										id='inlineFormCustomSelect'>
 										<option defaultValue>
@@ -173,6 +228,18 @@ const ListImages = () => {
 						))}
 					</tbody>
 				</Table>
+				{success && (
+					<div className='alert alert-success'>
+						La/Les image(s) ont bien été modifiée(s), redirection en
+						cours...
+					</div>
+				)}
+				{loading && (
+					<div className='alert alert-success'>
+						<Spinner />
+					</div>
+				)}
+				{error && <div className='alert alert-danger'>{error}</div>}
 				<Button color='success'>Valider ces infos</Button>
 			</form>
 		</>
