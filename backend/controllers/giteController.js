@@ -61,12 +61,25 @@ const createGite = (req, res) => {
 		couleur1,
 		couleur2,
 		videoLink,
-		texte1,
+		texteExterieur,
+		equipementExterieur,
+		texteInterieur,
+		equipementInterieur,
+		textePiscine,
+		equipementPiscine,
+		texte,
 		detailGite,
 		reviews,
 		capacite,
 		calendrierLink,
 	} = req.body;
+
+	let arrayOfEquipementExterieur =
+		equipementExterieur && equipementExterieur.split(',');
+	let arrayOfEquipementInterieur =
+		equipementInterieur && equipementInterieur.split(',');
+	let arrayOfEquipementPiscine =
+		equipementPiscine && equipementPiscine.split(',');
 
 	const gite = new Gite({
 		nom,
@@ -78,11 +91,11 @@ const createGite = (req, res) => {
 		couleur2,
 		videoLink,
 		texteExterieur,
-		equipementExterieur,
+		equipementExterieur: arrayOfEquipementExterieur,
 		texteInterieur,
-		equipementInterieur,
+		equipementInterieur: arrayOfEquipementInterieur,
 		textePiscine,
-		equipementPiscine,
+		equipementPiscine: arrayOfEquipementPiscine,
 		texte,
 		detailGite,
 		reviews,

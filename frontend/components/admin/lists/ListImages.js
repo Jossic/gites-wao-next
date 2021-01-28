@@ -58,6 +58,8 @@ const ListImages = () => {
 							<th>Nom</th>
 							<th>Photo</th>
 							<th>Texte alternatif</th>
+							<th>Titre Carousel</th>
+							<th>Texte Carousel</th>
 							<th>Page concernée</th>
 							<th>Section concerné</th>
 							<th colSpan='2'>Actions</th>
@@ -84,6 +86,24 @@ const ListImages = () => {
 										type='text'
 										name='alt'
 										value={photo.alt}
+										ref={register({ required: true })}
+									/>
+								</th>
+								<th>
+									<input
+										className='form-control'
+										type='text'
+										name='titreCarousel'
+										value={photo.titreCarousel}
+										ref={register({ required: true })}
+									/>
+								</th>
+								<th>
+									<input
+										className='form-control'
+										type='text'
+										name='texteCarousel'
+										value={photo.texteCarousel}
 										ref={register({ required: true })}
 									/>
 								</th>

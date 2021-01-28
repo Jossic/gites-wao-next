@@ -22,6 +22,12 @@ const photoSchema = mongoose.Schema(
 		sectionAssociee: {
 			type: String,
 		},
+		titreCarousel: {
+			type: String,
+		},
+		texteCarousel: {
+			type: String,
+		},
 	},
 	{
 		timestamps: true,

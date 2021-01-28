@@ -111,7 +111,7 @@ const Gite = ({ gite, query }) => {
 	const sectionExterieur = () => (
 		<div className='container'>
 			<section>
-				<h2>Partie extérieur</h2>
+				<h2 className='text-center'>Partie extérieur</h2>
 				<div className='row'>
 					<div className='col-md-6'>
 						<Carousel
@@ -136,15 +136,7 @@ const Gite = ({ gite, query }) => {
 							/>
 						</Carousel>
 					</div>
-					<div className='col-md-6'>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Natus delectus ipsa, corrupti minus totam nobis non
-						ducimus earum, possimus consectetur sequi suscipit
-						soluta beatae deserunt similique eaque est? Porro iusto
-						voluptatem ipsum optio obcaecati, est quasi corporis
-						quibusdam autem animi at tenetur omnis eveniet eaque
-						exercitationem dolores. Quod, reprehenderit commodi!
-					</div>
+					<div className='col-md-6'>{gite.texteExterieur}</div>
 				</div>
 			</section>
 		</div>
@@ -153,18 +145,9 @@ const Gite = ({ gite, query }) => {
 	const sectionInterieur = () => (
 		<div className='container'>
 			<section>
-				<h2>Partie intérieur</h2>
+				<h2 className='text-center'>Partie intérieur</h2>
 				<div className='row'>
-					<div className='col-md-6'>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Omnis dolorum quas asperiores deserunt debitis accusamus
-						amet ipsa dolores quisquam iusto veniam officiis vitae
-						tempore repudiandae quaerat cumque facilis, ab saepe,
-						eveniet voluptas odit perspiciatis alias. Sunt, beatae!
-						Officiis voluptas, adipisci repudiandae quaerat, atque
-						consequuntur ducimus, accusantium velit sint eum
-						dolores.
-					</div>
+					<div className='col-md-6'>{gite.texteInterieur}</div>
 					<div className='col-md-6'>
 						<Carousel
 							activeIndex={activeIndex}
@@ -196,7 +179,7 @@ const Gite = ({ gite, query }) => {
 	const sectionPiscine = () => (
 		<div className='container'>
 			<section>
-				<h2>Partie piscine</h2>
+				<h2 className='text-center'>Partie piscine</h2>
 				<div className='row'>
 					<div className='col-md-6'>
 						<Carousel
@@ -221,15 +204,7 @@ const Gite = ({ gite, query }) => {
 							/>
 						</Carousel>
 					</div>
-					<div className='col-md-6'>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Corporis delectus vitae numquam optio, a dignissimos,
-						commodi at eum, placeat obcaecati amet iure ipsa fuga
-						dolor facilis sint? Voluptatem consequatur vero
-						voluptates vitae recusandae vel, ab qui molestiae
-						pariatur quis, debitis aut impedit commodi nulla fugit
-						incidunt blanditiis hic a cupiditate.
-					</div>
+					<div className='col-md-6'>{gite.textePiscine}</div>
 				</div>
 			</section>
 		</div>
@@ -238,7 +213,9 @@ const Gite = ({ gite, query }) => {
 	const sectionReview = () => (
 		<div className='container'>
 			<section>
-				<h2>Ce que nos clients disent de ce gîte</h2>
+				<h2 className='text-center'>
+					Ce que nos clients disent de ce gîte
+				</h2>
 				<div className='row'>
 					<p>Liste des reviews</p>
 				</div>
@@ -251,14 +228,14 @@ const Gite = ({ gite, query }) => {
 			<section>
 				<div className='row'>
 					<div className='col-md-6'>
-						<h2>Tour du gîte en vidéo</h2>
+						<h2 className='text-center'>Tour du gîte en vidéo</h2>
 						<div
 							className='mt-5'
 							dangerouslySetInnerHTML={afficheVideo()}
 						/>
 					</div>
 					<div className='col-md-6'>
-						<h2>Ecrivez-nous !</h2>
+						<h2 className='text-center'>Ecrivez-nous !</h2>
 						<ContactForm />
 					</div>
 				</div>
@@ -269,7 +246,7 @@ const Gite = ({ gite, query }) => {
 	const sectionCalendrier = () => (
 		<div className='container text-center'>
 			<section>
-				<h2>Calendrier des disponibilités</h2>
+				<h2 className='text-center'>Calendrier des disponibilités</h2>
 				<div dangerouslySetInnerHTML={afficheCalendrier()} />
 			</section>
 		</div>
@@ -278,7 +255,9 @@ const Gite = ({ gite, query }) => {
 	const sectionMap = () => (
 		<div className='container text-center'>
 			<section>
-				<h2>Itinéraire conseillé depuis votre position</h2>
+				<h2 className='text-center'>
+					Itinéraire conseillé depuis votre position
+				</h2>
 				<p>Affiche la map ici</p>
 			</section>
 		</div>
@@ -290,11 +269,11 @@ const Gite = ({ gite, query }) => {
 				{APP_NAME} | {gite.nom}{' '}
 			</title>
 			<meta name='description' content={gite.mdesc} />
-			<link rel='canonical' href={`${DOMAIN}/blogs/${query.slug}`} />
+			<link rel='canonical' href={`${DOMAIN}/gite/${query.slug}`} />
 			<meta property='og:title' content={`${gite.nom} | ${APP_NAME}`} />
 			<meta property='og:description' content={gite.mdesc} />
 			<meta property='og:type' content='website' />
-			<meta property='og:url' content={`${DOMAIN}/blogs/${query.slug}`} />
+			<meta property='og:url' content={`${DOMAIN}/gite/${query.slug}`} />
 			<meta property='og:site_name' content={`${APP_NAME}`} />
 
 			<meta property='og:site_name' content={APP_NAME} />
@@ -316,8 +295,8 @@ const Gite = ({ gite, query }) => {
 		<>
 			{head()}
 			<Layout>
-				<h2>Infos du gite</h2>
-				{JSON.stringify(gite)}
+				{/* <h2>Infos du gite</h2> */}
+				{/* {JSON.stringify(gite)} */}
 				{jumbotron()}
 				{sectionExterieur()}
 				{sectionInterieur()}
