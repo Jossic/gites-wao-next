@@ -1,6 +1,7 @@
 // pages/_app.js
 import React from 'react';
 import Head from 'next/head';
+import { wrapper } from '../components/store';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
@@ -33,4 +34,4 @@ function MyApp({ Component, pageProps }) {
 	);
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

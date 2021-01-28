@@ -5,8 +5,12 @@ const index = () => {
 		<AdminHeader>
 			<h2>Reste à faire</h2>
 			<ul>
+				<li>Rendu de la page gîte</li>
+				<li>Rendu de la page accueil</li>
+				<li>Rendu de la page alentours</li>
 				<li>Update et delete gite</li>
 				<li>gestion des fichiers</li>
+				<li>gestion des reviews</li>
 				<li>update & delete image</li>
 				<li>Permettre l'affichage des images ajoutée sur S3</li>
 				<li>
@@ -18,9 +22,6 @@ const index = () => {
 					admin avec pastille nouveau message
 				</li>
 				<li>Améliorer affichage sous menu</li>
-				<li>Rendu de la page gîte</li>
-				<li>Rendu de la page accueil</li>
-				<li>Rendu de la page alentours</li>
 				<li>Rendu des pages partenaires</li>
 				<li>Page reserver</li>
 				<li>Page tarif</li>
