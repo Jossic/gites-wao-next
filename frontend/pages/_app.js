@@ -1,10 +1,12 @@
 // pages/_app.js
 import React from 'react';
 import Head from 'next/head';
-import { wrapper } from '../components/store';
+// import { Provider } from 'react-redux';
+// import { useStore } from '../store';
 import '../styles/globals.css';
 
-function MyApp({ Component, pageProps }) {
+export default function App({ Component, pageProps }) {
+	// const store = useStore(pageProps.initialReduxState);
 	return (
 		<>
 			<Head>
@@ -33,5 +35,3 @@ function MyApp({ Component, pageProps }) {
 		</>
 	);
 }
-
-export default wrapper.withRedux(MyApp);

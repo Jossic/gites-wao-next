@@ -4,80 +4,66 @@ import { useEffect, useState } from 'react';
 import { API } from '../../../config';
 import Link from 'next/link';
 import { getCookie } from '../../../actions/authActions';
-import { useDispatch, useSelector } from 'react-redux';
 import { Alert, Spinner } from 'reactstrap';
 import Router from 'next/router';
 
-const ListGites = () => {
-	// const [QRs, setQRs] = useState([]);
+const ListQR = () => {
+	const [QRs, setQRs] = useState([]);
 
-	const dispatch = useDispatch();
+	const [values, setvalues] = useState({
+		loading: false,
+		error: '',
+		success: '',
+		message: '',
+	});
 
-	const QRList = useSelector((state) => state.QRList);
-	const { loading, error, QRs } = QRList;
+	const { loading, success, error, message } = values;
 
-	const userLogin = useSelector((state) => state.userLogin);
-	const { token, user } = userLogin;
+	const token = getCookie('token');
+
+	const listerLesQR = () => {
+		listeDesQR().then((data) => {
+			if (data.error) {
+				console.log(error);
+			} else {
+				setQRs(...QRs, data);
+			}
+		});
+	};
 
 	useEffect(() => {
-		if (!user.isAdmin) {
-			Router.push('/login');
-		}
-		dispatch(listeDesQR());
-	}, [input]);
+		listerLesQR();
+	}, [success]);
 
-	// const [values, setvalues] = useState({
-	// 	loading: false,
-	// 	error: '',
-	// 	success: '',
-	// 	message: '',
-	// });
-
-	// const token = getCookie('token');
-
-	// const listerLesQR = () => {
-	// 	listeDesQR().then((data) => {
-	// 		if (data.error) {
-	// 			console.log(error);
-	// 		} else {
-	// 			setQRs(...QRs, data);
-	// 		}
-	// 	});
-	// };
-
-	// useEffect(() => {
-	// 	listerLesQR();
-	// }, [success]);
-
-	// const deleteQR = (id) => {
-	// 	setvalues({ ...values, loading: true });
-	// 	console.log('id', id);
-	// 	removeQR(id, token).then((data) => {
-	// 		if (data.error) {
-	// 			setvalues({
-	// 				...values,
-	// 				loading: false,
-	// 				error: true,
-	// 				success: false,
-	// 			});
-	// 		} else {
-	// 			setvalues({
-	// 				...values,
-	// 				loading: false,
-	// 				error: '',
-	// 				success: true,
-	// 				message: data.message,
-	// 			});
-	// 		}
-	// 	});
-	// };
+	const deleteQR = (id) => {
+		setvalues({ ...values, loading: true });
+		console.log('id', id);
+		removeQR(id, token).then((data) => {
+			if (data.error) {
+				setvalues({
+					...values,
+					loading: false,
+					error: true,
+					success: false,
+				});
+			} else {
+				setvalues({
+					...values,
+					loading: false,
+					error: '',
+					success: true,
+					message: data.message,
+				});
+			}
+		});
+	};
 
 	const deleteConfirm = (id) => {
 		let answer = window.confirm(
 			`Cette opération est irréversible, Etes-vous sur de vouloir supprimer la question avec l'id ${id} ?`
 		);
 		if (answer) {
-			// deleteQR(id);
+			deleteQR(id);
 		}
 	};
 
@@ -128,4 +114,4 @@ const ListGites = () => {
 	);
 };
 
-export default ListGites;
+export default ListQR;

@@ -117,56 +117,56 @@ export const updateGite = (gite, slug, token) => {
 		.catch((err) => console.log(err));
 };
 
-// export const createQR = (qr, token) => {
-// 	console.log('dan action', qr);
-// 	return fetch(`${API}/qr`, {
-// 		method: 'POST',
-// 		headers: {
-// 			Accept: 'application/json',
-// 			'Content-Type': 'application/json',
-// 			Authorization: `Bearer ${token}`,
-// 		},
-// 		body: JSON.stringify(qr),
-// 	})
-// 		.then((response) => {
-// 			// handleResponse(response);
-// 			return response.json();
-// 		})
-// 		.catch((err) => console.log(err));
-// };
-
-export const createQR = (token) => async (dispatch, getState) => {
-	try {
-		dispatch({
-			type: QR_CREATE_REQUEST,
-		});
-
-		const {
-			userToken: { userInfo },
-		} = getState();
-
-		const config = {
-			headers: {
-				Authorization: `Bearer ${userInfo.token}`,
-			},
-		};
-
-		const { data } = await axios.post(`${API}/qr`, {}, config);
-
-		dispatch({
-			type: QR_CREATE_SUCCESS,
-			payload: data,
-		});
-	} catch (e) {
-		dispatch({
-			type: QR_CREATE_FAIL,
-			payload:
-				e.response && e.response.data.message
-					? e.response.data.message
-					: e.message,
-		});
-	}
+export const createQR = (qr, token) => {
+	console.log('dan action', qr);
+	return fetch(`${API}/qr`, {
+		method: 'POST',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify(qr),
+	})
+		.then((response) => {
+			// handleResponse(response);
+			return response.json();
+		})
+		.catch((err) => console.log(err));
 };
+
+// export const createQR = (token) => async (dispatch, getState) => {
+// 	try {
+// 		dispatch({
+// 			type: QR_CREATE_REQUEST,
+// 		});
+
+// 		const {
+// 			userToken: { userInfo },
+// 		} = getState();
+
+// 		const config = {
+// 			headers: {
+// 				Authorization: `Bearer ${userInfo.token}`,
+// 			},
+// 		};
+
+// 		const { data } = await axios.post(`${API}/qr`, {}, config);
+
+// 		dispatch({
+// 			type: QR_CREATE_SUCCESS,
+// 			payload: data,
+// 		});
+// 	} catch (e) {
+// 		dispatch({
+// 			type: QR_CREATE_FAIL,
+// 			payload:
+// 				e.response && e.response.data.message
+// 					? e.response.data.message
+// 					: e.message,
+// 		});
+// 	}
+// };
 
 export const listeOneQR = (id, token) => {
 	return fetch(`${API}/qr/${id}`, {
@@ -181,36 +181,36 @@ export const listeOneQR = (id, token) => {
 		.catch((err) => console.log(err));
 };
 
-export const listeDesQR = () => async (dispatch) => {
-	try {
-		dispatch({ type: QR_LIST_REQUEST });
+// export const listeDesQR = () => async (dispatch) => {
+// 	try {
+// 		dispatch({ type: QR_LIST_REQUEST });
 
-		const { data } = await axios.get(`${API}/qr`);
+// 		const { data } = await axios.get(`${API}/qr`);
 
-		dispatch({
-			type: QR_LIST_SUCCESS,
-			payload: data,
-		});
-	} catch (error) {
-		dispatch({
-			type: QR_LIST_FAIL,
-			payload:
-				error.response && error.response.data.message
-					? error.response.data.message
-					: error.message,
-		});
-	}
-};
-
-// export const listeDesQR = () => {
-// 	return fetch(`${API}/qr`, {
-// 		method: 'GET',
-// 	})
-// 		.then((response) => {
-// 			return response.json();
-// 		})
-// 		.catch((err) => console.log(err));
+// 		dispatch({
+// 			type: QR_LIST_SUCCESS,
+// 			payload: data,
+// 		});
+// 	} catch (error) {
+// 		dispatch({
+// 			type: QR_LIST_FAIL,
+// 			payload:
+// 				error.response && error.response.data.message
+// 					? error.response.data.message
+// 					: error.message,
+// 		});
+// 	}
 // };
+
+export const listeDesQR = () => {
+	return fetch(`${API}/qr`, {
+		method: 'GET',
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
 
 export const removeQR = (id, token) => {
 	return fetch(`${API}/qr/${id}`, {
