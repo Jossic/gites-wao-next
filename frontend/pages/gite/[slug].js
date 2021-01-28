@@ -13,6 +13,7 @@ import {
 	CarouselCaption,
 } from 'reactstrap';
 import { useState } from 'react';
+import ContactForm from '../../components/ContactForm';
 
 const Gite = ({ gite, query }) => {
 	const photos = [
@@ -35,6 +36,13 @@ const Gite = ({ gite, query }) => {
 			texteImg: 'lorem lorem lorem',
 		},
 	];
+
+	const afficheCalendrier = () => {
+		return { __html: gite.calendrierLink };
+	};
+	const afficheVideo = () => {
+		return { __html: gite.videoLink };
+	};
 
 	const [activeIndex, setActiveIndex] = useState(0);
 	const [animating, setAnimating] = useState(false);
@@ -90,7 +98,7 @@ const Gite = ({ gite, query }) => {
 						src={photo.location}
 						alt={photo.nom}
 						width={500}
-						height={500}
+						height={375}
 					/>
 					<CarouselCaption
 						captionText={photo.texteImg}
@@ -103,6 +111,7 @@ const Gite = ({ gite, query }) => {
 	const sectionExterieur = () => (
 		<div className='container'>
 			<section>
+				<h2>Partie extérieur</h2>
 				<div className='row'>
 					<div className='col-md-6'>
 						<Carousel
@@ -144,6 +153,7 @@ const Gite = ({ gite, query }) => {
 	const sectionInterieur = () => (
 		<div className='container'>
 			<section>
+				<h2>Partie intérieur</h2>
 				<div className='row'>
 					<div className='col-md-6'>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -186,6 +196,7 @@ const Gite = ({ gite, query }) => {
 	const sectionPiscine = () => (
 		<div className='container'>
 			<section>
+				<h2>Partie piscine</h2>
 				<div className='row'>
 					<div className='col-md-6'>
 						<Carousel
@@ -220,6 +231,55 @@ const Gite = ({ gite, query }) => {
 						incidunt blanditiis hic a cupiditate.
 					</div>
 				</div>
+			</section>
+		</div>
+	);
+
+	const sectionReview = () => (
+		<div className='container'>
+			<section>
+				<h2>Ce que nos clients disent de ce gîte</h2>
+				<div className='row'>
+					<p>Liste des reviews</p>
+				</div>
+			</section>
+		</div>
+	);
+
+	const sectionVideoContact = () => (
+		<div className='container'>
+			<section>
+				<div className='row'>
+					<div className='col-md-6'>
+						<h2>Tour du gîte en vidéo</h2>
+						<div
+							className='mt-5'
+							dangerouslySetInnerHTML={afficheVideo()}
+						/>
+					</div>
+					<div className='col-md-6'>
+						<h2>Ecrivez-nous !</h2>
+						<ContactForm />
+					</div>
+				</div>
+			</section>
+		</div>
+	);
+
+	const sectionCalendrier = () => (
+		<div className='container text-center'>
+			<section>
+				<h2>Calendrier des disponibilités</h2>
+				<div dangerouslySetInnerHTML={afficheCalendrier()} />
+			</section>
+		</div>
+	);
+
+	const sectionMap = () => (
+		<div className='container text-center'>
+			<section>
+				<h2>Itinéraire conseillé depuis votre position</h2>
+				<p>Affiche la map ici</p>
 			</section>
 		</div>
 	);
@@ -262,6 +322,10 @@ const Gite = ({ gite, query }) => {
 				{sectionExterieur()}
 				{sectionInterieur()}
 				{sectionPiscine()}
+				{sectionReview()}
+				{sectionVideoContact()}
+				{sectionCalendrier()}
+				{sectionMap()}
 			</Layout>
 		</>
 	);
