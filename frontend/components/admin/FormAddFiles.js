@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { createGite } from '../../actions/giteActions';
 import { getCookie } from '../../actions/authActions';
 
-const FormCreateGite = () => {
+const FormAddFiles = () => {
 	const [values, setValues] = useState({
 		nom: '',
 		mtitle: '',
@@ -241,4 +241,4 @@ const FormCreateGite = () => {
 	);
 };
 
-export default FormCreateGite;
+export default FormAddFiles;

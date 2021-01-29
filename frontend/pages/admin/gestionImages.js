@@ -3,7 +3,7 @@ import Link from 'next/link';
 import ListImages from '../../components/admin/lists/ListImages';
 import Admin from '../../components/auth/Admin';
 
-const gestionPages = () => {
+const gestionImages = () => {
 	return (
 		<>
 			<AdminHeader>
@@ -24,4 +24,4 @@ const gestionPages = () => {
 	);
 };
 
-export default gestionPages;
+export default gestionImages;

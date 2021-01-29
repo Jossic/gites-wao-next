@@ -105,6 +105,12 @@ const AdminHeader = ({ children }) => {
 											Gestion des fichiers
 										</a>
 									</Link>
+									<Link href='/admin/gestionReviews'>
+										<a className='list-group-item list-group-item-action text-white bg-secondary'>
+											<i className='fas fa-arrow-right'></i>{' '}
+											Gestion des reviews
+										</a>
+									</Link>
 									{/* </div> */}
 								</div>
 							</div>

@@ -24,15 +24,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/gestionImages": [
+    "/admin": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/gestionImages.js"
+      "static/chunks/pages/admin.js"
     ],
-    "/gite/[slug]": [
+    "/admin/gestionReviews": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/gite/[slug].js"
+      "static/chunks/pages/admin/gestionReviews.js"
     ]
   },
   "ampFirstPages": []

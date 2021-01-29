@@ -1,7 +1,7 @@
 import AdminHeader from '../../../components/layout/AdminHeader';
 import Link from 'next/link';
 import { Button } from 'reactstrap';
-import ListPages from '../../../components/admin/ListPages';
+import ListPages from '../../../components/admin/lists/ListPages';
 import Admin from '../../../components/auth/Admin';
 
 const gestionDivers = () => {

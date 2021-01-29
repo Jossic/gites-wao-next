@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/gite/[slug]": "pages/gite/[slug].js",
-  "/admin/gestionImages": "pages/admin/gestionImages.js"
+  "/admin/gestionReviews": "pages/admin/gestionReviews.js",
+  "/admin": "pages/admin.js"
 }
