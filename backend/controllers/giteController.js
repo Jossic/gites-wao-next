@@ -246,8 +246,8 @@ const updateQR = asyncHandler(async (req, res) => {
 	const qr = await QR.findById(req.params.id);
 
 	if (qr) {
-		qr.question = question;
-		qr.reponse = reponse;
+		question && (review.question = question);
+		reponse && (review.reponse = reponse);
 
 		const updatedQr = await qr.save();
 		res.json(updatedQr);

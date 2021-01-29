@@ -4,8 +4,8 @@ const reviewSchema = mongoose.Schema(
 	{
 		client: { type: String, required: true },
 		note: { type: Number, required: true },
-		commentaire: { type: String, required: true },
-		giteConcerné: { type: String, required: true },
+		commentaire: { type: String },
+		giteConcerne: { type: String, required: true },
 	},
 	{
 		timestamps: true,

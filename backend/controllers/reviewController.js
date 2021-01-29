@@ -3,7 +3,7 @@ import asyncHandler from 'express-async-handler';
 
 // @desc      Fetch all Reviews
 // @route     GET /api/review
-// @access    Private/Admin
+// @access    Public
 const getAllReviews = asyncHandler(async (req, res) => {
 	const reviews = await Review.find({});
 	res.json(reviews);
@@ -29,9 +29,6 @@ const getReviewById = asyncHandler(async (req, res) => {
 const createReview = (req, res) => {
 	const { client, note, commentaire, gite } = req.body;
 
-	// console.log('req', req);
-	console.log('question', question);
-	console.log('reponse', reponse);
 	const review = new Review({
 		client,
 		note,
@@ -76,12 +73,13 @@ const updateReview = asyncHandler(async (req, res) => {
 	const { client, note, commentaire, gite } = req.body;
 
 	const review = await Review.findById(req.params.id);
-
+	console.log('review apres requete', review);
 	if (review) {
-		review.client = client;
-		review.note = note;
-		review.commentaire = commentaire;
-		review.gite = gite;
+		client && (review.client = client);
+		note && (review.note = note);
+		commentaire && (review.commentaire = commentaire);
+		gite && (review.giteConcerne = gite);
+		console.log('review avant save', review);
 
 		const updatedReview = await review.save();
 		res.json(updatedReview);
