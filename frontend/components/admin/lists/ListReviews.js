@@ -1,30 +1,30 @@
 import { Table } from 'reactstrap';
-import { listeDesGites } from '../../../actions/giteActions';
+import { listReviews } from '../../../actions/reviewActions';
 import { useEffect, useState } from 'react';
 import { API } from '../../../config';
 import Link from 'next/link';
 
-const ListGites = () => {
-	const [gites, setGites] = useState([]);
+const ListReviews = () => {
+	const [reviews, setReviews] = useState([]);
 
-	const listerLesGites = () => {
-		listeDesGites().then((data) => {
+	const listerLesReviews = () => {
+		listReviews().then((data) => {
 			if (data.error) {
 				console.log(error);
 			} else {
 				console.log('on est ok');
-				setGites(...gites, data);
+				setReviews(...reviews, data);
 			}
 		});
 	};
 
 	useEffect(() => {
-		listerLesGites();
+		listerLesReviews();
 	}, []);
 
 	const deleteConfirm = (slug) => {
 		let answer = window.confirm(
-			'Cette opération est irréversible, Etes-vous sur de vouloir supprimer cet article ?'
+			'Cette opération est irréversible, Etes-vous sur de vouloir supprimer cet review ?'
 		);
 		if (answer) {
 			// deleteGite(slug);
@@ -38,30 +38,24 @@ const ListGites = () => {
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Nom</th>
-						<th>Vignette</th>
-						<th>Capacité</th>
+						<th>Client</th>
+						<th>Gîte</th>
+						<th>Commentaire</th>
+						<th>Note</th>
 						<th colSpan='2'>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
-					{gites.map((gite) => (
-						<tr
-							style={{ backgroundColor: gite.couleur1 }}
-							className='mt-5'>
-							<th>{gite._id}</th>
-							<th>{gite.nom}</th>
+					{reviews.map((review) => (
+						<tr className='mt-5'>
+							<th>{review._id}</th>
+							<th>{review.client}</th>
+
+							<th>{review.gite}</th>
+							<th>{review.commentaire}</th>
+							<th>{review.note}</th>
 							<th>
-								<img
-									src={`${API}/gite/photo/${gite.slug}`}
-									style={{ maxHeight: 'auto', width: '100%' }}
-									className='img img-fluid'
-									alt={gite.nom}
-								/>
-							</th>
-							<th>{gite.capacite}</th>
-							<th>
-								<Link href={`/admin/crud/gite/${gite.slug}`}>
+								<Link href={`/admin/crud/review/${review.id}`}>
 									<a>
 										<i
 											class='fas fa-pencil-ruler'
@@ -71,7 +65,7 @@ const ListGites = () => {
 							</th>
 							<th>
 								<i
-									onClick={() => deleteConfirm(gite.slug)}
+									onClick={() => deleteConfirm(review.slug)}
 									class='fas fa-trash-alt'
 									style={{
 										color: 'red',
@@ -86,15 +80,4 @@ const ListGites = () => {
 	);
 };
 
-export async function getStaticProps(context) {
-	const res = await fetch('http://localhost:8000/api/gites');
-	const gites = await res.json();
-
-	return {
-		props: {
-			gites,
-		},
-	};
-}
-
-export default ListGites;
+export default ListReviews;
