@@ -1,7 +1,6 @@
 import { Table } from 'reactstrap';
 import { listeDesQR, removeQR } from '../../../actions/giteActions';
 import { useEffect, useState } from 'react';
-import { API } from '../../../config';
 import Link from 'next/link';
 import { getCookie } from '../../../actions/authActions';
 import { Alert, Spinner } from 'reactstrap';

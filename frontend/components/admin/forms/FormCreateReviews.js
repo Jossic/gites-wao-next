@@ -1,239 +1,145 @@
 import { useEffect, useState } from 'react';
-import { createGite } from '../../actions/giteActions';
-import { getCookie } from '../../actions/authActions';
+import { listGitesNoms } from '../../../actions/giteActions';
+import { Spinner } from 'reactstrap';
+import { getCookie } from '../../../actions/authActions';
+import { useForm } from 'react-hook-form';
+import Router from 'next/router';
+import { createReview } from '../../../actions/reviewActions';
 
 const FormCreateReviews = () => {
-	const [values, setValues] = useState({
-		nom: '',
-		mtitle: '',
-		presGiteSEO: '',
-		texte1: '',
-		detailGite: '',
-		capacite: '',
-		giteLogo: '',
-		imagesCarrousel: '',
-		autresImages: '',
-		videoLink: '',
-		calendrierLink: '',
-		pdf: '',
-		couleur1: '',
-		couleur2: '',
-		error: '',
-		success: '',
-		loading: false,
-		formData: '',
-	});
-
 	const token = getCookie('token');
-	const {
-		nom,
-		mtitle,
-		presGiteSEO,
-		texte1,
-		detailGite,
-		capacite,
-		photos,
-		videoLink,
-		calendrierLink,
-		pdf,
-		couleur1,
-		couleur2,
-		error,
-		success,
-		loading,
-		formData,
-	} = values;
+	const { register, handleSubmit } = useForm();
 
-	useEffect(() => {
-		setValues({ ...values, formData: new FormData() });
-	}, []);
+	const [gites, setGites] = useState([]);
 
-	const handleChange = (name) => (e) => {
-		console.log(e.target.value);
-		let value;
-		if (name === 'photos') {
-			console.log(e.target);
-			value = e.target.file[0];
-		} else {
-			value = e.target.value;
-		}
-
-		formData.set(name, value);
-		setValues({ ...values, [name]: value, formData, error: '' });
-	};
-
-	const creerGite = (e) => {
-		e.preventDefault();
-		setValues({ ...values, loading: true });
-		createGite(formData, token).then((data) => {
+	const listDesGites = () => {
+		listGitesNoms().then((data) => {
 			if (data.error) {
-				setValues({ ...values, error: data.error });
+				console.log(error);
 			} else {
-				setValues({
-					...values,
-					nom: '',
-					mtitle: '',
-					presGiteSEO: '',
-					texte1: '',
-					detailGite: '',
-					capacite: '',
-					photos: '',
-					videoLink: '',
-					calendrierLink: '',
-					pdf: '',
-					couleur1: '',
-					couleur2: '',
-					error: '',
-					success: `Le gite "${data.nom}" a bien été ajouté`,
-					loading: false,
-				});
+				setGites(...gites, data);
 			}
 		});
 	};
+
+	useEffect(() => {
+		listDesGites();
+	}, []);
+
+	const [values, setValues] = useState({
+		client: '',
+		note: '',
+		commentaire: '',
+		giteConcerne: '',
+		loading: false,
+		success: '',
+		error: '',
+	});
+	const { question, reponse, success, loading, error } = values;
+
+	const onSubmit = async (data) => {
+		setValues({ ...values, loading: true });
+		console.log('data vaut =>', data);
+		createReview(data, token).then((result) => {
+			console.log('result vaut =>', result);
+			if (result.error) {
+				console.log('une grosse erreur');
+				setValues({ ...values, error: result.error });
+			} else {
+				setValues({
+					...values,
+					client: '',
+					note: '',
+					commentaire: '',
+					giteConcerne: '',
+					success: true,
+					loading: false,
+				});
+				setTimeout(() => {
+					Router.push('/admin/gestionReviews');
+				}, 3000);
+			}
+		});
+	};
+
 	return (
 		<>
-			<form onSubmit={creerGite}>
+			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className='row'>
-					<div className='col-md-8'>
+					<div className='col-md-12'>
 						<div className='form-group'>
-							<label className='text-muted'>Nom du gîte</label>
-							<input
-								type='text'
-								className='form-control'
-								onChange={handleChange('nom')}
-							/>
-						</div>
-						<div className='form-group'>
-							<label className='text-muted'>Meta Title</label>
-							<input
-								type='text'
-								className='form-control'
-								onChange={handleChange('mtitle')}
-							/>
+							<label className='text-muted'>
+								Selection du gîte*
+							</label>
+							<select
+								ref={register({ required: true })}
+								name='giteConcerne'
+								className='custom-select mr-sm-2'
+								id='inlineFormCustomSelect'>
+								<option defaultValue>Gîte...</option>
+								{gites.map((gite, i) => (
+									<option key={i} value={gite.slug}>
+										{gite.nom}
+									</option>
+								))}
+							</select>
 						</div>
 						<div className='form-group'>
 							<label className='text-muted'>
-								Méta-Description (présentation SEO du gîte pour
-								Google)
-							</label>
-							<textarea
-								type='text'
-								className='form-control'
-								onChange={handleChange('presGiteSEO')}
-								cols='30'
-								rows='4'></textarea>
-						</div>
-
-						<div className='form-group'>
-							<label className='text-muted'>Texte du gîte</label>
-							<textarea
-								type='text'
-								className='form-control'
-								onChange={handleChange('texte1')}
-								cols='30'
-								rows='4'></textarea>
-						</div>
-						<div className='form-group'>
-							<label className='text-muted'>Détail du gîte</label>
-							<textarea
-								type='text'
-								className='form-control'
-								onChange={handleChange('detailGite')}
-								cols='30'
-								rows='4'></textarea>
-						</div>
-						<div className='form-group'>
-							<label className='text-muted'>
-								Capacité du gîte
+								Nom & première lettre du prénom du client (pour
+								l'anonymat des commentaires)*
 							</label>
 							<input
-								type='number'
+								type='text'
+								name='client'
+								ref={register({ required: true })}
+								// value={client}
 								className='form-control'
-								onChange={handleChange('capacite')}
+								c
 							/>
 						</div>
-					</div>
-					<div className='col-md-4'>
-						{/* <fieldset className='border p-2'>
-							<legend className='w-auto'>Images</legend>
-							<div className='form-group'>
-								<label className='btn btn-outline-info'>
-									Photos
-									<input
-										onChange={handleChange('photos')}
-										type='file'
-										accept='image/*'
-										multiple
-										hidden
-									/>
-								</label>
-							</div>
-						</fieldset> */}
-						<fieldset className='border p-2'>
-							<legend className='w-auto'>Liens</legend>
-							<div className='form-group'>
-								<label className='text-muted'>
-									Lien vidéo YouTube
-								</label>
-								<input
-									type='text'
-									className='form-control'
-									onChange={handleChange('videoLink')}
-								/>
-							</div>
-							<div className='form-group'>
-								<label className='text-muted'>
-									Lien du calendrier
-								</label>
-								<input
-									type='text'
-									className='form-control'
-									onChange={handleChange('calendrierLink')}
-								/>
-							</div>
-						</fieldset>
-						{/* <fieldset className='border p-2'>
-							<legend className='w-auto'>Fichiers</legend>
-							<div className='form-group'>
-								<label className='btn btn-outline-info'>
-									Fichiers PDF
-									<input
-										onChange={handleChange('pdf')}
-										type='file'
-										accept='.pdf'
-										hidden
-									/>
-								</label>
-							</div>
-						</fieldset> */}
-						<fieldset className='border p-2'>
-							<legend className='w-auto'>Couleurs</legend>
-							<div className='form-group'>
-								<label className='text-muted'>
-									Couleur de fond
-								</label>
-								<input
-									type='color'
-									className='form-control'
-									onChange={handleChange('couleur1')}
-								/>
-							</div>
-							<div className='form-group'>
-								<label className='text-muted'>
-									Couleur du texte (noir)
-								</label>
-								<input
-									type='color'
-									className='form-control'
-									onChange={handleChange('couleur2')}
-								/>
-							</div>
-						</fieldset>
+						<div className='form-group'>
+							<label className='text-muted'>Note sur 5 *</label>
+							<select
+								ref={register({ required: true })}
+								name='note'
+								className='custom-select mr-sm-2'
+								id='inlineFormCustomSelect'>
+								<option value=''>Votre note...</option>
+								<option value='1'>1 - Très mauvais</option>
+								<option value='2'>2 - Mauvais</option>
+								<option value='3'>3 - Moyen</option>
+								<option value='4'>4 - Bon</option>
+								<option value='5'>5 - Très bon</option>
+							</select>
+						</div>
+						<div className='form-group'>
+							<label className='text-muted'>Commentaire</label>
+							<textarea
+								type='text'
+								name='commentaire'
+								ref={register()}
+								// value={commentaire}
+								className='form-control'
+								cols='30'
+								rows='5'></textarea>
+						</div>
 					</div>
 				</div>
+				{success && (
+					<div className='alert alert-success'>
+						La review a bien été ajoutée, redirection en cours...
+					</div>
+				)}
+				{loading && (
+					<div className='alert alert-success'>
+						<Spinner />
+					</div>
+				)}
+				{error && <div className='alert alert-danger'>{error}</div>}
 				<div>
 					<button type='submit' className='btn btn-info'>
-						Ajouter ces fichiers
+						Créer ce commentaire
 					</button>
 				</div>
 			</form>

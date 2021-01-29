@@ -31,7 +31,7 @@ export const listeOneReview = (id, token) => {
 		.catch((err) => console.log(err));
 };
 
-export const listeDesReviews = () => {
+export const listReviews = () => {
 	return fetch(`${API}/review`, {
 		method: 'GET',
 	})
@@ -45,8 +45,8 @@ export const removeReview = (id, token) => {
 	return fetch(`${API}/review/${id}`, {
 		method: 'DELETE',
 		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
+			// Accept: 'application/json',
+			// 'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`,
 		},
 	})

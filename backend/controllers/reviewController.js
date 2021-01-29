@@ -27,13 +27,13 @@ const getReviewById = asyncHandler(async (req, res) => {
 // @route     POST /api/review
 // @access    Private/Admin
 const createReview = (req, res) => {
-	const { client, note, commentaire, gite } = req.body;
+	const { client, note, commentaire, giteConcerne } = req.body;
 
 	const review = new Review({
 		client,
-		note,
+		note: Number(note),
 		commentaire,
-		giteConcerne: gite,
+		giteConcerne,
 	});
 
 	console.log('review dans le back', review);
@@ -70,7 +70,7 @@ const removeReview = asyncHandler(async (req, res) => {
 // @route     GET /api/review
 // @access    Private/Admin
 const updateReview = asyncHandler(async (req, res) => {
-	const { client, note, commentaire, gite } = req.body;
+	const { client, note, commentaire, giteConcerne } = req.body;
 
 	const review = await Review.findById(req.params.id);
 	console.log('review apres requete', review);
@@ -78,7 +78,7 @@ const updateReview = asyncHandler(async (req, res) => {
 		client && (review.client = client);
 		note && (review.note = note);
 		commentaire && (review.commentaire = commentaire);
-		gite && (review.giteConcerne = gite);
+		giteConcerne && (review.giteConcerne = giteConcerne);
 		console.log('review avant save', review);
 
 		const updatedReview = await review.save();

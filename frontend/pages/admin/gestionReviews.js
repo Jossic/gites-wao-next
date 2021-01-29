@@ -10,9 +10,9 @@ const gestionReviews = () => {
 				<Admin>
 					<h2>Gestion des reviews</h2>
 
-					<Link href='/admin/crud/reviews/create'>
+					<Link href='/admin/crud/divers/review/create'>
 						<a className='btn btn-info btn-lg mb-3 mt-3 float-right'>
-							Ajouter des Reviews
+							Ajouter une review
 						</a>
 					</Link>
 					<hr />
