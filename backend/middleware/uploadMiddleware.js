@@ -52,6 +52,7 @@ const uploadAWSS3 = async (req, res) => {
 	for (let i = 0; i < req.files.photos.length; i++) {
 		params = {
 			Bucket: 'gites-wao',
+			ACL: 'public-read',
 			Key: shortid.generate() + '-' + req.files.photos[i].name,
 			Body: req.files.photos[i].data,
 		};

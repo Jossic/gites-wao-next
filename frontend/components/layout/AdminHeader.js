@@ -30,15 +30,15 @@ const AdminHeader = ({ children }) => {
 					</div>
 					<div className='sidebar-header'>
 						<div className='user-pic'>
-							<img
+							{/* <img
 								className='img-responsive img-rounded'
 								src='/images/logov4-1024x496.png'
 								alt='User picture'
-							/>
+							/> */}
 						</div>
 						<div className='user-info text-white text-center pb-3'>
 							<span className='user-name'>
-								Martine
+								Jossic
 								<strong> Lapierre</strong>
 							</span>
 							<br />
@@ -190,7 +190,8 @@ const AdminHeader = ({ children }) => {
 						</Link>
 						<Link href='/admin'>
 							<a className='list-group-item list-group-item-action text-white bg-dark'>
-								<i className='fas fa-bed'></i> Gestion des mails
+								<i className='fas fa-envelope'></i> Gestion des
+								mails
 							</a>
 						</Link>
 						<Link href='/admin'>
@@ -204,9 +205,9 @@ const AdminHeader = ({ children }) => {
 
 				<div id='page-content-wrapper'>
 					<nav className='navbar navbar-expand-lg navbar-dark bg-dark border-bottom'>
-						<button className='btn btn-primary' id='menu-toggle'>
+						{/* <button className='btn btn-primary' id='menu-toggle'>
 							Toggle Menu
-						</button>
+						</button> */}
 
 						<button
 							className='navbar-toggler'
@@ -225,7 +226,7 @@ const AdminHeader = ({ children }) => {
 							<ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
 								<li className='nav-item active'>
 									<a className='nav-link' href='/admin'>
-										Admin{' '}
+										Espace Admin{' '}
 										<span className='sr-only'>
 											(current)
 										</span>
@@ -236,7 +237,7 @@ const AdminHeader = ({ children }) => {
 										Voir le site
 									</a>
 								</li>
-								<li className='nav-item dropdown'>
+								{/* <li className='nav-item dropdown'>
 									<a
 										className='nav-link dropdown-toggle'
 										href='#'
@@ -261,7 +262,7 @@ const AdminHeader = ({ children }) => {
 											Something else here
 										</a>
 									</div>
-								</li>
+								</li> */}
 							</ul>
 						</div>
 					</nav>

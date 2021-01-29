@@ -3,5 +3,7 @@
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
   "/admin/gestionReviews": "pages/admin/gestionReviews.js",
-  "/admin/crud/divers/review/[id]": "pages/admin/crud/divers/review/[id].js"
+  "/admin/gestionImages": "pages/admin/gestionImages.js",
+  "/gite/[slug]": "pages/gite/[slug].js",
+  "/404": "pages/404.js"
 }

@@ -23,7 +23,7 @@ const FormUpdateReview = ({ preloadedValues, router }) => {
 		loading: false,
 		error: '',
 	});
-	const { success, loading, error } = values;
+	const { success, loading, error, giteConcerne } = values;
 	const [gites, setGites] = useState([]);
 
 	const listDesGites = () => {
@@ -77,9 +77,10 @@ const FormUpdateReview = ({ preloadedValues, router }) => {
 							<select
 								ref={register({ required: true })}
 								name='giteConcerne'
+								defaultvalue='manola'
 								className='custom-select mr-sm-2'
 								id='inlineFormCustomSelect'>
-								<option defaultValue>Gîte...</option>
+								<option>Gîte...</option>
 								{gites.map((gite, i) => (
 									<option key={i} value={gite.slug}>
 										{gite.nom}

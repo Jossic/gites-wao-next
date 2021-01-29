@@ -20,13 +20,11 @@ const index = () => {
 				<li>Rendu de la page alentours</li>
 				<li>Update et delete gite</li>
 				<li>gestion des fichiers</li>
-				<li>gestion des reviews</li>
+				<li>
+					gestion des reviews : Preload valeur du select pour update
+				</li>
 				<li>update & delete image</li>
 				<li>Permettre l'affichage des images ajoutée sur S3</li>
-				<li>
-					Dégager le toggle Menu et modifier les liens espace admin en
-					haut
-				</li>
 				<li>
 					Renvoyer les messages du formulaire de contact dans l'espace
 					admin avec pastille nouveau message

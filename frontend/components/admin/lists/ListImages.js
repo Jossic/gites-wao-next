@@ -230,8 +230,7 @@ const ListImages = () => {
 				</Table>
 				{success && (
 					<div className='alert alert-success'>
-						La/Les image(s) ont bien été modifiée(s), redirection en
-						cours...
+						La/Les image(s) ont bien été modifiée(s)
 					</div>
 				)}
 				{loading && (

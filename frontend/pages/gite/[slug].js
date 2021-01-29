@@ -87,7 +87,7 @@ const Gite = ({ gite, query }) => {
 		</section>
 	);
 
-	const carousel = (nom) =>
+	const carousel = (nom, section) =>
 		photos.map((photo) => {
 			return (
 				<CarouselItem

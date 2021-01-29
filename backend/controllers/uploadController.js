@@ -14,20 +14,13 @@ const savePhotosData = asyncHandler(async (req, res) => {
 	// console.log('req.body', req.body.items);
 	const photos = req.body.items;
 	photos.map(async (photo, index) => {
-		const {
-			nom,
-			alt,
-			pageAssociee,
-			sectionAssociee,
-			titreCarousel,
-			texteCarousel,
-		} = photo;
+		const { nom, alt, page, section, titreCarousel, texteCarousel } = photo;
 		const image = await Photo.findOne({ nom });
 		if (image) {
 			image.nom = nom;
 			image.alt = alt;
-			image.pageAssociee = pageAssociee;
-			image.sectionAssociee = sectionAssociee;
+			image.pageAssociee = page;
+			image.sectionAssociee = section;
 			image.titreCarousel = titreCarousel;
 			image.texteCarousel = texteCarousel;
 
