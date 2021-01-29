@@ -11,6 +11,7 @@ import bodyParser from 'body-parser';
 import gitesRoutes from './routes/gitesRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
+import reviewRoutes from './routes/reviewRoutes.js';
 // import AWS from 'aws-sdk';
 
 dotenv.config();
@@ -43,6 +44,7 @@ app.use(express.json());
 app.use('/api', gitesRoutes);
 app.use('/api', userRoutes);
 app.use('/api', uploadRoutes);
+app.use('/api', reviewRoutes);
 
 // app.get('/api/config/paypal', (req, res) =>
 // 	res.send(process.env.PAYPAL_CLIENT_ID)
