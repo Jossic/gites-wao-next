@@ -4,6 +4,8 @@ import {
 	listGitesNoms,
 	saveImageData,
 } from '../../../actions/giteActions';
+import Select from 'react-select';
+
 import { useEffect, useState } from 'react';
 import { API } from '../../../config';
 import Link from 'next/link';
@@ -40,6 +42,16 @@ const ListImages = () => {
 				console.log(error);
 			} else {
 				setGites(...gites, data);
+				// const monTableau = data.map((gite) => {
+				// 	const options = {
+				// 		// value: gite.slug,
+				// 		// label: gite.nom,
+				// 	};
+				// 	options.value = gite.slug;
+				// 	options.label = gite.nom;
+				// 	// debugger;
+				// 	return options;
+				// });
 			}
 		});
 	};
@@ -163,19 +175,33 @@ const ListImages = () => {
 									/>
 								</th>
 								<th>
-									<label>
+									{/* <label>
 										Selectionné :{' '}
 										{photo.pageAssociee &&
 											photo.pageAssociee}
-									</label>
-									<select
+									</label> */}
+									{/* <Select
 										defaultValue={photo.pageAssociee}
+										onChange={photo.pageAssociee}
+										options={{
+											label: gites.nom,
+											value: gites.slug,
+										}}
+									/> */}
+									<select
 										ref={register({ required: true })}
 										name={`items[${index}].page`}
 										className='custom-select mr-sm-2'>
 										<option>Selection...</option>
 										{gites.map((gite, i) => (
-											<option key={i} value={gite.slug}>
+											<option
+												key={i}
+												value={gite.slug}
+												selected={
+													gite.slug ===
+														photo.pageAssociee &&
+													'selected'
+												}>
 												{gite.nom}
 											</option>
 										))}
@@ -185,30 +211,62 @@ const ListImages = () => {
 									</select>
 								</th>
 								<th>
-									<label>
+									{/* <label>
 										Selectionné :{' '}
 										{photo.sectionAssociee &&
 											photo.sectionAssociee}
-									</label>
+									</label> */}
 									<select
 										ref={register({ required: true })}
 										name={`items[${index}].section`}
 										className='custom-select mr-sm-2'>
-										<option defaultValue>
-											Selection...
-										</option>
-										<option value='Autre'>
+										<option>Selection...</option>
+										<option
+											value='Autre'
+											selected={
+												photo.sectionAssociee ===
+													'Autre' && 'selected'
+											}>
 											Autres sections
 										</option>
-										<option value='exterieur'>
+										<option
+											value='exterieur'
+											selected={
+												photo.sectionAssociee ===
+													'exterieur' && 'selected'
+											}>
 											Extérieur
 										</option>
-										<option value='piscine'>Piscine</option>
-										<option value='interieur'>
+										<option
+											value='piscine'
+											selected={
+												photo.sectionAssociee ===
+													'piscine' && 'selected'
+											}>
+											Piscine
+										</option>
+										<option
+											value='interieur'
+											selected={
+												photo.sectionAssociee ===
+													'interieur' && 'selected'
+											}>
 											Intérieur
 										</option>
-										<option value='avatar'>Avatar</option>
-										<option value='avatar'>
+										<option
+											value='avatar'
+											selected={
+												photo.sectionAssociee ===
+													'avatar' && 'selected'
+											}>
+											Avatar
+										</option>
+										<option
+											value='vignettes'
+											selected={
+												photo.sectionAssociee ===
+													'vignettes' && 'selected'
+											}>
 											Vignettes
 										</option>
 									</select>

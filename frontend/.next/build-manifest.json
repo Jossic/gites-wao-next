@@ -29,10 +29,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/admin/gestionImages.js"
     ],
-    "/admin/gestionReviews": [
+    "/login": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/gestionReviews.js"
+      "static/chunks/pages/login.js"
     ]
   },
   "ampFirstPages": []
