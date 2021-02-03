@@ -48,7 +48,6 @@ const getPhotosByNom = asyncHandler(async (req, res) => {
 const deleteGite = asyncHandler(async (req, res) => {
 	const slug = req.params.slug.toLowerCase();
 	const gite = await Gite.findOne({ slug });
-	console.log(gite);
 
 	if (gite) {
 		await gite.remove();

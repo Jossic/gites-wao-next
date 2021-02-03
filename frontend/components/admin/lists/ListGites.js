@@ -1,18 +1,28 @@
 import { Table } from 'reactstrap';
-import { listeDesGites } from '../../../actions/giteActions';
+import { deleteGite, listeDesGites } from '../../../actions/giteActions';
 import { useEffect, useState } from 'react';
 import { API } from '../../../config';
+import { Alert, Spinner } from 'reactstrap';
 import Link from 'next/link';
+import { getCookie } from '../../../actions/authActions';
 
 const ListGites = () => {
+	const token = getCookie('token');
 	const [gites, setGites] = useState([]);
+
+	const [values, setvalues] = useState({
+		loading: false,
+		error: '',
+		success: '',
+		message: '',
+	});
+	const { loading, success, error, message } = values;
 
 	const listerLesGites = () => {
 		listeDesGites().then((data) => {
 			if (data.error) {
 				console.log(error);
 			} else {
-				console.log('on est ok');
 				setGites(...gites, data);
 			}
 		});
@@ -20,20 +30,45 @@ const ListGites = () => {
 
 	useEffect(() => {
 		listerLesGites();
-	}, []);
+	}, [success]);
+
+	const removeGite = (slug) => {
+		setvalues({ ...values, loading: true });
+		console.log('slug', slug);
+		deleteGite(slug, token).then((data) => {
+			if (data.error) {
+				setvalues({
+					...values,
+					loading: false,
+					error: true,
+					success: false,
+				});
+			} else {
+				setvalues({
+					...values,
+					loading: false,
+					error: '',
+					success: true,
+					message: data.message,
+				});
+			}
+		});
+	};
 
 	const deleteConfirm = (slug) => {
 		let answer = window.confirm(
-			'Cette opération est irréversible, Etes-vous sur de vouloir supprimer cet article ?'
+			`Vous êtes sur le point de supprimer le gîte ${slug}, êtes-vous sûr ?`
 		);
 		if (answer) {
-			// deleteGite(slug);
-			console.log('Suppression');
+			removeGite(slug);
 		}
 	};
 
 	return (
 		<>
+			{loading && <Spinner />}
+			{success && <Alert color='success'>{message}</Alert>}
+			{error && <Alert color='danger'>Une erreur est survenue</Alert>}
 			<Table>
 				<thead>
 					<tr>
