@@ -120,7 +120,7 @@ const ListImages = () => {
 										className='form-control'
 										type='text'
 										name={`items[${index}].nom`}
-										// value={photo.nom}
+										defaultValue={photo.nom}
 										ref={register({ required: true })}
 									/>
 								</th>
@@ -140,7 +140,7 @@ const ListImages = () => {
 										className='form-control'
 										type='text'
 										name={`items[${index}].alt`}
-										// value={photo.alt}
+										defaultValue={photo.alt}
 										ref={register({ required: true })}
 									/>
 								</th>
@@ -149,7 +149,7 @@ const ListImages = () => {
 										className='form-control'
 										type='text'
 										name={`items[${index}].titreCarousel`}
-										// value={photo.titreCarousel}
+										defaultValue={photo.titreCarousel}
 										ref={register({ required: true })}
 									/>
 								</th>
@@ -158,7 +158,7 @@ const ListImages = () => {
 										className='form-control'
 										type='text'
 										name={`items[${index}].texteCarousel`}
-										// value={photo.texteCarousel}
+										defaultValue={photo.texteCarousel}
 										ref={register({ required: true })}
 									/>
 								</th>
@@ -169,6 +169,7 @@ const ListImages = () => {
 											photo.pageAssociee}
 									</label>
 									<select
+										defaultValue={photo.pageAssociee}
 										ref={register({ required: true })}
 										name={`items[${index}].page`}
 										className='custom-select mr-sm-2'>
