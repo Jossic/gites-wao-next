@@ -1,23 +1,6 @@
 import axios from 'axios';
 import fetch from 'isomorphic-fetch';
 import { API } from '../config';
-import {
-	QR_LIST_REQUEST,
-	QR_LIST_SUCCESS,
-	QR_LIST_FAIL,
-	// QR_DETAILS_REQUEST,
-	// QR_DETAILS_SUCCESS,
-	// QR_DETAILS_FAIL,
-	QR_DELETE_REQUEST,
-	QR_DELETE_SUCCESS,
-	QR_DELETE_FAIL,
-	QR_CREATE_REQUEST,
-	QR_CREATE_SUCCESS,
-	QR_CREATE_FAIL,
-	QR_UPDATE_REQUEST,
-	QR_UPDATE_SUCCESS,
-	QR_UPDATE_FAIL,
-} from '../constants/giteConstants';
 
 export const listGiteDetails = async (slug) => {
 	try {

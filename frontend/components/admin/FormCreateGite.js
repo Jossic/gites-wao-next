@@ -100,41 +100,7 @@ const FormCreateGite = () => {
 			}
 		});
 	};
-	// const creerGite = (e) => {
-	// 	e.preventDefault();
-	// 	setValues({ ...values, loading: true });
-	// 	createGite(formData, token).then((data) => {
-	// 		if (data.error) {
-	// 			setValues({ ...values, error: data.error });
-	// 		} else {
-	// 			setValues({
-	// 				nom: '',
-	// 				mtitle: '',
-	// 				presGiteSEO: '',
-	// 				texte: '',
-	// 				texteExterieur: '',
-	// 				equipementExterieur: '',
-	// 				texteInterieur: '',
-	// 				equipementInterieur: '',
-	// 				textePiscine: '',
-	// 				equipementPiscine: '',
-	// 				detailGite: '',
-	// 				capacite: '',
-	// 				videoLink: '',
-	// 				calendrierLink: '',
-	// 				pdf: '',
-	// 				couleur1: '#FFFFFF',
-	// 				couleur2: '#111111',
-	// 				error: '',
-	// 				success: 'Le gîte a bien été ajouté',
-	// 				loading: false,
-	// 			});
-	// 			setTimeout(() => {
-	// 				Router.push('/admin/gestionPages');
-	// 			}, 3000);
-	// 		}
-	// 	});
-	// };
+
 	return (
 		<>
 			<form onSubmit={handleSubmit(onSubmit)}>
