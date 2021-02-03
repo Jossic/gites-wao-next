@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import { createGite } from '../../actions/giteActions';
 import { getCookie } from '../../actions/authActions';
+import { useForm } from 'react-hook-form';
 import Router from 'next/router';
 
 const FormCreateGite = () => {
+	const { register, handleSubmit, watch, errors } = useForm();
+
 	const [values, setValues] = useState({
 		nom: '',
 		mtitle: '',
@@ -55,17 +58,17 @@ const FormCreateGite = () => {
 		setValues({ ...values, formData: new FormData() });
 	}, []);
 
-	const handleChange = (name) => (e) => {
-		let value = e.target.value;
+	// const handleChange = (name) => (e) => {
+	// 	let value = e.target.value;
 
-		formData.set(name, value);
-		setValues({ ...values, [name]: value, formData, error: '' });
-	};
+	// 	formData.set(name, value);
+	// 	setValues({ ...values, [name]: value, formData, error: '' });
+	// };
 
-	const creerGite = (e) => {
-		e.preventDefault();
+	const onSubmit = (data) => {
 		setValues({ ...values, loading: true });
-		createGite(formData, token).then((data) => {
+		console.log(data);
+		createGite(data, token).then((data) => {
 			if (data.error) {
 				setValues({ ...values, error: data.error });
 			} else {
@@ -97,27 +100,62 @@ const FormCreateGite = () => {
 			}
 		});
 	};
+	// const creerGite = (e) => {
+	// 	e.preventDefault();
+	// 	setValues({ ...values, loading: true });
+	// 	createGite(formData, token).then((data) => {
+	// 		if (data.error) {
+	// 			setValues({ ...values, error: data.error });
+	// 		} else {
+	// 			setValues({
+	// 				nom: '',
+	// 				mtitle: '',
+	// 				presGiteSEO: '',
+	// 				texte: '',
+	// 				texteExterieur: '',
+	// 				equipementExterieur: '',
+	// 				texteInterieur: '',
+	// 				equipementInterieur: '',
+	// 				textePiscine: '',
+	// 				equipementPiscine: '',
+	// 				detailGite: '',
+	// 				capacite: '',
+	// 				videoLink: '',
+	// 				calendrierLink: '',
+	// 				pdf: '',
+	// 				couleur1: '#FFFFFF',
+	// 				couleur2: '#111111',
+	// 				error: '',
+	// 				success: 'Le gîte a bien été ajouté',
+	// 				loading: false,
+	// 			});
+	// 			setTimeout(() => {
+	// 				Router.push('/admin/gestionPages');
+	// 			}, 3000);
+	// 		}
+	// 	});
+	// };
 	return (
 		<>
-			<form onSubmit={creerGite}>
+			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className='row'>
 					<div className='col-md-8'>
 						<div className='form-group'>
 							<label className='text-muted'>Nom du gîte</label>
 							<input
 								type='text'
-								value={nom}
+								name={'nom'}
 								className='form-control'
-								onChange={handleChange('nom')}
+								ref={register({ required: true })}
 							/>
 						</div>
 						<div className='form-group'>
 							<label className='text-muted'>Meta Title</label>
 							<input
 								type='text'
-								value={mtitle}
+								name={'mtitle'}
 								className='form-control'
-								onChange={handleChange('mtitle')}
+								ref={register({ required: true })}
 							/>
 						</div>
 						<div className='form-group'>
@@ -127,9 +165,9 @@ const FormCreateGite = () => {
 							</label>
 							<textarea
 								type='text'
-								value={presGiteSEO}
+								name={'presGiteSEO'}
 								className='form-control'
-								onChange={handleChange('presGiteSEO')}
+								ref={register({ required: true })}
 								cols='30'
 								rows='4'></textarea>
 						</div>
@@ -138,9 +176,9 @@ const FormCreateGite = () => {
 							<label className='text-muted'>Texte du gîte</label>
 							<textarea
 								type='text'
-								value={texte}
+								name={'texte'}
 								className='form-control'
-								onChange={handleChange('texte')}
+								ref={register()}
 								cols='30'
 								rows='4'></textarea>
 						</div>
@@ -150,9 +188,9 @@ const FormCreateGite = () => {
 							</label>
 							<textarea
 								type='text'
-								value={texteExterieur}
+								name={'texteExterieur'}
 								className='form-control'
-								onChange={handleChange('texteExterieur')}
+								ref={register()}
 								cols='30'
 								rows='4'></textarea>
 						</div>
@@ -162,9 +200,9 @@ const FormCreateGite = () => {
 							</label>
 							<textarea
 								type='text'
-								value={texteInterieur}
+								name={'texteInterieur'}
 								className='form-control'
-								onChange={handleChange('texteInterieur')}
+								ref={register()}
 								cols='30'
 								rows='4'></textarea>
 						</div>
@@ -174,9 +212,9 @@ const FormCreateGite = () => {
 							</label>
 							<textarea
 								type='text'
-								value={textePiscine}
+								name={'textePiscine'}
 								className='form-control'
-								onChange={handleChange('textePiscine')}
+								ref={register()}
 								cols='30'
 								rows='4'></textarea>
 						</div>
@@ -184,9 +222,9 @@ const FormCreateGite = () => {
 							<label className='text-muted'>Détail du gîte</label>
 							<textarea
 								type='text'
-								value={detailGite}
+								name={'detailGite'}
 								className='form-control'
-								onChange={handleChange('detailGite')}
+								ref={register()}
 								cols='30'
 								rows='4'></textarea>
 						</div>
@@ -196,9 +234,9 @@ const FormCreateGite = () => {
 							</label>
 							<input
 								type='number'
-								value={capacite}
+								name={'capacite'}
 								className='form-control'
-								onChange={handleChange('capacite')}
+								ref={register({ required: true })}
 							/>
 						</div>
 						<div className='form-group'>
@@ -207,9 +245,9 @@ const FormCreateGite = () => {
 							</label>
 							<input
 								type='text'
-								value={equipementExterieur}
+								name={'equipementExterieur'}
 								className='form-control'
-								onChange={handleChange('equipementExterieur')}
+								ref={register()}
 							/>
 						</div>
 						<div className='form-group'>
@@ -218,9 +256,9 @@ const FormCreateGite = () => {
 							</label>
 							<input
 								type='text'
-								value={equipementInterieur}
+								name={'equipementInterieur'}
 								className='form-control'
-								onChange={handleChange('equipementInterieur')}
+								ref={register()}
 							/>
 						</div>
 						<div className='form-group'>
@@ -229,28 +267,13 @@ const FormCreateGite = () => {
 							</label>
 							<input
 								type='text'
-								value={equipementPiscine}
+								name={'equipementPiscine'}
 								className='form-control'
-								onChange={handleChange('equipementPiscine')}
+								ref={register()}
 							/>
 						</div>
 					</div>
 					<div className='col-md-4'>
-						{/* <fieldset className='border p-2'>
-							<legend className='w-auto'>Images</legend>
-							<div className='form-group'>
-								<label className='btn btn-outline-info'>
-									Photos
-									<input
-										onChange={handleChange('photos')}
-										type='file'
-										accept='image/*'
-										multiple
-										hidden
-									/>
-								</label>
-							</div>
-						</fieldset> */}
 						<fieldset className='border p-2'>
 							<legend className='w-auto'>Liens</legend>
 							<div className='form-group'>
@@ -259,9 +282,9 @@ const FormCreateGite = () => {
 								</label>
 								<input
 									type='text'
-									value={videoLink}
+									name={'videoLink'}
 									className='form-control'
-									onChange={handleChange('videoLink')}
+									ref={register()}
 								/>
 							</div>
 							<div className='form-group'>
@@ -270,26 +293,13 @@ const FormCreateGite = () => {
 								</label>
 								<input
 									type='text'
-									value={calendrierLink}
+									name={'calendrierLink'}
 									className='form-control'
-									onChange={handleChange('calendrierLink')}
+									ref={register()}
 								/>
 							</div>
 						</fieldset>
-						{/* <fieldset className='border p-2'>
-							<legend className='w-auto'>Fichiers</legend>
-							<div className='form-group'>
-								<label className='btn btn-outline-info'>
-									Fichiers PDF
-									<input
-										onChange={handleChange('pdf')}
-										type='file'
-										accept='.pdf'
-										hidden
-									/>
-								</label>
-							</div>
-						</fieldset> */}
+
 						<fieldset className='border p-2'>
 							<legend className='w-auto'>Couleurs</legend>
 							<div className='form-group'>
@@ -298,9 +308,9 @@ const FormCreateGite = () => {
 								</label>
 								<input
 									type='color'
-									value={couleur1}
+									name={'couleur1'}
 									className='form-control'
-									onChange={handleChange('couleur1')}
+									ref={register({ required: true })}
 								/>
 							</div>
 							<div className='form-group'>
@@ -309,9 +319,9 @@ const FormCreateGite = () => {
 								</label>
 								<input
 									type='color'
-									value={couleur2}
+									name={'couleur2'}
 									className='form-control'
-									onChange={handleChange('couleur2')}
+									ref={register({ required: true })}
 								/>
 							</div>
 						</fieldset>

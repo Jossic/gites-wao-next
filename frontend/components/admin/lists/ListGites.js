@@ -86,15 +86,4 @@ const ListGites = () => {
 	);
 };
 
-export async function getStaticProps(context) {
-	const res = await fetch('http://localhost:8000/api/gites');
-	const gites = await res.json();
-
-	return {
-		props: {
-			gites,
-		},
-	};
-}
-
 export default ListGites;

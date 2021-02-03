@@ -89,10 +89,10 @@ export const createGite = (gite, token) => {
 	return fetch(`${API}/gite`, {
 		method: 'POST',
 		headers: {
-			Accept: 'multipart/form-data',
+			'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`,
 		},
-		body: gite,
+		body: JSON.stringify(gite),
 	})
 		.then((response) => {
 			// handleResponse(response);
@@ -124,7 +124,7 @@ export const updateGite = (gite, slug, token) => {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`,
 		},
-		body: gite,
+		body: JSON.stringify(gite),
 	})
 		.then((response) => {
 			// handleResponse(response);
