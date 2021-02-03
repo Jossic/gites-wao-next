@@ -185,7 +185,7 @@ const updateGite = asyncHandler(async (req, res) => {
 
 // @desc      Fetch all photos
 // @route     GET /api/photos
-// @access    Private/Admin
+// @access    Public
 const getAllPhotos = asyncHandler(async (req, res) => {
 	const photos = await Photo.find({});
 	res.json(photos);

@@ -22,12 +22,9 @@ export const listeDesGites = () => {
 		.catch((err) => console.log(err));
 };
 
-export const listeDesImages = (token) => {
+export const listeDesImages = () => {
 	return fetch(`${API}/photos`, {
 		method: 'GET',
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
 	})
 		.then((response) => {
 			return response.json();
@@ -59,13 +56,6 @@ export const listGitesNoms = () => {
 			return response.json();
 		})
 		.catch((err) => console.log(err));
-
-	// try {
-	// 	const { data } = await axios.get(`${API}/gite`);
-	// 	return data;
-	// } catch (error) {
-	// 	console.error(error);
-	// }
 };
 
 export const createGite = (gite, token) => {
@@ -134,39 +124,6 @@ export const createQR = (qr, token) => {
 		.catch((err) => console.log(err));
 };
 
-// export const createQR = (token) => async (dispatch, getState) => {
-// 	try {
-// 		dispatch({
-// 			type: QR_CREATE_REQUEST,
-// 		});
-
-// 		const {
-// 			userToken: { userInfo },
-// 		} = getState();
-
-// 		const config = {
-// 			headers: {
-// 				Authorization: `Bearer ${userInfo.token}`,
-// 			},
-// 		};
-
-// 		const { data } = await axios.post(`${API}/qr`, {}, config);
-
-// 		dispatch({
-// 			type: QR_CREATE_SUCCESS,
-// 			payload: data,
-// 		});
-// 	} catch (e) {
-// 		dispatch({
-// 			type: QR_CREATE_FAIL,
-// 			payload:
-// 				e.response && e.response.data.message
-// 					? e.response.data.message
-// 					: e.message,
-// 		});
-// 	}
-// };
-
 export const listeOneQR = (id, token) => {
 	return fetch(`${API}/qr/${id}`, {
 		method: 'GET',
@@ -179,27 +136,6 @@ export const listeOneQR = (id, token) => {
 		})
 		.catch((err) => console.log(err));
 };
-
-// export const listeDesQR = () => async (dispatch) => {
-// 	try {
-// 		dispatch({ type: QR_LIST_REQUEST });
-
-// 		const { data } = await axios.get(`${API}/qr`);
-
-// 		dispatch({
-// 			type: QR_LIST_SUCCESS,
-// 			payload: data,
-// 		});
-// 	} catch (error) {
-// 		dispatch({
-// 			type: QR_LIST_FAIL,
-// 			payload:
-// 				error.response && error.response.data.message
-// 					? error.response.data.message
-// 					: error.message,
-// 		});
-// 	}
-// };
 
 export const listeDesQR = () => {
 	return fetch(`${API}/qr`, {

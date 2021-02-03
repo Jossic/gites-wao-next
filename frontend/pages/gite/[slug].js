@@ -2,41 +2,41 @@ import Head from 'next/head';
 // import Link from 'next/link';
 import Layout from '../../components/layout/Layout';
 import { API, DOMAIN, APP_NAME } from '../../config';
-import { listGiteDetails } from '../../actions/giteActions';
+import { listeDesImages, listGiteDetails } from '../../actions/giteActions';
 import Image from 'next/image';
-import {
-	Jumbotron,
-	Carousel,
-	CarouselItem,
-	CarouselControl,
-	CarouselIndicators,
-	CarouselCaption,
-} from 'reactstrap';
+import { Jumbotron } from 'reactstrap';
+import { Carousel } from 'react-bootstrap';
 import { useState } from 'react';
 import ContactForm from '../../components/ContactForm';
 
-const Gite = ({ gite, query }) => {
-	// const photos = [
-	// 	{
-	// 		location:
-	// 			'https://gites-wao.s3.amazonaws.com/OpvcUJi1EH-P1010186.jpg',
-	// 		nom: 'P1010186.jpg',
-	// 		texteImg: 'lorem lorem lorem',
-	// 	},
-	// 	{
-	// 		location:
-	// 			'https://gites-wao.s3.amazonaws.com/NUKKUUtUDm-P1090714.jpg',
-	// 		nom: 'P1090714.jpg',
-	// 		texteImg: 'lorem lorem lorem',
-	// 	},
-	// 	{
-	// 		location:
-	// 			'https://gites-wao.s3.amazonaws.com/ibRGvozgYu-P1090716.jpg',
-	// 		nom: 'P1090716.jpg',
-	// 		texteImg: 'lorem lorem lorem',
-	// 	},
-	// ];
+const Gite = ({ gite, photos }) => {
+	const head = () => (
+		<Head>
+			<title>
+				{APP_NAME} | {gite.nom}{' '}
+			</title>
+			<meta name='description' content={gite.mdesc} />
+			<link rel='canonical' href={`${DOMAIN}/gite/${gite.slug}`} />
+			<meta property='og:title' content={`${gite.nom} | ${APP_NAME}`} />
+			<meta property='og:description' content={gite.mdesc} />
+			<meta property='og:type' content='website' />
+			<meta property='og:url' content={`${DOMAIN}/gite/${gite.slug}`} />
+			<meta property='og:site_name' content={`${APP_NAME}`} />
 
+			<meta property='og:site_name' content={APP_NAME} />
+
+			<meta
+				property='og:image'
+				content={`${API}/blog/photo/${gite.slug}`}
+			/>
+			<meta
+				property='og:image:secure_url'
+				content={`${API}/gite/photo/${gite.slug}`}
+			/>
+			<meta property='og:image:type' content='image/jpg' />
+			{/* <meta property='fb:app_id' content={`${FB_APP_ID}`} /> */}
+		</Head>
+	);
 	const afficheCalendrier = () => {
 		return { __html: gite.calendrierLink };
 	};
@@ -44,27 +44,27 @@ const Gite = ({ gite, query }) => {
 		return { __html: gite.videoLink };
 	};
 
-	const [activeIndex, setActiveIndex] = useState(0);
-	const [animating, setAnimating] = useState(false);
+	// const [activeIndex, setActiveIndex] = useState(0);
+	// const [animating, setAnimating] = useState(false);
 
-	const next = () => {
-		if (animating) return;
-		const nextIndex =
-			activeIndex === photos.length - 1 ? 0 : activeIndex + 1;
-		setActiveIndex(nextIndex);
-	};
+	// const next = () => {
+	// 	if (animating) return;
+	// 	const nextIndex =
+	// 		activeIndex === photos.length - 1 ? 0 : activeIndex + 1;
+	// 	setActiveIndex(nextIndex);
+	// };
 
-	const previous = () => {
-		if (animating) return;
-		const nextIndex =
-			activeIndex === 0 ? photos.length - 1 : activeIndex - 1;
-		setActiveIndex(nextIndex);
-	};
+	// const previous = () => {
+	// 	if (animating) return;
+	// 	const nextIndex =
+	// 		activeIndex === 0 ? photos.length - 1 : activeIndex - 1;
+	// 	setActiveIndex(nextIndex);
+	// };
 
-	const goToIndex = (newIndex) => {
-		if (animating) return;
-		setActiveIndex(newIndex);
-	};
+	// const goToIndex = (newIndex) => {
+	// 	if (animating) return;
+	// 	setActiveIndex(newIndex);
+	// };
 
 	const jumbotron = () => (
 		<section>
@@ -79,40 +79,36 @@ const Gite = ({ gite, query }) => {
 						It uses utility classes for typography and spacing to
 						space content out within the larger container.
 					</p>
-					<p className='lead'>
-						{/* <Button color='primary'>Learn More</Button> */}
-					</p>
+					<p className='lead'></p>
 				</Jumbotron>
 			</div>
 		</section>
 	);
 
 	const carousel = (section) => {
-		let currentSection;
-		if (section === 'exterieur') {
-			currentSection = 'exterieur';
-		} else if (section === 'piscine') {
-			currentSection = 'piscine';
-		} else if (section === 'interieur') {
-			currentSection = 'interieur';
-		}
+		console.log(gite);
+		// let currentSection;
+		// if (section === 'exterieur') {
+		// 	currentSection = 'exterieur';
+		// } else if (section === 'piscine') {
+		// 	currentSection = 'piscine';
+		// } else if (section === 'interieur') {
+		// 	currentSection = 'interieur';
+		// }
 		photos.map((photo) => {
 			return (
-				<CarouselItem
-					onExiting={() => setAnimating(true)}
-					onExited={() => setAnimating(false)}
-					key={photo.location}>
+				<Carousel.Item>
 					<Image
 						src={photo.location}
-						alt={photo.nom}
+						alt={photo.alt}
 						width={500}
 						height={375}
 					/>
-					<CarouselCaption
-						captionText={photo.texteImg}
-						captionHeader={photo.texteImg}
-					/>
-				</CarouselItem>
+					<Carousel.Caption>
+						<h4>{photo.titreCarousel}</h4>
+						<p>{photo.texteCarousel}</p>
+					</Carousel.Caption>
+				</Carousel.Item>
 			);
 		});
 	};
@@ -122,27 +118,7 @@ const Gite = ({ gite, query }) => {
 				<h2 className='text-center'>Partie extérieur</h2>
 				<div className='row'>
 					<div className='col-md-6'>
-						<Carousel
-							activeIndex={activeIndex}
-							next={next}
-							previous={previous}>
-							<CarouselIndicators
-								items={photos}
-								activeIndex={activeIndex}
-								onClickHandler={goToIndex}
-							/>
-							{carousel('exterieur')}
-							<CarouselControl
-								direction='prev'
-								directionText='Previous'
-								onClickHandler={previous}
-							/>
-							<CarouselControl
-								direction='next'
-								directionText='Next'
-								onClickHandler={next}
-							/>
-						</Carousel>
+						<Carousel>{carousel('exterieur')}</Carousel>
 					</div>
 					<div className='col-md-6'>{gite.texteExterieur}</div>
 				</div>
@@ -157,27 +133,7 @@ const Gite = ({ gite, query }) => {
 				<div className='row'>
 					<div className='col-md-6'>{gite.texteInterieur}</div>
 					<div className='col-md-6'>
-						<Carousel
-							activeIndex={activeIndex}
-							next={next}
-							previous={previous}>
-							<CarouselIndicators
-								items={photos}
-								activeIndex={activeIndex}
-								onClickHandler={goToIndex}
-							/>
-							{carousel('interieur')}
-							<CarouselControl
-								direction='prev'
-								directionText='Previous'
-								onClickHandler={previous}
-							/>
-							<CarouselControl
-								direction='next'
-								directionText='Next'
-								onClickHandler={next}
-							/>
-						</Carousel>
+						<Carousel>{carousel('interieur')}</Carousel>
 					</div>
 				</div>
 			</section>
@@ -190,27 +146,7 @@ const Gite = ({ gite, query }) => {
 				<h2 className='text-center'>Partie piscine</h2>
 				<div className='row'>
 					<div className='col-md-6'>
-						<Carousel
-							activeIndex={activeIndex}
-							next={next}
-							previous={previous}>
-							<CarouselIndicators
-								items={photos}
-								activeIndex={activeIndex}
-								onClickHandler={goToIndex}
-							/>
-							{carousel('piscine')}
-							<CarouselControl
-								direction='prev'
-								directionText='Previous'
-								onClickHandler={previous}
-							/>
-							<CarouselControl
-								direction='next'
-								directionText='Next'
-								onClickHandler={next}
-							/>
-						</Carousel>
+						<Carousel>{carousel('piscine')}</Carousel>
 					</div>
 					<div className='col-md-6'>{gite.textePiscine}</div>
 				</div>
@@ -271,34 +207,6 @@ const Gite = ({ gite, query }) => {
 		</div>
 	);
 
-	const head = () => (
-		<Head>
-			<title>
-				{APP_NAME} | {gite.nom}{' '}
-			</title>
-			<meta name='description' content={gite.mdesc} />
-			<link rel='canonical' href={`${DOMAIN}/gite/${query.slug}`} />
-			<meta property='og:title' content={`${gite.nom} | ${APP_NAME}`} />
-			<meta property='og:description' content={gite.mdesc} />
-			<meta property='og:type' content='website' />
-			<meta property='og:url' content={`${DOMAIN}/gite/${query.slug}`} />
-			<meta property='og:site_name' content={`${APP_NAME}`} />
-
-			<meta property='og:site_name' content={APP_NAME} />
-
-			<meta
-				property='og:image'
-				content={`${API}/blog/photo/${gite.slug}`}
-			/>
-			<meta
-				property='og:image:secure_url'
-				content={`${API}/gite/photo/${gite.slug}`}
-			/>
-			<meta property='og:image:type' content='image/jpg' />
-			{/* <meta property='fb:app_id' content={`${FB_APP_ID}`} /> */}
-		</Head>
-	);
-
 	return (
 		<>
 			{head()}
@@ -318,15 +226,34 @@ const Gite = ({ gite, query }) => {
 	);
 };
 
-Gite.getInitialProps = ({ query }) => {
+export async function getStaticPaths() {
+	//lister les noms de gites
+	return {
+		paths: [
+			{ params: { slug: 'manola' } }, // See the "paths" section below
+			{ params: { slug: 'brinchette' } }, // See the "paths" section below
+			{ params: { slug: 'lauberoye' } }, // See the "paths" section below
+			{ params: { slug: 'petit-nay' } }, // See the "paths" section below
+		],
+		fallback: true,
+	};
+}
+
+export async function getStaticProps(context) {
 	// console.log(query);
-	return listGiteDetails(query.slug).then((data) => {
-		if (data.error) {
-			console.log(data.error);
+	return listGiteDetails(context.params.slug).then((gite) => {
+		if (gite.error) {
+			console.log(gite.error);
 		} else {
-			return { gite: data, query };
+			return listeDesImages().then((photos) => {
+				if (photos.error) {
+					console.log(photos.error);
+				} else {
+					return { props: { gite, photos } };
+				}
+			});
 		}
 	});
-};
+}
 
 export default Gite;
