@@ -205,7 +205,12 @@ const ListImages = () => {
 												{gite.nom}
 											</option>
 										))}
-										<option value='Autre'>
+										<option
+											value='Autre'
+											selected={
+												photo.pageAssociee ===
+													'Autre' && 'selected'
+											}>
 											Autres pages
 										</option>
 									</select>

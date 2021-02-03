@@ -89,9 +89,7 @@ const FormUpdateReview = ({ preloadedValues, router }) => {
 					<div className='col-md-12'>
 						<div className='form-group'>
 							<label className='text-muted'>
-								Selection du gîte* (Pour info, valeur
-								précédement selectionnée :{' '}
-								<strong>{giteConcerne}</strong>)
+								Selection du gîte*
 							</label>
 							<select
 								ref={register({ required: true })}
@@ -100,7 +98,13 @@ const FormUpdateReview = ({ preloadedValues, router }) => {
 								className='custom-select mr-sm-2'>
 								<option value=''>Gîte...</option>
 								{gites.map((gite, i) => (
-									<option key={i} value={gite.slug}>
+									<option
+										key={i}
+										value={gite.slug}
+										selected={
+											gite.slug === giteConcerne &&
+											'selected'
+										}>
 										{gite.nom}
 									</option>
 								))}
