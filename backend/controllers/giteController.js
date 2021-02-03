@@ -127,49 +127,61 @@ const createGite = (req, res) => {
 // @access    Private/Admin
 const updateGite = asyncHandler(async (req, res) => {
 	const slug = req.params.slug.toLowerCase();
+	const {
+		nom,
+		mtitle,
+		presGiteSEO,
+		mdesc,
+		couleur1,
+		couleur2,
+		videoLink,
+		texteExterieur,
+		equipementExterieur,
+		texteInterieur,
+		equipementInterieur,
+		textePiscine,
+		equipementPiscine,
+		texte,
+		detailGite,
+		capacite,
+		calendrierLink,
+	} = req.body;
 
-	Gite.findOne({ slug }).exec((err, ancienGite) => {
-		if (err) {
-			return res.status(400).json({
-				error: err,
-			});
-		}
+	const gite = await Gite.findOne({ slug });
 
-		let form = new formidable.IncomingForm();
-		form.keepExtensions = true;
+	if (gite) {
+		let arrayOfEquipementExterieur =
+			equipementExterieur && equipementExterieur.split(',');
+		let arrayOfEquipementInterieur =
+			equipementInterieur && equipementInterieur.split(',');
+		let arrayOfEquipementPiscine =
+			equipementPiscine && equipementPiscine.split(',');
 
-		form.parse(req, (err, fields, files) => {
-			if (err) {
-				return res.status(400).json({
-					error: "Impossible d'uploader l'image",
-				});
-			}
+		nom && (gite.nom = nom);
+		mtitle && (gite.mtitle = mtitle);
+		presGiteSEO && (gite.presGiteSEO = presGiteSEO);
+		mdesc && (gite.mdesc = stripHtml(presGiteSEO.substring(0, 160)));
+		nom && (gite.slug = slugify(nom).toLowerCase());
+		couleur1 && (gite.couleur1 = couleur1);
+		couleur2 && (gite.couleur2 = couleur2);
+		videoLink && (gite.videoLink = videoLink);
+		texteExterieur && (gite.texteExterieur = texteExterieur);
+		nom && (gite.equipementExterieur = arrayOfEquipementExterieur);
+		texteInterieur && (gite.texteInterieur = texteInterieur);
+		nom && (gite.equipementInterieur = arrayOfEquipementInterieur);
+		textePiscine && (gite.textePiscine = textePiscine);
+		nom && (gite.equipementPiscine = arrayOfEquipementPiscine);
+		texte && (gite.texte = texte);
+		detailGite && (gite.detailGite = detailGite);
+		capacite && (gite.capacite = capacite);
+		calendrierLink && (gite.calendrierLink = calendrierLink);
 
-			let slugBeforeMerge = ancienGite.slug;
-			ancienGite = _.merge(ancienGite, fields);
-
-			ancienGite.slug = slugBeforeMerge;
-
-			const { nom, presGiteSEO } = fields;
-
-			if (presGiteSEO) {
-				ancienGite.mdesc = stripHtml(presGiteSEO.substring(0, 160));
-			}
-
-			if (nom) {
-				ancienGite.slug = slugify(nom).toLowerCase();
-			}
-
-			ancienGite.save((err, result) => {
-				if (err) {
-					return res.status(400).json({
-						error: err,
-					});
-				}
-				res.json(result);
-			});
-		});
-	});
+		const updatedGite = await gite.save();
+		res.json(updatedGite);
+	} else {
+		res.status(404);
+		throw new Error('Gite non trouvé');
+	}
 });
 
 // @desc      Fetch all photos
