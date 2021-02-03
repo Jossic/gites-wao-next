@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { updateReview } from '../../../actions/reviewActions';
+import { listeOneReview, updateReview } from '../../../actions/reviewActions';
 import { Spinner, Alert } from 'reactstrap';
 import { listGitesNoms } from '../../../actions/giteActions';
 import { getCookie } from '../../../actions/authActions';
@@ -28,6 +28,8 @@ const FormUpdateReview = ({ preloadedValues, router }) => {
 
 	const listDesGites = () => {
 		listGitesNoms().then((data) => {
+			console.log('id', router.query.id);
+			// console.log('data nom vaut', data);
 			if (data.error) {
 				console.log(error);
 			} else {
@@ -36,7 +38,22 @@ const FormUpdateReview = ({ preloadedValues, router }) => {
 		});
 	};
 
+	const listDetailReview = () => {
+		console.log('id', router.query.id);
+		const ident = router.query.id;
+		listeOneReview(ident, token).then((data) => {
+			console.log('data review vaut', data.giteConcerne);
+			if (data.error) {
+				console.log(data.error);
+			} else {
+				const giteConc = data.giteConcerne;
+				setValues({ ...values, giteConcerne: giteConc });
+			}
+		});
+	};
+
 	useEffect(() => {
+		listDetailReview();
 		listDesGites();
 	}, []);
 
@@ -72,15 +89,16 @@ const FormUpdateReview = ({ preloadedValues, router }) => {
 					<div className='col-md-12'>
 						<div className='form-group'>
 							<label className='text-muted'>
-								Selection du gîte*
+								Selection du gîte* (Pour info, valeur
+								précédement selectionnée :{' '}
+								<strong>{giteConcerne}</strong>)
 							</label>
 							<select
 								ref={register({ required: true })}
 								name='giteConcerne'
-								defaultvalue='manola'
-								className='custom-select mr-sm-2'
-								id='inlineFormCustomSelect'>
-								<option>Gîte...</option>
+								// value={giteConcerne}
+								className='custom-select mr-sm-2'>
+								<option value=''>Gîte...</option>
 								{gites.map((gite, i) => (
 									<option key={i} value={gite.slug}>
 										{gite.nom}
@@ -107,8 +125,7 @@ const FormUpdateReview = ({ preloadedValues, router }) => {
 							<select
 								ref={register({ required: true })}
 								name='note'
-								className='custom-select mr-sm-2'
-								id='inlineFormCustomSelect'>
+								className='custom-select mr-sm-2'>
 								<option value=''>Votre note...</option>
 								<option value='1'>1 - Très mauvais</option>
 								<option value='2'>2 - Mauvais</option>
@@ -150,5 +167,19 @@ const FormUpdateReview = ({ preloadedValues, router }) => {
 		</>
 	);
 };
+
+// export async function getServerSideProps(context) {
+// 	listeOneReview().then((data) => {
+// 		if (data.error) {
+// 			console.log(data.error);
+// 		} else {
+// 			return {
+// 				props: {
+// 					gite: data,
+// 				},
+// 			};
+// 		}
+// 	});
+// }
 
 export default withRouter(FormUpdateReview);

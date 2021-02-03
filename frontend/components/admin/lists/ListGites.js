@@ -64,7 +64,7 @@ const ListGites = () => {
 								<Link href={`/admin/crud/gite/${gite.slug}`}>
 									<a>
 										<i
-											class='fas fa-pencil-ruler'
+											className='fas fa-pencil-ruler'
 											style={{ color: 'orange' }}></i>
 									</a>
 								</Link>
@@ -72,7 +72,7 @@ const ListGites = () => {
 							<th>
 								<i
 									onClick={() => deleteConfirm(gite.slug)}
-									class='fas fa-trash-alt'
+									className='fas fa-trash-alt'
 									style={{
 										color: 'red',
 										cursor: 'pointer',

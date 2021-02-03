@@ -24,11 +24,11 @@ const FormUpdateQR = ({ preloadedValues, router }) => {
 
 	const onSubmit = async (data) => {
 		setValues({ ...values, loading: true });
-		console.log('data vaut =>', data);
+		// console.log('data vaut =>', data);
 		updateQR(data, router.query.id, token).then((result) => {
-			console.log('result vaut =>', result);
+			// console.log('result vaut =>', result);
 			if (result.error) {
-				console.log('une grosse erreur');
+				// console.log('une grosse erreur');
 				setValues({ ...values, error: result.error });
 			} else {
 				setValues({

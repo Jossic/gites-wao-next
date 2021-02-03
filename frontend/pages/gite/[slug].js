@@ -16,26 +16,26 @@ import { useState } from 'react';
 import ContactForm from '../../components/ContactForm';
 
 const Gite = ({ gite, query }) => {
-	const photos = [
-		{
-			location:
-				'https://gites-wao.s3.amazonaws.com/OpvcUJi1EH-P1010186.jpg',
-			nom: 'P1010186.jpg',
-			texteImg: 'lorem lorem lorem',
-		},
-		{
-			location:
-				'https://gites-wao.s3.amazonaws.com/NUKKUUtUDm-P1090714.jpg',
-			nom: 'P1090714.jpg',
-			texteImg: 'lorem lorem lorem',
-		},
-		{
-			location:
-				'https://gites-wao.s3.amazonaws.com/ibRGvozgYu-P1090716.jpg',
-			nom: 'P1090716.jpg',
-			texteImg: 'lorem lorem lorem',
-		},
-	];
+	// const photos = [
+	// 	{
+	// 		location:
+	// 			'https://gites-wao.s3.amazonaws.com/OpvcUJi1EH-P1010186.jpg',
+	// 		nom: 'P1010186.jpg',
+	// 		texteImg: 'lorem lorem lorem',
+	// 	},
+	// 	{
+	// 		location:
+	// 			'https://gites-wao.s3.amazonaws.com/NUKKUUtUDm-P1090714.jpg',
+	// 		nom: 'P1090714.jpg',
+	// 		texteImg: 'lorem lorem lorem',
+	// 	},
+	// 	{
+	// 		location:
+	// 			'https://gites-wao.s3.amazonaws.com/ibRGvozgYu-P1090716.jpg',
+	// 		nom: 'P1090716.jpg',
+	// 		texteImg: 'lorem lorem lorem',
+	// 	},
+	// ];
 
 	const afficheCalendrier = () => {
 		return { __html: gite.calendrierLink };
@@ -87,7 +87,15 @@ const Gite = ({ gite, query }) => {
 		</section>
 	);
 
-	const carousel = (nom, section) =>
+	const carousel = (section) => {
+		let currentSection;
+		if (section === 'exterieur') {
+			currentSection = 'exterieur';
+		} else if (section === 'piscine') {
+			currentSection = 'piscine';
+		} else if (section === 'interieur') {
+			currentSection = 'interieur';
+		}
 		photos.map((photo) => {
 			return (
 				<CarouselItem
@@ -107,7 +115,7 @@ const Gite = ({ gite, query }) => {
 				</CarouselItem>
 			);
 		});
-
+	};
 	const sectionExterieur = () => (
 		<div className='container'>
 			<section>

@@ -91,7 +91,7 @@ const ListQR = () => {
 								<Link href={`/admin/crud/divers/qr/${QR._id}`}>
 									<a>
 										<i
-											class='fas fa-pencil-ruler'
+											className='fas fa-pencil-ruler'
 											style={{ color: 'orange' }}></i>
 									</a>
 								</Link>
@@ -99,7 +99,7 @@ const ListQR = () => {
 							<th>
 								<i
 									onClick={() => deleteConfirm(QR._id)}
-									class='fas fa-trash-alt'
+									className='fas fa-trash-alt'
 									style={{
 										color: 'red',
 										cursor: 'pointer',

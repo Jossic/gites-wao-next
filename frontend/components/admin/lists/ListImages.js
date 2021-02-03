@@ -120,7 +120,7 @@ const ListImages = () => {
 										className='form-control'
 										type='text'
 										name={`items[${index}].nom`}
-										value={photo.nom}
+										// value={photo.nom}
 										ref={register({ required: true })}
 									/>
 								</th>
@@ -140,7 +140,7 @@ const ListImages = () => {
 										className='form-control'
 										type='text'
 										name={`items[${index}].alt`}
-										value={photo.alt}
+										// value={photo.alt}
 										ref={register({ required: true })}
 									/>
 								</th>
@@ -149,7 +149,7 @@ const ListImages = () => {
 										className='form-control'
 										type='text'
 										name={`items[${index}].titreCarousel`}
-										value={photo.titreCarousel}
+										// value={photo.titreCarousel}
 										ref={register({ required: true })}
 									/>
 								</th>
@@ -158,19 +158,21 @@ const ListImages = () => {
 										className='form-control'
 										type='text'
 										name={`items[${index}].texteCarousel`}
-										value={photo.texteCarousel}
+										// value={photo.texteCarousel}
 										ref={register({ required: true })}
 									/>
 								</th>
 								<th>
+									<label>
+										Selectionné :{' '}
+										{photo.pageAssociee &&
+											photo.pageAssociee}
+									</label>
 									<select
 										ref={register({ required: true })}
 										name={`items[${index}].page`}
-										className='custom-select mr-sm-2'
-										id='inlineFormCustomSelect'>
-										<option defaultValue>
-											Selection...
-										</option>
+										className='custom-select mr-sm-2'>
+										<option>Selection...</option>
 										{gites.map((gite, i) => (
 											<option key={i} value={gite.slug}>
 												{gite.nom}
@@ -182,19 +184,23 @@ const ListImages = () => {
 									</select>
 								</th>
 								<th>
+									<label>
+										Selectionné :{' '}
+										{photo.sectionAssociee &&
+											photo.sectionAssociee}
+									</label>
 									<select
 										ref={register({ required: true })}
 										name={`items[${index}].section`}
-										className='custom-select mr-sm-2'
-										id='inlineFormCustomSelect'>
+										className='custom-select mr-sm-2'>
 										<option defaultValue>
 											Selection...
 										</option>
 										<option value='Autre'>
 											Autres sections
 										</option>
-										<option value='presentation'>
-											Présentation
+										<option value='exterieur'>
+											Extérieur
 										</option>
 										<option value='piscine'>Piscine</option>
 										<option value='interieur'>

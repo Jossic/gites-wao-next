@@ -83,8 +83,8 @@ const ListReviews = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{reviews.map((review) => (
-						<tr className='mt-5'>
+					{reviews.map((review, i) => (
+						<tr className='mt-5' key={i}>
 							<th>{review._id}</th>
 							<th>{review.client}</th>
 
@@ -101,7 +101,7 @@ const ListReviews = () => {
 									href={`/admin/crud/divers/review/${review._id}`}>
 									<a>
 										<i
-											class='fas fa-pencil-ruler'
+											className='fas fa-pencil-ruler'
 											style={{ color: 'orange' }}></i>
 									</a>
 								</Link>
@@ -109,7 +109,7 @@ const ListReviews = () => {
 							<th>
 								<i
 									onClick={() => deleteConfirm(review._id)}
-									class='fas fa-trash-alt'
+									className='fas fa-trash-alt'
 									style={{
 										color: 'red',
 										cursor: 'pointer',

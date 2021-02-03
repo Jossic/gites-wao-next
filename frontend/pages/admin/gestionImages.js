@@ -2,6 +2,9 @@ import AdminHeader from '../../components/layout/AdminHeader';
 import Link from 'next/link';
 import ListImages from '../../components/admin/lists/ListImages';
 import Admin from '../../components/auth/Admin';
+import { listeDesImages } from '../../actions/giteActions';
+import { useEffect, useState } from 'react';
+import { getCookie } from '../../actions/authActions';
 
 const gestionImages = () => {
 	return (
