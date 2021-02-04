@@ -12,6 +12,7 @@ import gitesRoutes from './routes/gitesRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import reviewRoutes from './routes/reviewRoutes.js';
+import pagesRoutes from './routes/pagesRoutes.js';
 // import AWS from 'aws-sdk';
 
 dotenv.config();
@@ -45,6 +46,7 @@ app.use('/api', gitesRoutes);
 app.use('/api', userRoutes);
 app.use('/api', uploadRoutes);
 app.use('/api', reviewRoutes);
+app.use('/api', pagesRoutes);
 
 // app.get('/api/config/paypal', (req, res) =>
 // 	res.send(process.env.PAYPAL_CLIENT_ID)

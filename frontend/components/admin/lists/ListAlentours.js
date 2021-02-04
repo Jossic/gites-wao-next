@@ -7,6 +7,7 @@ import { Alert, Spinner } from 'reactstrap';
 import Router from 'next/router';
 
 const ListAlentours = () => {
+	const token = getCookie('token');
 	const [QRs, setQRs] = useState([]);
 
 	const [values, setvalues] = useState({
@@ -17,8 +18,6 @@ const ListAlentours = () => {
 	});
 
 	const { loading, success, error, message } = values;
-
-	const token = getCookie('token');
 
 	const listerLesQR = () => {
 		listeDesQR().then((data) => {
