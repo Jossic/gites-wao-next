@@ -9,6 +9,17 @@ const getAllReviews = asyncHandler(async (req, res) => {
 	res.json(reviews);
 });
 
+// @desc      Fetch reviews by gite
+// @route     GET /api/review/:slug
+// @access    Public
+const getReviewsByGites = asyncHandler(async (req, res) => {
+	const slug = req.params.slug;
+	console.log(slug);
+	const reviews = await Review.find({ giteConcerne: slug });
+	console.log(reviews);
+	res.json(reviews);
+});
+
 // @desc      Fetch one Review by Id
 // @route     GET /api/review/:id
 // @access    Private/Admin
@@ -95,4 +106,5 @@ export {
 	createReview,
 	getAllReviews,
 	getReviewById,
+	getReviewsByGites,
 };

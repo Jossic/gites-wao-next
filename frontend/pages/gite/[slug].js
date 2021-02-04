@@ -11,8 +11,9 @@ import Image from 'next/image';
 import { Jumbotron } from 'reactstrap';
 import { Carousel } from 'react-bootstrap';
 import ContactForm from '../../components/ContactForm';
+import { listReviewsBySlug } from '../../actions/reviewActions';
 
-const Gite = React.forwardRef(({ gite, photos }, ref) => {
+const Gite = React.forwardRef(({ gite, photos, reviews }, ref) => {
 	const head = () => (
 		<Head>
 			<title>
@@ -129,14 +130,24 @@ const Gite = React.forwardRef(({ gite, photos }, ref) => {
 		</div>
 	);
 
-	const sectionReview = () => (
+	const sectionReviews = () => (
 		<div className='container'>
 			<section>
 				<h2 className='text-center'>
 					Ce que nos clients disent de ce gîte
 				</h2>
 				<div className='row'>
-					<p>Liste des reviews</p>
+					<Carousel>
+						{reviews.map((review, i) => (
+							<Carousel.Item key={i}>
+								<Carousel.Caption>
+									<p>{reviews.commentaire}</p>
+									<p>{reviews.note}</p>
+									<h4>{review.client}</h4>
+								</Carousel.Caption>
+							</Carousel.Item>
+						))}
+					</Carousel>
 				</div>
 			</section>
 		</div>
@@ -196,7 +207,8 @@ const Gite = React.forwardRef(({ gite, photos }, ref) => {
 				<hr />
 				{sectionPiscine()}
 				<hr />
-				{sectionReview()}
+				{console.log(reviews)}
+				{sectionReviews()}
 				<hr />
 				{sectionVideoContact()}
 				<hr />
@@ -231,7 +243,13 @@ export async function getStaticProps(context) {
 				if (photos.error) {
 					console.log(photos.error);
 				} else {
-					return { props: { gite, photos } };
+					return listReviewsBySlug(gite.slug).then((reviews) => {
+						if (reviews.error) {
+							console.log(reviews.error);
+						} else {
+							return { props: { gite, photos, reviews } };
+						}
+					});
 				}
 			});
 		}

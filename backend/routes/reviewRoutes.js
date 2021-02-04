@@ -6,11 +6,13 @@ import {
 	createReview,
 	updateReview,
 	removeReview,
+	getReviewsByGites,
 } from '../controllers/reviewController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
 //Public
 router.get('/review', getAllReviews);
+router.get('/review/:slug', getReviewsByGites);
 
 //Admin
 router.get('/review/:id', protect, admin, getReviewById);

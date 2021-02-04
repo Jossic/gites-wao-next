@@ -6,6 +6,7 @@ const reviewSchema = mongoose.Schema(
 		note: { type: Number, required: true },
 		commentaire: { type: String },
 		giteConcerne: { type: String, required: true },
+		actif: { type: Boolean, default: false },
 	},
 	{
 		timestamps: true,

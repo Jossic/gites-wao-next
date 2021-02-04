@@ -42,6 +42,16 @@ export const listReviews = () => {
 		.catch((err) => console.log(err));
 };
 
+export const listReviewsBySlug = async (slug) => {
+	try {
+		const { data } = await axios.get(`${API}/review/${slug}`);
+		// console.log(data);
+		return data;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
 export const removeReview = (id, token) => {
 	return fetch(`${API}/review/${id}`, {
 		method: 'DELETE',
