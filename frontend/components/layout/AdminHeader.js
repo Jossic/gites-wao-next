@@ -1,54 +1,66 @@
-import {
-	Container,
-	Row,
-	Navbar,
-	Nav,
-	NavbarBrand,
-	NavbarToggler,
-	Collapse,
-	Col,
-	NavItem,
-	NavLink,
-} from 'reactstrap';
 import NProgress from 'nprogress';
 import Link from 'next/link';
 import Router from 'next/router';
+import { isAuth } from '../../actions/authActions';
 
 import '../../node_modules/nprogress/nprogress.css';
 
 Router.onRouteChangeStart = (url) => NProgress.start();
 Router.onRouteChangeComplete = (url) => NProgress.done();
 Router.onRouteChangeError = (url) => NProgress.done();
-
 const AdminHeader = ({ children }) => {
+	const user = JSON.parse(localStorage.getItem('user'));
 	return (
 		<>
 			<div className='d-flex' id='wrapper'>
 				<div className='bg-dark border-right' id='sidebar-wrapper'>
-					<div className='sidebar-heading text-white'>
+					<div className='sidebar-heading text-white text-center'>
 						Les Gîtes WAO
 					</div>
 					<div className='sidebar-header'>
-						<div className='user-pic'>
+						<div className='user-pic text-center pb-2'>
 							{/* <img
 								className='img-responsive img-rounded'
 								src='/images/logov4-1024x496.png'
 								alt='User picture'
 							/> */}
+							<i
+								class='far fa-user-circle'
+								style={{
+									color: 'white',
+									fontSize: '40px',
+								}}></i>
 						</div>
-						<div className='user-info text-white text-center pb-3'>
-							<span className='user-name'>
-								Jossic
-								<strong> Lapierre</strong>
-							</span>
-							<br />
-							<span className='user-role'>Administrateur</span>
-							<br />
-							<span className='user-status'>
-								<i className='fa fa-circle'></i>
-								<span>Connecté</span>
-							</span>
-						</div>
+						{isAuth && (
+							<div className='user-info text-white text-center pb-3'>
+								<span className='user-name'>{user.name}</span>
+								<br />
+								<strong
+									className='user-role'
+									style={{ color: '#d3d3d3' }}>
+									{user.isAdmin
+										? 'Administrateur'
+										: 'Utilisateur'}
+								</strong>
+								<br />
+								<span className='user-status mt-3'>
+									<i
+										className='fa fa-circle'
+										style={{
+											color: '#00ff04',
+											fontSize: '10px',
+										}}></i>
+									<span
+										style={{
+											color: '#00ff04',
+											fontSize: '15px',
+										}}>
+										{' '}
+										Connecté
+									</span>
+								</span>
+							</div>
+						)}
 					</div>
 					<div className='list-group list-group-flush'>
 						<Link href='/admin'>
@@ -181,6 +193,12 @@ const AdminHeader = ({ children }) => {
 								</div>
 							</div>
 						</div>
+
+						<Link href='/admin'>
+							<a className='list-group-item list-group-item-action text-white bg-dark'>
+								<i className='fas fa-comments'></i> Messages
+							</a>
+						</Link>
 
 						<Link href='/admin'>
 							<a className='list-group-item list-group-item-action text-white bg-dark'>

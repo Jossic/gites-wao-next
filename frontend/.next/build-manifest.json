@@ -14,6 +14,16 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
+    "/": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/index.js"
+    ],
+    "/404": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/404.js"
+    ],
     "/_app": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
@@ -24,15 +34,30 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/crud/divers/review/[id]": [
+    "/admin": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/crud/divers/review/[id].js"
+      "static/chunks/pages/admin.js"
+    ],
+    "/admin/gestionDivers": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/admin/gestionDivers.js"
+    ],
+    "/admin/gestionDivers/alentours": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/admin/gestionDivers/alentours.js"
     ],
     "/gite/[slug]": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
       "static/chunks/pages/gite/[slug].js"
+    ],
+    "/next/dist/pages/_error": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/next/dist/pages/_error.js"
     ]
   },
   "ampFirstPages": []

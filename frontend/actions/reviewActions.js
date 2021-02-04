@@ -33,7 +33,7 @@ export const listeOneReview = (id, token) => {
 };
 
 export const listReviews = () => {
-	return fetch(`${API}/review`, {
+	return fetch(`${API}/reviews`, {
 		method: 'GET',
 	})
 		.then((response) => {
@@ -44,7 +44,7 @@ export const listReviews = () => {
 
 export const listReviewsBySlug = async (slug) => {
 	try {
-		const { data } = await axios.get(`${API}/review/${slug}`);
+		const { data } = await axios.get(`${API}/reviews/${slug}`);
 		// console.log(data);
 		return data;
 	} catch (error) {

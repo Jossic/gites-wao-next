@@ -164,7 +164,7 @@ const FormUpdateReview = ({ preloadedValues, router }) => {
 				{error && <Alert color='success'>{error}</Alert>}
 				<div>
 					<button type='submit' className='btn btn-info'>
-						Créer ce commentaire
+						Modifier ce commentaire
 					</button>
 				</div>
 			</form>

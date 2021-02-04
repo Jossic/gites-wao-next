@@ -11,8 +11,8 @@ import {
 import { protect, admin } from '../middleware/authMiddleware.js';
 
 //Public
-router.get('/review', getAllReviews);
-router.get('/review/:slug', getReviewsByGites);
+router.get('/reviews', getAllReviews);
+router.get('/reviews/:slug', getReviewsByGites);
 
 //Admin
 router.get('/review/:id', protect, admin, getReviewById);

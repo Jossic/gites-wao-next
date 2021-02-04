@@ -54,7 +54,7 @@ const ListPages = () => {
 						<th></th>
 						<th></th>
 						<th>
-							<Link href={`/admin/crud/gite/${''}`}>
+							<Link href={`/admin/gestionDivers/alentours`}>
 								<a>
 									<i
 										className='fas fa-pencil-ruler'

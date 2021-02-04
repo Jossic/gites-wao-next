@@ -2,7 +2,7 @@ import Review from '../models/ReviewModel.js';
 import asyncHandler from 'express-async-handler';
 
 // @desc      Fetch all Reviews
-// @route     GET /api/review
+// @route     GET /api/reviews
 // @access    Public
 const getAllReviews = asyncHandler(async (req, res) => {
 	const reviews = await Review.find({});
@@ -10,7 +10,7 @@ const getAllReviews = asyncHandler(async (req, res) => {
 });
 
 // @desc      Fetch reviews by gite
-// @route     GET /api/review/:slug
+// @route     GET /api/reviews/:slug
 // @access    Public
 const getReviewsByGites = asyncHandler(async (req, res) => {
 	const slug = req.params.slug;
