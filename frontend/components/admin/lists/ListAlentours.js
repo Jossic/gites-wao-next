@@ -1,5 +1,5 @@
 import { Table } from 'reactstrap';
-import { listeDesQR, removeQR } from '../../../actions/giteActions';
+import { listLiens, removeLien } from '../../../actions/pagesActions';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getCookie } from '../../../actions/authActions';
@@ -8,7 +8,7 @@ import Router from 'next/router';
 
 const ListAlentours = () => {
 	const token = getCookie('token');
-	const [QRs, setQRs] = useState([]);
+	const [alentours, setAlentours] = useState([]);
 
 	const [values, setvalues] = useState({
 		loading: false,
@@ -20,11 +20,11 @@ const ListAlentours = () => {
 	const { loading, success, error, message } = values;
 
 	const listerLesQR = () => {
-		listeDesQR().then((data) => {
+		listLiens().then((data) => {
 			if (data.error) {
 				console.log(error);
 			} else {
-				setQRs(...QRs, data);
+				setAlentours(...alentours, data);
 			}
 		});
 	};
@@ -33,10 +33,10 @@ const ListAlentours = () => {
 		listerLesQR();
 	}, [success]);
 
-	const deleteQR = (id) => {
+	const deleteLien = (id) => {
 		setvalues({ ...values, loading: true });
 		console.log('id', id);
-		removeQR(id, token).then((data) => {
+		removeLien(id, token).then((data) => {
 			if (data.error) {
 				setvalues({
 					...values,
@@ -61,7 +61,7 @@ const ListAlentours = () => {
 			`Cette opération est irréversible, Etes-vous sur de vouloir supprimer la question avec l'id ${id} ?`
 		);
 		if (answer) {
-			deleteQR(id);
+			deleteLien(id);
 		}
 	};
 
@@ -77,28 +77,44 @@ const ListAlentours = () => {
 						<th>Titre</th>
 						<th>Lien</th>
 						<th>Catégorie</th>
+						<th>Actif</th>
 
 						<th colSpan='2'>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
-					{QRs.map((QR) => (
+					{alentours.map((alentour) => (
 						<tr className='mt-5'>
-							<th>{QR._id}</th>
-							<th>{QR.question}</th>
-							<th>{QR.reponse}</th>
+							<th>{alentour._id}</th>
+							<th>{alentour.titre}</th>
+							<th>{alentour.lien}</th>
+							<th>{alentour.categorie}</th>
 							<th>
-								<Link href={`/admin/crud/divers/qr/${QR._id}`}>
+								{alentour.actif ? (
+									<i
+										class='fas fa-check-square'
+										style={{ color: 'green' }}></i>
+								) : (
+									<i
+										class='fas fa-times'
+										style={{ color: 'red' }}></i>
+								)}
+							</th>
+							<th>
+								<Link
+									href={`/admin/crud/divers/alentours/${alentour._id}`}>
 									<a>
 										<i
 											className='fas fa-pencil-ruler'
-											style={{ color: 'orange' }}></i>
+											style={{
+												color: 'orange',
+											}}></i>
 									</a>
 								</Link>
 							</th>
 							<th>
 								<i
-									onClick={() => deleteConfirm(QR._id)}
+									onClick={() => deleteConfirm(alentour._id)}
 									className='fas fa-trash-alt'
 									style={{
 										color: 'red',

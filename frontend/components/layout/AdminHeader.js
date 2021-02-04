@@ -9,7 +9,11 @@ Router.onRouteChangeStart = (url) => NProgress.start();
 Router.onRouteChangeComplete = (url) => NProgress.done();
 Router.onRouteChangeError = (url) => NProgress.done();
 const AdminHeader = ({ children }) => {
-	const user = JSON.parse(localStorage.getItem('user'));
+	// const user = JSON.parse(localStorage.getItem('user'));
+	const user = {
+		name: 'Jossic LAPIERRE',
+		isAdmin: true,
+	};
 	return (
 		<>
 			<div className='d-flex' id='wrapper'>

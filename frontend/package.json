@@ -11,7 +11,7 @@
     "@babel/core": "^7.12.13",
     "@zeit/next-css": "^1.0.1",
     "axios": "^0.21.1",
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^5.0.0-beta1",
     "google-map-react": "^2.1.9",
     "isomorphic-fetch": "^3.0.0",
     "jquery": "^1.9.1",
