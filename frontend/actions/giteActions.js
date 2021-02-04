@@ -177,3 +177,13 @@ export const updateQR = (qr, id, token) => {
 		})
 		.catch((err) => console.log(err));
 };
+
+export const listPhotosByNom = async (nom) => {
+	try {
+		const { data } = await axios.get(`${API}/photos/${nom}`);
+		// console.log(data);
+		return data;
+	} catch (error) {
+		console.error(error);
+	}
+};

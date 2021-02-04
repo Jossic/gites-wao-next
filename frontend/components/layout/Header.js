@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 // import { APP_NAME } from '../config';
 import NProgress from 'nprogress';
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 import Link from 'next/link';
 // import gites from '../../data';
 import Image from 'next/image';

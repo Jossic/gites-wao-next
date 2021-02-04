@@ -1,15 +1,18 @@
 import Head from 'next/head';
-// import Link from 'next/link';
+import React, { Component } from 'react';
 import Layout from '../../components/layout/Layout';
 import { API, DOMAIN, APP_NAME } from '../../config';
-import { listeDesImages, listGiteDetails } from '../../actions/giteActions';
+import {
+	listeDesImages,
+	listGiteDetails,
+	listPhotosByNom,
+} from '../../actions/giteActions';
 import Image from 'next/image';
 import { Jumbotron } from 'reactstrap';
 import { Carousel } from 'react-bootstrap';
-import { useState } from 'react';
 import ContactForm from '../../components/ContactForm';
 
-const Gite = ({ gite, photos }) => {
+const Gite = React.forwardRef(({ gite, photos }, ref) => {
 	const head = () => (
 		<Head>
 			<title>
@@ -44,28 +47,6 @@ const Gite = ({ gite, photos }) => {
 		return { __html: gite.videoLink };
 	};
 
-	// const [activeIndex, setActiveIndex] = useState(0);
-	// const [animating, setAnimating] = useState(false);
-
-	// const next = () => {
-	// 	if (animating) return;
-	// 	const nextIndex =
-	// 		activeIndex === photos.length - 1 ? 0 : activeIndex + 1;
-	// 	setActiveIndex(nextIndex);
-	// };
-
-	// const previous = () => {
-	// 	if (animating) return;
-	// 	const nextIndex =
-	// 		activeIndex === 0 ? photos.length - 1 : activeIndex - 1;
-	// 	setActiveIndex(nextIndex);
-	// };
-
-	// const goToIndex = (newIndex) => {
-	// 	if (animating) return;
-	// 	setActiveIndex(newIndex);
-	// };
-
 	const jumbotron = () => (
 		<section>
 			<div className='container'>
@@ -86,32 +67,28 @@ const Gite = ({ gite, photos }) => {
 	);
 
 	const carousel = (section) => {
-		console.log(gite);
-		// let currentSection;
-		// if (section === 'exterieur') {
-		// 	currentSection = 'exterieur';
-		// } else if (section === 'piscine') {
-		// 	currentSection = 'piscine';
-		// } else if (section === 'interieur') {
-		// 	currentSection = 'interieur';
-		// }
-		photos.map((photo) => {
-			return (
-				<Carousel.Item>
-					<Image
-						src={photo.location}
-						alt={photo.alt}
-						width={500}
-						height={375}
-					/>
-					<Carousel.Caption>
-						<h4>{photo.titreCarousel}</h4>
-						<p>{photo.texteCarousel}</p>
-					</Carousel.Caption>
-				</Carousel.Item>
-			);
-		});
+		console.log('section', section);
+		const photoFilter = Object.fromEntries(
+			Object.entries(photos).filter(([key, value]) => value === section)
+		);
+		console.log(photoFilter);
+		// photoFilter.map((photo, i) => (
+		// 	<Carousel.Item key={i} ref={ref}>
+		// 		<Image
+		// 			className='d-block w-100'
+		// 			src={photo.location}
+		// 			alt={photo.alt}
+		// 			width={500}
+		// 			height={375}
+		// 		/>
+		// 		<Carousel.Caption>
+		// 			<h4>{photo.titreCarousel}</h4>
+		// 			<p>{photo.texteCarousel}</p>
+		// 		</Carousel.Caption>
+		// 	</Carousel.Item>
+		// ));
 	};
+
 	const sectionExterieur = () => (
 		<div className='container'>
 			<section>
@@ -224,16 +201,16 @@ const Gite = ({ gite, photos }) => {
 			</Layout>
 		</>
 	);
-};
+});
 
 export async function getStaticPaths() {
 	//lister les noms de gites
 	return {
 		paths: [
-			{ params: { slug: 'manola' } }, // See the "paths" section below
-			{ params: { slug: 'brinchette' } }, // See the "paths" section below
-			{ params: { slug: 'lauberoye' } }, // See the "paths" section below
-			{ params: { slug: 'petit-nay' } }, // See the "paths" section below
+			{ params: { slug: 'manola' } },
+			{ params: { slug: 'brinchette' } },
+			{ params: { slug: 'lauberoye' } },
+			{ params: { slug: 'petit-nay' } },
 		],
 		fallback: true,
 	};
@@ -245,7 +222,7 @@ export async function getStaticProps(context) {
 		if (gite.error) {
 			console.log(gite.error);
 		} else {
-			return listeDesImages().then((photos) => {
+			return listPhotosByNom(gite.slug).then((photos) => {
 				if (photos.error) {
 					console.log(photos.error);
 				} else {

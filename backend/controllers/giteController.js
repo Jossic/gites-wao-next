@@ -34,7 +34,7 @@ const getGiteByNom = asyncHandler(async (req, res) => {
 });
 
 // @desc      Fetch photos by nom
-// @route     GET /api/photo/:nom
+// @route     GET /api/photos/:nom
 // @access    Public
 const getPhotosByNom = asyncHandler(async (req, res) => {
 	const nom = req.params.nom;

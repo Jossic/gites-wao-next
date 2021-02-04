@@ -21,7 +21,7 @@ router.get('/');
 router.get('/gites', getGites);
 router.get('/gites/noms', getGitesNoms);
 router.get('/gite/:slug', getGiteByNom);
-router.get('/photo/:nom', getPhotosByNom);
+router.get('/photos/:nom', getPhotosByNom);
 router.get('/qr', getAllQR);
 router.get('/photos', getAllPhotos);
 

@@ -22,7 +22,7 @@ const ContactForm = () => {
 				<div className='col-md-7'>
 					<form>
 						<div className='form-group'>
-							<label for='exampleFormControlInput1'>
+							<label htmlFor='exampleFormControlInput1'>
 								Email address
 							</label>
 							<input
@@ -33,7 +33,7 @@ const ContactForm = () => {
 							/>
 						</div>
 						<div className='form-group'>
-							<label for='exampleFormControlInput1'>
+							<label htmlFor='exampleFormControlInput1'>
 								Email address
 							</label>
 							<input
@@ -44,7 +44,7 @@ const ContactForm = () => {
 							/>
 						</div>
 						<div className='form-group'>
-							<label for='exampleFormControlInput1'>
+							<label htmlFor='exampleFormControlInput1'>
 								Email address
 							</label>
 							<input
@@ -55,7 +55,7 @@ const ContactForm = () => {
 							/>
 						</div>
 						<div className='form-group'>
-							<label for='exampleFormControlTextarea1'>
+							<label htmlFor='exampleFormControlTextarea1'>
 								Example textarea
 							</label>
 							<textarea
