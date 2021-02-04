@@ -67,26 +67,24 @@ const Gite = React.forwardRef(({ gite, photos }, ref) => {
 	);
 
 	const carousel = (section) => {
-		console.log('section', section);
-		const photoFilter = Object.fromEntries(
-			Object.entries(photos).filter(([key, value]) => value === section)
-		);
-		console.log(photoFilter);
-		// photoFilter.map((photo, i) => (
-		// 	<Carousel.Item key={i} ref={ref}>
-		// 		<Image
-		// 			className='d-block w-100'
-		// 			src={photo.location}
-		// 			alt={photo.alt}
-		// 			width={500}
-		// 			height={375}
-		// 		/>
-		// 		<Carousel.Caption>
-		// 			<h4>{photo.titreCarousel}</h4>
-		// 			<p>{photo.texteCarousel}</p>
-		// 		</Carousel.Caption>
-		// 	</Carousel.Item>
-		// ));
+		const filteredPhotos = photos.filter((photo) => {
+			return photo.sectionAssociee === section;
+		});
+		return filteredPhotos.map((photo, i) => (
+			<Carousel.Item key={i} ref={ref}>
+				<Image
+					className='d-block w-100'
+					src={photo.location}
+					alt={photo.alt}
+					width={500}
+					height={375}
+				/>
+				<Carousel.Caption>
+					<h4>{photo.titreCarousel}</h4>
+					<p>{photo.texteCarousel}</p>
+				</Carousel.Caption>
+			</Carousel.Item>
+		));
 	};
 
 	const sectionExterieur = () => (
@@ -191,12 +189,19 @@ const Gite = React.forwardRef(({ gite, photos }, ref) => {
 				{/* <h2>Infos du gite</h2> */}
 				{/* {JSON.stringify(gite)} */}
 				{jumbotron()}
+				<hr />
 				{sectionExterieur()}
+				<hr />
 				{sectionInterieur()}
+				<hr />
 				{sectionPiscine()}
+				<hr />
 				{sectionReview()}
+				<hr />
 				{sectionVideoContact()}
+				<hr />
 				{sectionCalendrier()}
+				<hr />
 				{sectionMap()}
 			</Layout>
 		</>
