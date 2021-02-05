@@ -24,15 +24,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/gestionImages": [
+    "/admin/gestionDivers/partenaires": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/gestionImages.js"
-    ],
-    "/divers/alentours": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/divers/alentours.js"
+      "static/chunks/pages/admin/gestionDivers/partenaires.js"
     ]
   },
   "ampFirstPages": []

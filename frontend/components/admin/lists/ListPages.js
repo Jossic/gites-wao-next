@@ -1,30 +1,7 @@
 import { Table } from 'reactstrap';
-import { listeDesGites } from '../../../actions/giteActions';
-import { useEffect, useState } from 'react';
-import { API } from '../../../config';
 import Link from 'next/link';
-import { getCookie } from '../../../actions/authActions';
 
 const ListPages = () => {
-	// const [gites, setGites] = useState([]);
-
-	// const token = getCookie('token');
-
-	// const listerLesGites = () => {
-	// 	listeDesGites().then((data) => {
-	// 		if (data.error) {
-	// 			console.log(error);
-	// 		} else {
-	// 			console.log('on est ok');
-	// 			setGites(...gites, data);
-	// 		}
-	// 	});
-	// };
-
-	// useEffect(() => {
-	// 	listerLesGites();
-	// }, []);
-
 	const deleteConfirm = (slug) => {
 		let answer = window.confirm(
 			'Cette opération est irréversible, Etes-vous sur de vouloir supprimer cet article ?'

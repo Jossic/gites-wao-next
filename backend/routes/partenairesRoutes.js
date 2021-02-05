@@ -12,7 +12,6 @@ import { protect, admin } from '../middleware/authMiddleware.js';
 
 //Public
 router.get('/divers/partenaires', getAllPartenaires);
-// router.get('/divers/partenaires/:categorie', getPartenairesByCategorie);
 
 //Admin
 router.get('/divers/partenaire/:id', protect, admin, getPartenaireById);

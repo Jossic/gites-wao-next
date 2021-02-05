@@ -29,7 +29,7 @@ const AdminHeader = ({ children }) => {
 								alt='User picture'
 							/> */}
 							<i
-								class='far fa-user-circle'
+								className='far fa-user-circle'
 								style={{
 									color: 'white',
 									fontSize: '40px',
@@ -158,7 +158,13 @@ const AdminHeader = ({ children }) => {
 									<Link href='/admin/gestionDivers'>
 										<a className='list-group-item list-group-item-action text-white bg-secondary'>
 											<i className='fas fa-arrow-right'></i>{' '}
-											Gestion des pages
+											Pages diverses
+										</a>
+									</Link>
+									<Link href='/admin/gestionDivers/partenaires'>
+										<a className='list-group-item list-group-item-action text-white bg-secondary'>
+											<i className='fas fa-arrow-right'></i>{' '}
+											Pages Partenaires
 										</a>
 									</Link>
 								</div>

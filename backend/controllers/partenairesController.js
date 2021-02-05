@@ -1,71 +1,63 @@
-import Alentours from '../models/AlentoursModel.js';
+import Partenaire from '../models/PartenaireModel.js';
 import asyncHandler from 'express-async-handler';
+import slugify from 'slugify';
 
-// @desc      Fetch all Liens
-// @route     GET /api/divers/alentours
+// @desc      Fetch all partenaires
+// @route     GET /api/divers/partenaires
 // @access    Public
 const getAllPartenaires = asyncHandler(async (req, res) => {
-	const liens = await Alentours.find({});
-	res.json(liens);
+	const partenaires = await Partenaire.find({});
+	res.json(partenaires);
 });
 
-// // @desc      Fetch all liens by categorie
-// // @route     GET /api/divers/alentourss/:id
-// // @access    Public
-// const getLiensByCategorie = asyncHandler(async (req, res) => {
-// 	const categorie = req.params.categorie;
-// 	const liens = await Alentours.find({ categorie: categorie });
-// 	res.json(liens);
-// });
-
-// @desc      Fetch one Lien by Id
-// @route     GET /api/divers/alentours/:id
+// @desc      Fetch one partenaire by Id
+// @route     GET /api/divers/partenaires/:id
 // @access    Private/Admin
 const getPartenaireById = asyncHandler(async (req, res) => {
-	const lien = await Alentours.findById(req.params.id);
+	const partenaire = await Partenaire.findById(req.params.id);
 
-	if (lien) {
-		res.json(lien);
+	if (partenaire) {
+		res.json(partenaire);
 	} else {
 		res.status(404);
-		throw new Error('Lien non trouvé');
+		throw new Error('Partenaire non trouvé');
 	}
 });
 
-// @desc      Create a lien
-// @route     POST /api/divers/alentours
+// @desc      Create a partenaire
+// @route     POST /api/divers/partenaire
 // @access    Private/Admin
 const createPartenaire = (req, res) => {
-	const { titre, lien, categorie, actif } = req.body;
+	const { nom, presPartenaire, actif } = req.body;
 
-	const link = new Alentours({
-		titre,
-		lien,
-		categorie,
+	const partenaire = new Partenaire({
+		nom,
+		slug: slugify(nom).toLowerCase(),
+		presPartenaire,
 		actif,
 	});
 
-	console.log('Lien dans le back', link);
-	link.save((error, link) => {
+	console.log('Partenaire dans le back', partenaire);
+	partenaire.save((error, partenaire) => {
 		if (error) return res.status(400).json({ error });
-		if (link) {
+		if (partenaire) {
 			res.status(201).json({
-				link,
-				message: 'Le lien a bien été ajouté',
+				partenaire,
+				message: 'Le partenaire a bien été créé',
 			});
 		}
 	});
 };
 
-// @desc      Delete a Review
-// @route     GET /api/divers/alentours/:id
+// @desc      Delete a partenaire
+// @route     GET /api/divers/partenaire/:id
 // @access    Private/Admin
 const removePartenaire = asyncHandler(async (req, res) => {
-	const lien = await Alentours.findById(req.params.id);
-	if (lien) {
-		await lien.remove();
+	const partenaire = await Partenaire.findById(req.params.id);
+	if (partenaire) {
+		await partenaire.remove();
 		res.json({
-			message: 'Lien correctement supprimé',
+			message: 'Partenaire correctement supprimé',
 		});
 	} else {
 		return res.json({
@@ -74,20 +66,20 @@ const removePartenaire = asyncHandler(async (req, res) => {
 	}
 });
 
-// @desc      Update a lien
-// @route     GET /api/divers/alentours/:id
+// @desc      Update a partenaire
+// @route     GET /api/divers/partenaire/:id
 // @access    Private/Admin
 const updatePartenaire = asyncHandler(async (req, res) => {
 	const { titre, lien, categorie, actif } = req.body;
 
-	const link = await Alentours.findById(req.params.id);
-	if (link) {
-		titre && (link.titre = titre);
-		lien && (link.lien = lien);
-		categorie && (link.categorie = categorie);
-		actif && (link.actif = actif);
+	const partenaire = await Partenaire.findById(req.params.id);
+	if (partenaire) {
+		titre && (partenaire.titre = titre);
+		lien && (partenaire.lien = lien);
+		categorie && (partenaire.categorie = categorie);
+		actif && (partenaire.actif = actif);
 
-		const updatedLien = await link.save();
+		const updatedLien = await partenaire.save();
 		res.json(updatedLien);
 	} else {
 		res.status(404);
