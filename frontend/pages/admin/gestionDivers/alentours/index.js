@@ -2,6 +2,7 @@ import AdminHeader from '../../../../components/layout/AdminHeader';
 import Link from 'next/link';
 import ListAlentours from '../../../../components/admin/lists/ListAlentours';
 import Admin from '../../../../components/auth/Admin';
+import { listLiens } from '../../../../actions/pagesActions';
 
 const Alentours = () => {
 	return (

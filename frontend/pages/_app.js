@@ -41,19 +41,6 @@ export default function App({ Component, pageProps }) {
 				integrity='sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=='
 				crossOrigin='anonymous'
 			/>
-			<script
-				src='https://unpkg.com/react/umd/react.production.min.js'
-				crossOrigin></script>
-
-			<script
-				src='https://unpkg.com/react-dom/umd/react-dom.production.min.js'
-				crossOrigin></script>
-
-			<script
-				src='https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js'
-				crossOrigin></script>
-
-			<script>var Alert = ReactBootstrap.Alert;</script>
 		</>
 	);
 }

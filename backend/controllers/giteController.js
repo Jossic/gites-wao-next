@@ -42,6 +42,15 @@ const getPhotosByNom = asyncHandler(async (req, res) => {
 	res.json(gite);
 });
 
+// @desc      Fetch photos by nom
+// @route     GET /api/photos/section/:section
+// @access    Public
+const getPhotosBySection = asyncHandler(async (req, res) => {
+	const section = req.params.section;
+	const photos = await Photo.find({ sectionAssociee: section });
+	res.json(photos);
+});
+
 // @desc      Delete a Gite
 // @route     DELETE /api/gites/:slug
 // @access    Private/Admin
@@ -291,4 +300,5 @@ export {
 	removeQR,
 	updateQR,
 	getPhotosByNom,
+	getPhotosBySection,
 };

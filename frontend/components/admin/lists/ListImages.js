@@ -175,19 +175,6 @@ const ListImages = () => {
 									/>
 								</th>
 								<th>
-									{/* <label>
-										Selectionné :{' '}
-										{photo.pageAssociee &&
-											photo.pageAssociee}
-									</label> */}
-									{/* <Select
-										defaultValue={photo.pageAssociee}
-										onChange={photo.pageAssociee}
-										options={{
-											label: gites.nom,
-											value: gites.slug,
-										}}
-									/> */}
 									<select
 										ref={register({ required: true })}
 										name={`items[${index}].page`}
@@ -216,11 +203,6 @@ const ListImages = () => {
 									</select>
 								</th>
 								<th>
-									{/* <label>
-										Selectionné :{' '}
-										{photo.sectionAssociee &&
-											photo.sectionAssociee}
-									</label> */}
 									<select
 										ref={register({ required: true })}
 										name={`items[${index}].section`}
@@ -273,6 +255,14 @@ const ListImages = () => {
 													'vignettes' && 'selected'
 											}>
 											Vignettes
+										</option>
+										<option
+											value='alentours'
+											selected={
+												photo.sectionAssociee ===
+													'alentours' && 'selected'
+											}>
+											Alentours
 										</option>
 									</select>
 								</th>

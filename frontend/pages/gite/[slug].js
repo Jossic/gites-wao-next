@@ -1,12 +1,8 @@
 import Head from 'next/head';
-import React, { Component } from 'react';
+import React from 'react';
 import Layout from '../../components/layout/Layout';
 import { API, DOMAIN, APP_NAME } from '../../config';
-import {
-	listeDesImages,
-	listGiteDetails,
-	listPhotosByNom,
-} from '../../actions/giteActions';
+import { listGiteDetails, listPhotosByNom } from '../../actions/giteActions';
 import Image from 'next/image';
 import { Jumbotron } from 'reactstrap';
 import { Carousel } from 'react-bootstrap';

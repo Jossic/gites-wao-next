@@ -19,7 +19,7 @@ const ListAlentours = () => {
 
 	const { loading, success, error, message } = values;
 
-	const listerLesQR = () => {
+	const listerLesLiens = () => {
 		listLiens().then((data) => {
 			if (data.error) {
 				console.log(error);
@@ -30,7 +30,7 @@ const ListAlentours = () => {
 	};
 
 	useEffect(() => {
-		listerLesQR();
+		listerLesLiens();
 	}, [success]);
 
 	const deleteLien = (id) => {
