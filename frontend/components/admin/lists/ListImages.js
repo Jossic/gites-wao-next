@@ -264,6 +264,47 @@ const ListImages = () => {
 											}>
 											Alentours
 										</option>
+										<option
+											value='festiBuz'
+											selected={
+												photo.sectionAssociee ===
+													'festiBuz' && 'selected'
+											}>
+											Festi'Buz
+										</option>
+										<option
+											value='restauration'
+											selected={
+												photo.sectionAssociee ===
+													'restauration' && 'selected'
+											}>
+											Restauration
+										</option>
+										<option
+											value='terroir'
+											selected={
+												photo.sectionAssociee ===
+													'terroir' && 'selected'
+											}>
+											Terroir
+										</option>
+										<option
+											value='adressesUtiles'
+											selected={
+												photo.sectionAssociee ===
+													'adressesUtiles' &&
+												'selected'
+											}>
+											Adresses Utiles
+										</option>
+										<option
+											value='labels'
+											selected={
+												photo.sectionAssociee ===
+													'labels' && 'selected'
+											}>
+											Labels
+										</option>
 									</select>
 								</th>
 								<th>
