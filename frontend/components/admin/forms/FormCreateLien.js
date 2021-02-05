@@ -13,7 +13,7 @@ const FormCreateLien = () => {
 		titre: '',
 		lien: '',
 		categorie: '',
-		actif: false,
+		actif: '',
 		loading: false,
 		success: '',
 		error: '',

@@ -36,14 +36,16 @@ const getLienById = asyncHandler(async (req, res) => {
 // @route     POST /api/divers/alentours
 // @access    Private/Admin
 const createLien = (req, res) => {
-	const { titre, lien, categorie } = req.body;
+	const { titre, lien, categorie, actif } = req.body;
 
 	const link = new Alentours({
 		titre,
 		lien,
 		categorie,
+		actif,
 	});
 
+	console.log('Lien dans le back', link);
 	link.save((error, link) => {
 		if (error) return res.status(400).json({ error });
 		if (link) {
