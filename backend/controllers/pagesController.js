@@ -78,13 +78,14 @@ const removeLien = asyncHandler(async (req, res) => {
 // @route     GET /api/divers/alentours/:id
 // @access    Private/Admin
 const updateLien = asyncHandler(async (req, res) => {
-	const { titre, lien, categorie } = req.body;
+	const { titre, lien, categorie, actif } = req.body;
 
 	const link = await Alentours.findById(req.params.id);
 	if (link) {
 		titre && (link.titre = titre);
 		lien && (link.lien = lien);
 		categorie && (link.categorie = categorie);
+		actif && (link.actif = actif);
 
 		const updatedLien = await link.save();
 		res.json(updatedLien);

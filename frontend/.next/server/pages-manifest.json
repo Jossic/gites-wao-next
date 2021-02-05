@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/admin/crud/divers/alentours/create": "pages/admin/crud/divers/alentours/create.js",
-  "/admin/gestionDivers/alentours": "pages/admin/gestionDivers/alentours.js"
+  "/admin/gestionDivers/alentours": "pages/admin/gestionDivers/alentours.js",
+  "/admin/crud/divers/alentours/[id]": "pages/admin/crud/divers/alentours/[id].js"
 }

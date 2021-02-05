@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
-import { listeOneQR } from '../../../../../actions/giteActions';
-import FormUpdateQR from '../../../../../components/admin/FormUpdateQR';
+import { listeOneLien } from '../../../../../actions/pagesActions';
+import FormUpdateLien from '../../../../../components/admin/forms/FormUpdateLien';
 import Admin from '../../../../../components/auth/Admin';
 import AdminHeader from '../../../../../components/layout/AdminHeader';
 import { withRouter } from 'next/router';
 import { Spinner } from 'reactstrap';
 import { getCookie } from '../../../../../actions/authActions';
 
-const gestionPages = ({ router }) => {
+const ModifPageAlentours = ({ router }) => {
 	const [data, setData] = useState(null);
 	const token = getCookie('token');
 
 	useEffect(() => {
 		const fetchData = async () => {
-			setData(await listeOneQR(router.query.id, token));
+			setData(await listeOneLien(router.query.id, token));
 		};
 		fetchData();
 	}, []);
@@ -22,9 +22,9 @@ const gestionPages = ({ router }) => {
 		<>
 			<AdminHeader>
 				<Admin>
-					<h2>Formulaire de modification d'une question/réponse</h2>
+					<h2>Formulaire de modification d'un lien</h2>
 					{data ? (
-						<FormUpdateQR preloadedValues={data} />
+						<FormUpdateLien preloadedValues={data} />
 					) : (
 						<Spinner />
 					)}
@@ -34,4 +34,4 @@ const gestionPages = ({ router }) => {
 	);
 };
 
-export default withRouter(gestionPages);
+export default withRouter(ModifPageAlentours);

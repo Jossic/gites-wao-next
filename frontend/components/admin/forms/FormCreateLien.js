@@ -93,16 +93,12 @@ const FormCreateLien = () => {
 					</div>
 				</div>
 				{success && (
-					<div className='alert alert-success'>
+					<Alert color='success'>
 						Le lien a bien été ajouté, redirection en cours...
-					</div>
+					</Alert>
 				)}
-				{loading && (
-					<div className='alert alert-success'>
-						<Spinner />
-					</div>
-				)}
-				{error && <div className='alert alert-danger'>{error}</div>}
+				{loading && <Spinner />}
+				{error && <Alert color='danger'>{error}</Alert>}
 				<div>
 					<button type='submit' className='btn btn-info'>
 						Créer ce lien

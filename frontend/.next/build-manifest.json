@@ -24,10 +24,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/crud/divers/alentours/create": [
+    "/admin/crud/divers/alentours/[id]": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/crud/divers/alentours/create.js"
+      "static/chunks/pages/admin/crud/divers/alentours/[id].js"
     ],
     "/admin/gestionDivers/alentours": [
       "static/chunks/main.js",
