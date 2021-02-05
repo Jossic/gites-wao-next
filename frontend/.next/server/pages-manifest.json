@@ -2,5 +2,7 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/admin/gestionDivers/partenaires": "pages/admin/gestionDivers/partenaires.js"
+  "/admin/gestionDivers/partenaires": "pages/admin/gestionDivers/partenaires.js",
+  "/divers/alentours": "pages/divers/alentours.js",
+  "/404": "pages/404.js"
 }

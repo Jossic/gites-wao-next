@@ -1,18 +1,17 @@
 import { useState } from 'react';
-import { Spinner } from 'reactstrap';
 import { getCookie } from '../../../actions/authActions';
 import { useForm } from 'react-hook-form';
 import Router from 'next/router';
-import { createLien } from '../../../actions/pagesActions';
+import { createPartenaire } from '../../../actions/partenairesActions';
+import { Alert, Spinner } from 'reactstrap';
 
-const FormCreateLien = () => {
+const FormCreatePartenaire = () => {
 	const token = getCookie('token');
 	const { register, handleSubmit } = useForm();
 
 	const [values, setValues] = useState({
-		titre: '',
-		lien: '',
-		categorie: '',
+		nom: '',
+		presPartenaire: '',
 		actif: '',
 		loading: false,
 		success: '',
@@ -23,7 +22,7 @@ const FormCreateLien = () => {
 	const onSubmit = async (data) => {
 		console.log(data);
 		setValues({ ...values, loading: true });
-		createLien(data, token).then((result) => {
+		createPartenaire(data, token).then((result) => {
 			if (result.error) {
 				setValues({ ...values, error: result.error });
 			} else {
@@ -33,7 +32,7 @@ const FormCreateLien = () => {
 					loading: false,
 				});
 				setTimeout(() => {
-					Router.push('/admin/gestionDivers/alentours');
+					Router.push('/admin/gestionDivers/partenaires');
 				}, 3000);
 			}
 		});
@@ -45,37 +44,28 @@ const FormCreateLien = () => {
 				<div className='row'>
 					<div className='col-md-12'>
 						<div className='form-group'>
-							<label className='text-muted'>Texte du lien</label>
+							<label className='text-muted'>
+								Texte du lien (Catégorie)
+							</label>
 							<input
 								type='text'
-								name='titre'
+								name='nom'
 								ref={register({ required: true })}
 								className='form-control'
 							/>
 						</div>
 						<div className='form-group'>
-							<label className='text-muted'>Lien</label>
+							<label className='text-muted'>
+								Descriptif (facultatif)
+							</label>
 							<input
 								type='text'
-								name='lien'
-								ref={register({ required: true })}
+								name='presPartenaire'
+								ref={register()}
 								className='form-control'
 							/>
 						</div>
 
-						<div className='form-group'>
-							<label className='text-muted'>Catégorie</label>
-							<select
-								ref={register({ required: true })}
-								name='categorie'
-								className='custom-select mr-sm-2'>
-								<option value=''>Catégorie...</option>
-								<option value='ardennes'>Ardennes</option>
-								<option value='belgique'>Belgique</option>
-								<option value='ailleurs'>Ailleurs</option>
-								<option value='meuse'>Meuse</option>
-							</select>
-						</div>
 						<div className='custom-control custom-switch'>
 							<input
 								className='custom-control-input'
@@ -94,14 +84,14 @@ const FormCreateLien = () => {
 				</div>
 				{success && (
 					<Alert color='success'>
-						Le lien a bien été ajouté, redirection en cours...
+						La catégorie a bien été ajoutée, redirection en cours...
 					</Alert>
 				)}
 				{loading && <Spinner />}
 				{error && <Alert color='danger'>{error}</Alert>}
 				<div>
 					<button type='submit' className='btn btn-info'>
-						Créer ce lien
+						Créer cette catégorie
 					</button>
 				</div>
 			</form>
@@ -109,4 +99,4 @@ const FormCreateLien = () => {
 	);
 };
 
-export default FormCreateLien;
+export default FormCreatePartenaire;

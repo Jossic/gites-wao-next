@@ -21,7 +21,7 @@ const partenaireSchema = mongoose.Schema(
 	{
 		nom: { type: String, required: true, unique: true },
 		slug: { type: String, unique: true },
-		presSection: { type: Number, required: true },
+		presPartenaire: { type: String },
 		actif: { type: Boolean, default: false },
 		listePartenairesCards: [cardSchema],
 	},

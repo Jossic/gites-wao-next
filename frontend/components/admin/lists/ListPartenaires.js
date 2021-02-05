@@ -2,6 +2,7 @@ import { Table } from 'reactstrap';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getCookie } from '../../../actions/authActions';
+import { Alert, Spinner } from 'reactstrap';
 import {
 	ListAllPartenaires,
 	removePartenaire,
@@ -23,7 +24,6 @@ const ListPartenaires = () => {
 
 	const listerLesPartenaires = () => {
 		ListAllPartenaires().then((data) => {
-			console.log('data partenaire vaut =>', data);
 			if (data.error) {
 				console.log(error);
 			} else {
@@ -66,7 +66,6 @@ const ListPartenaires = () => {
 		);
 		if (answer) {
 			deletePartenaire(id);
-			console.log('Suppression');
 		}
 	};
 
@@ -79,45 +78,63 @@ const ListPartenaires = () => {
 				<thead>
 					<tr>
 						<th>#ID</th>
-						<th>Partenaire</th>
+						<th>Catégorie/sous-menu</th>
 						<th>Présentation</th>
 						<th>Actif</th>
-						<th colSpan='2'>Actions</th>
+						<th>Gérer</th>
+						<th colSpan='2'>Modif/Suppr</th>
 					</tr>
 				</thead>
 				<tbody>
-					{console.log(partenaires)}
-					{partenaires.length === 0 ? (
-						<h3>Pas encore de partenaires, en créer un ?</h3>
-					) : (
-						partenaires.map((partenaire, i) => {
-							<tr className='mt-5'>
-								<th></th>
-								<th></th>
-								<th></th>
-								<th></th>
-								<th>
-									<Link
-										href={`/admin/gestionDivers/alentours`}>
-										<a>
-											<i
-												className='fas fa-pencil-ruler'
-												style={{ color: 'orange' }}></i>
-										</a>
-									</Link>
-								</th>
-								<th>
+					{partenaires.map((partenaire, i) => (
+						<tr className='mt-5' key={i}>
+							<th>{partenaire._id}</th>
+							<th>{partenaire.nom}</th>
+							<th>{partenaire.presPartenaire}</th>
+							<th>
+								{partenaire.actif ? (
 									<i
-										onClick={() => deleteConfirm('')}
-										className='fas fa-trash-alt'
-										style={{
-											color: 'red',
-											cursor: 'pointer',
-										}}></i>
-								</th>
-							</tr>;
-						})
-					)}
+										class='fas fa-check-square'
+										style={{ color: 'green' }}></i>
+								) : (
+									<i
+										class='fas fa-times'
+										style={{ color: 'red' }}></i>
+								)}
+							</th>
+							<th>
+								<Link
+									href={`/admin/gestionDivers/partenaires/manage/${partenaire._id}`}>
+									<a>
+										<i
+											className='fas fa-tasks'
+											style={{ color: 'blue' }}></i>
+									</a>
+								</Link>
+							</th>
+							<th>
+								<Link
+									href={`/admin/crud/divers/partenaire/${partenaire._id}`}>
+									<a>
+										<i
+											className='fas fa-pencil-ruler'
+											style={{ color: 'orange' }}></i>
+									</a>
+								</Link>
+							</th>
+							<th>
+								<i
+									onClick={() =>
+										deleteConfirm(partenaire._id)
+									}
+									className='fas fa-trash-alt'
+									style={{
+										color: 'red',
+										cursor: 'pointer',
+									}}></i>
+							</th>
+						</tr>
+					))}
 				</tbody>
 			</Table>
 		</>

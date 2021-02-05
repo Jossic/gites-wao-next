@@ -70,22 +70,74 @@ const removePartenaire = asyncHandler(async (req, res) => {
 // @route     GET /api/divers/partenaire/:id
 // @access    Private/Admin
 const updatePartenaire = asyncHandler(async (req, res) => {
-	const { titre, lien, categorie, actif } = req.body;
+	const { nom, presPartenaire, actif } = req.body;
 
 	const partenaire = await Partenaire.findById(req.params.id);
 	if (partenaire) {
-		titre && (partenaire.titre = titre);
-		lien && (partenaire.lien = lien);
-		categorie && (partenaire.categorie = categorie);
+		nom && (partenaire.nom = nom);
+		presPartenaire && (partenaire.presPartenaire = presPartenaire);
 		actif && (partenaire.actif = actif);
 
-		const updatedLien = await partenaire.save();
-		res.json(updatedLien);
+		const updatedPartenaire = await partenaire.save();
+		res.json(updatedPartenaire);
 	} else {
 		res.status(404);
-		throw new Error('Lien non trouvée');
+		throw new Error('Partenaire non trouvé');
 	}
 });
+
+// @desc      Create a partenaire
+// @route     POST /api/divers/partenaire
+// @access    Private/Admin
+const createPartenaireCard = (req, res) => {
+	// const { nom, presPartenaire, actif } = req.body;
+	// const partenaire = new Partenaire({
+	// 	nom,
+	// 	slug: slugify(nom).toLowerCase(),
+	// 	presPartenaire,
+	// 	actif,
+	// });
+	// console.log('Partenaire dans le back', partenaire);
+	// partenaire.save((error, partenaire) => {
+	// 	if (error) return res.status(400).json({ error });
+	// 	if (partenaire) {
+	// 		res.status(201).json({
+	// 			partenaire,
+	// 			message: 'Le partenaire a bien été créé',
+	// 		});
+	// 	}
+	// });
+	// voir reviews mernecom ci dessous
+	// const createProductReview = asyncHandler(async (req, res) => {
+	// 	const { rating, comment } = req.body
+	// 	const product = await Product.findById(req.params.id)
+	// 	if (product) {
+	// 		const alreadyReviewed = product.reviews.find(
+	// 			(r) => r.user.toString() === req.user._id.toString()
+	// 		)
+	// 		if (alreadyReviewed) {
+	// 			res.status(400)
+	// 			throw new Error('Vous avez déjà laiser un commentaire')
+	// 		}
+	// 		const review = {
+	// 			name: req.user.name,
+	// 			rating: Number(rating),
+	// 			comment,
+	// 			user: req.user._id,
+	// 		}
+	// 		product.reviews.push(review)
+	// 		product.numReviews = product.reviews.length
+	// 		product.rating =
+	// 			product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+	// 			product.reviews.length
+	// 		await product.save()
+	// 		res.status(201).json({ message: 'Commentaire ajouté' })
+	// 	} else {
+	// 		res.status(404)
+	// 		throw new Error('Produit non trouvé')
+	// 	}
+	// })
+};
 
 export {
 	updatePartenaire,
