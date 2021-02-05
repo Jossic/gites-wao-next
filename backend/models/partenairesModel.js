@@ -1,11 +1,15 @@
 import mongoose from 'mongoose';
+const { ObjectId } = mongoose.Schema;
 
-const reviewSchema = mongoose.Schema(
+const cardSchema = mongoose.Schema(
 	{
-		client: { type: String, required: true, unique: true },
-		note: { type: Number, required: true },
-		commentaire: { type: String },
-		giteConcerne: { type: String, required: true },
+		titre: { type: String, required: true },
+		mail: { type: String },
+		tel: { type: Number },
+		adresse: { type: String },
+		texte: { type: String },
+		site: { type: String },
+		image: { type: ObjectId, ref: 'Photo', required: true },
 		actif: { type: Boolean, default: false },
 	},
 	{
@@ -13,6 +17,18 @@ const reviewSchema = mongoose.Schema(
 	}
 );
 
-const Review = mongoose.model('Review', reviewSchema);
+const partenaireSchema = mongoose.Schema(
+	{
+		nom: { type: String, required: true, unique: true },
+		presSection: { type: Number, required: true },
+		actif: { type: Boolean, default: false },
+		listePartenairesCards: [cardSchema],
+	},
+	{
+		timestamps: true,
+	}
+);
 
-export default Review;
+const Partenaire = mongoose.model('Partenaire', partenaireSchema);
+
+export default Partenaire;
