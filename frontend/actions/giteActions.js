@@ -197,3 +197,13 @@ export const listPhotosBySection = async (section) => {
 		console.error(error);
 	}
 };
+
+export const listPhotosById = async (id) => {
+	try {
+		const { data } = await axios.get(`${API}/photo/${id}`);
+		// console.log(data);
+		return data;
+	} catch (error) {
+		console.error(error);
+	}
+};

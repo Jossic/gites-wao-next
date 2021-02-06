@@ -42,6 +42,14 @@ const getPhotosByNom = asyncHandler(async (req, res) => {
 	res.json(gite);
 });
 
+// @desc      Fetch photos by id
+// @route     GET /api/photo/:id
+// @access    Public
+const getPhotoById = asyncHandler(async (req, res) => {
+	const photo = await Photo.findById(req.params.id);
+	res.json(photo);
+});
+
 // @desc      Fetch photos by nom
 // @route     GET /api/photos/section/:section
 // @access    Public
@@ -301,4 +309,5 @@ export {
 	updateQR,
 	getPhotosByNom,
 	getPhotosBySection,
+	getPhotoById,
 };

@@ -6,11 +6,11 @@ import { Alert, Spinner } from 'reactstrap';
 
 import {
 	ListAllPartenaireCards,
-	ListAllPartenaires,
 	listePartenaireById,
-	removePartenaire,
+	removePartenaireCard,
 } from '../../../actions/partenairesActions';
 import { withRouter } from 'next/router';
+import { listPhotosById } from '../../../actions/giteActions';
 
 const ListPartenairesCards = ({ router }) => {
 	const token = getCookie('token');
@@ -25,8 +25,15 @@ const ListPartenairesCards = ({ router }) => {
 		message: '',
 	});
 
-	const getImageById = () => {
-		//récupérer l'image avec l'id
+	const getImageById = (id) => {
+		listPhotosById(id).then((data) => {
+			console.log('data vaut', data);
+			if (data.error) {
+				console.log(error);
+			} else {
+				return <img src={data.location} alt={data.alt} />;
+			}
+		});
 	};
 
 	const recupCategorie = () => {
@@ -41,6 +48,7 @@ const ListPartenairesCards = ({ router }) => {
 	};
 
 	useEffect(() => {
+		//Tester en serversideprops plutôt qu'en hooks
 		recupCategorie();
 		listerLesPartenaireCards();
 	}, []);
@@ -117,7 +125,7 @@ const ListPartenairesCards = ({ router }) => {
 						<tr className='mt-5' key={i}>
 							<th>{partenaireCard._id}</th>
 							<th>{partenaireCard.titre}</th>
-							<th>{partenaireCard.image}</th>
+							<th>{getImageById(partenaireCard.image)}</th>
 							<th>{partenaireCard.mail}</th>
 							<th>{partenaireCard.tel}</th>
 							<th>

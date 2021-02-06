@@ -15,6 +15,7 @@ import {
 	removeQR,
 	getPhotosByNom,
 	getPhotosBySection,
+	getPhotoById,
 } from '../controllers/giteController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
@@ -25,6 +26,7 @@ router.get('/gite/:slug', getGiteByNom);
 router.get('/photos/:nom', getPhotosByNom);
 router.get('/qr', getAllQR);
 router.get('/photos', getAllPhotos);
+router.get('/photo/:id', getPhotoById);
 router.get('/photos/section/:section', getPhotosBySection);
 
 // Routes espaces admin
