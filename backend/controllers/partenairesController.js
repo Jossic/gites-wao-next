@@ -106,8 +106,9 @@ const createPartenaireCard = asyncHandler(async (req, res) => {
 			actif,
 		};
 
-		partenaire.card.push(card);
+		partenaire.listePartenairesCards.push(card);
 
+		console.log('partenaire dans le back -', partenaire);
 		await partenaire.save();
 		res.status(201).json({ message: 'Carte ajoutée' });
 	} else {

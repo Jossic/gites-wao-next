@@ -1,6 +1,6 @@
 module.exports = {
 	images: {
-		domains: ['gites-wao.s3.amazonaws.com', 'picsum.photos'],
+		domains: ['gites-wao.s3.amazonaws.com'],
 	},
 	publicRuntimeConfig: {
 		APP_NAME: 'Gites-Wao',

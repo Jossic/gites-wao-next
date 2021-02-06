@@ -29,10 +29,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/admin/crud/divers/partenaire/[id]/card/create.js"
     ],
-    "/admin/gestionImages": [
+    "/admin/gestionDivers/partenaires/manage/[id]": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/gestionImages.js"
+      "static/chunks/pages/admin/gestionDivers/partenaires/manage/[id].js"
     ]
   },
   "ampFirstPages": []

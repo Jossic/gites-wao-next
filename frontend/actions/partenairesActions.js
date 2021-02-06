@@ -78,7 +78,7 @@ export const removePartenaire = (id, token) => {
 		.catch((err) => console.log(err));
 };
 
-export const createPartenaireCard = (partenaireCard, token) => {
+export const createPartenaireCard = (partenaireCard, id, token) => {
 	return fetch(`${API}/divers/partenaire/${id}/card`, {
 		method: 'POST',
 		headers: {

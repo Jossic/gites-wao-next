@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react';
 import { getCookie } from '../../../actions/authActions';
 import { useForm } from 'react-hook-form';
 import { withRouter } from 'next/router';
+import Router from 'next/router';
 import {
-	createPartenaire,
+	createPartenaireCard,
 	listePartenaireById,
 } from '../../../actions/partenairesActions';
 import { Alert, Spinner } from 'reactstrap';
 import Image from 'next/image';
 import { listPhotosBySection } from '../../../actions/giteActions';
 
-const FormCreatePartenaire = ({ router }) => {
+const FormCreatePartenaireCard = ({ router }) => {
 	const token = getCookie('token');
 	const [photos, setPhotos] = useState([]);
 
@@ -32,13 +33,13 @@ const FormCreatePartenaire = ({ router }) => {
 	const { success, loading, error } = values;
 
 	const listerLesImages = () => {
-		//recup Section
 		listePartenaireById(router.query.id, token).then((result) => {
 			console.log('result.slug', result.slug);
 			if (result.error) {
 				console.log(error);
 			} else {
 				listPhotosBySection(result.slug).then((data) => {
+					console.log('photo =>', data);
 					if (data.error) {
 						console.log(error);
 					} else {
@@ -54,9 +55,9 @@ const FormCreatePartenaire = ({ router }) => {
 	}, []);
 
 	const onSubmit = async (data) => {
-		console.log(data);
+		console.log('data onsubmit', data);
 		setValues({ ...values, loading: true });
-		createPartenaire(data, token).then((result) => {
+		createPartenaireCard(data, router.query.id, token).then((result) => {
 			if (result.error) {
 				setValues({ ...values, error: result.error });
 			} else {
@@ -136,17 +137,35 @@ const FormCreatePartenaire = ({ router }) => {
 								className='form-control'
 							/>
 						</div>
-						<select
-							name=''
-							id=''
-							ref={register()}
-							className='selectpicker'>
-							{photos.map((photo, i) => (
-								<option
-									value=''
-									data-thumbnail={photo.location}></option>
-							))}
-						</select>
+
+						{photos.map((photo, i) => (
+							<div class='form-check form-check-inline'>
+								<input
+									class='form-check-input'
+									type='radio'
+									name='image'
+									id={`check${i}`}
+									value={photo._id}
+									ref={register()}
+								/>
+								<label
+									class='form-check-label'
+									htmlFor={`check${i}`}>
+									<img
+										className='d-block w-100'
+										src={photo.location}
+										alt={photo.alt}
+										style={{
+											height: '150px',
+											width: '200px',
+										}}
+										className='img img-fluid'
+										// width={200}
+										// height={150}
+									/>
+								</label>
+							</div>
+						))}
 
 						<div className='custom-control custom-switch'>
 							<input
@@ -166,14 +185,14 @@ const FormCreatePartenaire = ({ router }) => {
 				</div>
 				{success && (
 					<Alert color='success'>
-						La catégorie a bien été ajoutée, redirection en cours...
+						Le partenaire a bien été ajouté, redirection en cours...
 					</Alert>
 				)}
 				{loading && <Spinner />}
 				{error && <Alert color='danger'>{error}</Alert>}
 				<div>
 					<button type='submit' className='btn btn-info'>
-						Créer cette catégorie
+						Créer ce partenaire
 					</button>
 				</div>
 			</form>
@@ -181,4 +200,4 @@ const FormCreatePartenaire = ({ router }) => {
 	);
 };
 
-export default withRouter(FormCreatePartenaire);
+export default withRouter(FormCreatePartenaireCard);
