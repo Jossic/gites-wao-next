@@ -1,23 +1,57 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getCookie } from '../../../actions/authActions';
 import { useForm } from 'react-hook-form';
-import Router from 'next/router';
-import { createPartenaire } from '../../../actions/partenairesActions';
+import { withRouter } from 'next/router';
+import {
+	createPartenaire,
+	listePartenaireById,
+} from '../../../actions/partenairesActions';
 import { Alert, Spinner } from 'reactstrap';
+import Image from 'next/image';
+import { listPhotosBySection } from '../../../actions/giteActions';
 
-const FormCreatePartenaire = () => {
+const FormCreatePartenaire = ({ router }) => {
 	const token = getCookie('token');
+	const [photos, setPhotos] = useState([]);
+
 	const { register, handleSubmit } = useForm();
 
 	const [values, setValues] = useState({
-		nom: '',
-		presPartenaire: '',
+		titre: '',
+		mail: '',
+		tel: '',
+		adresse: '',
+		texte: '',
+		site: '',
+		image: '',
 		actif: '',
 		loading: false,
 		success: '',
 		error: '',
 	});
 	const { success, loading, error } = values;
+
+	const listerLesImages = () => {
+		//recup Section
+		listePartenaireById(router.query.id, token).then((result) => {
+			console.log('result.slug', result.slug);
+			if (result.error) {
+				console.log(error);
+			} else {
+				listPhotosBySection(result.slug).then((data) => {
+					if (data.error) {
+						console.log(error);
+					} else {
+						setPhotos(...photos, data);
+					}
+				});
+			}
+		});
+	};
+
+	useEffect(() => {
+		listerLesImages();
+	}, []);
 
 	const onSubmit = async (data) => {
 		console.log(data);
@@ -32,7 +66,9 @@ const FormCreatePartenaire = () => {
 					loading: false,
 				});
 				setTimeout(() => {
-					Router.push('/admin/gestionDivers/partenaires');
+					Router.push(
+						`/admin/gestionDivers/partenaires/manage/${router.query.id}`
+					);
 				}, 3000);
 			}
 		});
@@ -45,26 +81,72 @@ const FormCreatePartenaire = () => {
 					<div className='col-md-12'>
 						<div className='form-group'>
 							<label className='text-muted'>
-								Texte du lien (Catégorie)
+								Nom du partenaire
 							</label>
 							<input
 								type='text'
-								name='nom'
+								name='titre'
 								ref={register({ required: true })}
 								className='form-control'
 							/>
 						</div>
 						<div className='form-group'>
-							<label className='text-muted'>
-								Descriptif (facultatif)
-							</label>
+							<label className='text-muted'>Mail</label>
 							<input
-								type='text'
-								name='presPartenaire'
+								type='mail'
+								name='mail'
 								ref={register()}
 								className='form-control'
 							/>
 						</div>
+
+						<div className='form-group'>
+							<label className='text-muted'>Tel</label>
+							<input
+								type='tel'
+								name='tel'
+								ref={register()}
+								className='form-control'
+							/>
+						</div>
+						<div className='form-group'>
+							<label className='text-muted'>Adresse</label>
+							<input
+								type='text'
+								name='adresse'
+								ref={register()}
+								className='form-control'
+							/>
+						</div>
+						<div className='form-group'>
+							<label className='text-muted'>Texte</label>
+							<input
+								type='text'
+								name='texte'
+								ref={register()}
+								className='form-control'
+							/>
+						</div>
+						<div className='form-group'>
+							<label className='text-muted'>Site</label>
+							<input
+								type='text'
+								name='site'
+								ref={register()}
+								className='form-control'
+							/>
+						</div>
+						<select
+							name=''
+							id=''
+							ref={register()}
+							className='selectpicker'>
+							{photos.map((photo, i) => (
+								<option
+									value=''
+									data-thumbnail={photo.location}></option>
+							))}
+						</select>
 
 						<div className='custom-control custom-switch'>
 							<input
@@ -99,4 +181,4 @@ const FormCreatePartenaire = () => {
 	);
 };
 
-export default FormCreatePartenaire;
+export default withRouter(FormCreatePartenaire);

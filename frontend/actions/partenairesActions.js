@@ -77,3 +77,19 @@ export const removePartenaire = (id, token) => {
 		})
 		.catch((err) => console.log(err));
 };
+
+export const createPartenaireCard = (partenaireCard, token) => {
+	return fetch(`${API}/divers/partenaire/${id}/card`, {
+		method: 'POST',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify(partenaireCard),
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};

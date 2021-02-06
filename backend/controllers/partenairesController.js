@@ -89,8 +89,32 @@ const updatePartenaire = asyncHandler(async (req, res) => {
 // @desc      Create a partenaire card
 // @route     POST /api/divers/partenaire/:id/card
 // @access    Private/Admin
-const createPartenaireCard = (req, res) => {
-	// const { nom, presPartenaire, actif } = req.body;
+const createPartenaireCard = asyncHandler(async (req, res) => {
+	const { titre, mail, tel, adresse, texte, site, image, actif } = req.body;
+
+	const partenaire = await Partenaire.findById(req.params.id);
+
+	if (partenaire) {
+		const card = {
+			titre,
+			mail,
+			tel,
+			adresse,
+			texte,
+			site,
+			image,
+			actif,
+		};
+
+		partenaire.card.push(card);
+
+		await partenaire.save();
+		res.status(201).json({ message: 'Carte ajoutée' });
+	} else {
+		res.status(404);
+		throw new Error('Catégorie non trouvée');
+	}
+
 	// const partenaire = new Partenaire({
 	// 	nom,
 	// 	slug: slugify(nom).toLowerCase(),
@@ -137,7 +161,7 @@ const createPartenaireCard = (req, res) => {
 	// 		throw new Error('Produit non trouvé')
 	// 	}
 	// })
-};
+});
 
 export {
 	updatePartenaire,
@@ -145,5 +169,6 @@ export {
 	createPartenaire,
 	getAllPartenaires,
 	getPartenaireById,
+	createPartenaireCard,
 	// getLiensByCategorie,
 };
