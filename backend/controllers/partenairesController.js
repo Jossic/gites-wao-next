@@ -86,8 +86,8 @@ const updatePartenaire = asyncHandler(async (req, res) => {
 	}
 });
 
-// @desc      Create a partenaire
-// @route     POST /api/divers/partenaire
+// @desc      Create a partenaire card
+// @route     POST /api/divers/partenaire/:id/card
 // @access    Private/Admin
 const createPartenaireCard = (req, res) => {
 	// const { nom, presPartenaire, actif } = req.body;
