@@ -15,7 +15,6 @@ const getAllPartenaires = asyncHandler(async (req, res) => {
 // @access    Private/Admin
 const getPartenaireById = asyncHandler(async (req, res) => {
 	const partenaire = await Partenaire.findById(req.params.id);
-
 	if (partenaire) {
 		res.json(partenaire);
 	} else {
@@ -102,7 +101,6 @@ const getAllPartenaireCards = asyncHandler(async (req, res) => {
 // @access    Private/Admin
 const getPartenaireCardById = asyncHandler(async (req, res) => {
 	const partenaire = await Partenaire.findById(req.params.id);
-
 	if (partenaire) {
 		res.json(partenaire);
 	} else {
@@ -143,14 +141,17 @@ const createPartenaireCard = asyncHandler(async (req, res) => {
 });
 
 // @desc      Delete a partenaire card
-// @route     GET /api/divers/partenaire/:id/card/:idCard
+// @route     DELETE /api/divers/partenaire/:id/card/:idCard
 // @access    Private/Admin
 const removePartenaireCard = asyncHandler(async (req, res) => {
 	const partenaire = await Partenaire.findById(req.params.id);
+	console.log(partenaire);
 	if (partenaire) {
-		await partenaire.remove();
+		partenaire.listePartenairesCards.pull({ _id: req.params.idCard });
+		console.log(partenaire);
+		partenaire.save();
 		res.json({
-			message: 'Partenaire correctement supprimé',
+			message: 'Partenaire correctement supprimé, actualisation en cours',
 		});
 	} else {
 		return res.json({
@@ -160,7 +161,7 @@ const removePartenaireCard = asyncHandler(async (req, res) => {
 });
 
 // @desc      Update a partenaire card
-// @route     GET /api/divers/partenaire/:id/card/:idCard
+// @route     PUT /api/divers/partenaire/:id/card/:idCard
 // @access    Private/Admin
 const updatePartenaireCard = asyncHandler(async (req, res) => {
 	const { nom, presPartenaire, actif } = req.body;

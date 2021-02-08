@@ -15,15 +15,6 @@ import {
 } from '../controllers/partenairesController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
-//Public
-router.get('/divers/partenaires', getAllPartenaires);
-
-//Admin
-router.get('/divers/partenaire/:id', protect, admin, getPartenaireById);
-router.post('/divers/partenaire', protect, admin, createPartenaire);
-router.put('/divers/partenaire/:id', protect, admin, updatePartenaire);
-router.delete('/divers/partenaire/:id', protect, admin, removePartenaire);
-
 //Card
 //Public
 router.get('/divers/partenaire/:id/cards', getAllPartenaireCards);
@@ -31,8 +22,7 @@ router.get('/divers/partenaire/:id/cards', getAllPartenaireCards);
 //Admin
 router.get(
 	'/divers/partenaire/:id/card/:idCard',
-	protect,
-	admin,
+
 	getPartenaireCardById
 );
 router.post(
@@ -54,5 +44,14 @@ router.delete(
 	admin,
 	removePartenaireCard
 );
+
+//Public
+router.get('/divers/partenaires', getAllPartenaires);
+
+//Admin
+router.get('/divers/partenaire/:id', getPartenaireById);
+router.post('/divers/partenaire', protect, admin, createPartenaire);
+router.put('/divers/partenaire/:id', protect, admin, updatePartenaire);
+router.delete('/divers/partenaire/:id', protect, admin, removePartenaire);
 
 export default router;

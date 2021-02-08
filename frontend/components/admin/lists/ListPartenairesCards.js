@@ -3,99 +3,66 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getCookie } from '../../../actions/authActions';
 import { Alert, Spinner } from 'reactstrap';
+import Router from 'next/router';
+import { removePartenaireCard } from '../../../actions/partenairesActions';
 
-import {
-	ListAllPartenaireCards,
-	listePartenaireById,
-	removePartenaireCard,
-} from '../../../actions/partenairesActions';
-import { withRouter } from 'next/router';
 import { listPhotosById } from '../../../actions/giteActions';
 
-const ListPartenairesCards = ({ router }) => {
+const ListPartenairesCards = ({ partenaireCards, categorie, partenaireId }) => {
+	const [image, setImage] = useState([]);
 	const token = getCookie('token');
-
-	const [categorie, setCategorie] = useState('');
-	const [partenaireCards, setPartenaireCards] = useState([]);
 
 	const [values, setvalues] = useState({
 		loading: false,
 		error: '',
-		success: '',
+		success: false,
 		message: '',
 	});
 
-	const getImageById = (id) => {
-		listPhotosById(id).then((data) => {
-			console.log('data vaut', data);
-			if (data.error) {
-				console.log(error);
-			} else {
-				return <img src={data.location} alt={data.alt} />;
-			}
-		});
-	};
-
-	const recupCategorie = () => {
-		listePartenaireById(router.query.id, token).then((result) => {
-			console.log('result', result);
-			if (result.error) {
-				console.log(error);
-			} else {
-				setCategorie(result);
-			}
-		});
-	};
-
-	useEffect(() => {
-		//Tester en serversideprops plutôt qu'en hooks
-		recupCategorie();
-		listerLesPartenaireCards();
-	}, []);
-
 	const { loading, success, error, message } = values;
 
-	const listerLesPartenaireCards = () => {
-		ListAllPartenaireCards(router.query.id).then((data) => {
-			console.log('liste des partenaires', data);
+	const getImageById = (id) => {
+		listPhotosById(id).then((data) => {
+			console.log('image vaut =>', data);
 			if (data.error) {
 				console.log(error);
 			} else {
-				setPartenaireCards(...partenaireCards, data);
+				setImage({ ...image, data });
 			}
 		});
 	};
 
-	// const deletePartenaire = (id) => {
-	// 	setvalues({ ...values, loading: true });
-	// 	console.log('id', id);
-	// 	removePartenaire(id, token).then((data) => {
-	// 		console.log('data vaut', data);
-	// 		if (data.error) {
-	// 			setvalues({
-	// 				...values,
-	// 				loading: false,
-	// 				error: true,
-	// 				success: false,
-	// 			});
-	// 		} else {
-	// 			setvalues({
-	// 				...values,
-	// 				loading: false,
-	// 				error: '',
-	// 				success: true,
-	// 				message: data.message,
-	// 			});
-	// 		}
-	// 	});
-	// };
+	const deletePartenaireCard = (id) => {
+		setvalues({ ...values, loading: true });
+		removePartenaireCard(partenaireId, id, token).then((data) => {
+			if (data.error) {
+				setvalues({
+					...values,
+					loading: false,
+					error: true,
+					success: false,
+				});
+			} else {
+				setvalues({
+					...values,
+					loading: false,
+					error: '',
+					success: true,
+					message: data.message,
+				});
+				setTimeout(() => {
+					Router.reload();
+				}, 2000);
+			}
+		});
+	};
 
 	const deleteConfirm = (id) => {
 		let answer = window.confirm(
 			`Suppression du partenaire ${id}, êtes-vous sûr ?`
 		);
 		if (answer) {
-			deletePartenaire(id);
+			deletePartenaireCard(id);
 		}
 	};
 
@@ -103,7 +70,11 @@ const ListPartenairesCards = ({ router }) => {
 		<>
 			<h3>
 				Liste des partenaires pour la catégorie{' '}
-				<strong>{categorie.slug}</strong>
+				<strong>{categorie.slug}</strong>,{' '}
+				<small style={{ fontSize: '13px' }}>
+					(pensez à ajouter des images dans la catégorie
+					correspondante avant de créer un partenaire)
+				</small>
 			</h3>
 			{loading && <Spinner />}
 			{success && <Alert color='success'>{message}</Alert>}
@@ -125,7 +96,10 @@ const ListPartenairesCards = ({ router }) => {
 						<tr className='mt-5' key={i}>
 							<th>{partenaireCard._id}</th>
 							<th>{partenaireCard.titre}</th>
-							<th>{getImageById(partenaireCard.image)}</th>
+							<th>
+								{getImageById(partenaireCard.image)}
+								{image.location}
+							</th>
 							<th>{partenaireCard.mail}</th>
 							<th>{partenaireCard.tel}</th>
 							<th>
@@ -169,4 +143,4 @@ const ListPartenairesCards = ({ router }) => {
 	);
 };
 
-export default withRouter(ListPartenairesCards);
+export default ListPartenairesCards;

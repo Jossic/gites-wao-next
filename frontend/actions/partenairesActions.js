@@ -11,12 +11,9 @@ export const ListAllPartenaires = () => {
 		.catch((err) => console.log(err));
 };
 
-export const listePartenaireById = (id, token) => {
+export const listePartenaireById = (id) => {
 	return fetch(`${API}/divers/partenaire/${id}`, {
 		method: 'GET',
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
 	})
 		.then((response) => {
 			return response.json();
@@ -88,12 +85,9 @@ export const ListAllPartenaireCards = (id) => {
 		.catch((err) => console.log(err));
 };
 
-export const listePartenaireCardById = (id, idCard, token) => {
+export const listePartenaireCardById = (id, idCard) => {
 	return fetch(`${API}/divers/partenaire/${id}/card/${idCard}`, {
 		method: 'GET',
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
 	})
 		.then((response) => {
 			return response.json();
