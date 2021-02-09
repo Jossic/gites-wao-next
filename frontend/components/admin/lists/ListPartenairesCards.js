@@ -6,13 +6,14 @@ import { Alert, Spinner } from 'reactstrap';
 import Router from 'next/router';
 import { removePartenaireCard } from '../../../actions/partenairesActions';
 import Image from 'next/image';
-import {
-	listPhotosById,
-	listPhotosBySection,
-} from '../../../actions/giteActions';
+import { listPhotosBySection } from '../../../actions/giteActions';
 
-const ListPartenairesCards = ({ partenaireCards, categorie, partenaireId }) => {
-	const [images, setImages] = useState([]);
+const ListPartenairesCards = ({
+	partenaireCards,
+	categorie,
+	partenaireId,
+	photos,
+}) => {
 	const token = getCookie('token');
 
 	const [values, setvalues] = useState({
@@ -24,18 +25,33 @@ const ListPartenairesCards = ({ partenaireCards, categorie, partenaireId }) => {
 
 	const { loading, success, error, message } = values;
 
-	const getAllImages = () => {
-		listPhotosBySection(categorie.slug).then((photos) => {
-			if (photos.error) {
-				console.log(photos.error);
-			} else {
-				setImages({ ...images, images: photos });
-			}
-		});
+	// const getAllImages = () => {
+	// 	listPhotosBySection(categorie.slug).then((photos) => {
+	// 		if (photos.error) {
+	// 			console.log(photos.error);
+	// 		} else {
+	// 			setImages({ ...images, images: photos });
+	// 		}
+	// 	});
+	// };
+	// useEffect(() => {
+	// 	getAllImages();
+	// }, []);
+
+	const photoInfos = (id) => {
+		return photos.map(
+			(photos) =>
+				photos._id === id && (
+					<Image
+						// className='d-block w-100'
+						src={photos.location}
+						alt={photos.alt}
+						width={200}
+						height={150}
+					/>
+				)
+		);
 	};
-	useEffect(() => {
-		getAllImages();
-	}, []);
 
 	const deletePartenaireCard = (id) => {
 		setvalues({ ...values, loading: true });
@@ -101,8 +117,12 @@ const ListPartenairesCards = ({ partenaireCards, categorie, partenaireId }) => {
 						<tr className='mt-5' key={i}>
 							<th>{partenaireCard._id}</th>
 							<th>{partenaireCard.titre}</th>
-							<th>{partenaireCard.image}</th>
-							<th>{partenaireCard.mail}</th>
+							<th>{photoInfos(partenaireCard.image)}</th>
+							<th>
+								<a href={`mailto:${partenaireCard.mail}`}>
+									{partenaireCard.mail}
+								</a>
+							</th>
 							<th>{partenaireCard.tel}</th>
 							<th>
 								{partenaireCard.actif ? (

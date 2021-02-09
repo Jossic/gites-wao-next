@@ -6,25 +6,13 @@ const index = () => {
 			<h2>Reste à faire</h2>
 			<ul>
 				<li>Rendu de la page gîte</li>
-				<li>Gérer correctement les photos des carousel</li>
-				<li>
-					Preloaded value sur list des images (voir sur update QR)
-				</li>
-				<li>Donner la possibilité d'agrandir l'image dans un modal</li>
-
 				<li>
 					Permettre d'ajouter un tri sur les photos (par page et par
 					section)
 				</li>
 				<li>Rendu de la page accueil</li>
-				<li>Rendu de la page alentours</li>
-				<li>Update et delete gite</li>
 				<li>gestion des fichiers</li>
-				<li>
-					gestion des reviews : Preload valeur du select pour update
-				</li>
 				<li>update & delete image</li>
-				<li>Permettre l'affichage des images ajoutée sur S3</li>
 				<li>
 					Renvoyer les messages du formulaire de contact dans l'espace
 					admin avec pastille nouveau message

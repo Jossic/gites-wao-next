@@ -8,11 +8,13 @@ import {
 	listePartenaireById,
 } from '../../../../../actions/partenairesActions';
 import { getCookie } from '../../../../../actions/authActions';
+import { listPhotosBySection } from '../../../../../actions/giteActions';
 
 const GestionPartenairesCards = ({
 	partenaireCards,
 	categorie,
 	partenaireId,
+	photos,
 }) => {
 	return (
 		<>
@@ -32,6 +34,7 @@ const GestionPartenairesCards = ({
 						partenaireCards={partenaireCards}
 						categorie={categorie}
 						partenaireId={partenaireId}
+						photos={photos}
 					/>
 				</Admin>
 			</AdminHeader>
@@ -45,8 +48,15 @@ export async function getServerSideProps(context) {
 	const partenaireCards = await res1;
 	const res2 = await listePartenaireById(context.params.id, token);
 	const categorie = await res2;
+	const res3 = await listPhotosBySection(categorie.slug);
+	const photos = await res3;
 	return {
-		props: { partenaireCards, categorie, partenaireId: context.params.id },
+		props: {
+			partenaireCards,
+			categorie,
+			partenaireId: context.params.id,
+			photos,
+		},
 	};
 }
 
