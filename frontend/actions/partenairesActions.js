@@ -11,6 +11,16 @@ export const ListAllPartenaires = () => {
 		.catch((err) => console.log(err));
 };
 
+export const ListAllPartenairesNoms = () => {
+	return fetch(`${API}/divers/partenaires/noms`, {
+		method: 'GET',
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
 export const listePartenaireById = (id) => {
 	return fetch(`${API}/divers/partenaire/${id}`, {
 		method: 'GET',
@@ -36,16 +46,6 @@ export const createPartenaire = (partenaire, token) => {
 		})
 		.catch((err) => console.log(err));
 };
-
-// export const listReviewsBySlug = async (slug) => {
-// 	try {
-// 		const { data } = await axios.get(`${API}/reviews/${slug}`);
-// 		// console.log(data);
-// 		return data;
-// 	} catch (error) {
-// 		console.error(error);
-// 	}
-// };
 
 export const updatePartenaire = (partenaire, id, token) => {
 	return fetch(`${API}/divers/partenaire/${id}`, {

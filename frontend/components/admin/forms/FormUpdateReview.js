@@ -29,7 +29,6 @@ const FormUpdateReview = ({ preloadedValues, router }) => {
 	const listDesGites = () => {
 		listGitesNoms().then((data) => {
 			console.log('id', router.query.id);
-			// console.log('data nom vaut', data);
 			if (data.error) {
 				console.log(error);
 			} else {
@@ -39,7 +38,6 @@ const FormUpdateReview = ({ preloadedValues, router }) => {
 	};
 
 	const listDetailReview = () => {
-		console.log('id', router.query.id);
 		const ident = router.query.id;
 		listeOneReview(ident, token).then((data) => {
 			console.log('data review vaut', data.giteConcerne);

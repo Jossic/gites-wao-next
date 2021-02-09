@@ -5,11 +5,14 @@ import { getCookie } from '../../../actions/authActions';
 import { Alert, Spinner } from 'reactstrap';
 import Router from 'next/router';
 import { removePartenaireCard } from '../../../actions/partenairesActions';
-
-import { listPhotosById } from '../../../actions/giteActions';
+import Image from 'next/image';
+import {
+	listPhotosById,
+	listPhotosBySection,
+} from '../../../actions/giteActions';
 
 const ListPartenairesCards = ({ partenaireCards, categorie, partenaireId }) => {
-	const [image, setImage] = useState([]);
+	const [images, setImages] = useState([]);
 	const token = getCookie('token');
 
 	const [values, setvalues] = useState({
@@ -21,16 +24,18 @@ const ListPartenairesCards = ({ partenaireCards, categorie, partenaireId }) => {
 
 	const { loading, success, error, message } = values;
 
-	const getImageById = (id) => {
-		listPhotosById(id).then((data) => {
-			console.log('image vaut =>', data);
-			if (data.error) {
-				console.log(error);
+	const getAllImages = () => {
+		listPhotosBySection(categorie.slug).then((photos) => {
+			if (photos.error) {
+				console.log(photos.error);
 			} else {
-				setImage({ ...image, data });
+				setImages({ ...images, images: photos });
 			}
 		});
 	};
+	useEffect(() => {
+		getAllImages();
+	}, []);
 
 	const deletePartenaireCard = (id) => {
 		setvalues({ ...values, loading: true });
@@ -96,27 +101,25 @@ const ListPartenairesCards = ({ partenaireCards, categorie, partenaireId }) => {
 						<tr className='mt-5' key={i}>
 							<th>{partenaireCard._id}</th>
 							<th>{partenaireCard.titre}</th>
-							<th>
-								{getImageById(partenaireCard.image)}
-								{image.location}
-							</th>
+							<th>{partenaireCard.image}</th>
 							<th>{partenaireCard.mail}</th>
 							<th>{partenaireCard.tel}</th>
 							<th>
 								{partenaireCard.actif ? (
 									<i
-										class='fas fa-check-square'
+										className='fas fa-check-square'
 										style={{ color: 'green' }}></i>
 								) : (
 									<i
-										class='fas fa-times'
+										className='fas fa-times'
 										style={{ color: 'red' }}></i>
 								)}
 							</th>
 
 							<th>
 								<Link
-									href={`/admin/crud/divers/partenaire/${partenaireCard._id}`}>
+									href={`/admin/crud/divers/partenaire/[id]/card/[idCard]`}
+									as={`/admin/crud/divers/partenaire/${partenaireId}/card/${partenaireCard._id}`}>
 									<a>
 										<i
 											className='fas fa-pencil-ruler'

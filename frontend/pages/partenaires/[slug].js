@@ -14,54 +14,39 @@ import {
 	Button,
 } from 'reactstrap';
 
-import Note from '../../components/admin/Note';
-
-const Gite = ({ gite, photos, reviews }, ref) => {
+const Partenaire = ({}) => {
 	const head = () => (
 		<Head>
 			<title>
-				{APP_NAME} | {gite.nom}{' '}
+				{APP_NAME} | {categorie.nom}{' '}
 			</title>
-			<meta name='description' content={gite.mdesc} />
-			<link rel='canonical' href={`${DOMAIN}/gite/${gite.slug}`} />
-			<meta property='og:title' content={`${gite.nom} | ${APP_NAME}`} />
-			<meta property='og:description' content={gite.mdesc} />
+			<meta name='description' content={categorie.mdesc} />
+			<link rel='canonical' href={`${DOMAIN}/gite/${categorie.slug}`} />
+			<meta
+				property='og:title'
+				content={`${categorie.nom} | ${APP_NAME}`}
+			/>
+			<meta property='og:description' content={categorie.mdesc} />
 			<meta property='og:type' content='website' />
-			<meta property='og:url' content={`${DOMAIN}/gite/${gite.slug}`} />
+			<meta
+				property='og:url'
+				content={`${DOMAIN}/gite/${categorie.slug}`}
+			/>
 			<meta property='og:site_name' content={`${APP_NAME}`} />
 
 			<meta property='og:site_name' content={APP_NAME} />
 
 			<meta
 				property='og:image'
-				content={`${API}/blog/photo/${gite.slug}`}
+				content={`${API}/blog/photo/${categorie.slug}`}
 			/>
 			<meta
 				property='og:image:secure_url'
-				content={`${API}/gite/photo/${gite.slug}`}
+				content={`${API}/gite/photo/${categorie.slug}`}
 			/>
 			<meta property='og:image:type' content='image/jpg' />
 		</Head>
 	);
-
-	const sectionPartenaires = [
-		{
-			nom: "Festi'Buz",
-			presSection: 'Une présentation de la section',
-			listePartenairesCards: [
-				{
-					titre: 'Festival de musique',
-					mail: 'festibuz@gmail.com',
-					tel: '0623819149',
-					adresse: '',
-					texte: `3ème édition les 18 et 19 juin 2021
-                    clic sur photo pour voir tarifs`,
-					site: 'www.festibuz.com',
-					// image: 'photo.location',
-				},
-			],
-		},
-	];
 
 	const jumbotron = () => (
 		<section>
@@ -146,4 +131,4 @@ export async function getStaticProps(context) {
 	});
 }
 
-export default Gite;
+export default Partenaire;

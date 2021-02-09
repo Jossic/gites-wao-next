@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
-// import { APP_NAME } from '../config';
 import NProgress from 'nprogress';
-// import 'bootstrap/dist/css/bootstrap.css';
 import Link from 'next/link';
-// import gites from '../../data';
 import Image from 'next/image';
-import fetch from 'isomorphic-fetch';
 import { isAuth, logout } from '../../actions/authActions';
 import {
 	Collapse,
@@ -25,6 +21,7 @@ import { listGitesNoms } from '../../actions/giteActions';
 import Router from 'next/router';
 
 import '../../node_modules/nprogress/nprogress.css';
+import { ListAllPartenairesNoms } from '../../actions/partenairesActions';
 
 Router.onRouteChangeStart = (url) => NProgress.start();
 Router.onRouteChangeComplete = (url) => NProgress.done();
@@ -35,6 +32,7 @@ const Header = () => {
 	const toggle = () => setIsOpen(!isOpen);
 
 	const [gites, setGites] = useState([]);
+	const [partenaires, setPartenaires] = useState([]);
 
 	const listDesGites = () => {
 		listGitesNoms().then((data) => {
@@ -46,8 +44,19 @@ const Header = () => {
 		});
 	};
 
+	const listDesPartenaires = () => {
+		ListAllPartenairesNoms().then((data) => {
+			if (data.error) {
+				console.log(error);
+			} else {
+				setPartenaires(...partenaires, data);
+			}
+		});
+	};
+
 	useEffect(() => {
 		listDesGites();
+		listDesPartenaires();
 	}, []);
 
 	return (
@@ -136,11 +145,19 @@ const Header = () => {
 								Partenaires
 							</DropdownToggle>
 							<DropdownMenu right>
-								<DropdownItem>Restauration</DropdownItem>
-								<DropdownItem>Terroir</DropdownItem>
-								<DropdownItem>Adresses utiles</DropdownItem>
-								<DropdownItem>Festi'buz</DropdownItem>
-								<DropdownItem>Labels</DropdownItem>
+								{partenaires.map((partenaire) => (
+									<Link
+										href={`/partenaires/${partenaire.slug}`}>
+										<NavItem>
+											<NavLink
+												style={{ cursor: 'pointer' }}>
+												<DropdownItem>
+													{partenaire.nom}
+												</DropdownItem>
+											</NavLink>
+										</NavItem>
+									</Link>
+								))}
 							</DropdownMenu>
 						</UncontrolledDropdown>
 						{!isAuth() && (

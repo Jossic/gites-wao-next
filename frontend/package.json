@@ -12,11 +12,13 @@
     "@zeit/next-css": "^1.0.1",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.0-beta1",
+    "caniuse-lite": "^1.0.30001185",
     "google-map-react": "^2.1.9",
     "isomorphic-fetch": "^3.0.0",
     "jquery": "^1.9.1",
     "js-cookie": "^2.2.1",
     "little-state-machine": "^4.0.0",
+    "mongoose": "^5.11.15",
     "next": "^10.0.5",
     "next-redux-wrapper": "^6.0.2",
     "nprogress": "^0.2.0",
@@ -31,6 +33,7 @@
     "reactstrap": "^8.9.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "sharp": "^0.27.1"
   }
 }

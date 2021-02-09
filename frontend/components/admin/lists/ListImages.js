@@ -1,4 +1,4 @@
-import { Table, Button, Spinner } from 'reactstrap';
+import { Table, Button, Spinner, Alert } from 'reactstrap';
 import {
 	listeDesImages,
 	listGitesNoms,
@@ -11,10 +11,12 @@ import { API } from '../../../config';
 import Link from 'next/link';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { getCookie } from '../../../actions/authActions';
+import { ListAllPartenairesNoms } from '../../../actions/partenairesActions';
 
 const ListImages = () => {
 	const [photos, setPhotos] = useState([]);
 	const token = getCookie('token');
+	const [partenaires, setPartenaires] = useState([]);
 	const { register, handleSubmit, control, errors } = useForm();
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -36,22 +38,22 @@ const ListImages = () => {
 
 	const [gites, setGites] = useState([]);
 
+	const listDesPartenaires = () => {
+		ListAllPartenairesNoms().then((data) => {
+			if (data.error) {
+				console.log(error);
+			} else {
+				setPartenaires(...partenaires, data);
+			}
+		});
+	};
+
 	const listDesGites = () => {
 		listGitesNoms().then((data) => {
 			if (data.error) {
 				console.log(error);
 			} else {
 				setGites(...gites, data);
-				// const monTableau = data.map((gite) => {
-				// 	const options = {
-				// 		// value: gite.slug,
-				// 		// label: gite.nom,
-				// 	};
-				// 	options.value = gite.slug;
-				// 	options.label = gite.nom;
-				// 	// debugger;
-				// 	return options;
-				// });
 			}
 		});
 	};
@@ -69,6 +71,7 @@ const ListImages = () => {
 	useEffect(() => {
 		listDesGites();
 		listerLesImages();
+		listDesPartenaires();
 	}, []);
 
 	const deleteConfirm = (slug) => {
@@ -87,7 +90,6 @@ const ListImages = () => {
 		saveImageData(data, token).then((result) => {
 			console.log('result vaut =>', result);
 			if (result.error) {
-				console.log('une grosse erreur');
 				setValues({ ...values, error: result.error });
 			} else {
 				setValues({
@@ -208,103 +210,84 @@ const ListImages = () => {
 										name={`items[${index}].section`}
 										className='custom-select mr-sm-2'>
 										<option>Selection...</option>
-										<option
-											value='Autre'
-											selected={
-												photo.sectionAssociee ===
-													'Autre' && 'selected'
-											}>
-											Autres sections
-										</option>
-										<option
-											value='exterieur'
-											selected={
-												photo.sectionAssociee ===
-													'exterieur' && 'selected'
-											}>
-											Extérieur
-										</option>
-										<option
-											value='piscine'
-											selected={
-												photo.sectionAssociee ===
-													'piscine' && 'selected'
-											}>
-											Piscine
-										</option>
-										<option
-											value='interieur'
-											selected={
-												photo.sectionAssociee ===
-													'interieur' && 'selected'
-											}>
-											Intérieur
-										</option>
-										<option
-											value='avatar'
-											selected={
-												photo.sectionAssociee ===
-													'avatar' && 'selected'
-											}>
-											Avatar
-										</option>
-										<option
-											value='vignettes'
-											selected={
-												photo.sectionAssociee ===
-													'vignettes' && 'selected'
-											}>
-											Vignettes
-										</option>
-										<option
-											value='alentours'
-											selected={
-												photo.sectionAssociee ===
-													'alentours' && 'selected'
-											}>
-											Alentours
-										</option>
-										<option
-											value='festiBuz'
-											selected={
-												photo.sectionAssociee ===
-													'festiBuz' && 'selected'
-											}>
-											Festi'Buz
-										</option>
-										<option
-											value='restauration'
-											selected={
-												photo.sectionAssociee ===
-													'restauration' && 'selected'
-											}>
-											Restauration
-										</option>
-										<option
-											value='terroir'
-											selected={
-												photo.sectionAssociee ===
-													'terroir' && 'selected'
-											}>
-											Terroir
-										</option>
-										<option
-											value='adressesUtiles'
-											selected={
-												photo.sectionAssociee ===
-													'adressesUtiles' &&
-												'selected'
-											}>
-											Adresses Utiles
-										</option>
-										<option
-											value='labels'
-											selected={
-												photo.sectionAssociee ===
-													'labels' && 'selected'
-											}>
-											Labels
-										</option>
+
+										<optgroup label='Gites'>
+											<option
+												value='exterieur'
+												selected={
+													photo.sectionAssociee ===
+														'exterieur' &&
+													'selected'
+												}>
+												Extérieur
+											</option>
+											<option
+												value='piscine'
+												selected={
+													photo.sectionAssociee ===
+														'piscine' && 'selected'
+												}>
+												Piscine
+											</option>
+											<option
+												value='interieur'
+												selected={
+													photo.sectionAssociee ===
+														'interieur' &&
+													'selected'
+												}>
+												Intérieur
+											</option>
+										</optgroup>
+										<optgroup label='Divers'>
+											<option
+												value='Autre'
+												selected={
+													photo.sectionAssociee ===
+														'Autre' && 'selected'
+												}>
+												Autres sections
+											</option>
+											<option
+												value='avatar'
+												selected={
+													photo.sectionAssociee ===
+														'avatar' && 'selected'
+												}>
+												Avatar
+											</option>
+											<option
+												value='vignettes'
+												selected={
+													photo.sectionAssociee ===
+														'vignettes' &&
+													'selected'
+												}>
+												Vignettes
+											</option>
+											<option
+												value='alentours'
+												selected={
+													photo.sectionAssociee ===
+														'alentours' &&
+													'selected'
+												}>
+												Alentours
+											</option>
+										</optgroup>
+										<optgroup label='Partenaires'>
+											{partenaires.map((partenaire) => (
+												<option
+													value={partenaire.slug}
+													selected={
+														photo.sectionAssociee ===
+															partenaire.slug &&
+														'selected'
+													}>
+													{partenaire.nom}
+												</option>
+											))}
+										</optgroup>
 									</select>
 								</th>
 								<th>
@@ -330,16 +313,12 @@ const ListImages = () => {
 					</tbody>
 				</Table>
 				{success && (
-					<div className='alert alert-success'>
+					<Alert color='success'>
 						La/Les image(s) ont bien été modifiée(s)
-					</div>
+					</Alert>
 				)}
-				{loading && (
-					<div className='alert alert-success'>
-						<Spinner />
-					</div>
-				)}
-				{error && <div className='alert alert-danger'>{error}</div>}
+				{loading && <Spinner />}
+				{error && <Alert color='danger'>{error}</Alert>}
 				<Button color='success'>Valider ces infos</Button>
 			</form>
 		</>

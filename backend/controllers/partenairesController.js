@@ -9,6 +9,13 @@ const getAllPartenaires = asyncHandler(async (req, res) => {
 	const partenaires = await Partenaire.find({});
 	res.json(partenaires);
 });
+// @desc      Fetch all partenaires name
+// @route     GET /api/divers/partenaires/noms
+// @access    Public
+const getAllPartenairesNoms = asyncHandler(async (req, res) => {
+	const partenaires = await Partenaire.find({}).select('nom slug');
+	res.json(partenaires);
+});
 
 // @desc      Fetch one partenaire by Id
 // @route     GET /api/divers/partenaires/:id
@@ -97,12 +104,19 @@ const getAllPartenaireCards = asyncHandler(async (req, res) => {
 });
 
 // @desc      Fetch one partenaire cards by Id
-// @route     GET /api/divers/partenaires/:id/card/:idCard
+// @route     GET /api/divers/partenaire/:id/card/:idCard
 // @access    Private/Admin
 const getPartenaireCardById = asyncHandler(async (req, res) => {
-	const partenaire = await Partenaire.findById(req.params.id);
+	const partenaire = await Partenaire.findOne({
+		_id: req.params.id,
+	});
+
 	if (partenaire) {
-		res.json(partenaire);
+		partenaire.listePartenairesCards.forEach((element) => {
+			if (element._id == req.params.idCard) {
+				return res.json(element);
+			}
+		});
 	} else {
 		res.status(404);
 		throw new Error('Partenaire non trouvé');
@@ -145,7 +159,6 @@ const createPartenaireCard = asyncHandler(async (req, res) => {
 // @access    Private/Admin
 const removePartenaireCard = asyncHandler(async (req, res) => {
 	const partenaire = await Partenaire.findById(req.params.id);
-	console.log(partenaire);
 	if (partenaire) {
 		partenaire.listePartenairesCards.pull({ _id: req.params.idCard });
 		console.log(partenaire);
@@ -164,16 +177,29 @@ const removePartenaireCard = asyncHandler(async (req, res) => {
 // @route     PUT /api/divers/partenaire/:id/card/:idCard
 // @access    Private/Admin
 const updatePartenaireCard = asyncHandler(async (req, res) => {
-	const { nom, presPartenaire, actif } = req.body;
+	const { titre, mail, tel, adresse, texte, site, image, actif } = req.body;
+	const partenaire = await Partenaire.findOne({
+		_id: req.params.id,
+	});
 
-	const partenaire = await Partenaire.findById(req.params.id);
+	console.log('partenaire dans back', partenaire);
+
 	if (partenaire) {
-		nom && (partenaire.nom = nom);
-		presPartenaire && (partenaire.presPartenaire = presPartenaire);
-		actif && (partenaire.actif = actif);
+		partenaire.listePartenairesCards.forEach(async (element) => {
+			if (element._id == req.params.idCard) {
+				titre && (element.titre = titre);
+				mail && (element.mail = mail);
+				tel && (element.tel = tel);
+				adresse && (element.adresse = adresse);
+				texte && (element.texte = texte);
+				site && (element.site = site);
+				image && (element.image = image);
+				actif !== undefined && (element.actif = actif);
 
-		const updatedPartenaire = await partenaire.save();
-		res.json(updatedPartenaire);
+				const updatedPartenaire = await partenaire.save();
+				res.json(updatedPartenaire);
+			}
+		});
 	} else {
 		res.status(404);
 		throw new Error('Partenaire non trouvé');
@@ -191,4 +217,5 @@ export {
 	getPartenaireCardById,
 	updatePartenaireCard,
 	removePartenaireCard,
+	getAllPartenairesNoms,
 };

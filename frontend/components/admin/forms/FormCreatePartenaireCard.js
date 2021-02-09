@@ -8,7 +8,6 @@ import {
 	listePartenaireById,
 } from '../../../actions/partenairesActions';
 import { Alert, Spinner } from 'reactstrap';
-import Image from 'next/image';
 import { listPhotosBySection } from '../../../actions/giteActions';
 
 const FormCreatePartenaireCard = ({ router }) => {
@@ -34,12 +33,10 @@ const FormCreatePartenaireCard = ({ router }) => {
 
 	const listerLesImages = () => {
 		listePartenaireById(router.query.id, token).then((result) => {
-			console.log('result.slug', result.slug);
 			if (result.error) {
 				console.log(error);
 			} else {
 				listPhotosBySection(result.slug).then((data) => {
-					console.log('photo =>', data);
 					if (data.error) {
 						console.log(error);
 					} else {
