@@ -13,7 +13,7 @@ const getAllPartenaires = asyncHandler(async (req, res) => {
 // @route     GET /api/divers/partenaires/noms
 // @access    Public
 const getAllPartenairesNoms = asyncHandler(async (req, res) => {
-	const partenaires = await Partenaire.find({}).select('nom slug');
+	const partenaires = await Partenaire.find({}).select('_id nom slug');
 	res.json(partenaires);
 });
 
@@ -22,6 +22,19 @@ const getAllPartenairesNoms = asyncHandler(async (req, res) => {
 // @access    Private/Admin
 const getPartenaireById = asyncHandler(async (req, res) => {
 	const partenaire = await Partenaire.findById(req.params.id);
+	if (partenaire) {
+		res.json(partenaire);
+	} else {
+		res.status(404);
+		throw new Error('Partenaire non trouvé');
+	}
+});
+
+// @desc      Fetch one partenaire by slug
+// @route     GET api/divers/partenaires/slug/:slug
+// @access    Private/Admin
+const getPartenaireBySlug = asyncHandler(async (req, res) => {
+	const partenaire = await Partenaire.findOne({ slug: req.params.slug });
 	if (partenaire) {
 		res.json(partenaire);
 	} else {
@@ -218,4 +231,5 @@ export {
 	updatePartenaireCard,
 	removePartenaireCard,
 	getAllPartenairesNoms,
+	getPartenaireBySlug,
 };

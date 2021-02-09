@@ -31,6 +31,16 @@ export const listePartenaireById = (id) => {
 		.catch((err) => console.log(err));
 };
 
+export const listePartenaireBySlug = (slug) => {
+	return fetch(`${API}/divers/partenaire/slug/${slug}`, {
+		method: 'GET',
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
 export const createPartenaire = (partenaire, token) => {
 	return fetch(`${API}/divers/partenaire`, {
 		method: 'POST',

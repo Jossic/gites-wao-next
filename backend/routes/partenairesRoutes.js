@@ -13,6 +13,7 @@ import {
 	updatePartenaireCard,
 	removePartenaireCard,
 	getAllPartenairesNoms,
+	getPartenaireBySlug,
 } from '../controllers/partenairesController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
@@ -47,6 +48,7 @@ router.get('/divers/partenaires', getAllPartenaires);
 router.get('/divers/partenaires/noms', getAllPartenairesNoms);
 
 //Admin
+router.get('/divers/partenaire/slug/:slug', getPartenaireBySlug);
 router.get('/divers/partenaire/:id', getPartenaireById);
 router.post('/divers/partenaire', protect, admin, createPartenaire);
 router.put('/divers/partenaire/:id', protect, admin, updatePartenaire);

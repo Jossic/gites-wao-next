@@ -13,8 +13,12 @@ import {
 	CardSubtitle,
 	Button,
 } from 'reactstrap';
+import {
+	ListAllPartenairesNoms,
+	listePartenaireBySlug,
+} from '../../actions/partenairesActions';
 
-const Partenaire = ({}) => {
+const Partenaire = ({ categorie }) => {
 	const head = () => (
 		<Head>
 			<title>
@@ -53,16 +57,11 @@ const Partenaire = ({}) => {
 			<div className='container'>
 				<Jumbotron>
 					<h1 className='display-3'>
-						Nos partenaires {partenaire.nom}
+						Nos partenaires dans la catégorie {categorie.nom}
 					</h1>
-					<p className='lead'>{partenaire.presSection}</p>
+					<p className='lead'>{categorie.presSection}</p>
 					<hr className='my-2' />
-					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Facilis laborum nisi temporibus sunt quod eos deserunt
-						minus alias, ad placeat maxime modi iste quam assumenda,
-						autem impedit asperiores, totam expedita?
-					</p>
+					<p>{categorie.presPartenaire}</p>
 					<p className='lead'></p>
 				</Jumbotron>
 			</div>
@@ -108,25 +107,26 @@ const Partenaire = ({}) => {
 	);
 };
 
-// export async function getStaticPaths() {
-// 	//lister les noms de gites
-// 	return {
-// 		paths: [
-// 			{ params: { slug: 'manola' } },
-// 			{ params: { slug: 'brinchette' } },
-// 			{ params: { slug: 'lauberoye' } },
-// 			{ params: { slug: 'petit-nay' } },
-// 		],
-// 		fallback: true,
-// 	};
-// }
+export async function getStaticPaths() {
+	//lister les noms de
+
+	const partenairesNoms = await ListAllPartenairesNoms();
+	return {
+		paths: partenairesNoms.map((nom) => {
+			return {
+				params: { id: nom._id, slug: nom.slug },
+			};
+		}),
+		fallback: false,
+	};
+}
 
 export async function getStaticProps(context) {
-	return listGiteDetails(context.params.slug).then((gite) => {
-		if (gite.error) {
-			console.log(gite.error);
+	return listePartenaireBySlug(context.params.slug).then((categorie) => {
+		if (categorie.error) {
+			console.log(categorie.error);
 		} else {
-			return { props: { gite } };
+			return { props: { categorie } };
 		}
 	});
 }

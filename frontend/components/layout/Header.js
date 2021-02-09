@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import NProgress from 'nprogress';
 import Link from 'next/link';
 import Image from 'next/image';
-import { isAuth, logout } from '../../actions/authActions';
+import { isAuth } from '../../actions/authActions';
 import {
 	Collapse,
 	Navbar,
