@@ -12,7 +12,7 @@ const getAllMessages = asyncHandler(async (req, res) => {
 
 // @desc      Fetch one Message by Id
 // @route     GET /api/Message/:id
-// @access    Private/Admin
+// @access    Public
 const getMessageById = asyncHandler(async (req, res) => {
 	const message = await Message.findById(req.params.id);
 
@@ -21,6 +21,22 @@ const getMessageById = asyncHandler(async (req, res) => {
 	} else {
 		res.status(404);
 		throw new Error('Message non trouvé');
+	}
+});
+
+// @desc      Count number of new message
+// @route     GET /api/message/count
+// @access    Public
+const getNumberOfNewMessage = asyncHandler(async (req, res) => {
+	const message = await Message.find({});
+
+	// console.log('message ', message);
+	// console.log('message taille ', message.length);
+	if (message.length > 0) {
+		res.json(message.length);
+	} else {
+		res.status(404);
+		throw new Error('Pas de message trouvé');
 	}
 });
 
@@ -77,4 +93,10 @@ const removeMessage = asyncHandler(async (req, res) => {
 	}
 });
 
-export { getAllMessages, getMessageById, createMessage, removeMessage };
+export {
+	getAllMessages,
+	getMessageById,
+	createMessage,
+	removeMessage,
+	getNumberOfNewMessage,
+};

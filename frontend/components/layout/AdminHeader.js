@@ -4,12 +4,31 @@ import Router from 'next/router';
 import { isAuth } from '../../actions/authActions';
 
 import '../../node_modules/nprogress/nprogress.css';
+import { countMessageNonLus } from '../../actions/messageActions';
+import { useEffect, useState } from 'react';
 
 Router.onRouteChangeStart = (url) => NProgress.start();
 Router.onRouteChangeComplete = (url) => NProgress.done();
 Router.onRouteChangeError = (url) => NProgress.done();
 const AdminHeader = ({ children }) => {
+	const [newMessages, setNewMessages] = useState(0);
+	const recupNonLus = () => {
+		countMessageNonLus().then((data) => {
+			console.log('data vaut =>', data);
+			if (data.error) {
+				console.log(data.error);
+			} else {
+				setNewMessages(data);
+			}
+		});
+	};
+
+	useEffect(() => {
+		recupNonLus();
+	}, []);
+
 	// const user = JSON.parse(localStorage.getItem('user'));
+
 	const user = {
 		name: 'Jossic LAPIERRE',
 		isAdmin: true,
@@ -204,9 +223,12 @@ const AdminHeader = ({ children }) => {
 							</div>
 						</div>
 
-						<Link href='/admin'>
+						<Link href='/admin/messages'>
 							<a className='list-group-item list-group-item-action text-white bg-dark'>
-								<i className='fas fa-comments'></i> Messages
+								<i className='fas fa-comments'></i> Messages{' '}
+								<span class='badge badge-pill badge-info'>
+									{newMessages}
+								</span>
 							</a>
 						</Link>
 

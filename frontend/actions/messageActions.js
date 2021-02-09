@@ -21,6 +21,16 @@ export const listMessageById = (id) => {
 		.catch((err) => console.log(err));
 };
 
+export const countMessageNonLus = () => {
+	return fetch(`${API}/message/count`, {
+		method: 'GET',
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
 export const createMessage = (message) => {
 	console.log('dans action', message);
 	return fetch(`${API}/message`, {

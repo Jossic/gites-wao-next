@@ -5,15 +5,17 @@ import {
 	getMessageById,
 	createMessage,
 	removeMessage,
+	getNumberOfNewMessage,
 } from '../controllers/messageController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
 //Public
+router.get('/message/count', getNumberOfNewMessage);
 router.get('/message', getAllMessages);
 router.get('/message/:id', getMessageById);
+router.post('/message', createMessage);
 
 //Admin
-router.post('/message', createMessage);
 router.delete('/message/:id', protect, admin, removeMessage);
 
 export default router;
