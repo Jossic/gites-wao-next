@@ -3,7 +3,7 @@ import { API } from '../config';
 import axios from 'axios';
 
 export const createReview = (review, token) => {
-	console.log('dan action', review);
+	console.log('dans action', review);
 	return fetch(`${API}/review`, {
 		method: 'POST',
 		headers: {

@@ -14,7 +14,7 @@ import uploadRoutes from './routes/uploadRoutes.js';
 import reviewRoutes from './routes/reviewRoutes.js';
 import pagesRoutes from './routes/pagesRoutes.js';
 import partenairesRoutes from './routes/partenairesRoutes.js';
-import contactRoutes from './routes/contactRoutes.js';
+import messageRoutes from './routes/messageRoutes.js';
 // import AWS from 'aws-sdk';
 
 dotenv.config();
@@ -50,7 +50,7 @@ app.use('/api', uploadRoutes);
 app.use('/api', reviewRoutes);
 app.use('/api', pagesRoutes);
 app.use('/api', partenairesRoutes);
-app.use('/api', contactRoutes);
+app.use('/api', messageRoutes);
 
 // app.get('/api/config/paypal', (req, res) =>
 // 	res.send(process.env.PAYPAL_CLIENT_ID)

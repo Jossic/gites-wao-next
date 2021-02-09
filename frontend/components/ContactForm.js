@@ -1,22 +1,35 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Alert, Spinner } from 'reactstrap';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { RECAPTCHA_SECRET_KEY } from '../config';
+import { createMessage } from '../actions/messageActions';
+import Router from 'next/router';
 
 const ContactForm = () => {
-	const { register, handleSubmit } = useForm();
+	const { register, handleSubmit } = useForm({
+		defaultValues: {
+			nom: 'Test',
+			mail: 'mail@mail.com',
+			tel: '0606060606',
+			msg: 'lorem lorem',
+		},
+	});
+	const reRef = useRef();
 
 	const [values, setValues] = useState({
 		loading: false,
 		success: '',
 		error: '',
-		message: '',
+		text: '',
 	});
-	const { success, loading, error, message } = values;
+	const { success, loading, error, text } = values;
 
-	const onSubmit = (data) => {
-		console.log(data);
+	const onSubmit = async (data) => {
+		data.token = await reRef.current.executeAsync();
+		reRef.current.reset();
 		setValues({ ...values, loading: true });
-		createPartenaire(data, token).then((result) => {
+		createMessage(data).then((result) => {
 			if (result.error) {
 				setValues({ ...values, error: result.error });
 			} else {
@@ -24,10 +37,10 @@ const ContactForm = () => {
 					...values,
 					success: true,
 					loading: false,
-					message: data.message,
+					text: result.text,
 				});
 				setTimeout(() => {
-					Router.push('/admin/gestionDivers/partenaires');
+					Router.push('/');
 				}, 3000);
 			}
 		});
@@ -99,11 +112,17 @@ const ContactForm = () => {
 							</label>
 							<textarea
 								className='form-control'
-								name='message'
+								name='msg'
 								rows='3'
 								ref={register({ required: true })}></textarea>
 						</div>
-						{success && <Alert color='success'>{message}</Alert>}
+						<ReCAPTCHA
+							sitekey={RECAPTCHA_SECRET_KEY}
+							ref={reRef}
+							size='invisible'
+							// onChange={onChange}
+						/>
+						{success && <Alert color='success'>{text}</Alert>}
 						{loading && <Spinner />}
 						{error && <Alert color='danger'>{error}</Alert>}
 
