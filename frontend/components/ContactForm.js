@@ -81,6 +81,17 @@ const ContactForm = () => {
 								ref={register({ required: true })}
 							/>
 						</div>
+						<div className='form-group'>
+							<label htmlFor='exampleFormControlInput1'>
+								Téléphone
+							</label>
+							<input
+								type='tel'
+								className='form-control'
+								name='tel'
+								ref={register({ required: true })}
+							/>
+						</div>
 
 						<div className='form-group'>
 							<label htmlFor='exampleFormControlTextarea1'>
