@@ -3,5 +3,6 @@
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
   "/admin/gestionImages": "pages/admin/gestionImages.js",
-  "/partenaires/[slug]": "pages/partenaires/[slug].js"
+  "/partenaires/[slug]": "pages/partenaires/[slug].js",
+  "/404": "pages/404.js"
 }
