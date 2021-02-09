@@ -143,7 +143,7 @@ const createPartenaireCard = asyncHandler(async (req, res) => {
 	const { titre, mail, tel, adresse, texte, site, image, actif } = req.body;
 
 	const partenaire = await Partenaire.findById(req.params.id);
-
+	console.log('partenaire dans le back -', partenaire);
 	if (partenaire) {
 		const card = {
 			titre,

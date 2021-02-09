@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/admin/gestionImages": "pages/admin/gestionImages.js",
   "/partenaires/[slug]": "pages/partenaires/[slug].js",
-  "/404": "pages/404.js"
+  "/admin/gestionDivers/partenaires/manage/[id]": "pages/admin/gestionDivers/partenaires/manage/[id].js"
 }

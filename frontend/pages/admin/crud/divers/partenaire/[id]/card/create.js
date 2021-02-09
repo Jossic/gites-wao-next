@@ -13,7 +13,6 @@ const CreateCard = ({ router }) => {
 	const recupCategorie = () => {
 		//recup Section
 		listePartenaireById(router.query.id, token).then((result) => {
-			console.log('result', result);
 			if (result.error) {
 				console.log(error);
 			} else {

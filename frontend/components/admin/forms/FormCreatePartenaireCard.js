@@ -142,7 +142,7 @@ const FormCreatePartenaireCard = ({ router }) => {
 									type='radio'
 									name='image'
 									id={`check${i}`}
-									value={photo._id}
+									value={photo}
 									ref={register()}
 								/>
 								<label

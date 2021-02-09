@@ -1,25 +1,27 @@
 import Head from 'next/head';
-import React from 'react';
 import Layout from '../../components/layout/Layout';
 import { API, DOMAIN, APP_NAME } from '../../config';
 import Image from 'next/image';
 import {
-	Jumbotron,
 	Card,
-	CardImg,
-	CardText,
-	CardBody,
-	CardTitle,
-	CardSubtitle,
 	Button,
+	CardImg,
+	CardTitle,
+	CardText,
+	CardDeck,
+	CardSubtitle,
+	CardBody,
+	Jumbotron,
 } from 'reactstrap';
 import {
 	ListAllPartenaireCards,
 	ListAllPartenairesNoms,
 	listePartenaireBySlug,
 } from '../../actions/partenairesActions';
+import { listPhotosBySection } from '../../actions/giteActions';
+import image from 'next/image';
 
-const Partenaire = ({ categorie, partenaires }) => {
+const Partenaire = ({ categorie, partenaires, photos }) => {
 	const head = () => (
 		<Head>
 			<title>
@@ -53,6 +55,21 @@ const Partenaire = ({ categorie, partenaires }) => {
 		</Head>
 	);
 
+	const photoInfos = (id) => {
+		return photos.map(
+			(photo) =>
+				photo._id === id && (
+					<Image
+						className='d-block w-100'
+						src={photo.location}
+						alt={photo.alt}
+						width={200}
+						height={150}
+					/>
+				)
+		);
+	};
+
 	const jumbotron = () => (
 		<section>
 			<div className='container'>
@@ -69,34 +86,33 @@ const Partenaire = ({ categorie, partenaires }) => {
 		</section>
 	);
 
-	const card = () => {
-		{
-			return partenaires.map((partenaire) => (
+	const card = () => (
+		<CardDeck>
+			{partenaires.map((partenaire) => (
 				<div>
 					<Card>
-						<CardImg
-							top
-							width='100%'
-							src='/assets/318x180.svg'
-							alt='Card image cap'
-						/>
+						{photoInfos(partenaire.image)}
 						<CardBody>
 							<CardTitle tag='h5'>{partenaire.titre}</CardTitle>
 							<CardSubtitle tag='h6' className='mb-2 text-muted'>
-								Card subtitle
+								{/* Card subtitle */}
 							</CardSubtitle>
 							<CardText>
-								Some quick example text to build on the card
-								title and make up the bulk of the card's
-								content.
+								{partenaire.mail && <p>{partenaire.mail}</p>}
+								{partenaire.tel && <p>{partenaire.tel}</p>}
+								{partenaire.adresse && (
+									<p>{partenaire.adresse}</p>
+								)}
+								{partenaire.texte && <p>{partenaire.texte}</p>}
+								{/* {partenaire.site && <p>{partenaire.site}</p>} */}
 							</CardText>
 							<Button>Button</Button>
 						</CardBody>
 					</Card>
 				</div>
-			));
-		}
-	};
+			))}
+		</CardDeck>
+	);
 
 	return (
 		<>
@@ -134,7 +150,17 @@ export async function getStaticProps(context) {
 				if (partenaires.error) {
 					console.log(partenaires.error);
 				} else {
-					return { props: { categorie, partenaires } };
+					return listPhotosBySection(categorie.slug).then(
+						(photos) => {
+							if (photos.error) {
+								console.log(photos.error);
+							} else {
+								return {
+									props: { categorie, partenaires, photos },
+								};
+							}
+						}
+					);
 				}
 			});
 		}
