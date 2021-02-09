@@ -14,7 +14,6 @@ const AdminHeader = ({ children }) => {
 	const [newMessages, setNewMessages] = useState(0);
 	const recupNonLus = () => {
 		countMessageNonLus().then((data) => {
-			console.log('data vaut =>', data);
 			if (data.error) {
 				console.log(data.error);
 			} else {
@@ -225,7 +224,8 @@ const AdminHeader = ({ children }) => {
 
 						<Link href='/admin/messages'>
 							<a className='list-group-item list-group-item-action text-white bg-dark'>
-								<i className='fas fa-comments'></i> Messages{' '}
+								<i className='fas fa-comments'></i> Messages
+								{'  '}
 								<span class='badge badge-pill badge-info'>
 									{newMessages}
 								</span>

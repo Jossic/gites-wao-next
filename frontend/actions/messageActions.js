@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import { API } from '../config';
 
-export const listMessages = () => {
+export const listAllMessages = () => {
 	return fetch(`${API}/message`, {
 		method: 'GET',
 	})
