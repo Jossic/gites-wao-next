@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { listePartenaireById } from '../../../../../actions/partenaireActions';
-// import FormUpdatePartenaire from '../../../../../components/admin/forms/FormUpdatePartenaire';
+import { listePartenaireById } from '../../../../../actions/partenairesActions';
+import FormUpdatePartenaire from '../../../../../components/admin/forms/FormUpdatePartenaire';
 import Admin from '../../../../../components/auth/Admin';
 import AdminHeader from '../../../../../components/layout/AdminHeader';
 import { withRouter } from 'next/router';
