@@ -18,7 +18,6 @@ const index = () => {
 					admin avec pastille nouveau message
 				</li>
 				<li>Améliorer affichage sous menu</li>
-				<li>Rendu des pages partenaires</li>
 				<li>Page reserver</li>
 				<li>Page tarif</li>
 				<li>Intégration Tidio</li>
