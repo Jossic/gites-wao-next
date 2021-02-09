@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/partenaires/[slug]": "pages/partenaires/[slug].js",
-  "/admin/gestionDivers/partenaires/manage/[id]": "pages/admin/gestionDivers/partenaires/manage/[id].js"
+  "/admin/gestionDivers/partenaires/manage/[id]": "pages/admin/gestionDivers/partenaires/manage/[id].js",
+  "/partenaires/[slug]": "pages/partenaires/[slug].js"
 }

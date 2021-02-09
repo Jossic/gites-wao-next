@@ -13,6 +13,7 @@ import {
 	CardBody,
 	Jumbotron,
 } from 'reactstrap';
+import Link from 'next/link';
 import {
 	ListAllPartenaireCards,
 	ListAllPartenairesNoms,
@@ -90,7 +91,12 @@ const Partenaire = ({ categorie, partenaires, photos }) => {
 		<CardDeck>
 			{partenaires.map((partenaire) => (
 				<div>
-					<Card>
+					<Card
+						style={{
+							width: '18rem',
+							minHeight: '25rem',
+							margin: '10px',
+						}}>
 						{photoInfos(partenaire.image)}
 						<CardBody>
 							<CardTitle tag='h5'>{partenaire.titre}</CardTitle>
@@ -98,15 +104,25 @@ const Partenaire = ({ categorie, partenaires, photos }) => {
 								{/* Card subtitle */}
 							</CardSubtitle>
 							<CardText>
-								{partenaire.mail && <p>{partenaire.mail}</p>}
-								{partenaire.tel && <p>{partenaire.tel}</p>}
+								{partenaire.mail && (
+									<a href={`mailto:${partenaire.mail}`}>
+										{partenaire.mail}
+									</a>
+								)}
+								{partenaire.tel && <p>0{partenaire.tel}</p>}
 								{partenaire.adresse && (
 									<p>{partenaire.adresse}</p>
 								)}
 								{partenaire.texte && <p>{partenaire.texte}</p>}
-								{/* {partenaire.site && <p>{partenaire.site}</p>} */}
+								{/* </p>} */}
 							</CardText>
-							<Button>Button</Button>
+							{partenaire.site && (
+								<Link href={partenaire.site}>
+									<a className='btn btn-info'>
+										<i class='fas fa-globe'></i>
+									</a>
+								</Link>
+							)}
 						</CardBody>
 					</Card>
 				</div>
@@ -121,15 +137,13 @@ const Partenaire = ({ categorie, partenaires, photos }) => {
 				{/* {JSON.stringify(gite)} */}
 				{jumbotron()}
 				<hr />
-				{card()}
+				<div className='container'>{card()}</div>
 			</Layout>
 		</>
 	);
 };
 
 export async function getStaticPaths() {
-	//lister les noms de
-
 	const partenairesNoms = await ListAllPartenairesNoms();
 	return {
 		paths: partenairesNoms.map((nom) => {
