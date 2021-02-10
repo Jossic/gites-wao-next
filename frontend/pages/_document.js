@@ -2,7 +2,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 import getConfig from 'next/config';
 const { publicRuntimeConfig } = getConfig();
 import { ServerStyleSheets } from '@material-ui/core/styles';
-import theme from '../src/theme';
+import theme from './theme';
 
 class MyDocument extends Document {
 	setGoogleTags() {

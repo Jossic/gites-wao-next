@@ -1,14 +1,21 @@
-// pages/_app.js
 import React from 'react';
 import Head from 'next/head';
-// import { Provider } from 'react-redux';
-// import { useStore } from '../store';
 import '../styles/globals.css';
+import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './theme';
 
 export default function App({ Component, pageProps }) {
-	// const store = useStore(pageProps.initialReduxState);
+	React.useEffect(() => {
+		// Remove the server-side injected CSS.
+		const jssStyles = document.querySelector('#jss-server-side');
+		if (jssStyles) {
+			jssStyles.parentElement.removeChild(jssStyles);
+		}
+	}, []);
 	return (
 		<>
 			<Head>
@@ -33,7 +40,11 @@ export default function App({ Component, pageProps }) {
 					href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
 				/>
 			</Head>
-			<Component {...pageProps} />
+			<ThemeProvider theme={theme}>
+				{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+				<CssBaseline />
+				<Component {...pageProps} />
+			</ThemeProvider>
 
 			<script
 				src='https://code.jquery.com/jquery-3.5.1.slim.min.js'
@@ -52,3 +63,8 @@ export default function App({ Component, pageProps }) {
 		</>
 	);
 }
+
+App.propTypes = {
+	Component: PropTypes.elementType.isRequired,
+	pageProps: PropTypes.object.isRequired,
+};
