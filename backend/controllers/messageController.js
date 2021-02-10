@@ -28,7 +28,7 @@ const getMessageById = asyncHandler(async (req, res) => {
 // @route     GET /api/message/count
 // @access    Public
 const getNumberOfNewMessage = asyncHandler(async (req, res) => {
-	const message = await Message.find({});
+	const message = await Message.find({ vu: false });
 
 	// console.log('message ', message);
 	// console.log('message taille ', message.length);

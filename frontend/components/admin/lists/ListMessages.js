@@ -75,10 +75,6 @@ const ListMessages = ({ messages, newMessages }) => {
 				<tbody>
 					{messages.map((msge, i) => (
 						<tr
-							// className={
-							// 	!msge.vu ? 'shadow mb-5 mt-5 rounded' : 'mb-5'
-							// }
-
 							style={
 								!msge.vu
 									? {
