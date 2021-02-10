@@ -19,6 +19,7 @@
     "jquery": "^1.9.1",
     "js-cookie": "^2.2.1",
     "little-state-machine": "^4.0.0",
+    "material-table": "^1.69.2",
     "mongoose": "^5.11.15",
     "next": "^10.0.5",
     "next-redux-wrapper": "^6.0.2",

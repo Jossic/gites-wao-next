@@ -16,6 +16,7 @@ import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles({
 	table: {
 		minWidth: 650,
+		color: 'white',
 	},
 });
 
@@ -75,10 +76,7 @@ const ListMessages = ({ messages, newMessages }) => {
 				component={Paper}
 				style={{ backgroundColor: '#282c34', color: 'white' }}
 				height='100%'>
-				<Table
-					style={{}}
-					className={classes.table}
-					aria-label='simple table'>
+				<Table className={classes.table} aria-label='simple table'>
 					{/* style={{
 						marginTop: '30px',
 						borderCollapse: 'separate',
@@ -86,7 +84,7 @@ const ListMessages = ({ messages, newMessages }) => {
 						color: 'white',
 					}}> */}
 					<TableHead>
-						<TableRow>
+						<TableRow style={{ color: 'white' }}>
 							<TableCell>#ID</TableCell>
 							<TableCell>Nom</TableCell>
 							<TableCell>Mail</TableCell>
@@ -98,6 +96,7 @@ const ListMessages = ({ messages, newMessages }) => {
 					<TableBody>
 						{messages.map((msge, i) => (
 							<TableRow
+								style={{ color: 'white !important' }}
 								// style={
 								// 	!msge.vu
 								// 		? {
