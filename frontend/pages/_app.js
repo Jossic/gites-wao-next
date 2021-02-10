@@ -7,6 +7,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from './theme';
+import darkTheme from './darkTheme';
 
 export default function App({ Component, pageProps }) {
 	React.useEffect(() => {
@@ -40,7 +41,7 @@ export default function App({ Component, pageProps }) {
 					href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
 				/>
 			</Head>
-			<ThemeProvider theme={theme}>
+			<ThemeProvider theme={darkTheme}>
 				{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
 				<CssBaseline />
 				<Component {...pageProps} />

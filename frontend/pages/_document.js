@@ -3,6 +3,7 @@ import getConfig from 'next/config';
 const { publicRuntimeConfig } = getConfig();
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import theme from './theme';
+import darkTheme from './darkTheme';
 
 class MyDocument extends Document {
 	setGoogleTags() {
@@ -26,7 +27,7 @@ class MyDocument extends Document {
 					<meta charSet='UTF-8' />
 					<meta
 						name='theme-color'
-						content={theme.palette.primary.main}
+						content={darkTheme.palette.primary.main}
 					/>
 					<link
 						rel='stylesheet'
