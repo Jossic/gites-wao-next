@@ -1,12 +1,27 @@
-import { Table } from 'reactstrap';
+// import { Table } from 'reactstrap';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { makeStyles, withTheme } from '@material-ui/core/styles';
 import { getCookie } from '../../../actions/authActions';
 import { Alert, Spinner } from 'reactstrap';
-
 import { removeMessage } from '../../../actions/messageActions';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+const useStyles = makeStyles({
+	table: {
+		minWidth: 650,
+	},
+});
 
 const ListMessages = ({ messages, newMessages }) => {
+	const classes = useStyles();
+
 	const token = getCookie('token');
 
 	const [values, setvalues] = useState({
@@ -55,71 +70,80 @@ const ListMessages = ({ messages, newMessages }) => {
 			{loading && <Spinner />}
 			{success && <Alert color='success'>{message}</Alert>}
 			{error && <Alert color='danger'>Une erreur est survenue</Alert>}
-			<p>Vous avez {newMessages} non lus !</p>
-			<Table
-				style={{
-					marginTop: '30px',
-					borderCollapse: 'separate',
-					borderSpacing: '0 10px',
-				}}>
-				<thead>
-					<tr>
-						<th>#ID</th>
-						<th>Nom</th>
-						<th>Mail</th>
-						<th>Tel</th>
-						<th>Message</th>
-						<th colSpan='2'>Répondre/Suppr</th>
-					</tr>
-				</thead>
-				<tbody>
-					{messages.map((msge, i) => (
-						<tr
-							style={
-								!msge.vu
-									? {
-											backgroundColor: '#56e8ff',
-											paddingBottom: '20px',
-											boxShadow:
-												'-1px 2px 5px 1px rgba(0,0,0,0.7), -1px 2px 20px rgba(255,255,255,0.6) inset',
-									  }
-									: {
-											backgroundColor: '#adedff',
-											paddingBottom: '20px',
-									  }
-							}
-							key={i}>
-							<th>{msge._id}</th>
-							<th>{msge.nom}</th>
-							<th>{msge.mail}</th>
-							<th>{msge.tel}</th>
-							<th>{msge.msg}</th>
+			<p style={{ color: 'white' }}>Vous avez {newMessages} non lus !</p>
+			<TableContainer
+				component={Paper}
+				style={{ backgroundColor: '#282c34', color: 'white' }}
+				height='100%'>
+				<Table
+					style={{}}
+					className={classes.table}
+					aria-label='simple table'>
+					{/* style={{
+						marginTop: '30px',
+						borderCollapse: 'separate',
+						borderSpacing: '0 10px',
+						color: 'white',
+					}}> */}
+					<TableHead>
+						<TableRow>
+							<TableCell>#ID</TableCell>
+							<TableCell>Nom</TableCell>
+							<TableCell>Mail</TableCell>
+							<TableCell>Tel</TableCell>
+							<TableCell>Message</TableCell>
+							<TableCell colSpan='2'>Répondre/Suppr</TableCell>
+						</TableRow>
+					</TableHead>
+					<TableBody>
+						{messages.map((msge, i) => (
+							<TableRow
+								// style={
+								// 	!msge.vu
+								// 		? {
+								// 				backgroundColor: '#56e8ff',
+								// 				paddingBottom: '20px',
+								// 				boxShadow:
+								// 					'-1px 2px 5px 1px rgba(0,0,0,0.7), -1px 2px 20px rgba(255,255,255,0.6) inset',
+								// 		  }
+								// 		: {
+								// 				backgroundColor: '#adedff',
+								// 				paddingBottom: '20px',
+								// 		  }
+								// }
+								key={i}>
+								<TableCell>{msge._id}</TableCell>
+								<TableCell>{msge.nom}</TableCell>
+								<TableCell>{msge.mail}</TableCell>
+								<TableCell>{msge.tel}</TableCell>
+								<TableCell>{msge.msg}</TableCell>
 
-							<th>
-								<Link
-									href={`/admin/message/repondre/${msge._id}`}>
-									<a>
-										<i
-											className='fas fa-reply'
-											style={{ color: 'blue' }}></i>
-									</a>
-								</Link>
-							</th>
-							<th>
-								<i
-									onClick={() =>
-										deleteConfirm(partenaire._id)
-									}
-									className='fas fa-trash-alt'
-									style={{
-										color: 'red',
-										cursor: 'pointer',
-									}}></i>
-							</th>
-						</tr>
-					))}
-				</tbody>
-			</Table>
+								<TableCell>
+									<Link
+										href={`/admin/message/repondre/${msge._id}`}>
+										<a>
+											<i
+												className='fas fa-reply'
+												style={{ color: 'blue' }}></i>
+										</a>
+									</Link>
+								</TableCell>
+								<TableCell>
+									<i
+										onClick={() =>
+											deleteConfirm(partenaire._id)
+										}
+										className='fas fa-trash-alt'
+										style={{
+											color: 'red',
+											cursor: 'pointer',
+										}}></i>
+								</TableCell>
+							</TableRow>
+						))}
+					</TableBody>
+				</Table>
+			</TableContainer>
 		</>
 	);
 };

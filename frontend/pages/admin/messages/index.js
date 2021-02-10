@@ -11,7 +11,10 @@ const Message = ({ messages, newMessages }) => {
 		<>
 			<AdminHeader>
 				<Admin>
-					<h2>Consulter les messages reçus</h2>
+					{/* Fil d'ariane */}
+					<h2 style={{ color: 'white' }}>
+						Consulter les messages reçus
+					</h2>
 
 					<hr />
 					<ListMessages

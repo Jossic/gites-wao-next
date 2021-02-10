@@ -317,7 +317,11 @@ const AdminHeader = ({ children }) => {
 						</div>
 					</nav>
 
-					<div className='container-fluid'>{children}</div>
+					<div
+						className='container-fluid'
+						style={{ backgroundColor: '#1c2025', height: '100vh' }}>
+						{children}
+					</div>
 				</div>
 			</div>
 		</>
