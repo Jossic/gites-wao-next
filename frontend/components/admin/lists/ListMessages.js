@@ -5,9 +5,16 @@ import { getCookie } from '../../../actions/authActions';
 import { Alert, Spinner } from 'reactstrap';
 import { removeMessage } from '../../../actions/messageActions';
 import MUIDataTable from 'mui-datatables';
+// import AddBoxIcon from '@material-ui/icons/AddBox';
+import ReplyIcon from '@material-ui/icons/Reply';
+import NewReleasesIcon from '@material-ui/icons/NewReleases';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 
 const ListMessages = ({ messages, newMessages }) => {
 	const token = getCookie('token');
+
+	//Ajouter le delete et multiple delete
 
 	const [values, setvalues] = useState({
 		loading: false,
@@ -64,7 +71,7 @@ const ListMessages = ({ messages, newMessages }) => {
 			label: 'Nom',
 			options: {
 				filter: true,
-				sort: false,
+				sort: true,
 			},
 		},
 		{
@@ -89,6 +96,53 @@ const ListMessages = ({ messages, newMessages }) => {
 			options: {
 				filter: true,
 				sort: false,
+				customBodyRender: (value, tableMeta, updateValue) => {
+					console.log(value);
+					return <p>{value.substring(0, 20) + '...'}</p>;
+				},
+			},
+		},
+		{
+			name: 'vu',
+			label: 'Non lu',
+			options: {
+				filter: true,
+				customBodyRender: (value, tableMeta, updateValue) => {
+					// console.log(tableMeta.rowData[0]);
+					return !value && <NewReleasesIcon />;
+				},
+			},
+		},
+		{
+			name: 'rep',
+			label: 'Répondu',
+			options: {
+				filter: true,
+				customBodyRender: (value, tableMeta, updateValue) => {
+					// console.log(tableMeta.rowData[0]);
+					return value ? (
+						<CheckBoxIcon />
+					) : (
+						<CheckBoxOutlineBlankIcon />
+					);
+				},
+			},
+		},
+		{
+			name: 'Voir/Répondre',
+			options: {
+				sort: false,
+				filter: false,
+				customBodyRender: (value, tableMeta, updateValue) => {
+					// console.log(tableMeta.rowData[0]);
+					return (
+						<Link href={`/admin/messages/${tableMeta.rowData[0]}`}>
+							<a>
+								<ReplyIcon fontSize='large' />
+							</a>
+						</Link>
+					);
+				},
 			},
 		},
 	];
@@ -102,6 +156,7 @@ const ListMessages = ({ messages, newMessages }) => {
 			{loading && <Spinner />}
 			{success && <Alert color='success'>{message}</Alert>}
 			{error && <Alert color='danger'>Une erreur est survenue</Alert>}
+			{/* <AddBoxIcon fontSize='large' style={{ float: 'right' }} /> Ajouter */}
 			<p style={{ color: 'white' }}>Vous avez {newMessages} non lus !</p>
 			<MUIDataTable
 				title={'Messages'}
