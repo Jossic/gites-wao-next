@@ -59,7 +59,7 @@ export const removeMessage = (id, token) => {
 };
 
 export const addResponse = (response, id, token) => {
-	return fetch(`${API}/review/${id}`, {
+	return fetch(`${API}/message/${id}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',

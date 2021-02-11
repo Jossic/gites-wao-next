@@ -110,7 +110,10 @@ const messageResponse = asyncHandler(async (req, res) => {
 		console.log('message avant save', message);
 
 		const updatedMessage = await message.save();
-		res.json(updatedMessage);
+		res.json({
+			updatedMessage,
+			text: 'Le mail a bien été envoyé, une copie vous sera envoyée',
+		});
 	} else {
 		res.status(404);
 		throw new Error('Message non trouvée');

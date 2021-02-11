@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/admin/messages": "pages/admin/messages.js",
-  "/404": "pages/404.js",
-  "/admin/messages/[id]": "pages/admin/messages/[id].js"
+  "/admin/messages/[id]": "pages/admin/messages/[id].js",
+  "/admin/messages": "pages/admin/messages.js"
 }

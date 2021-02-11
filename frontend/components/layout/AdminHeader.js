@@ -226,9 +226,11 @@ const AdminHeader = ({ children }) => {
 							<a className='list-group-item list-group-item-action text-white bg-dark'>
 								<i className='fas fa-comments'></i> Messages
 								{'  '}
-								<span class='badge badge-pill badge-info'>
-									{newMessages}
-								</span>
+								{newMessages > 0 && (
+									<span class='badge badge-pill badge-info'>
+										{newMessages}
+									</span>
+								)}
 							</a>
 						</Link>
 
