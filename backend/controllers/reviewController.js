@@ -78,7 +78,7 @@ const removeReview = asyncHandler(async (req, res) => {
 });
 
 // @desc      Update a Review
-// @route     GET /api/review
+// @route     PUT /api/review
 // @access    Private/Admin
 const updateReview = asyncHandler(async (req, res) => {
 	const { client, note, commentaire, giteConcerne } = req.body;

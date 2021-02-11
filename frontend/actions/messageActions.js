@@ -32,7 +32,6 @@ export const countMessageNonLus = () => {
 };
 
 export const createMessage = (message) => {
-	console.log('dans action', message);
 	return fetch(`${API}/message`, {
 		method: 'POST',
 		headers: {
@@ -52,6 +51,36 @@ export const removeMessage = (id, token) => {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
+export const addResponse = (response, id, token) => {
+	return fetch(`${API}/review/${id}`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify(response),
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
+export const setVu = (id, token) => {
+	return fetch(`${API}/message/${id}/vu`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		// body: JSON.stringify(response),
 	})
 		.then((response) => {
 			return response.json();

@@ -6,6 +6,8 @@ import {
 	createMessage,
 	removeMessage,
 	getNumberOfNewMessage,
+	messageResponse,
+	setVu,
 } from '../controllers/messageController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
@@ -17,5 +19,7 @@ router.post('/message', createMessage);
 
 //Admin
 router.delete('/message/:id', protect, admin, removeMessage);
+router.put('/message/:id', protect, admin, messageResponse);
+router.put('/message/:id/vu', protect, admin, setVu);
 
 export default router;

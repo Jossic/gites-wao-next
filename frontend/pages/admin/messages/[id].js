@@ -1,20 +1,21 @@
 import AdminHeader from '../../../components/layout/AdminHeader';
 import Admin from '../../../components/auth/Admin';
 import dayjs from 'dayjs';
-import { listMessageById } from '../../../actions/messageActions';
+import { listMessageById, setVu } from '../../../actions/messageActions';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import InputBase from '@material-ui/core/InputBase';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import TextField from '@material-ui/core/TextField';
 import SendIcon from '@material-ui/icons/Send';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import { useEffect } from 'react';
+import { getCookie } from '../../../actions/authActions';
+import { withRouter } from 'next/router';
+import BackspaceIcon from '@material-ui/icons/Backspace';
+import Link from 'next/link';
 
 const useStyles = makeStyles((darkTheme) => ({
 	root: {
@@ -51,12 +52,16 @@ const useStyles = makeStyles((darkTheme) => ({
 	},
 }));
 
-const MessageId = ({ message }) => {
+const MessageId = ({ message, router }) => {
 	const classes = useStyles();
-
+	const token = getCookie('token');
 	//Envoyer la réponse
 	//UseEffect mettant vu à true au chargement de la page
 	//Afficher la réponse en dessous du message
+
+	useEffect(() => {
+		setVu(router.query.id, token);
+	}, []);
 
 	return (
 		<>
@@ -66,6 +71,14 @@ const MessageId = ({ message }) => {
 					<h2 style={{ color: 'white' }}>
 						Consultation du message de {message.nom}
 					</h2>
+					<Link href='/admin/messages'>
+						<a>
+							<BackspaceIcon
+								fontSize='large'
+								style={{ float: 'right', position: 'relative' }}
+							/>
+						</a>
+					</Link>
 					<hr />
 					<Card className={classes.root}>
 						<CardContent>
@@ -128,14 +141,6 @@ const MessageId = ({ message }) => {
 									className={classes.rootPaper}
 									noValidate
 									autoComplete='off'>
-									{/* <InputBase
-										className={classes.input}
-										placeholder='Réponse'
-										inputProps={{
-											'aria-label': 'reponse',
-										}}
-									/> */}
-
 									<TextareaAutosize
 										style={{ width: '100%' }}
 										aria-label='reponse'
@@ -166,7 +171,6 @@ const MessageId = ({ message }) => {
 export async function getServerSideProps(context) {
 	const res1 = await listMessageById(context.params.id);
 	const message = await res1;
-	console.log('message', message);
 
 	return {
 		props: {
@@ -175,4 +179,4 @@ export async function getServerSideProps(context) {
 	};
 }
 
-export default MessageId;
+export default withRouter(MessageId);

@@ -32,7 +32,9 @@ const getNumberOfNewMessage = asyncHandler(async (req, res) => {
 
 	// console.log('message ', message);
 	// console.log('message taille ', message.length);
-	if (message.length > 0) {
+	if (message.length === 0) {
+		res.json(0);
+	} else if (message.length > 0) {
 		res.json(message.length);
 	} else {
 		res.status(404);
@@ -93,10 +95,49 @@ const removeMessage = asyncHandler(async (req, res) => {
 	}
 });
 
+// @desc      Add a response
+// @route     PUT /api/message/:id
+// @access    Private/Admin
+const messageResponse = asyncHandler(async (req, res) => {
+	const { reponse } = req.body;
+
+	const message = await Message.findById(req.params.id);
+	console.log('message apres requete', message);
+	if (message) {
+		reponse && (message.reponse = reponse);
+		message.dateReponse = Date.now();
+		message.repondu = true;
+		console.log('message avant save', message);
+
+		const updatedMessage = await message.save();
+		res.json(updatedMessage);
+	} else {
+		res.status(404);
+		throw new Error('Message non trouvée');
+	}
+});
+// @desc      Set Vu = true
+// @route     PUT /api/message/:id/vu
+// @access    Private/Admin
+const setVu = asyncHandler(async (req, res) => {
+	const message = await Message.findById(req.params.id);
+	if (message) {
+		message.vu = true;
+
+		const updatedMessage = await message.save();
+		res.json(updatedMessage);
+	} else {
+		res.status(404);
+		throw new Error('Message non trouvée');
+	}
+});
+
 export {
 	getAllMessages,
 	getMessageById,
 	createMessage,
 	removeMessage,
 	getNumberOfNewMessage,
+	messageResponse,
+	setVu,
 };

@@ -30,10 +30,8 @@ const Message = ({ messages, newMessages }) => {
 export async function getServerSideProps(context) {
 	const res1 = await listAllMessages();
 	const messages = await res1;
-	console.log('messages', messages);
 	const res3 = await countMessageNonLus();
 	const newMessages = await res3;
-	console.log('newMessages', newMessages);
 	return {
 		props: {
 			messages,

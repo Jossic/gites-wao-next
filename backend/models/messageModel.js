@@ -7,6 +7,9 @@ const messageSchema = mongoose.Schema(
 		msg: { type: String, required: true },
 		tel: { type: Number },
 		vu: { type: Boolean, default: false },
+		reponse: { type: String },
+		dateReponse: { type: Date },
+		repondu: { type: Boolean, default: false },
 	},
 	{
 		timestamps: true,

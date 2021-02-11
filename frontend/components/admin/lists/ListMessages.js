@@ -97,7 +97,6 @@ const ListMessages = ({ messages, newMessages }) => {
 				filter: true,
 				sort: false,
 				customBodyRender: (value, tableMeta, updateValue) => {
-					console.log(value);
 					return <p>{value.substring(0, 20) + '...'}</p>;
 				},
 			},
@@ -108,7 +107,6 @@ const ListMessages = ({ messages, newMessages }) => {
 			options: {
 				filter: true,
 				customBodyRender: (value, tableMeta, updateValue) => {
-					// console.log(tableMeta.rowData[0]);
 					return !value && <NewReleasesIcon />;
 				},
 			},
@@ -119,7 +117,6 @@ const ListMessages = ({ messages, newMessages }) => {
 			options: {
 				filter: true,
 				customBodyRender: (value, tableMeta, updateValue) => {
-					// console.log(tableMeta.rowData[0]);
 					return value ? (
 						<CheckBoxIcon />
 					) : (
@@ -134,7 +131,6 @@ const ListMessages = ({ messages, newMessages }) => {
 				sort: false,
 				filter: false,
 				customBodyRender: (value, tableMeta, updateValue) => {
-					// console.log(tableMeta.rowData[0]);
 					return (
 						<Link href={`/admin/messages/${tableMeta.rowData[0]}`}>
 							<a>
