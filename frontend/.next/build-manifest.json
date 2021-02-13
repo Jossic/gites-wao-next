@@ -34,15 +34,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/admin/messages.js"
     ],
-    "/login": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/login.js"
-    ],
     "/next/dist/pages/_error": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
       "static/chunks/pages/next/dist/pages/_error.js"
+    ],
+    "/reservation": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/reservation.js"
     ]
   },
   "ampFirstPages": []
