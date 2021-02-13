@@ -1,0 +1,75 @@
+[
+{
+    "type": "header",
+    "version": "4.9.7",
+    "comment": "Export to JSON plugin for PHPMyAdmin"
+},
+{
+    "type": "database",
+    "name": "db624755550"
+},
+{
+    "type": "table",
+    "name": "response",
+    "database": "db624755550",
+    "data": 
+[
+{
+    "id": "7",
+    "content": "Merci pour vos encouragements, c'est avec plaisir que nous vous accueillerons à nouveau",
+    "date": "2016-01-26 11:50:11"
+},
+{
+    "id": "8",
+    "content": "Merci à vous pour votre réservation. Nous vous accueillerons à nouveau avec plaisir.",
+    "date": "2016-06-19 17:19:44"
+},
+{
+    "id": "9",
+    "content": "Merci pour cette première appréciation sur le gîte du Petit Nay. Sur vos conseils, nous avons déjà racheté des grands couteaux et allons réfléchir pour le lave vaisselle.",
+    "date": "2016-09-27 13:12:27"
+},
+{
+    "id": "10",
+    "content": "Gîte Manola. Vous étiez des locataires très sympa, merci pour la flûte de champagne.",
+    "date": "2017-03-27 16:12:55"
+},
+{
+    "id": "11",
+    "content": "Merci pour votre message et pour les photos du brochet, du coup nous les avons mises sur le site",
+    "date": "2017-04-19 13:36:27"
+},
+{
+    "id": "12",
+    "content": "Merci à vous, lorsqu'il y aura une piscine, ce sera encore mieux, c'est ce que nous espérons et nous sommes contents que le cadre vous ai plu.",
+    "date": "2017-05-05 19:29:48"
+},
+{
+    "id": "13",
+    "content": "Merci pour cette appréciation fort sympathique, le gîte est en effet spacieux et bientôt les 2 dernières chambres seront terminées, ce qui donnera encore plus de place.",
+    "date": "2017-06-02 12:53:58"
+},
+{
+    "id": "14",
+    "content": "Merci pour cette appréciation, c'est vrai que nous avons quelques soucis avec ce gîte depuis un moment déjà et que nous ne pouvons pas refaire de travaux (entre autres les peintures) car nous sommes en conflit avec l'entreprise qui a fait le gîte et nous ",
+    "date": "2017-06-15 14:23:31"
+},
+{
+    "id": "15",
+    "content": "Merci pour votre message sur le gîte Manola. Vous aviez amené beaucoup de nourriture ce qui fait que le frigo bien chargé avait effectivement du mal à refroidir. Mais comme nous en avons un en dépannage, cela n'a pas posé de problème. Nous essayons dans l",
+    "date": "2017-06-29 21:01:19"
+},
+{
+    "id": "16",
+    "content": "Merci pour vos remarques, effectivement, nous sommes conscients qu'il y a quelques rénovation à apporter. Comme le gîte est pas mal occupé, Il faut que nous trouvions un créneau pour le faire, mais nous y pensons sans doute pour la fin de cette année",
+    "date": "2017-07-06 14:18:53"
+},
+{
+    "id": "17",
+    "content": "Malheureusement les pannes arrivent sans prévenir.  Nous allons faire des travaux de peinture rapidement pour améliorer l'état du gîte",
+    "date": "2019-02-15 08:52:46"
+}
+]
+
+}
+]

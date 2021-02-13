@@ -1,0 +1,31 @@
+[
+{
+    "type": "header",
+    "version": "4.9.7",
+    "comment": "Export to JSON plugin for PHPMyAdmin"
+},
+{
+    "type": "database",
+    "name": "db624755550"
+},
+{
+    "type": "table",
+    "name": "rate_with_pool",
+    "database": "db624755550",
+    "data": 
+[
+{
+    "id": "1",
+    "three_nights": "220",
+    "four_nights": "430",
+    "one_nights": "80",
+    "lowSeason": "380",
+    "middleSeason": "160",
+    "highSeason": "180",
+    "vhighSeasonChristmas": "670",
+    "vhighSeasonY": "200"
+}
+]
+
+}
+]

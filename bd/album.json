@@ -1,0 +1,21 @@
+[
+{"type":"header","version":"4.9.7","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"db624755550"},
+{"type":"table","name":"album","database":"db624755550","data":
+[
+{"id":"1","lodge_id":"1","name":"Piscine","activated":"1","description":"La piscine est située à 150 m du gîte, derrière notre maison d'habitation, elle est totalement privée et réservée aux locataires du gîte. Des rideaux préservent l'intimité de chacun. Du coup, il n'y a pas de vis à vis."},
+{"id":"2","lodge_id":"1","name":"Presentation","activated":"1","description":"Construction du gîte en 2009. Situation 14 rue de la Vautée 08240 Fossé. Nous attirons votre attention sur le fait que pour ce gîte, la piscine est située à 150 m du gîte, elle est exclusivement réservée aux locataires. Ce gîte a 4 chambres."},
+{"id":"3","lodge_id":"1","name":"Interieur","activated":"1","description":"Logement avec une grande pièce à vivre pouvant recevoir une quinzaine de personnes"},
+{"id":"10","lodge_id":"2","name":"Presentation","activated":"1","description":"Situation 24 rue de la Gare 08240 Bar les Buzancy. Le gîte Brinchette est opérationnel depuis début 2011, le terrain est complètement clos. Ce gîte a 5 chambres."},
+{"id":"11","lodge_id":"2","name":"Interieur","activated":"1","description":"Au rez de chaussée, logement avec une grande pièce à vivre, 1 chambre spéciale personne avec handicap et 1 salle de bain. A l'étage, 4 chambres, 1 salle de bain et 1 salle de jeux."},
+{"id":"12","lodge_id":"2","name":"Piscine","activated":"1","description":"Pour le gîte Brinchette, la piscine est intégrée dans la construction. Seuls les locataires du gîte y ont accès, cette piscine est totalement privée et il y a des rideaux sur la baie vitrée."},
+{"id":"13","lodge_id":"3","name":"Presentation","activated":"1","description":"Situation 2 rue du moulin 08240 Saint Pierremont. Lieu-dit : Fontenois. Pour le gîte Lauberoye (acquisition en 2012), nous avons ajouté une piscine couverte qui a été adossée à la maison existante. Ce gîte est situé à 900 m du village à l'écart des routes dans un endroit calme et reposant. Ce gîte a 6 chambres."},
+{"id":"14","lodge_id":"3","name":"Interieur","activated":"1","description":"Pour votre divertissement, le gîte Lauberoye a des équipements comme piscine, cabine infra-rouge, billard, baby-foot, trampoline, aire de jeux, table de ping-pong, jeu de fléchettes."},
+{"id":"15","lodge_id":"3","name":"Piscine","activated":"1","description":"Piscine de 10 m par 5 m avec plancher chauffant autour de la piscine. Elle est totalement privée pour les locataires du gîte et à l'écart du village, il n'y a pas de vis à vis et des rideaux sont installés sur toutes les fenêtres de la piscine."},
+{"id":"21","lodge_id":null,"name":"Activite","activated":"1","description":"Album activite"},
+{"id":"28","lodge_id":"6","name":"Présentation","activated":"1","description":"Situation 81 route de Stenay 08240 Nouart. Ancienne auberge aménagée en gîte, pour l'instant il n'y a pas de piscine, mais un SPA, billard, baby foot, etc. Ce gîte a 10 chambres et 2 dortoirs. Il est à l'écart du village à 600 m sans voisins."},
+{"id":"29","lodge_id":"6","name":"Intérieur","activated":"1","description":"Ce gîte a 10 chambres dont 5 avec salle de bain privée + 2 dortoirs de 10 places chacun. Une grande salle permet d'accueillir des réceptions."},
+{"id":"30","lodge_id":"6","name":"Piscine","activated":"1","description":"Une piscine est prévue dans ce gîte, mais nous n'avons pas encore de dates précises"}
+]
+}
+]

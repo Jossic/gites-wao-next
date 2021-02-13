@@ -2,21 +2,44 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getCookie } from '../../../actions/authActions';
-import { Alert, Spinner } from 'reactstrap';
 import { removeMessage } from '../../../actions/messageActions';
+import { makeStyles } from '@material-ui/core/styles';
 import MUIDataTable from 'mui-datatables';
 // import AddBoxIcon from '@material-ui/icons/AddBox';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import ReplyIcon from '@material-ui/icons/Reply';
 import FiberNewIcon from '@material-ui/icons/FiberNew';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import Snackbar from '@material-ui/core/Snackbar';
+import { withRouter } from 'next/router';
+import MuiAlert from '@material-ui/lab/Alert';
+import Router from 'next/router';
 
-const ListMessages = ({ messages, newMessages }) => {
+function Alert(props) {
+	return <MuiAlert elevation={6} variant='filled' {...props} />;
+}
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		width: '100%',
+		'& > * + *': {
+			marginTop: theme.spacing(2),
+		},
+	},
+}));
+
+const ListMessages = ({ messages, newMessages, router }) => {
+	const classes = useStyles();
+
 	const token = getCookie('token');
 
 	//Ajouter le delete et multiple delete
 
 	const [values, setvalues] = useState({
+		open: false,
 		loading: false,
 		error: '',
 		success: '',
@@ -24,6 +47,14 @@ const ListMessages = ({ messages, newMessages }) => {
 	});
 
 	const { loading, success, error, message } = values;
+
+	const handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+			return;
+		}
+
+		setValues({ ...values, open: false });
+	};
 
 	const deleteMessage = (id) => {
 		setvalues({ ...values, loading: true });
@@ -39,21 +70,27 @@ const ListMessages = ({ messages, newMessages }) => {
 			} else {
 				setvalues({
 					...values,
+					open: true,
 					loading: false,
 					error: '',
 					success: true,
 					message: data.text,
 				});
+				setTimeout(() => {
+					router.reload();
+				}, 3000);
 			}
 		});
 	};
 
 	const deleteConfirm = (id) => {
-		let answer = window.confirm(
-			`Suppression du message ${id}, êtes-vous sûr ?`
-		);
-		if (answer) {
-			deleteMessage(id);
+		if (typeof window !== 'undefined') {
+			let answer = window.confirm(
+				`Suppression du message ${id}, êtes-vous sûr ?`
+			);
+			if (answer) {
+				deleteMessage(id);
+			}
 		}
 	};
 
@@ -119,7 +156,7 @@ const ListMessages = ({ messages, newMessages }) => {
 			},
 		},
 		{
-			name: 'reponse',
+			name: 'repondu',
 			label: 'Répondu',
 			options: {
 				filter: true,
@@ -138,12 +175,37 @@ const ListMessages = ({ messages, newMessages }) => {
 				sort: false,
 				filter: false,
 				customBodyRender: (value, tableMeta, updateValue) => {
-					return (
+					// console.log(tableMeta.rowData);
+					return !tableMeta.rowData[6] ? (
 						<Link href={`/admin/messages/${tableMeta.rowData[0]}`}>
 							<a>
 								<ReplyIcon fontSize='large' />
 							</a>
 						</Link>
+					) : (
+						<Link href={`/admin/messages/${tableMeta.rowData[0]}`}>
+							<a>
+								<VisibilityIcon fontSize='large' />
+							</a>
+						</Link>
+					);
+				},
+			},
+		},
+		{
+			name: 'Suppr',
+			options: {
+				customBodyRender: (value, tableMeta, updateValue) => {
+					// console.log(tableMeta.rowData);
+					return (
+						<DeleteForeverIcon
+							style={{
+								cursor: 'pointer',
+								fontSize: '30px',
+								color: 'red',
+							}}
+							onClick={() => deleteConfirm(tableMeta.rowData[0])}
+						/>
 					);
 				},
 			},
@@ -152,18 +214,36 @@ const ListMessages = ({ messages, newMessages }) => {
 
 	const options = {
 		filterType: 'checkbox',
+		selectableRows: false,
 	};
 
 	return (
 		<>
-			{loading && <Spinner />}
-			{success && <Alert color='success'>{message}</Alert>}
-			{error && <Alert color='danger'>Une erreur est survenue</Alert>}
-			{/* <AddBoxIcon fontSize='large' style={{ float: 'right' }} /> Ajouter */}
+			{loading && <CircularProgress />}
+			{success && (
+				<Snackbar
+					open={open}
+					autoHideDuration={6000}
+					onClose={handleClose}>
+					<Alert onClose={handleClose} severity='success'>
+						{message}
+					</Alert>
+				</Snackbar>
+			)}
+			{error && (
+				<Snackbar
+					open={open}
+					autoHideDuration={6000}
+					onClose={handleClose}>
+					<Alert onClose={handleClose} severity='error'>
+						{error}
+					</Alert>
+				</Snackbar>
+			)}
 			<p style={{ color: 'white' }}>
 				{newMessages > 0
 					? `Vous avez ${newMessages} non lus !`
-					: `Aucun message !`}
+					: `Aucun nouveau message !`}
 			</p>
 			<MUIDataTable
 				title={'Messages'}
@@ -175,4 +255,4 @@ const ListMessages = ({ messages, newMessages }) => {
 	);
 };
 
-export default ListMessages;
+export default withRouter(ListMessages);

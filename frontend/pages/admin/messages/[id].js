@@ -78,9 +78,8 @@ const MessageId = ({ message, router }) => {
 		text: '',
 	});
 	const { success, loading, error, text } = values;
-	//Envoyer la réponse
-	//UseEffect mettant vu à true au chargement de la page
-	//Afficher la réponse en dessous du message
+
+	//Envoyer le mail via Nodemailer
 
 	useEffect(() => {
 		setVu(router.query.id, token);

@@ -1,0 +1,56 @@
+[
+{
+    "type": "header",
+    "version": "4.9.7",
+    "comment": "Export to JSON plugin for PHPMyAdmin"
+},
+{
+    "type": "database",
+    "name": "db624755550"
+},
+{
+    "type": "table",
+    "name": "pdf_file",
+    "database": "db624755550",
+    "data": 
+[
+{
+    "id": "1",
+    "url": "uploads\/file\/1_itineraire_manola.pdf"
+},
+{
+    "id": "2",
+    "url": "uploads\/file\/2_itineraire_brinchette.pdf"
+},
+{
+    "id": "3",
+    "url": "uploads\/file\/3_itineraire_lauberoye.pdf"
+},
+{
+    "id": "4",
+    "url": "uploads\/file\/projet sur site perso.pdf"
+},
+{
+    "id": "5",
+    "url": "uploads\/file\/4_itinéraire Petitnay.pdf"
+},
+{
+    "id": "6",
+    "url": "uploads\/file\/Annexe contrat Manola.pdf"
+},
+{
+    "id": "7",
+    "url": "uploads\/file\/Annexe contrat Brinchette.pdf"
+},
+{
+    "id": "8",
+    "url": "uploads\/file\/Annexe contrat Lauberoye.pdf"
+},
+{
+    "id": "9",
+    "url": "uploads\/file\/Annexe contrat Petit Nay.pdf"
+}
+]
+
+}
+]
