@@ -16,6 +16,27 @@ import HouseIcon from '@material-ui/icons/House';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import { useEffect, useState } from 'react';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import {
+	Checkbox,
+	Container,
+	FormControl,
+	FormControlLabel,
+	FormGroup,
+	FormHelperText,
+	FormLabel,
+	InputLabel,
+	MenuItem,
+	Select,
+	Switch,
+	TextField,
+} from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+	MuiPickersUtilsProvider,
+	KeyboardTimePicker,
+	KeyboardDatePicker,
+} from '@material-ui/pickers';
 
 const QontoConnector = withStyles({
 	alternativeLabel: {
@@ -187,6 +208,13 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(1),
 		marginBottom: theme.spacing(1),
 	},
+	formControl: {
+		margin: theme.spacing(1),
+		minWidth: 120,
+	},
+	selectEmpty: {
+		marginTop: theme.spacing(2),
+	},
 }));
 
 function getSteps() {
@@ -202,6 +230,14 @@ const ReservationForm = () => {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = React.useState(0);
 	const steps = getSteps();
+
+	const [selectedDate, setSelectedDate] = React.useState(
+		new Date('2014-08-18T21:11:54')
+	);
+
+	const handleDateChange = (date) => {
+		setSelectedDate(date);
+	};
 
 	const handleNext = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -235,255 +271,246 @@ const ReservationForm = () => {
 		<div className=''>
 			<h2>Informations sur la location</h2>
 
-			<div className='form-group'>
-				<label htmlFor='exampleFormControlSelect1'>Quel gîte ?</label>
-				<select className='form-control' id='exampleFormControlSelect1'>
-					{gites.map((gite, i) => (
-						<option key={i} value={gite.slug}>
-							{gite.nom}
-						</option>
-					))}
-				</select>
-			</div>
-			<div className='form-group'>
-				<label>Nombre de personnes total</label>
-				<input type='number' className='form-control' />
-			</div>
-			<div className='form-group'>
-				<label>Dont enfants de moins de 18 ans</label>
-				<input type='number' className='form-control' />
-			</div>
-			<div className='form-group'>
-				<label>Date d'arrivée</label>
-				<input type='date' className='form-control' />
-			</div>
-			<div className='form-group'>
-				<label>Date de départ</label>
-				<input type='date' className='form-control' />
-			</div>
+			<Grid container justify='space-around'>
+				<FormControl className={classes.formControl}>
+					<InputLabel
+						shrink
+						id='demo-simple-select-placeholder-label-label'>
+						Réservation sur le gîte :
+					</InputLabel>
+					<Select
+						labelId='demo-simple-select-placeholder-label-label'
+						id='demo-simple-select-placeholder-label'
+						// value={gites.slug}
+						// onChange={handleChange}
+						displayEmpty
+						className={classes.selectEmpty}>
+						{gites.map((gite, i) => (
+							<MenuItem value={gite.slug}>{gite.nom}</MenuItem>
+						))}
+					</Select>
+					{/* <FormHelperText>Réservation sur le gîte :</FormHelperText> */}
+				</FormControl>
+				<TextField
+					id='standard-number'
+					label='Nombre de personnes total'
+					type='number'
+					InputLabelProps={{
+						shrink: true,
+					}}
+				/>
+				<TextField
+					id='standard-number'
+					label='Dont enfants de moins de 18 ans'
+					type='number'
+					InputLabelProps={{
+						shrink: true,
+					}}
+				/>
+			</Grid>
+			<MuiPickersUtilsProvider utils={DateFnsUtils}>
+				<Grid container justify='space-around'>
+					<KeyboardDatePicker
+						margin='normal'
+						id='date-picker-dialog'
+						label="Date d'arrivée"
+						format='dd/MM/yyyy'
+						value={selectedDate}
+						onChange={handleDateChange}
+						KeyboardButtonProps={{
+							'aria-label': 'change date',
+						}}
+					/>
+
+					<KeyboardDatePicker
+						margin='normal'
+						id='date-picker-dialog'
+						label='Date de départ'
+						format='dd/MM/yyyy'
+						value={selectedDate}
+						onChange={handleDateChange}
+						KeyboardButtonProps={{
+							'aria-label': 'change date',
+						}}
+					/>
+				</Grid>
+			</MuiPickersUtilsProvider>
 		</div>
 	);
 	const infoComp = () => (
 		<div>
 			<h2>Informations supplémentaires</h2>
-			<fieldset
-				style={{ border: '1px solid black' }}
-				className='pl-3 pb-3'>
-				<legend>
-					{' '}
-					<h3>
+			<div className={classes.root}>
+				<FormControl
+					component='fieldset'
+					className={classes.formControl}>
+					<FormLabel component='legend'>
 						Merci d'indiquer si vous nous avez déja contacté par :
-					</h3>
-				</legend>
-				<div className='row'>
-					<div className='col'>
-						<div className='form-check'>
-							<input
-								className='form-check-input'
-								type='checkbox'
-								value=''
-								id='defaultCheck1'
+					</FormLabel>
+					<FormGroup>
+						<Grid container justify='space-around'>
+							<FormControlLabel
+								control={<Checkbox />}
+								label='Mail'
 							/>
-							<label
-								className='form-check-label'
-								htmlFor='defaultCheck1'>
-								Mail
-							</label>
-						</div>
-					</div>
-					<div className='col'>
-						<div className='form-check'>
-							<input
-								className='form-check-input'
-								type='checkbox'
-								value=''
-								id='defaultCheck1'
+							<FormControlLabel
+								control={<Checkbox />}
+								label='Téléphone'
 							/>
-							<label
-								className='form-check-label'
-								htmlFor='defaultCheck1'>
-								Téléphone
-							</label>
-						</div>
-					</div>
-					<div className='col'>
-						<div className='form-check'>
-							<input
-								className='form-check-input'
-								type='checkbox'
-								value=''
-								id='defaultCheck1'
+							<FormControlLabel
+								control={<Checkbox />}
+								label='Abritel'
 							/>
-							<label
-								className='form-check-label'
-								htmlFor='defaultCheck1'>
-								Abritel
-							</label>
-						</div>
-					</div>
-					<div className='col'>
-						<div className='form-check'>
-							<input
-								className='form-check-input'
-								type='checkbox'
-								value=''
-								id='defaultCheck1'
+							<FormControlLabel
+								control={<Checkbox />}
+								label='Leboncoin'
 							/>
-							<label
-								className='form-check-label'
-								htmlFor='defaultCheck1'>
-								Leboncoin
-							</label>
-						</div>
-					</div>
-					<div className='col'>
-						<div className='form-check'>
-							<input
-								className='form-check-input'
-								type='checkbox'
-								value=''
-								id='defaultCheck1'
+							<FormControlLabel
+								control={<Checkbox />}
+								label='Autre'
 							/>
-							<label
-								className='form-check-label'
-								htmlFor='defaultCheck1'>
-								Autre
-							</label>
-						</div>
-					</div>
-				</div>
-			</fieldset>
-			<fieldset
-				style={{ border: '1px solid black' }}
-				className='pl-3 pb-3'>
-				<legend>
-					{' '}
-					<h3>
-						S'il y a des chiens, merci d'indiquer leur nombre
-						(3€/jour/animal)
-					</h3>
-				</legend>
-				<div className='form-group'>
-					<input type='number' className='form-control' />
-				</div>
-			</fieldset>
-			<fieldset
-				style={{ border: '1px solid black' }}
-				className='pl-3 pb-3'>
-				<legend>
-					{' '}
-					<h3>Souhaitez-vous l'option lit fait à l'arrivée ?</h3>
-				</legend>
-				<div className='form-check'>
-					<input
-						className='form-check-input'
-						type='radio'
-						name='exampleRadios'
-						id='exampleRadios1'
-						value='option1'
-						checked
+						</Grid>
+					</FormGroup>
+					{/* <FormHelperText>Be careful</FormHelperText> */}
+				</FormControl>
+				<Grid container justify='space-around'>
+					<TextField
+						id='standard-number'
+						label='Nombre de chien ? (3€/jour/animal)'
+						type='number'
+						InputLabelProps={{
+							shrink: true,
+						}}
 					/>
-					<label
-						className='form-check-label'
-						htmlFor='exampleRadios1'>
-						Oui
-					</label>
-				</div>
-				<div className='form-check'>
-					<input
-						className='form-check-input'
-						type='radio'
-						name='exampleRadios'
-						id='exampleRadios2'
-						value='option2'
+					<FormControlLabel
+						control={
+							<Switch
+								// checked={state.checkedB}
+								// onChange={handleChange}
+								// name="checkedB"
+								color='primary'
+							/>
+						}
+						label="Souhaitez-vous l'option lit fait à l'arrivée ?"
 					/>
-					<label
-						className='form-check-label'
-						htmlFor='exampleRadios2'>
-						Non
-					</label>
-				</div>
-			</fieldset>
+				</Grid>
+			</div>
 		</div>
 	);
 	const Coord = () => (
 		<div>
 			<h2>Vos coordonnées</h2>
-			<div className='form-row mb-3'>
-				<div className='col-2'>
-					<select
-						className='form-control'
-						id='exampleFormControlSelect1'>
-						<option>Mr & Mme</option>
-						<option>Mr</option>
-						<option>Mme</option>
-						<option>Entreprise</option>
-						<option>Association</option>
-					</select>
-				</div>
 
-				<div className='col-5'>
-					<input
-						type='text'
-						className='form-control'
-						placeholder='Nom'
-					/>
-				</div>
-				<div className='col-5'>
-					<input
-						type='text'
-						className='form-control'
-						placeholder='Prénom'
-					/>
-				</div>
-			</div>
-			<div className='form-row mb-3'>
-				<div className='col-5'>
-					<input
-						type='text'
-						className='form-control'
-						placeholder='Adresse'
-					/>
-				</div>
-				<div className='col-2'>
-					<input
-						type='text'
-						className='form-control'
-						placeholder='Code Postal'
-					/>
-				</div>
-				<div className='col-3'>
-					<input
-						type='text'
-						className='form-control'
-						placeholder='Ville'
-					/>
-				</div>
-				<div className='col'>
-					<input
-						type='text'
-						className='form-control'
-						placeholder='Pays'
-					/>
-				</div>
-			</div>
-			<div className='form-row'>
-				<div className='col-5'>
-					<input
-						type='tel'
-						pattern='[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}'
-						className='form-control'
-						placeholder='Téléphone'
-					/>
-				</div>
-				<div className='col-7'>
-					<input
-						type='mail'
-						className='form-control'
-						placeholder='Email'
-					/>
-				</div>
-			</div>
+			<Grid container justify='space-around'>
+				<FormControl className={classes.formControl}>
+					<InputLabel
+						shrink
+						id='demo-simple-select-placeholder-label-label'>
+						Civilité
+					</InputLabel>
+					<Select
+						labelId='demo-simple-select-placeholder-label-label'
+						id='demo-simple-select-placeholder-label'
+						// value={gites.slug}
+						// onChange={handleChange}
+						displayEmpty
+						className={classes.selectEmpty}>
+						<MenuItem value=''>M. & Mme</MenuItem>
+						<MenuItem value=''>Mme</MenuItem>
+						<MenuItem value=''>Mlle</MenuItem>
+						<MenuItem value=''>M.</MenuItem>
+						<MenuItem value=''>Association</MenuItem>
+						<MenuItem value=''>Comité d'entreprise</MenuItem>
+						<MenuItem value=''>Société</MenuItem>
+						<MenuItem value=''>Entreprise</MenuItem>
+						<MenuItem value=''>Foyer de vie</MenuItem>
+						<MenuItem value=''>Foyer d'accueil</MenuItem>
+						<MenuItem value=''>Famille</MenuItem>
+						<MenuItem value=''>Autres</MenuItem>
+					</Select>
+					{/* <FormHelperText>Réservation sur le gîte :</FormHelperText> */}
+				</FormControl>
+				<TextField
+					id='standard-number'
+					label='Nom'
+					InputLabelProps={{
+						shrink: true,
+					}}
+				/>
+				<TextField
+					id='standard-number'
+					label='Prénom'
+					InputLabelProps={{
+						shrink: true,
+					}}
+				/>
+			</Grid>
+			<Grid container justify='space-around'>
+				<TextField
+					id='standard-number'
+					label='Adresse'
+					InputLabelProps={{
+						shrink: true,
+					}}
+				/>
+				<TextField
+					id='standard-number'
+					label='Code Postal'
+					InputLabelProps={{
+						shrink: true,
+					}}
+				/>
+				<TextField
+					id='standard-number'
+					label='Ville'
+					InputLabelProps={{
+						shrink: true,
+					}}
+				/>
+				<FormControl className={classes.formControl}>
+					<InputLabel
+						shrink
+						id='demo-simple-select-placeholder-label-label'>
+						Pays
+					</InputLabel>
+					<Select
+						labelId='demo-simple-select-placeholder-label-label'
+						id='demo-simple-select-placeholder-label'
+						// value={gites.slug}
+						// onChange={handleChange}
+						displayEmpty
+						className={classes.selectEmpty}>
+						<MenuItem value=''>France</MenuItem>
+						<MenuItem value=''>--------</MenuItem>
+						<MenuItem value=''>Autres</MenuItem>
+						<MenuItem value=''>Allemagne</MenuItem>
+						<MenuItem value=''>Angleterre</MenuItem>
+						<MenuItem value=''>Belgique</MenuItem>
+						<MenuItem value=''>Hollande</MenuItem>
+						<MenuItem value=''>Luxembourg</MenuItem>
+						<MenuItem value=''>Suisse</MenuItem>
+					</Select>
+					{/* <FormHelperText>Pays</FormHelperText> */}
+				</FormControl>
+			</Grid>
+			<Grid container justify='space-around'>
+				<TextField
+					id='standard-number'
+					label='Téléphone'
+					type='telephone'
+					InputLabelProps={{
+						shrink: true,
+					}}
+				/>
+				<TextField
+					id='standard-number'
+					label='Email'
+					type='mail'
+					InputLabelProps={{
+						shrink: true,
+					}}
+				/>
+			</Grid>
 		</div>
 	);
 	const recap = () => <p>recap</p>;
@@ -504,64 +531,66 @@ const ReservationForm = () => {
 	}
 
 	return (
-		<div className={classes.root}>
-			<form>
-				<Stepper
-					alternativeLabel
-					activeStep={activeStep}
-					connector={<ColorlibConnector />}>
-					{steps.map((label) => (
-						<Step key={label}>
-							<StepLabel StepIconComponent={ColorlibStepIcon}>
-								{label}
-							</StepLabel>
-						</Step>
-					))}
-				</Stepper>
-				<div>
-					{activeStep === steps.length ? (
-						<div>
-							<Typography className={classes.instructions}>
-								All steps completed - you&apos;re finished
-							</Typography>
-							<Button
-								onClick={handleReset}
-								className={classes.button}>
-								Recommencer
-							</Button>
-							{/* <Button
+		<Container>
+			<div className={classes.root}>
+				<form>
+					<Stepper
+						alternativeLabel
+						activeStep={activeStep}
+						connector={<ColorlibConnector />}>
+						{steps.map((label) => (
+							<Step key={label}>
+								<StepLabel StepIconComponent={ColorlibStepIcon}>
+									{label}
+								</StepLabel>
+							</Step>
+						))}
+					</Stepper>
+					<div>
+						{activeStep === steps.length ? (
+							<div>
+								<Typography className={classes.instructions}>
+									All steps completed - you&apos;re finished
+								</Typography>
+								<Button
+									onClick={handleReset}
+									className={classes.button}>
+									Recommencer
+								</Button>
+								{/* <Button
 								// onClick={handleReset}
 								className={classes.button}>
 								Valider
 							</Button> */}
-						</div>
-					) : (
-						<div>
-							<Typography className={classes.instructions}>
-								{getStepContent(activeStep)}
-							</Typography>
-							<div>
-								<Button
-									disabled={activeStep === 0}
-									onClick={handleBack}
-									className={classes.button}>
-									Retour
-								</Button>
-								<Button
-									variant='contained'
-									color='primary'
-									onClick={handleNext}
-									className={classes.button}>
-									{activeStep === steps.length - 1
-										? 'Valider'
-										: 'Suivant'}
-								</Button>
 							</div>
-						</div>
-					)}
-				</div>
-			</form>
-		</div>
+						) : (
+							<div>
+								<Typography className={classes.instructions}>
+									{getStepContent(activeStep)}
+								</Typography>
+								<div>
+									<Button
+										disabled={activeStep === 0}
+										onClick={handleBack}
+										className={classes.button}>
+										Retour
+									</Button>
+									<Button
+										variant='contained'
+										color='primary'
+										onClick={handleNext}
+										className={classes.button}>
+										{activeStep === steps.length - 1
+											? 'Valider'
+											: 'Suivant'}
+									</Button>
+								</div>
+							</div>
+						)}
+					</div>
+				</form>
+			</div>
+		</Container>
 	);
 };
 

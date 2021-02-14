@@ -17,6 +17,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import { withRouter } from 'next/router';
 import MuiAlert from '@material-ui/lab/Alert';
 import Router from 'next/router';
+import { IconButton } from '@material-ui/core';
 
 function Alert(props) {
 	return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -177,17 +178,23 @@ const ListMessages = ({ messages, newMessages, router }) => {
 				customBodyRender: (value, tableMeta, updateValue) => {
 					// console.log(tableMeta.rowData);
 					return !tableMeta.rowData[6] ? (
-						<Link href={`/admin/messages/${tableMeta.rowData[0]}`}>
-							<a>
-								<ReplyIcon fontSize='large' />
-							</a>
-						</Link>
+						<IconButton>
+							<Link
+								href={`/admin/messages/${tableMeta.rowData[0]}`}>
+								<a>
+									<ReplyIcon fontSize='large' />
+								</a>
+							</Link>
+						</IconButton>
 					) : (
-						<Link href={`/admin/messages/${tableMeta.rowData[0]}`}>
-							<a>
-								<VisibilityIcon fontSize='large' />
-							</a>
-						</Link>
+						<IconButton>
+							<Link
+								href={`/admin/messages/${tableMeta.rowData[0]}`}>
+								<a>
+									<VisibilityIcon fontSize='large' />
+								</a>
+							</Link>
+						</IconButton>
 					);
 				},
 			},
@@ -198,14 +205,17 @@ const ListMessages = ({ messages, newMessages, router }) => {
 				customBodyRender: (value, tableMeta, updateValue) => {
 					// console.log(tableMeta.rowData);
 					return (
-						<DeleteForeverIcon
-							style={{
-								cursor: 'pointer',
-								fontSize: '30px',
-								color: 'red',
-							}}
-							onClick={() => deleteConfirm(tableMeta.rowData[0])}
-						/>
+						<IconButton>
+							<DeleteForeverIcon
+								style={{
+									fontSize: '30px',
+									color: 'red',
+								}}
+								onClick={() =>
+									deleteConfirm(tableMeta.rowData[0])
+								}
+							/>
+						</IconButton>
 					);
 				},
 			},
