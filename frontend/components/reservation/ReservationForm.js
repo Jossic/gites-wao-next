@@ -531,6 +531,10 @@ const ReservationForm = () => {
 		}
 	}
 
+	const onSubmit = (data) => {
+		//
+	};
+
 	return (
 		<Container>
 			<div className={classes.root}>

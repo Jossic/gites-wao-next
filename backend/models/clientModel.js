@@ -3,16 +3,17 @@ const { ObjectId } = mongoose.Schema;
 
 const clientSchema = mongoose.Schema(
 	{
+		civilite: { type: String },
 		nom: { type: String, required: true },
 		prenom: { type: String, required: true },
-		adresse: { type: String },
-		cp: { type: String },
-		ville: { type: String },
-		pays: { type: String },
-		tel: { type: Number },
-		mail: { type: String },
+		adresse: { type: String, required: true },
+		cp: { type: String, required: true },
+		ville: { type: String, required: true },
+		pays: { type: String, required: true },
+		tel: { type: Number, required: true },
+		mail: { type: String, required: true },
 		nbVenu: { type: Number },
-		Note: { type: String },
+		commentaire: { type: String },
 	},
 	{
 		timestamps: true,
