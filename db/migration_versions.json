@@ -1,0 +1,44 @@
+[
+{
+    "type": "header",
+    "version": "4.9.7",
+    "comment": "Export to JSON plugin for PHPMyAdmin"
+},
+{
+    "type": "database",
+    "name": "db624755550"
+},
+{
+    "type": "table",
+    "name": "migration_versions",
+    "database": "db624755550",
+    "data": 
+[
+{
+    "version": "20190207174940"
+},
+{
+    "version": "20190225144953"
+},
+{
+    "version": "20190301120637"
+},
+{
+    "version": "20190302172627"
+},
+{
+    "version": "20190308180703"
+},
+{
+    "version": "20190309101553"
+},
+{
+    "version": "20190516114502"
+},
+{
+    "version": "20190702075855"
+}
+]
+
+}
+]

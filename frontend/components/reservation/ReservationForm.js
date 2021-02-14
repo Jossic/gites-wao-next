@@ -16,6 +16,7 @@ import HouseIcon from '@material-ui/icons/House';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import { useEffect, useState } from 'react';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import { useForm, Controller } from 'react-hook-form';
 import {
 	Checkbox,
 	Container,
@@ -228,12 +229,12 @@ function getSteps() {
 
 const ReservationForm = () => {
 	const classes = useStyles();
-	const [activeStep, setActiveStep] = React.useState(0);
+	const [activeStep, setActiveStep] = useState(0);
+	const { control, handleSubmit } = useForm();
 	const steps = getSteps();
 
-	const [selectedDate, setSelectedDate] = React.useState(
-		new Date('2014-08-18T21:11:54')
-	);
+	const [selectedDate, setSelectedDate] = useState();
+	// new Date('2014-08-18T21:11:54')
 
 	const handleDateChange = (date) => {
 		setSelectedDate(date);
@@ -533,7 +534,7 @@ const ReservationForm = () => {
 	return (
 		<Container>
 			<div className={classes.root}>
-				<form>
+				<form onSubmit={handleSubmit(onSubmit)}>
 					<Stepper
 						alternativeLabel
 						activeStep={activeStep}

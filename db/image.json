@@ -1,0 +1,1244 @@
+[
+{
+    "type": "header",
+    "version": "4.9.7",
+    "comment": "Export to JSON plugin for PHPMyAdmin"
+},
+{
+    "type": "database",
+    "name": "db624755550"
+},
+{
+    "type": "table",
+    "name": "image",
+    "database": "db624755550",
+    "data": 
+[
+{
+    "id": "59",
+    "url": "uploads\/images\/Lauberoye\/lauberoye.jpg",
+    "title": "",
+    "content": "",
+    "album_id": null,
+    "activated": "0"
+},
+{
+    "id": "108",
+    "url": "uploads\/images\/Activite\/P1010357.JPG",
+    "title": "Camping de la Samaritaine",
+    "content": "Aire de jeux",
+    "album_id": "21",
+    "activated": "1"
+},
+{
+    "id": "109",
+    "url": "uploads\/images\/Activite\/P1010359.JPG",
+    "title": "Camping de la Samaritaine",
+    "content": "Friterie",
+    "album_id": "21",
+    "activated": "1"
+},
+{
+    "id": "110",
+    "url": "uploads\/images\/Activite\/P1010344.JPG",
+    "title": "Plan d'eau de la Samaritaine",
+    "content": "à côté du camping",
+    "album_id": "21",
+    "activated": "1"
+},
+{
+    "id": "111",
+    "url": "uploads\/images\/Activite\/P1010352.JPG",
+    "title": "Baignade à Buzancy",
+    "content": "au plan d'eau de la Samaritaine",
+    "album_id": "21",
+    "activated": "1"
+},
+{
+    "id": "114",
+    "url": "uploads\/images\/Activite\/P1010350.JPG",
+    "title": "Aire de jeux",
+    "content": "au camping de Buzancy",
+    "album_id": "21",
+    "activated": "1"
+},
+{
+    "id": "170",
+    "url": "uploads\/images\/Activite\/karting.jpg",
+    "title": "Karting de Douzy",
+    "content": "Le plus grand karting d'Europe. Voir le lien du site si dessous",
+    "album_id": "21",
+    "activated": "1"
+},
+{
+    "id": "171",
+    "url": "uploads\/images\/Activite\/parc argonne.jpg",
+    "title": "Parc d'Argonne",
+    "content": "Avec ses loups et son hamac à bonds. Idéal pour les enfants. Lien du site ci-dessous.",
+    "album_id": "21",
+    "activated": "1"
+},
+{
+    "id": "172",
+    "url": "uploads\/images\/Activite\/P1010332.JPG",
+    "title": "Le château Augeard",
+    "content": "Les Bouveries",
+    "album_id": "21",
+    "activated": "1"
+},
+{
+    "id": "175",
+    "url": "uploads\/images\/Activite\/terrainfoot.jpg",
+    "title": "Terrain foot",
+    "content": "le petit terrain peut être utilisé",
+    "album_id": "21",
+    "activated": "1"
+},
+{
+    "id": "176",
+    "url": "uploads\/images\/Activite\/P1010335.JPG",
+    "title": "Centre équestre",
+    "content": "Les écuries du Iorga à Buzancy",
+    "album_id": "21",
+    "activated": "1"
+},
+{
+    "id": "177",
+    "url": "uploads\/images\/Activite\/plan entier1.jpg",
+    "title": "Itinéraire de randonnées",
+    "content": "Entre Buzancy et Fossé",
+    "album_id": "21",
+    "activated": "1"
+},
+{
+    "id": "178",
+    "url": "uploads\/images\/Activite\/planfrancebis.jpg",
+    "title": "Situation des Ardennes",
+    "content": "Au cœur de l'Europe",
+    "album_id": "21",
+    "activated": "1"
+},
+{
+    "id": "179",
+    "url": "uploads\/images\/Activite\/situation gites.PNG",
+    "title": "Situation des gîtes",
+    "content": "Dans un rayon de 4 à 8 km autour de Fossé",
+    "album_id": "21",
+    "activated": "1"
+},
+{
+    "id": "181",
+    "url": "uploads\/images\/Manola\/Presentation\/P1010194.JPG",
+    "title": "Arrière du gite",
+    "content": "Arrière du gite",
+    "album_id": "2",
+    "activated": "1"
+},
+{
+    "id": "182",
+    "url": "uploads\/images\/Manola\/Presentation\/P1010189.JPG",
+    "title": "Extérieur",
+    "content": "Accès par l'avant du gîte",
+    "album_id": "2",
+    "activated": "1"
+},
+{
+    "id": "183",
+    "url": "uploads\/images\/Manola\/Presentation\/P1010203.JPG",
+    "title": "Terrain de Jeux",
+    "content": "Derrière le gîte avec trampoline et but pour jouer au ballon",
+    "album_id": "2",
+    "activated": "1"
+},
+{
+    "id": "185",
+    "url": "uploads\/images\/Manola\/Presentation\/plan de situation copie.jpg",
+    "title": "Plan",
+    "content": "La piscine est à 150 m du gîte",
+    "album_id": "2",
+    "activated": "1"
+},
+{
+    "id": "187",
+    "url": "uploads\/images\/Manola\/Interieur\/P1010075.JPG",
+    "title": "Coin salon",
+    "content": "Deux canapés convertibles",
+    "album_id": "3",
+    "activated": "1"
+},
+{
+    "id": "188",
+    "url": "uploads\/images\/Manola\/Interieur\/P1010055.JPG",
+    "title": "Meuble TV et lecture",
+    "content": "TV 81 cm, magnétoscope, lecteur DVD, cassettes. Feu à l'âtre pour agrémenter les soirées d'hiver",
+    "album_id": "3",
+    "activated": "1"
+},
+{
+    "id": "189",
+    "url": "uploads\/images\/Manola\/Interieur\/P1010076.JPG",
+    "title": "Vue d'ensemble",
+    "content": "Grande pièce à vivre avec d'un côté le coin cuisine et repas et de l'autre le coin salon séparé par un meuble de rangement.",
+    "album_id": "3",
+    "activated": "1"
+},
+{
+    "id": "190",
+    "url": "uploads\/images\/Manola\/Interieur\/P1010058.JPG",
+    "title": "Partie salle à manger",
+    "content": "Table prévue pour une quinzaine de personnes. il y a également 2 chaises hautes pour enfant.\r\nla table mesure 3,2 m",
+    "album_id": "3",
+    "activated": "1"
+},
+{
+    "id": "191",
+    "url": "uploads\/images\/Manola\/Interieur\/P1010078.JPG",
+    "title": "Cuisine",
+    "content": "Toute équipée, four, four micro-onde, réfrigérateur avec partie congélation, plaque induction, lave vaisselle",
+    "album_id": "3",
+    "activated": "1"
+},
+{
+    "id": "192",
+    "url": "uploads\/images\/Manola\/Interieur\/P1010043.JPG",
+    "title": "Chambre cannelle",
+    "content": "Lit 2 personnes (dim:160*200). Chauffage électrique dans toutes les piéces",
+    "album_id": "3",
+    "activated": "1"
+},
+{
+    "id": "193",
+    "url": "uploads\/images\/Manola\/Interieur\/P1010044.JPG",
+    "title": "Chambre Cannelle",
+    "content": "Placard de rangement et lit bébé",
+    "album_id": "3",
+    "activated": "1"
+},
+{
+    "id": "194",
+    "url": "uploads\/images\/Manola\/Interieur\/P1010060.JPG",
+    "title": "Chambre turquoise",
+    "content": "Lit deux personnes (dim : 140*190), et également un lit bébé (dim : 135*62).",
+    "album_id": "3",
+    "activated": "1"
+},
+{
+    "id": "195",
+    "url": "uploads\/images\/Manola\/Interieur\/P1010038.JPG",
+    "title": "Chambre anis",
+    "content": "Lit 2 personnes (dim:140*200) et lit superposé (dim:90*200(x2)). Chambre spéciale personne avec handicap.",
+    "album_id": "3",
+    "activated": "1"
+},
+{
+    "id": "196",
+    "url": "uploads\/images\/Manola\/Interieur\/P1010050.JPG",
+    "title": "Chambre corail",
+    "content": "Lits superposés (dim : 140*200 en bas) et (dim : 90*200 en haut), chambre de faible surface pouvant accueillir 3 personnes.",
+    "album_id": "3",
+    "activated": "1"
+},
+{
+    "id": "197",
+    "url": "uploads\/images\/Manola\/Interieur\/P1010047.JPG",
+    "title": "Salle de bain grise",
+    "content": "Douche italienne avec siége spécial selon les normes pour personne avec handicap. Machine à laver.",
+    "album_id": "3",
+    "activated": "1"
+},
+{
+    "id": "198",
+    "url": "uploads\/images\/Manola\/Interieur\/P1010065.JPG",
+    "title": "Salle de bain marron",
+    "content": "Douche et placard avec table et fer à repasser. Quelques ustensiles pour bébé sont à votre disposition.",
+    "album_id": "3",
+    "activated": "1"
+},
+{
+    "id": "199",
+    "url": "uploads\/images\/Manola\/Interieur\/P1010028.JPG",
+    "title": "Terrasse",
+    "content": "Barbecue et table de ping pong",
+    "album_id": "3",
+    "activated": "1"
+},
+{
+    "id": "205",
+    "url": "uploads\/images\/Manola\/Piscine\/IMG_2278.jpg",
+    "title": "Espace piscine la nuit",
+    "content": "Vous en verrez de toutes les couleurs.",
+    "album_id": "1",
+    "activated": "1"
+},
+{
+    "id": "206",
+    "url": "uploads\/images\/Manola\/Piscine\/P1010296.JPG",
+    "title": "Coin détente",
+    "content": "Table et fauteuils pour prendre son goûter.",
+    "album_id": "1",
+    "activated": "1"
+},
+{
+    "id": "208",
+    "url": "uploads\/images\/Manola\/Piscine\/P1010312.JPG",
+    "title": "Billard",
+    "content": "Dans la véranda à côté de la piscine.",
+    "album_id": "1",
+    "activated": "1"
+},
+{
+    "id": "209",
+    "url": "uploads\/images\/Manola\/Piscine\/P1010311.JPG",
+    "title": "Baby Foot",
+    "content": "Dans la véranda.",
+    "album_id": "1",
+    "activated": "1"
+},
+{
+    "id": "210",
+    "url": "uploads\/images\/Brinchette\/Presentation\/P1010181.JPG",
+    "title": "Façade avant",
+    "content": "Maison moderne avec 1 étage.",
+    "album_id": "10",
+    "activated": "1"
+},
+{
+    "id": "211",
+    "url": "uploads\/images\/Brinchette\/Presentation\/P1010186.JPG",
+    "title": "Aire de jeu",
+    "content": "Dans un terrain complètement clos. Une table de ping pong peut être dépliée sur la terrasse ou sur le parking.",
+    "album_id": "10",
+    "activated": "1"
+},
+{
+    "id": "212",
+    "url": "uploads\/images\/Brinchette\/Presentation\/P1010182.JPG",
+    "title": "Trampoline",
+    "content": "A côté de la maison.",
+    "album_id": "10",
+    "activated": "1"
+},
+{
+    "id": "213",
+    "url": "uploads\/images\/Brinchette\/Presentation\/P1000935.JPG",
+    "title": "Terrain de pétanque",
+    "content": "A l'arrière de la maison.",
+    "album_id": "10",
+    "activated": "1"
+},
+{
+    "id": "215",
+    "url": "uploads\/images\/Brinchette\/Presentation\/plan RDC2.jpg",
+    "title": "Plan étage",
+    "content": "4 chambres, 1 salle de jeux.",
+    "album_id": "10",
+    "activated": "0"
+},
+{
+    "id": "216",
+    "url": "uploads\/images\/Brinchette\/Interieur\/P1000910.JPG",
+    "title": "Vue d'ensemble",
+    "content": "Salle à manger et coin salon, dans cette pièce une télévision.\r\nil y a 2 tables de 2,60 m chacune",
+    "album_id": "11",
+    "activated": "1"
+},
+{
+    "id": "217",
+    "url": "uploads\/images\/Brinchette\/Interieur\/P1000926.JPG",
+    "title": "Salle à manger",
+    "content": "Vue de l'autre côté avec accès à la piscine.",
+    "album_id": "11",
+    "activated": "1"
+},
+{
+    "id": "218",
+    "url": "uploads\/images\/Brinchette\/Interieur\/P1000914.JPG",
+    "title": "Cuisine toute équipée",
+    "content": "Plaque induction, four, four micro onde, frigo, vaisselle pour une vingtaine de personnes.",
+    "album_id": "11",
+    "activated": "1"
+},
+{
+    "id": "219",
+    "url": "uploads\/images\/Brinchette\/Interieur\/P1000916.JPG",
+    "title": "Salle de bain noire et blanche",
+    "content": "Lavabo double, armoire de rangement, WC, machine à laver et séche linge. Douche italienne pour personne avec handicap.",
+    "album_id": "11",
+    "activated": "1"
+},
+{
+    "id": "220",
+    "url": "uploads\/images\/Brinchette\/Interieur\/P1000922.JPG",
+    "title": "Chambre 1 saphir au rez de chaussée",
+    "content": "2 couchages : Chambre prévue pour personne avec handicap, 1 lit 140 x 200",
+    "album_id": "11",
+    "activated": "1"
+},
+{
+    "id": "221",
+    "url": "uploads\/images\/Brinchette\/Interieur\/P1000967.JPG",
+    "title": "Chambre rubis à l'étage",
+    "content": "4 couchages : 1 lit 140 x 200 et 1 lit superposé 90 x 200. Toutes les chambres sont équipées de stores électriques.",
+    "album_id": "11",
+    "activated": "1"
+},
+{
+    "id": "222",
+    "url": "uploads\/images\/Brinchette\/Interieur\/P1000960.JPG",
+    "title": "Chambre diamant à l'étage",
+    "content": "Lit 1,40 x 2 m et lit bébé.",
+    "album_id": "11",
+    "activated": "1"
+},
+{
+    "id": "223",
+    "url": "uploads\/images\/Brinchette\/Interieur\/P1000963.JPG",
+    "title": "Chambre  émeraude à l'étage",
+    "content": "4 couchages : 2 lits superposés 2 fois 90 x 200. Il y a un radiateur dans chaque chambre.",
+    "album_id": "11",
+    "activated": "1"
+},
+{
+    "id": "224",
+    "url": "uploads\/images\/Brinchette\/Interieur\/P1000978.JPG",
+    "title": "Chambre  topaze à l'étage",
+    "content": "5 couchages : 1 lit superposé 2 fois 90x200 et 1 lit superposé 1 fois 140x200 et 1 fois 90x200.",
+    "album_id": "11",
+    "activated": "1"
+},
+{
+    "id": "225",
+    "url": "uploads\/images\/Brinchette\/Interieur\/P1000948.JPG",
+    "title": "Salle de jeux",
+    "content": "Avec un coin salon, TV avec WII et 4 manettes, baby foot.",
+    "album_id": "11",
+    "activated": "1"
+},
+{
+    "id": "226",
+    "url": "uploads\/images\/Brinchette\/Interieur\/P1000952.JPG",
+    "title": "Coin billard",
+    "content": "Billard et cabine infra rouge.",
+    "album_id": "11",
+    "activated": "1"
+},
+{
+    "id": "227",
+    "url": "uploads\/images\/Brinchette\/Piscine\/brinchette_6439.JPG",
+    "title": "Piscine\taccès par la salle à manger",
+    "content": "Les dimensions sont de 9 m par 4,50 m. Profondeur 1 m à l'entrée et 1,50 m au plus profond.",
+    "album_id": "12",
+    "activated": "1"
+},
+{
+    "id": "228",
+    "url": "uploads\/images\/Brinchette\/Piscine\/P1000944.JPG",
+    "title": "Piscine vue du fond",
+    "content": "SPA dans ce même local.",
+    "album_id": "12",
+    "activated": "1"
+},
+{
+    "id": "229",
+    "url": "uploads\/images\/Brinchette\/Piscine\/P1000945.JPG",
+    "title": "SPA et coin sanitaire",
+    "content": "Petite pataugeoire pour enfants",
+    "album_id": "12",
+    "activated": "1"
+},
+{
+    "id": "230",
+    "url": "uploads\/images\/Brinchette\/Piscine\/IMG_1790.JPG",
+    "title": "SPA",
+    "content": "5 à 6 places.",
+    "album_id": "12",
+    "activated": "1"
+},
+{
+    "id": "231",
+    "url": "uploads\/images\/Brinchette\/Piscine\/IMG_1803.JPG",
+    "title": "Sanitaire de la piscine",
+    "content": "Douche et toilette",
+    "album_id": "12",
+    "activated": "1"
+},
+{
+    "id": "232",
+    "url": "uploads\/images\/Brinchette\/Piscine\/IMG_2741.JPG",
+    "title": "La piscine la nuit",
+    "content": "Eclairage du bassin",
+    "album_id": "12",
+    "activated": "1"
+},
+{
+    "id": "233",
+    "url": "uploads\/images\/Lauberoye\/Presentation\/P1010095.JPG",
+    "title": "Gîte Lauberoye",
+    "content": "Sur un terrain de 6 ha avec étang. Il a 6 chambres dont 3 au rez de chaussée.",
+    "album_id": "13",
+    "activated": "1"
+},
+{
+    "id": "246",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1010151.JPG",
+    "title": "Véranda",
+    "content": "Grande salle de 4,40 m de large qui sert de salle à manger pour une vingtaine de personnes.\r\nIl y a 2 tables de 3 m chacune",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "249",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/IMG_6302.JPG",
+    "title": "Cuisine",
+    "content": "Congélateur coffre.",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "250",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1010144.JPG",
+    "title": "Cuisine",
+    "content": "Placards, grille pain, four, micro ondes, lave vaisselle.",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "251",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1010412.JPG",
+    "title": "Salle de bain du rez de chaussée",
+    "content": "Avec baignoire.",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "252",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1010408.JPG",
+    "title": "Chambre Violette",
+    "content": "Au rez de chaussée, lit 140 x 200",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "255",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1010428.JPG",
+    "title": "Salle de bain de l'étage",
+    "content": "Avec douche et WC.",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "256",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1010463.JPG",
+    "title": "Chambre bouton d'or à l'étage",
+    "content": "Lit 1,40 x 1,90 m et lit superposé 2 fois 0,90 x 2 m.",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "260",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1010431.JPG",
+    "title": "Salle de jeux",
+    "content": "Billard, chaine hifi qui sonorise la piscine.",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "261",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1010140.JPG",
+    "title": "Salle de jeux",
+    "content": "Baby foot Bonzini. Au fond on peut voir la porte d'accès à la piscine",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "262",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1010130.JPG",
+    "title": "Cabine infra rouge",
+    "content": "5 à 6 personnes",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "263",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1010134.JPG",
+    "title": "Buanderie",
+    "content": "Lave linge, sèche linge, douche et WC dans cette pièce.",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "264",
+    "url": "uploads\/images\/Lauberoye\/Piscine\/P1010118.JPG",
+    "title": "Piscine",
+    "content": "Quelques fauteuils pour se détendre.",
+    "album_id": "15",
+    "activated": "1"
+},
+{
+    "id": "265",
+    "url": "uploads\/images\/Lauberoye\/Piscine\/P1010121.JPG",
+    "title": "Piscine",
+    "content": "Vue de l'autre côté, dimensions 10m x 5m. Profondeur 1 m à l'entrée et 1,50 m au plus profond.",
+    "album_id": "15",
+    "activated": "1"
+},
+{
+    "id": "266",
+    "url": "uploads\/images\/Lauberoye\/Piscine\/P1010129.JPG",
+    "title": "SPA Phybris",
+    "content": "Pour 5 à 6 personnes avec filtre à sable.",
+    "album_id": "15",
+    "activated": "1"
+},
+{
+    "id": "267",
+    "url": "uploads\/images\/Lauberoye\/Piscine\/IMG_5319.JPG",
+    "title": "SPA",
+    "content": "Intérieur.",
+    "album_id": "15",
+    "activated": "1"
+},
+{
+    "id": "268",
+    "url": "uploads\/images\/Lauberoye\/Piscine\/IMG_7326.JPG",
+    "title": "La nuit",
+    "content": "Eclairage SPA et piscine.",
+    "album_id": "15",
+    "activated": "1"
+},
+{
+    "id": "269",
+    "url": "uploads\/images\/Lauberoye\/Piscine\/IMG_8017.JPG",
+    "title": "Douche et WC au fond à gauche",
+    "content": "Barrière de protection pour les escaliers",
+    "album_id": "15",
+    "activated": "1"
+},
+{
+    "id": "289",
+    "url": "uploads\/images\/Petit Nay\/Présentation\/IMG_5885.JPG",
+    "title": "Le bâtiment vue de devant",
+    "content": "dans son ensemble.",
+    "album_id": "28",
+    "activated": "1"
+},
+{
+    "id": "290",
+    "url": "uploads\/images\/Petit Nay\/Présentation\/IMG_5890.JPG",
+    "title": "Le bâtiment dans son ensemble",
+    "content": "vue de derrière côté gauche",
+    "album_id": "28",
+    "activated": "1"
+},
+{
+    "id": "294",
+    "url": "uploads\/images\/Petit Nay\/Présentation\/P1010695.JPG",
+    "title": "Possibilité de manger dehors",
+    "content": "Et de faire un barbecue",
+    "album_id": "28",
+    "activated": "1"
+},
+{
+    "id": "333",
+    "url": "uploads\/images\/Activite\/bowling.jpg",
+    "title": "Bowling de Douzy",
+    "content": "14 pistes homologuées à environ 35 km",
+    "album_id": "21",
+    "activated": "1"
+},
+{
+    "id": "335",
+    "url": "uploads\/images\/Activite\/spectacle-cassine2017.jpg",
+    "title": "Spectacle de la Cassine à Vendresse",
+    "content": "Spectacle son et lumières très réputé à une trentaine de km",
+    "album_id": "21",
+    "activated": "0"
+},
+{
+    "id": "337",
+    "url": "uploads\/images\/Manola\/Piscine\/P1030770.JPG",
+    "title": "Piscine de 12 m par 5,50 m",
+    "content": "La profondeur du bassin va de 1 m à 1 m 90. Le liner a été changé en février 2017.",
+    "album_id": "1",
+    "activated": "1"
+},
+{
+    "id": "338",
+    "url": "uploads\/images\/Manola\/Piscine\/P1030775.JPG",
+    "title": "Espace piscine",
+    "content": "Vue du fond. Il y a un rebord tout autour ce qui permet  d'avoir pied en bordure",
+    "album_id": "1",
+    "activated": "1"
+},
+{
+    "id": "339",
+    "url": "uploads\/images\/Manola\/Piscine\/P1030757.JPG",
+    "title": "Accès dans l'eau",
+    "content": "Partout des rideaux qui permettent de préserver l'intimité de chacun.",
+    "album_id": "1",
+    "activated": "1"
+},
+{
+    "id": "340",
+    "url": "uploads\/images\/Manola\/Piscine\/P1030767.JPG",
+    "title": "Escaliers et nouveau toboggan",
+    "content": "Accès facile",
+    "album_id": "1",
+    "activated": "1"
+},
+{
+    "id": "341",
+    "url": "uploads\/images\/Manola\/Piscine\/P1030781.JPG",
+    "title": "Piscine de nuit",
+    "content": "Eclairage du bassin pour la nuit",
+    "album_id": "1",
+    "activated": "1"
+},
+{
+    "id": "343",
+    "url": "uploads\/images\/Lauberoye\/Presentation\/IMG_3654.JPG",
+    "title": "Brochet de 1,10 m",
+    "content": "pêché par un de nos locataires",
+    "album_id": "13",
+    "activated": "1"
+},
+{
+    "id": "355",
+    "url": "uploads\/images\/Petit Nay\/Présentation\/P1050076.jpg",
+    "title": "Trampoline et toboggan",
+    "content": "Derrière la maison",
+    "album_id": "28",
+    "activated": "1"
+},
+{
+    "id": "356",
+    "url": "uploads\/images\/Petit Nay\/Présentation\/P1050150.jpg",
+    "title": "Terrasse à l'arrière de la maison",
+    "content": "Beaucoup d'espace, la terrasse mesure 27,50  m du coin gauche sans compter l'emplacement du spa, sur 6 m de large",
+    "album_id": "28",
+    "activated": "1"
+},
+{
+    "id": "357",
+    "url": "uploads\/images\/Petit Nay\/Présentation\/P1010828.jpg",
+    "title": "SPA 6 places",
+    "content": "A l'extérieur",
+    "album_id": "28",
+    "activated": "1"
+},
+{
+    "id": "358",
+    "url": "uploads\/images\/Petit Nay\/Présentation\/etang4.jpg",
+    "title": "Ruisseau",
+    "content": "Longe la propriété",
+    "album_id": "28",
+    "activated": "1"
+},
+{
+    "id": "359",
+    "url": "uploads\/images\/Petit Nay\/Présentation\/etang2.jpg",
+    "title": "Accès à l'étang",
+    "content": "Il faut traverser le ruisseau",
+    "album_id": "28",
+    "activated": "1"
+},
+{
+    "id": "360",
+    "url": "uploads\/images\/Petit Nay\/Présentation\/etang3.jpg",
+    "title": "L'étang",
+    "content": "Faire le tour en se promenant est très agréable",
+    "album_id": "28",
+    "activated": "1"
+},
+{
+    "id": "361",
+    "url": "uploads\/images\/Petit Nay\/Présentation\/etang0.jpg",
+    "title": "Fréquentation",
+    "content": "Selon la saison , il y a aussi des oiseaux",
+    "album_id": "28",
+    "activated": "1"
+},
+{
+    "id": "362",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/01bar.jpg",
+    "title": "L'ancien bar de l'auberge",
+    "content": "Salle toute en longueur avec des petites tables de 0,80 m par 0,80 m. Au total dans ce gîte, il y a 25 tables de ce type.",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "363",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/01bar2.jpg",
+    "title": "Dans le bar coin télé",
+    "content": "Smart TV et barre de son. Accès au spa de dehors. Pièce de 4 m de large et 13 m de long. Jusqu'au bar la pièce fait 7,50 m",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "364",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/01sam.jpg",
+    "title": "Salle à Manger",
+    "content": "Avec une belle cheminée. Plusieurs dispositions des tables possibles. Pièce de 9,30 m de long sur 6,80 m au plus large et 5,60 m au moins large",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "365",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/01sam2.jpg",
+    "title": "Salle à manger",
+    "content": "10 petites tables de 1,20 m par 0,80 m que l'on met bout à bout pour organiser selon la convenance de chacun. En longueur, on peut en mettre 5 ou 6 sur 2 ou 3 rangées",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "366",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/01cuisine1.jpg",
+    "title": "Cuisine",
+    "content": "Tout le nécessaire pour préparer le café",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "367",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/01cuisine2.jpg",
+    "title": "Cuisine",
+    "content": "Coin cuisson : four plaque induction, petites et grosses casseroles",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "368",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/01cuisine3.jpg",
+    "title": "Cuisine",
+    "content": "Coin lavage, porte pour accéder directement derrière le gîte",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "369",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/01cuisine4.jpg",
+    "title": "Salle à proximité",
+    "content": "grande chambre froide",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "370",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/01buanderie.jpg",
+    "title": "Buanderie",
+    "content": "Lave linge, sèche linge, accessoires bébé",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "371",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/01sdj.jpg",
+    "title": "Salle de jeux",
+    "content": "Billard, baby, table ping pong, cabine infra rouge",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "372",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/01sdj2.jpg",
+    "title": "Salle de jeux",
+    "content": "La pièce fait 10 m sur 8, coin salon",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "373",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/01sdj3.jpg",
+    "title": "Salle de jeux",
+    "content": "Coin télé (smart TV et barre de son)",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "374",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/1verveine.jpg",
+    "title": "Au rez de chaussée chambre n° 1 verveine",
+    "content": "Lit 140 x 200, lit à étage 2 fois 90 x 200 + lit tiroir 90 x 200 et lit bébé",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "375",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/2tilleul.jpg",
+    "title": "Au rez de chaussée chambre n° 2 tilleul",
+    "content": "Lit 140 x 200 et lit à étage 90 x 200 + lit tiroir 90 x 200 + lit Bébé",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "376",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/3biscitronnelle.jpg",
+    "title": "Au rez de chaussée chambre n° 3 citronnelle adaptée personne handicapée",
+    "content": "Lit 140 x 200 et salle de bain indépendante. Accès direct sur l'extérieur.",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "377",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/3sdb.jpg",
+    "title": "Salle de bain n° 1 de la chambre citronnelle",
+    "content": "Avec douche italienne",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "378",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/4romarin.jpg",
+    "title": "A l'étage chambre n° 4 romarin",
+    "content": "Lit 140 x 200 et salle de bain indépendante + lit bébé",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "379",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/4sdb.jpg",
+    "title": "Salle de bain n° 2 de la chambre Romarin",
+    "content": "Avec baignoire",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "380",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/5melisse.jpg",
+    "title": "A l'étage chambre n° 5 mélisse et salle de bain n° 3",
+    "content": "Lit 140 x 200 + lit bébé\r\nOn voit l'accès à la  salle de bain avec baignoire de cette chambre",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "381",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/6laurier.jpg",
+    "title": "A l'étage chambre n° 6  Laurier",
+    "content": "Lit 140 x 200 et salle de bain indépendante",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "382",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/6sdb.jpg",
+    "title": "Salle de bain n° 4 de la chambre Laurier",
+    "content": "Avec baignoire",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "383",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/7camomille.jpg",
+    "title": "A l'étage chambre n° 7 camomille",
+    "content": "Lit 140 x 200",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "384",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/8eucalyptus.jpg",
+    "title": "A l'étage chambre n° 8 eucalyptus",
+    "content": "2 lits 160 x 200 et 1 lit à étage 2 fois 90 x 200",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "385",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/9angelique.jpg",
+    "title": "A l'étage chambre n° 9 angélique",
+    "content": "Lit 140 x 200 et 1 lit à étage 2 fois 90 x 200",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "386",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/9sdb.jpg",
+    "title": "Salle de bain n° 5 pour les chambres 8 et 9",
+    "content": "Avec douche et double lavabos",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "387",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/amarjolaine.jpg",
+    "title": "A l'étage chambre n° 10 marjolaine",
+    "content": "Lit 140 x 200 et 1 lit à étage 2 fois 90 x 200 et salle de bain indépendante",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "388",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/asdb.jpg",
+    "title": "Salle de bain n° 6 de la chambre marjolaine",
+    "content": "Avec douche et 1 lavabo",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "389",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/blavande.JPG",
+    "title": "A l'étage dortoir n° 11 lavande",
+    "content": "4 lits à étage 2 fois 90 x 200, 8 couchages au total et 4 lits d'appoint supplémentaires",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "391",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/bsdb2.jpg",
+    "title": "Salles de bain n° 7 et 8 pour les 2 dortoirs",
+    "content": "2 salles d'eau avec 2 douches et 2 toilettes chacune, à l'origine prévues garçons d'un côté et filles de l'autre",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "392",
+    "url": "uploads\/images\/Petit Nay\/Présentation\/picture_20170529_115015.jpg",
+    "title": "Photo aérienne",
+    "content": "l'ensemble",
+    "album_id": "28",
+    "activated": "1"
+},
+{
+    "id": "393",
+    "url": "uploads\/images\/Petit Nay\/Présentation\/picture_20170618_173511.jpg",
+    "title": "Photo aérienne",
+    "content": "le parc",
+    "album_id": "28",
+    "activated": "1"
+},
+{
+    "id": "394",
+    "url": "uploads\/images\/Manola\/Piscine\/P1070571.JPG",
+    "title": "Cabine infra rouge 3 places",
+    "content": "Nouvelle cabine",
+    "album_id": "1",
+    "activated": "1"
+},
+{
+    "id": "395",
+    "url": "uploads\/images\/Petit Nay\/Présentation\/picture_20170601_130037.jpg",
+    "title": "Photo aérienne",
+    "content": "la maison, la grange, le laboratoire",
+    "album_id": "28",
+    "activated": "1"
+},
+{
+    "id": "396",
+    "url": "uploads\/images\/Manola\/Presentation\/P1070928b.jpg",
+    "title": "Trampoline",
+    "content": "Remplacement en avril 2018, excellent destressant",
+    "album_id": "2",
+    "activated": "1"
+},
+{
+    "id": "397",
+    "url": "uploads\/images\/Lauberoye\/Presentation\/P1080299_2.jpg",
+    "title": "Terrasse à l'arrière de la maison",
+    "content": "Avec barbecue",
+    "album_id": "13",
+    "activated": "1"
+},
+{
+    "id": "399",
+    "url": "uploads\/images\/Lauberoye\/Presentation\/P1070992_2.jpg",
+    "title": "L'étang à 100 m du gîte",
+    "content": "Côté entrée, destiné à la pêche, surface de 7700 m2",
+    "album_id": "13",
+    "activated": "1"
+},
+{
+    "id": "400",
+    "url": "uploads\/images\/Lauberoye\/Presentation\/P1080007_2.jpg",
+    "title": "2 pédalos",
+    "content": "A l'étang. Uniquement pendant la période estivale.",
+    "album_id": "13",
+    "activated": "1"
+},
+{
+    "id": "401",
+    "url": "uploads\/images\/Activite\/Screen Shot 06-14-18 at 07.01 PM.PNG",
+    "title": "Spectacle de la Cassine à Vendresse",
+    "content": "Spectacle son et lumières très réputé à une trentaine de km",
+    "album_id": "21",
+    "activated": "0"
+},
+{
+    "id": "402",
+    "url": "uploads\/images\/Petit Nay\/Présentation\/6.jpg",
+    "title": "Salle de la commune de Nouart",
+    "content": "Lors d'un mariage hébergé au gîte",
+    "album_id": "28",
+    "activated": "1"
+},
+{
+    "id": "403",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1080395.jpg",
+    "title": "Salle à manger et salon",
+    "content": "Rangement et 2 frigidaires",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "404",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1080388.jpg",
+    "title": "Coin salon",
+    "content": "Avec 1 canapé convertible et 1 smart TV.",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "406",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1090353.JPG",
+    "title": "Canapé du salon",
+    "content": "convertible 2 places",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "407",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1090349.JPG",
+    "title": "Nouveau canapé dans la salle de jeux",
+    "content": "plus confortable que le précédent",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "408",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1090348.JPG",
+    "title": "Convertible déplié",
+    "content": "4 places",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "409",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1090356.JPG",
+    "title": "Chambre Marguerite repeinte",
+    "content": "lits 140 x 200 et 140 x 190",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "410",
+    "url": "uploads\/images\/Lauberoye\/Presentation\/plan propriété.png",
+    "title": "Délimitation de la propriété",
+    "content": "environ 7000 M2",
+    "album_id": "13",
+    "activated": "1"
+},
+{
+    "id": "412",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/P1020429.JPG",
+    "title": "6 Tables rondes",
+    "content": "Possibilité d'installer ces plateaux, pour obtenir des tables rondes. Le diamètre est de 2 m. Il y a également 9 tables de 1,60 m par 0,80 m et 4 tables de 1,40 m par 0,80 m.",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "413",
+    "url": "uploads\/images\/Activite\/La cassine1.PNG",
+    "title": "La cassine à Vendresse",
+    "content": "35 ans",
+    "album_id": "21",
+    "activated": "1"
+},
+{
+    "id": "414",
+    "url": "uploads\/images\/Activite\/la cassine2.PNG",
+    "title": "La cassine à Vendresse",
+    "content": "Spectacle son et lumière",
+    "album_id": "21",
+    "activated": "1"
+},
+{
+    "id": "415",
+    "url": "uploads\/images\/Petit Nay\/Intérieur\/P1090553.JPG",
+    "title": "A l'étage dortoir n° 12 menthe",
+    "content": "3 lits à étage 2 fois 90 x 200, 6 couchages au total, 4 lits d'appoint supplémentaires et 1 lit 2 personnes",
+    "album_id": "29",
+    "activated": "1"
+},
+{
+    "id": "416",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1090698.jpg",
+    "title": "Chambre coquelicot",
+    "content": "Au rez de chaussée lit 1,40 x 2 m en bas et 0.9 x 2 m en haut.",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "417",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1090703.jpg",
+    "title": "Chambre Bleuet",
+    "content": "A l'étage, lit 1,40 x 2 m, lit tiroir pouvant accueillir 2 personnes et 1 lit bébé.",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "418",
+    "url": "uploads\/images\/Lauberoye\/Interieur\/P1090695.jpg",
+    "title": "chambre edelweiss",
+    "content": "Au rez de chaussée lit 1,40 x 2 m en bas et 0,90 x 2 m en haut.",
+    "album_id": "14",
+    "activated": "1"
+},
+{
+    "id": "419",
+    "url": "uploads\/images\/Lauberoye\/Presentation\/P1090728.jpg",
+    "title": "Vue de face",
+    "content": "Une extension a été ajouté pour la piscine.",
+    "album_id": "13",
+    "activated": "1"
+},
+{
+    "id": "420",
+    "url": "uploads\/images\/Lauberoye\/Presentation\/P1090716.jpg",
+    "title": "Arrière de la maison",
+    "content": "Terrasse avec barbecue et trampoline",
+    "album_id": "13",
+    "activated": "1"
+},
+{
+    "id": "421",
+    "url": "uploads\/images\/Lauberoye\/Presentation\/P1090724.jpg",
+    "title": "Côté gauche",
+    "content": "A côté de la piscine, éclairé pour jouer le soir.",
+    "album_id": "13",
+    "activated": "1"
+},
+{
+    "id": "422",
+    "url": "uploads\/images\/Lauberoye\/Presentation\/P1090714.jpg",
+    "title": "Côté droit",
+    "content": "Avec terrasse à l'abri et table de ping pong",
+    "album_id": "13",
+    "activated": "1"
+},
+{
+    "id": "423",
+    "url": "uploads\/images\/Lauberoye\/Presentation\/P1090610.jpg",
+    "title": "Aire de jeux",
+    "content": "Balançoire et toboggan.",
+    "album_id": "13",
+    "activated": "1"
+},
+{
+    "id": "424",
+    "url": "uploads\/images\/Petit Nay\/Présentation\/P1090664.jpg",
+    "title": "Nouveau barbecue",
+    "content": "Très efficace d'après nos locataires",
+    "album_id": "28",
+    "activated": "1"
+},
+{
+    "id": "425",
+    "url": "uploads\/images\/Petit Nay\/Présentation\/P1090659.jpg",
+    "title": "Panier de basket",
+    "content": "Pensez à prendre un ballon",
+    "album_id": "28",
+    "activated": "1"
+}
+]
+
+}
+]

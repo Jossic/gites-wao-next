@@ -1,0 +1,62 @@
+[
+{
+    "type": "header",
+    "version": "4.9.7",
+    "comment": "Export to JSON plugin for PHPMyAdmin"
+},
+{
+    "type": "database",
+    "name": "db624755550"
+},
+{
+    "type": "table",
+    "name": "fos_user_admin",
+    "database": "db624755550",
+    "data": 
+[
+{
+    "id": "2",
+    "username": "wao",
+    "username_canonical": "wao",
+    "email": "contact@gites-wao.fr",
+    "email_canonical": "contact@gites-wao.fr",
+    "enabled": "1",
+    "salt": "1rbs8ljbtq4gswog8s4s00kccoc4808",
+    "password": "AO62NNrDbZYP09bd+yo82tDrxWchydNW99b0A0b+8f3j2qqd\/MUh6wcXEQllVAXpfT3yTjJgXPfWZd4dPJJ5\/Q==",
+    "last_login": "2016-05-04 14:18:13",
+    "confirmation_token": null,
+    "password_requested_at": null,
+    "roles": "a:1:{i:0;s:12:\"ROLE_PROJECT\";}"
+},
+{
+    "id": "4",
+    "username": "saswao",
+    "username_canonical": "saswao",
+    "email": "direction@gites-wao.fr",
+    "email_canonical": "direction@gites-wao.fr",
+    "enabled": "1",
+    "salt": "4kbapawra7eog8cc04gogw8s0w0ko4g",
+    "password": "X0TbViFFzOEicsJNWpheUR3z2RLTHKXo2c22oCcIvjx47Zp4y7FQCPEuqaooe7+Eg0IVVrXpNPoqPtxBFRgRzA==",
+    "last_login": "2021-02-13 09:17:23",
+    "confirmation_token": null,
+    "password_requested_at": null,
+    "roles": "a:1:{i:0;s:10:\"ROLE_ADMIN\";}"
+},
+{
+    "id": "5",
+    "username": "tempuser",
+    "username_canonical": "tempuser",
+    "email": "delcourte.quentin@hotmail.com",
+    "email_canonical": "delcourte.quentin@hotmail.com",
+    "enabled": "1",
+    "salt": "7wdnvllrct8gwkkccsowcgg00g0k0c8",
+    "password": "2LqV+X84dxzGIMDyxfDGhEkm9WcGLeFJKZoWA03WCgGbr2\/AU81m8InUDN82IhebaJmClTX1ic8w7Ger0OFaTA==",
+    "last_login": "2021-02-02 20:34:32",
+    "confirmation_token": null,
+    "password_requested_at": null,
+    "roles": "a:1:{i:0;s:10:\"ROLE_ADMIN\";}"
+}
+]
+
+}
+]
