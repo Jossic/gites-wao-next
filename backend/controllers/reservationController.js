@@ -1,6 +1,7 @@
 import Reservation from '../models/ReservationModel.js';
 import asyncHandler from 'express-async-handler';
 import validateHuman from '../utils/validateHuman.js';
+import Client from '../models/clientModel.js';
 
 // @desc      Fetch all reservations
 // @route     GET /api/reservation
@@ -91,26 +92,11 @@ const updateReservation = asyncHandler(async (req, res) => {
 		reservation.repondu = true;
 		console.log('reservation avant save', reservation);
 
-		const updatedreservation = await reservation.save();
+		const updatedReservation = await reservation.save();
 		res.json({
-			updatedreservation,
+			updatedReservation,
 			text: 'Le mail a bien été envoyé, une copie vous sera envoyée',
 		});
-	} else {
-		res.status(404);
-		throw new Error('Reservation non trouvée');
-	}
-});
-// @desc      Set Vu = true
-// @route     PUT /api/reservation/:id/vu
-// @access    Private/Admin
-const setVu = asyncHandler(async (req, res) => {
-	const reservation = await Reservation.findById(req.params.id);
-	if (reservation) {
-		reservation.vu = true;
-
-		const updatedReservation = await reservation.save();
-		res.json(updatedReservation);
 	} else {
 		res.status(404);
 		throw new Error('Reservation non trouvée');
