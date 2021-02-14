@@ -21,7 +21,7 @@ const getGites = asyncHandler(async (req, res) => {
 // @access    Public
 const getGitesNoms = asyncHandler(async (req, res) => {
 	const gites = await Gite.find({}).select('nom slug');
-	console.log('back gites noms', gites);
+	// console.log('back gites noms', gites);
 	res.json(gites);
 });
 

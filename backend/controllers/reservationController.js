@@ -1,7 +1,7 @@
 import Reservation from '../models/ReservationModel.js';
 import asyncHandler from 'express-async-handler';
 import validateHuman from '../utils/validateHuman.js';
-import Client from '../models/clientModel.js';
+// import Client from '../models/clientModel.js';
 
 // @desc      Fetch all reservations
 // @route     GET /api/reservation

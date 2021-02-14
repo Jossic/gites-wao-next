@@ -230,7 +230,25 @@ function getSteps() {
 const ReservationForm = () => {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = useState(0);
-	const { control, handleSubmit } = useForm();
+	const { control, register, handleSubmit, setValue } = useForm({
+		defaultValues: {
+			gite: 'manola',
+			nbPers: 10,
+			nbEnf: 5,
+			nbChien: 1,
+			litFait: true,
+			civilite: 'mmme',
+		},
+	});
+
+	const handleChange = (e) => {
+		setValue('civilite', e.target.value);
+	};
+
+	React.useEffect(() => {
+		register('civilite'); // custom register Antd input
+	}, [register]);
+
 	const steps = getSteps();
 
 	const [selectedDate, setSelectedDate] = useState();
@@ -293,6 +311,8 @@ const ReservationForm = () => {
 					{/* <FormHelperText>Réservation sur le gîte :</FormHelperText> */}
 				</FormControl>
 				<TextField
+					inputRef={register}
+					name='nbPers'
 					id='standard-number'
 					label='Nombre de personnes total'
 					type='number'
@@ -301,6 +321,8 @@ const ReservationForm = () => {
 					}}
 				/>
 				<TextField
+					inputRef={register}
+					name='nbEnf'
 					id='standard-number'
 					label='Dont enfants de moins de 18 ans'
 					type='number'
@@ -351,23 +373,53 @@ const ReservationForm = () => {
 					<FormGroup>
 						<Grid container justify='space-around'>
 							<FormControlLabel
-								control={<Checkbox />}
+								control={
+									<Checkbox
+										name='checkMail'
+										inputRef={register}
+										defaultValue={false}
+									/>
+								}
 								label='Mail'
 							/>
 							<FormControlLabel
-								control={<Checkbox />}
+								control={
+									<Checkbox
+										name='checkTel'
+										inputRef={register}
+										defaultValue={true}
+									/>
+								}
 								label='Téléphone'
 							/>
 							<FormControlLabel
-								control={<Checkbox />}
+								control={
+									<Checkbox
+										name='checkAbritel'
+										inputRef={register}
+										defaultValue={false}
+									/>
+								}
 								label='Abritel'
 							/>
 							<FormControlLabel
-								control={<Checkbox />}
+								control={
+									<Checkbox
+										name='checkLeboncoin'
+										inputRef={register}
+										defaultValue={false}
+									/>
+								}
 								label='Leboncoin'
 							/>
 							<FormControlLabel
-								control={<Checkbox />}
+								control={
+									<Checkbox
+										name='checkAutre'
+										inputRef={register}
+										defaultValue={false}
+									/>
+								}
 								label='Autre'
 							/>
 						</Grid>
@@ -376,6 +428,8 @@ const ReservationForm = () => {
 				</FormControl>
 				<Grid container justify='space-around'>
 					<TextField
+						inputRef={register}
+						name='nbChien'
 						id='standard-number'
 						label='Nombre de chien ? (3€/jour/animal)'
 						type='number'
@@ -386,9 +440,9 @@ const ReservationForm = () => {
 					<FormControlLabel
 						control={
 							<Switch
-								// checked={state.checkedB}
-								// onChange={handleChange}
-								// name="checkedB"
+								inputRef={register}
+								checked={true}
+								name='litFait'
 								color='primary'
 							/>
 						}
@@ -410,28 +464,51 @@ const ReservationForm = () => {
 						Civilité
 					</InputLabel>
 					<Select
-						labelId='demo-simple-select-placeholder-label-label'
-						id='demo-simple-select-placeholder-label'
-						// value={gites.slug}
-						// onChange={handleChange}
+						// labelId='demo-simple-select-placeholder-label-label'
+						// id='demo-simple-select-placeholder-label'
+						name='civilite'
+						onChange={handleChange}
 						displayEmpty
 						className={classes.selectEmpty}>
-						<MenuItem value=''>M. & Mme</MenuItem>
-						<MenuItem value=''>Mme</MenuItem>
-						<MenuItem value=''>Mlle</MenuItem>
-						<MenuItem value=''>M.</MenuItem>
-						<MenuItem value=''>Association</MenuItem>
-						<MenuItem value=''>Comité d'entreprise</MenuItem>
-						<MenuItem value=''>Société</MenuItem>
-						<MenuItem value=''>Entreprise</MenuItem>
-						<MenuItem value=''>Foyer de vie</MenuItem>
-						<MenuItem value=''>Foyer d'accueil</MenuItem>
-						<MenuItem value=''>Famille</MenuItem>
-						<MenuItem value=''>Autres</MenuItem>
+						<MenuItem value='mmme'>M. & Mme</MenuItem>
+						<MenuItem value='mme'>Mme</MenuItem>
+						<MenuItem value='mlle'>Mlle</MenuItem>
+						<MenuItem value='m'>M.</MenuItem>
+						<MenuItem value='asso'>Association</MenuItem>
+						<MenuItem value='ce'>Comité d'entreprise</MenuItem>
+						<MenuItem value='soc'>Société</MenuItem>
+						<MenuItem value='entr'>Entreprise</MenuItem>
+						<MenuItem value='foyervie'>Foyer de vie</MenuItem>
+						<MenuItem value='foyeracc'>Foyer d'accueil</MenuItem>
+						<MenuItem value='famil'>Famille</MenuItem>
+						<MenuItem value='autre'>Autres</MenuItem>
 					</Select>
 					{/* <FormHelperText>Réservation sur le gîte :</FormHelperText> */}
 				</FormControl>
+
+				{/* <Controller
+						name='civilite'
+						control={control}
+						options={[
+							{ value: 'mmme', label: 'M. & Mme' },
+							{ value: 'mme', label: 'Mme' },
+							{ value: 'mlle', label: 'Mlle' },
+							{ value: 'm', label: 'M.' },
+							{ value: 'asso', label: 'Association' },
+							{ value: 'ce', label: "Comité d'entreprise" },
+							{ value: 'soc', label: 'Société' },
+							{ value: 'entr', label: 'Entreprise' },
+							{ value: 'foyervie', label: 'Foyer de vie' },
+							{ value: 'foyeracc', label: "Foyer d'accueil" },
+							{ value: 'famil', label: 'Famille' },
+							{ value: 'autre', label: 'Autres' },
+						]}
+						as={Select}
+						className={classes.formControl}
+					/> */}
 				<TextField
+					inputRef={register}
+					name='client.nom'
 					id='standard-number'
 					label='Nom'
 					InputLabelProps={{
@@ -439,6 +516,8 @@ const ReservationForm = () => {
 					}}
 				/>
 				<TextField
+					inputRef={register}
+					name='client.prenom'
 					id='standard-number'
 					label='Prénom'
 					InputLabelProps={{
@@ -448,6 +527,8 @@ const ReservationForm = () => {
 			</Grid>
 			<Grid container justify='space-around'>
 				<TextField
+					inputRef={register}
+					name='client.adresse'
 					id='standard-number'
 					label='Adresse'
 					InputLabelProps={{
@@ -455,6 +536,8 @@ const ReservationForm = () => {
 					}}
 				/>
 				<TextField
+					inputRef={register}
+					name='client.cp'
 					id='standard-number'
 					label='Code Postal'
 					InputLabelProps={{
@@ -462,6 +545,8 @@ const ReservationForm = () => {
 					}}
 				/>
 				<TextField
+					inputRef={register}
+					name='client.ville'
 					id='standard-number'
 					label='Ville'
 					InputLabelProps={{
@@ -496,6 +581,8 @@ const ReservationForm = () => {
 			</Grid>
 			<Grid container justify='space-around'>
 				<TextField
+					inputRef={register}
+					name='client.tel'
 					id='standard-number'
 					label='Téléphone'
 					type='telephone'
@@ -504,6 +591,8 @@ const ReservationForm = () => {
 					}}
 				/>
 				<TextField
+					inputRef={register}
+					name='client.mail'
 					id='standard-number'
 					label='Email'
 					type='mail'
@@ -514,7 +603,7 @@ const ReservationForm = () => {
 			</Grid>
 		</div>
 	);
-	const recap = () => <p>recap</p>;
+	const recap = () => <p>JSON.stringify()</p>;
 
 	function getStepContent(step) {
 		switch (step) {
@@ -532,7 +621,7 @@ const ReservationForm = () => {
 	}
 
 	const onSubmit = (data) => {
-		//
+		console.log('onSubmit data =>', data);
 	};
 
 	return (
@@ -555,7 +644,7 @@ const ReservationForm = () => {
 						{activeStep === steps.length ? (
 							<div>
 								<Typography className={classes.instructions}>
-									All steps completed - you&apos;re finished
+									Votre demande a bien été prise en compte
 								</Typography>
 								<Button
 									onClick={handleReset}
@@ -582,6 +671,11 @@ const ReservationForm = () => {
 									</Button>
 									<Button
 										variant='contained'
+										type={
+											activeStep === steps.length - 1
+												? 'submit'
+												: ''
+										}
 										color='primary'
 										onClick={handleNext}
 										className={classes.button}>

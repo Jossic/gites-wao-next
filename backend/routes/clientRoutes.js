@@ -3,7 +3,6 @@ const router = express.Router();
 import {
 	getAllClients,
 	getClientById,
-	// createClient,
 	removeClient,
 	updateClient,
 } from '../controllers/clientController.js';
