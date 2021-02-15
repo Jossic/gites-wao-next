@@ -36,6 +36,7 @@ import {
 	MuiPickersUtilsProvider,
 	KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { createReservation } from '../../actions/reservationActions';
 
 const QontoConnector = withStyles({
 	alternativeLabel: {
@@ -245,6 +246,14 @@ const ReservationForm = () => {
 			mail: 'jossic.lapierre@gmail.com',
 		},
 	});
+
+	const [values, setValues] = useState({
+		loading: false,
+		success: '',
+		error: '',
+		message: '',
+	});
+	const { message, success, loading, error } = values;
 
 	const handleChange = (name) => (e) => {
 		console.log('handleChange name vaut =>', name);
@@ -648,7 +657,25 @@ const ReservationForm = () => {
 	}
 
 	const onSubmit = (data) => {
+		setValues({ ...values, loading: true });
 		console.log('onSubmit data =>', data);
+		createReservation(data).then((result) => {
+			console.log('result vaut =>', result);
+			if (result.error) {
+				console.log('une grosse erreur');
+				setValues({ ...values, error: result.error });
+			} else {
+				setValues({
+					...values,
+					success: true,
+					loading: false,
+					message: result.message,
+				});
+				setTimeout(() => {
+					Router.push('/');
+				}, 3000);
+			}
+		});
 	};
 
 	return (

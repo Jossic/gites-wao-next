@@ -58,60 +58,76 @@ const createReservation = async (req, res) => {
 
 	//Checker l'adresse mail du client
 
-	const client = await Client.findOne({ mail });
-	if (client) {
-		client.nbVenu++;
-		// client.save()
-		res.json({ messageClient: 'il semble que vous soyez déjà venu' });
-	} else {
-		const client = new Client({
-			nom,
-			prenom,
-			adresse,
-			civilite,
-			cp,
-			ville,
-			pays,
-			tel,
-			mail,
-		});
-	}
-
-	const reservation = new Reservation({
-		gite,
-		nbPers,
-		nbEnf,
-		dateArrivee,
-		dateDepart,
-		nbChien,
-		contactPar,
-		litFait,
-		client: {
-			_id,
-			nom,
-			prenom,
-			adresse,
-			civilite,
-			cp,
-			ville,
-			pays,
-			tel,
-			mail,
-		},
-	});
-
-	console.log('Reservation dans le back', reservation);
-
-	reservation.save((error, reservation) => {
-		if (error) return res.status(400).json({ error });
-		if (reservation) {
-			res.status(201).json({
-				reservation,
-				message:
-					'Votre reservation à bien été envoyé, nous reviendrons vers vous rapidement, redirection en cours...',
+	Client.findOne({ mail }).exec((data) => {
+		console.log('après requete data vaut :', data);
+		if (data) {
+			console.log('data dans le if :', data);
+			data.nbVenu++;
+			// client.save()
+			res.json({ messageClient: 'il semble que vous soyez déjà venu' });
+		} else {
+			const client = new Client({
+				nom,
+				prenom,
+				adresse,
+				// civilite, //non recu
+				cp,
+				// ville, //non recu
+				pays,
+				// tel, //non recu
+				mail,
+			});
+			console.log('client dans le back', client);
+			client.save((error, client) => {
+				console.log('ici client vaut :', client);
+				console.log('ici error vaut :', error);
+				if (error) return res.status(400).json({ error });
+				if (client) {
+					console.log('client enregistré');
+					res.status(201).json({
+						client,
+						message: 'client enregistré',
+					});
+				}
 			});
 		}
 	});
+
+	// const reservation = new Reservation({
+	// 	gite,
+	// 	nbPers,
+	// 	nbEnf,
+	// 	dateArrivee,
+	// 	dateDepart,
+	// 	nbChien,
+	// 	contactPar,
+	// 	litFait,
+	// 	client: {
+	// 		_id: client._id,
+	// 		nom: client.nom,
+	// 		prenom: client.prenom,
+	// 		adresse: client.adresse,
+	// 		civilite: client.civilite,
+	// 		cp: client.cp,
+	// 		ville: client.ville,
+	// 		pays: client.pays,
+	// 		tel: client.tel,
+	// 		mail: client.mail,
+	// 	},
+	// });
+
+	// console.log('Reservation dans le back', reservation);
+
+	// reservation.save((error, reservation) => {
+	// 	if (error) return res.status(400).json({ error });
+	// 	if (reservation) {
+	// 		res.status(201).json({
+	// 			reservation,
+	// 			message:
+	// 				'Votre reservation à bien été envoyé, nous reviendrons vers vous rapidement, redirection en cours...',
+	// 		});
+	// 	}
+	// });
 };
 
 // @desc      Delete a reservation
