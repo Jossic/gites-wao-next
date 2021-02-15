@@ -1,7 +1,7 @@
 import Reservation from '../models/ReservationModel.js';
 import asyncHandler from 'express-async-handler';
 import validateHuman from '../utils/validateHuman.js';
-// import Client from '../models/clientModel.js';
+import Client from '../models/clientModel.js';
 
 // @desc      Fetch all reservations
 // @route     GET /api/reservation
@@ -29,22 +29,75 @@ const getReservationById = asyncHandler(async (req, res) => {
 // @route     POST /api/Reservation
 // @access    Private/Admin
 const createReservation = async (req, res) => {
-	const { nom, mail, msg, tel, vu, token } = req.body;
+	const {
+		gite,
+		nbPers,
+		nbEnf,
+		dateArrivee,
+		dateDepart,
+		nbChien,
+		contactPar,
+		litFait,
+		nom,
+		prenom,
+		adresse,
+		civilite,
+		cp,
+		ville,
+		pays,
+		tel,
+		mail,
+	} = req.body;
 
-	const human = await validateHuman(token);
-	if (!human) {
-		res.status(400);
-		res.json({ error: 'Vous avez été reconnu en tant que robot' });
-		return;
+	// const human = await validateHuman(token);
+	// if (!human) {
+	// 	res.status(400);
+	// 	res.json({ error: 'Vous avez été reconnu en tant que robot' });
+	// 	return;
+	// }
+
+	//Checker l'adresse mail du client
+
+	const client = await Client.findOne({ mail });
+	if (client) {
+		client.nbVenu++;
+		// client.save()
+		res.json({ messageClient: 'il semble que vous soyez déjà venu' });
+	} else {
+		const client = new Client({
+			nom,
+			prenom,
+			adresse,
+			civilite,
+			cp,
+			ville,
+			pays,
+			tel,
+			mail,
+		});
 	}
 
 	const reservation = new Reservation({
-		nom,
-		mail,
-		msg,
-		tel,
-		vu,
-		token,
+		gite,
+		nbPers,
+		nbEnf,
+		dateArrivee,
+		dateDepart,
+		nbChien,
+		contactPar,
+		litFait,
+		client: {
+			_id,
+			nom,
+			prenom,
+			adresse,
+			civilite,
+			cp,
+			ville,
+			pays,
+			tel,
+			mail,
+		},
 	});
 
 	console.log('Reservation dans le back', reservation);
@@ -54,7 +107,7 @@ const createReservation = async (req, res) => {
 		if (reservation) {
 			res.status(201).json({
 				reservation,
-				text:
+				message:
 					'Votre reservation à bien été envoyé, nous reviendrons vers vous rapidement, redirection en cours...',
 			});
 		}

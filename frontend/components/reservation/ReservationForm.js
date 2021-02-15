@@ -7,8 +7,6 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Check from '@material-ui/icons/Check';
 import SettingsIcon from '@material-ui/icons/Settings';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -36,7 +34,6 @@ import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import {
 	MuiPickersUtilsProvider,
-	KeyboardTimePicker,
 	KeyboardDatePicker,
 } from '@material-ui/pickers';
 
@@ -261,7 +258,9 @@ const ReservationForm = () => {
 	};
 
 	React.useEffect(() => {
-		register({ name: 'civilite', name: 'gite', name: 'pays' }); // custom register Antd input
+		register({ name: 'civilite' }); // custom register Antd input
+		register({ name: 'gite' }); // custom register Antd input
+		register({ name: 'pays' }); // custom register Antd input
 	}, [register]);
 
 	const steps = getSteps();
@@ -588,8 +587,8 @@ const ReservationForm = () => {
 					</InputLabel>
 					<Select
 						defaultValue='france'
-						labelId='demo-simple-select-placeholder-label-label'
-						id='demo-simple-select-placeholder-label'
+						// labelId='demo-simple-select-placeholder-label-label'
+						// id='demo-simple-select-placeholder-label'
 						name='pays'
 						onChange={handleChange('pays')}
 						displayEmpty
@@ -680,11 +679,6 @@ const ReservationForm = () => {
 									className={classes.button}>
 									Recommencer
 								</Button>
-								{/* <Button
-								// onClick={handleReset}
-								className={classes.button}>
-								Valider
-							</Button> */}
 							</div>
 						) : (
 							<div>
@@ -715,15 +709,6 @@ const ReservationForm = () => {
 											Suivant
 										</Button>
 									)}
-									{/* <Button
-										variant='contained'
-										color='primary'
-										onClick={handleNext}
-										className={classes.button}>
-										{activeStep === steps.length - 1
-											? 'Valider'
-											: 'Suivant'}
-									</Button> */}
 								</div>
 							</div>
 						)}
