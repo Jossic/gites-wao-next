@@ -70,9 +70,9 @@ const createReservation = async (req, res) => {
 				nom,
 				prenom,
 				adresse,
-				// civilite, //non recu
+				civilite,
 				cp,
-				// ville, //non recu
+				ville,
 				pays,
 				tel,
 				mail,

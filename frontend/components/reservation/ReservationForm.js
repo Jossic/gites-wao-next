@@ -255,22 +255,22 @@ const ReservationForm = () => {
 	});
 	const { message, success, loading, error } = values;
 
-	const handleChange = (name) => (e) => {
-		console.log('handleChange name vaut =>', name);
-		if (name === 'civilite') {
-			setValue('civilite', e.target.value);
-		} else if (name === 'gite') {
-			setValue('gite', e.target.value);
-		} else if (name === 'pays') {
-			setValue('pays', e.target.value);
-		}
-	};
+	// const handleChange = (name) => (e) => {
+	// 	console.log('handleChange name vaut =>', name);
+	// 	if (name === 'civilite') {
+	// 		setValue('civilite', e.target.value);
+	// 	} else if (name === 'gite') {
+	// 		setValue('gite', e.target.value);
+	// 	} else if (name === 'pays') {
+	// 		setValue('pays', e.target.value);
+	// 	}
+	// };
 
-	React.useEffect(() => {
-		register({ name: 'civilite' }); // custom register Antd input
-		register({ name: 'gite' }); // custom register Antd input
-		register({ name: 'pays' }); // custom register Antd input
-	}, [register]);
+	// React.useEffect(() => {
+	// 	register({ name: 'civilite' }); // custom register Antd input
+	// 	register({ name: 'gite' }); // custom register Antd input
+	// 	register({ name: 'pays' }); // custom register Antd input
+	// }, [register]);
 
 	const steps = getSteps();
 
@@ -324,7 +324,20 @@ const ReservationForm = () => {
 						id='demo-simple-select-placeholder-label-label'>
 						Réservation sur le gîte :
 					</InputLabel>
-					<Select
+					<Controller
+						control={control}
+						name='gite'
+						as={
+							<Select id='gite-select'>
+								{gites.map((gite, i) => (
+									<MenuItem key={gite.slug} value={gite.slug}>
+										{gite.nom}
+									</MenuItem>
+								))}
+							</Select>
+						}
+					/>
+					{/* <Select
 						defaultValue='manola'
 						labelId='demo-simple-select-placeholder-label-label'
 						id='demo-simple-select-placeholder-label'
@@ -335,7 +348,7 @@ const ReservationForm = () => {
 						{gites.map((gite, i) => (
 							<MenuItem value={gite.slug}>{gite.nom}</MenuItem>
 						))}
-					</Select>
+					</Select> */}
 					{/* <FormHelperText>Réservation sur le gîte :</FormHelperText> */}
 				</FormControl>
 				<TextField
@@ -497,6 +510,38 @@ const ReservationForm = () => {
 						id='demo-simple-select-placeholder-label-label'>
 						Civilité
 					</InputLabel>
+					<Controller
+						control={control}
+						name='civilite'
+						as={
+							<Select id='civilite-select'>
+								<MenuItem value='mmme'>M. & Mme</MenuItem>
+								<MenuItem value='mme'>Mme</MenuItem>
+								<MenuItem value='mlle'>Mlle</MenuItem>
+								<MenuItem value='m'>M.</MenuItem>
+								<MenuItem value='asso'>Association</MenuItem>
+								<MenuItem value='ce'>
+									Comité d'entreprise
+								</MenuItem>
+								<MenuItem value='soc'>Société</MenuItem>
+								<MenuItem value='entr'>Entreprise</MenuItem>
+								<MenuItem value='foyervie'>
+									Foyer de vie
+								</MenuItem>
+								<MenuItem value='foyeracc'>
+									Foyer d'accueil
+								</MenuItem>
+								<MenuItem value='famil'>Famille</MenuItem>
+								<MenuItem value='autre'>Autres</MenuItem>
+							</Select>
+						}
+					/>
+
+					{/* <InputLabel
+						shrink
+						id='demo-simple-select-placeholder-label-label'>
+						Civilité
+					</InputLabel>
 					<Select
 						defaultValue='m'
 						// labelId='demo-simple-select-placeholder-label-label'
@@ -517,7 +562,7 @@ const ReservationForm = () => {
 						<MenuItem value='foyeracc'>Foyer d'accueil</MenuItem>
 						<MenuItem value='famil'>Famille</MenuItem>
 						<MenuItem value='autre'>Autres</MenuItem>
-					</Select>
+					</Select> */}
 					{/* <FormHelperText>Réservation sur le gîte :</FormHelperText> */}
 				</FormControl>
 
@@ -594,6 +639,34 @@ const ReservationForm = () => {
 						id='demo-simple-select-placeholder-label-label'>
 						Pays
 					</InputLabel>
+
+					<Controller
+						control={control}
+						name='pays'
+						as={
+							<Select id='pays-select'>
+								<MenuItem value='france'>France</MenuItem>
+								<MenuItem value=''>--------</MenuItem>
+								<MenuItem value='autres'>Autres</MenuItem>
+								<MenuItem value='allemagne'>Allemagne</MenuItem>
+								<MenuItem value='angleterre'>
+									Angleterre
+								</MenuItem>
+								<MenuItem value='belgique'>Belgique</MenuItem>
+								<MenuItem value='hollande'>Hollande</MenuItem>
+								<MenuItem value='luxembourg'>
+									Luxembourg
+								</MenuItem>
+								<MenuItem value='suisse'>Suisse</MenuItem>
+							</Select>
+						}
+					/>
+
+					{/* <InputLabel
+						shrink
+						id='demo-simple-select-placeholder-label-label'>
+						Pays
+					</InputLabel>
 					<Select
 						defaultValue='france'
 						// labelId='demo-simple-select-placeholder-label-label'
@@ -611,7 +684,7 @@ const ReservationForm = () => {
 						<MenuItem value='hollande'>Hollande</MenuItem>
 						<MenuItem value='luxembourg'>Luxembourg</MenuItem>
 						<MenuItem value='suisse'>Suisse</MenuItem>
-					</Select>
+					</Select> */}
 					{/* <FormHelperText>Pays</FormHelperText> */}
 				</FormControl>
 			</Grid>
@@ -670,9 +743,9 @@ const ReservationForm = () => {
 					loading: false,
 					message: result.message,
 				});
-				setTimeout(() => {
-					Router.push('/');
-				}, 3000);
+				// setTimeout(() => {
+				// 	Router.push('/');
+				// }, 3000);
 			}
 		});
 	};
