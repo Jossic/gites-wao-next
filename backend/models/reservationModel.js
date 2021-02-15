@@ -5,7 +5,6 @@ const reservationSchema = mongoose.Schema(
 	{
 		gite: { type: ObjectId, ref: 'Gite', required: true },
 		client: { type: ObjectId, ref: 'Client', required: true },
-		titre: { type: String, required: true },
 		nbPers: { type: Number, required: true },
 		nbPersSup: { type: Number },
 		nbEnf: { type: Number, required: true },

@@ -30,6 +30,7 @@ import {
 	Select,
 	Switch,
 	TextField,
+	Input,
 } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
@@ -231,31 +232,49 @@ const ReservationForm = () => {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = useState(0);
 	const { control, register, handleSubmit, setValue } = useForm({
+		shouldUnregister: false,
 		defaultValues: {
 			gite: 'manola',
 			nbPers: 10,
 			nbEnf: 5,
 			nbChien: 1,
 			litFait: true,
-			civilite: 'mmme',
+			nom: 'Lapierre',
+			prenom: 'Jossic',
+			adresse: '18 rue test',
+			cp: '51000',
+			ville: 'maVille',
+			tel: '06 15 55 55 55',
+			mail: 'jossic.lapierre@gmail.com',
 		},
 	});
 
-	const handleChange = (e) => {
-		setValue('civilite', e.target.value);
+	const handleChange = (name) => (e) => {
+		console.log('handleChange name vaut =>', name);
+		if (name === 'civilite') {
+			setValue('civilite', e.target.value);
+		} else if (name === 'gite') {
+			setValue('gite', e.target.value);
+		} else if (name === 'pays') {
+			setValue('pays', e.target.value);
+		}
 	};
 
 	React.useEffect(() => {
-		register('civilite'); // custom register Antd input
+		register({ name: 'civilite', name: 'gite', name: 'pays' }); // custom register Antd input
 	}, [register]);
 
 	const steps = getSteps();
 
-	const [selectedDate, setSelectedDate] = useState();
-	// new Date('2014-08-18T21:11:54')
+	const [selectedDateArrivee, setSelectedDateArrivee] = useState();
 
-	const handleDateChange = (date) => {
-		setSelectedDate(date);
+	const handleDateChangeArrivee = (date) => {
+		setSelectedDateArrivee(date);
+	};
+	const [selectedDateDepart, setSelectedDateDepart] = useState();
+
+	const handleDateChangeDepart = (date) => {
+		setSelectedDateDepart(date);
 	};
 
 	const handleNext = () => {
@@ -298,10 +317,11 @@ const ReservationForm = () => {
 						Réservation sur le gîte :
 					</InputLabel>
 					<Select
+						defaultValue='manola'
 						labelId='demo-simple-select-placeholder-label-label'
 						id='demo-simple-select-placeholder-label'
-						// value={gites.slug}
-						// onChange={handleChange}
+						name='gite'
+						onChange={handleChange('gite')}
 						displayEmpty
 						className={classes.selectEmpty}>
 						{gites.map((gite, i) => (
@@ -334,24 +354,30 @@ const ReservationForm = () => {
 			<MuiPickersUtilsProvider utils={DateFnsUtils}>
 				<Grid container justify='space-around'>
 					<KeyboardDatePicker
+						inputRef={register}
 						margin='normal'
 						id='date-picker-dialog'
+						name='dateArrivee'
 						label="Date d'arrivée"
 						format='dd/MM/yyyy'
-						value={selectedDate}
-						onChange={handleDateChange}
+						defaultValue=''
+						value={selectedDateArrivee}
+						onChange={handleDateChangeArrivee}
 						KeyboardButtonProps={{
 							'aria-label': 'change date',
 						}}
 					/>
 
 					<KeyboardDatePicker
+						inputRef={register}
 						margin='normal'
 						id='date-picker-dialog'
+						name='dateDepart'
 						label='Date de départ'
 						format='dd/MM/yyyy'
-						value={selectedDate}
-						onChange={handleDateChange}
+						defaultValue=''
+						value={selectedDateDepart}
+						onChange={handleDateChangeDepart}
 						KeyboardButtonProps={{
 							'aria-label': 'change date',
 						}}
@@ -387,7 +413,7 @@ const ReservationForm = () => {
 									<Checkbox
 										name='checkTel'
 										inputRef={register}
-										defaultValue={true}
+										defaultValue={false}
 									/>
 								}
 								label='Téléphone'
@@ -464,10 +490,11 @@ const ReservationForm = () => {
 						Civilité
 					</InputLabel>
 					<Select
+						defaultValue='m'
 						// labelId='demo-simple-select-placeholder-label-label'
 						// id='demo-simple-select-placeholder-label'
 						name='civilite'
-						onChange={handleChange}
+						onChange={handleChange('civilite')}
 						displayEmpty
 						className={classes.selectEmpty}>
 						<MenuItem value='mmme'>M. & Mme</MenuItem>
@@ -508,7 +535,7 @@ const ReservationForm = () => {
 					/> */}
 				<TextField
 					inputRef={register}
-					name='client.nom'
+					name='nom'
 					id='standard-number'
 					label='Nom'
 					InputLabelProps={{
@@ -517,7 +544,7 @@ const ReservationForm = () => {
 				/>
 				<TextField
 					inputRef={register}
-					name='client.prenom'
+					name='prenom'
 					id='standard-number'
 					label='Prénom'
 					InputLabelProps={{
@@ -528,7 +555,7 @@ const ReservationForm = () => {
 			<Grid container justify='space-around'>
 				<TextField
 					inputRef={register}
-					name='client.adresse'
+					name='adresse'
 					id='standard-number'
 					label='Adresse'
 					InputLabelProps={{
@@ -537,7 +564,7 @@ const ReservationForm = () => {
 				/>
 				<TextField
 					inputRef={register}
-					name='client.cp'
+					name='cp'
 					id='standard-number'
 					label='Code Postal'
 					InputLabelProps={{
@@ -546,7 +573,7 @@ const ReservationForm = () => {
 				/>
 				<TextField
 					inputRef={register}
-					name='client.ville'
+					name='ville'
 					id='standard-number'
 					label='Ville'
 					InputLabelProps={{
@@ -560,21 +587,22 @@ const ReservationForm = () => {
 						Pays
 					</InputLabel>
 					<Select
+						defaultValue='france'
 						labelId='demo-simple-select-placeholder-label-label'
 						id='demo-simple-select-placeholder-label'
-						// value={gites.slug}
-						// onChange={handleChange}
+						name='pays'
+						onChange={handleChange('pays')}
 						displayEmpty
 						className={classes.selectEmpty}>
-						<MenuItem value=''>France</MenuItem>
+						<MenuItem value='france'>France</MenuItem>
 						<MenuItem value=''>--------</MenuItem>
-						<MenuItem value=''>Autres</MenuItem>
-						<MenuItem value=''>Allemagne</MenuItem>
-						<MenuItem value=''>Angleterre</MenuItem>
-						<MenuItem value=''>Belgique</MenuItem>
-						<MenuItem value=''>Hollande</MenuItem>
-						<MenuItem value=''>Luxembourg</MenuItem>
-						<MenuItem value=''>Suisse</MenuItem>
+						<MenuItem value='autres'>Autres</MenuItem>
+						<MenuItem value='allemagne'>Allemagne</MenuItem>
+						<MenuItem value='angleterre'>Angleterre</MenuItem>
+						<MenuItem value='belgique'>Belgique</MenuItem>
+						<MenuItem value='hollande'>Hollande</MenuItem>
+						<MenuItem value='luxembourg'>Luxembourg</MenuItem>
+						<MenuItem value='suisse'>Suisse</MenuItem>
 					</Select>
 					{/* <FormHelperText>Pays</FormHelperText> */}
 				</FormControl>
@@ -582,7 +610,7 @@ const ReservationForm = () => {
 			<Grid container justify='space-around'>
 				<TextField
 					inputRef={register}
-					name='client.tel'
+					name='tel'
 					id='standard-number'
 					label='Téléphone'
 					type='telephone'
@@ -592,7 +620,7 @@ const ReservationForm = () => {
 				/>
 				<TextField
 					inputRef={register}
-					name='client.mail'
+					name='mail'
 					id='standard-number'
 					label='Email'
 					type='mail'
@@ -643,6 +671,7 @@ const ReservationForm = () => {
 					<div>
 						{activeStep === steps.length ? (
 							<div>
+								{/* Voir pout ajouter isSubmited === true */}
 								<Typography className={classes.instructions}>
 									Votre demande a bien été prise en compte
 								</Typography>
@@ -669,20 +698,32 @@ const ReservationForm = () => {
 										className={classes.button}>
 										Retour
 									</Button>
-									<Button
+									{activeStep === steps.length - 1 ? (
+										<Button
+											type='submit'
+											variant='contained'
+											color='primary'
+											className={classes.button}>
+											Valider
+										</Button>
+									) : (
+										<Button
+											variant='contained'
+											color='primary'
+											onClick={handleNext}
+											className={classes.button}>
+											Suivant
+										</Button>
+									)}
+									{/* <Button
 										variant='contained'
-										type={
-											activeStep === steps.length - 1
-												? 'submit'
-												: ''
-										}
 										color='primary'
 										onClick={handleNext}
 										className={classes.button}>
 										{activeStep === steps.length - 1
 											? 'Valider'
 											: 'Suivant'}
-									</Button>
+									</Button> */}
 								</div>
 							</div>
 						)}
@@ -692,30 +733,5 @@ const ReservationForm = () => {
 		</Container>
 	);
 };
-
-// export async function getStaticPaths() {
-// 	const partenairesNoms = await ListAllPartenairesNoms();
-// 	return {
-// 		paths: partenairesNoms.map((nom) => {
-// 			return {
-// 				params: { id: nom._id, slug: nom.slug },
-// 			};
-// 		}),
-// 		fallback: false,
-// 	};
-// }
-
-// export async function getStaticProps(context) {
-// 	return listGitesNoms().then((gites) => {
-// 		if (gites.error) {
-// 			console.log(gites.error);
-// 		} else {
-// 			console.log('clg dans le else', gites);
-// 			return {
-// 				props: { gites },
-// 			};
-// 		}
-// 	});
-// }
 
 export default ReservationForm;
