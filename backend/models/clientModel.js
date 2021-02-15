@@ -9,7 +9,7 @@ const clientSchema = mongoose.Schema(
 		cp: { type: String, required: true },
 		ville: { type: String, required: true },
 		pays: { type: String, required: true },
-		tel: { type: Number, required: true },
+		tel: { type: String, required: true },
 		mail: { type: String, required: true },
 		nbVenu: { type: Number },
 		commentaire: { type: String },

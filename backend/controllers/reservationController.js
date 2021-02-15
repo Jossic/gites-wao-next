@@ -74,7 +74,7 @@ const createReservation = async (req, res) => {
 				cp,
 				// ville, //non recu
 				pays,
-				// tel, //non recu
+				tel,
 				mail,
 			});
 			console.log('client dans le back', client);

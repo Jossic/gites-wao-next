@@ -621,7 +621,6 @@ const ReservationForm = () => {
 					name='tel'
 					id='standard-number'
 					label='Téléphone'
-					type='telephone'
 					InputLabelProps={{
 						shrink: true,
 					}}
