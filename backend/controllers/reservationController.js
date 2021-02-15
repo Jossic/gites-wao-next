@@ -49,7 +49,7 @@ const createReservation = async (req, res) => {
 		tel,
 		mail,
 	} = req.body;
-	console.log('req.body vaut =>', req.body);
+	// console.log('req.body vaut =>', req.body);
 
 	// const human = await validateHuman(token);
 	// if (!human) {
@@ -58,10 +58,7 @@ const createReservation = async (req, res) => {
 	// 	return;
 	// }
 
-	//Checker l'adresse mail du client
-
 	const dejaClient = await Client.findOne({ mail });
-	// console.log('après requete dejaClient vaut :', dejaClient);
 
 	if (dejaClient) {
 		dejaClient.nbReserv = dejaClient.nbReserv + 1;
@@ -87,13 +84,11 @@ const createReservation = async (req, res) => {
 		});
 		console.log('client dans le back', client);
 		client.save((error, client) => {
+			console.log('error', error);
+			console.log('client', client);
 			if (error) return res.status(400).json({ error });
 			if (client) {
 				console.log('client enregistré');
-				res.status(201).json({
-					client,
-					message: 'client enregistré',
-				});
 			}
 		});
 	}
@@ -112,12 +107,12 @@ const createReservation = async (req, res) => {
 		nbChien,
 		contactPar,
 		litFait,
+		dateRes: Date.now(),
 	});
 
 	console.log('Reservation dans le back', reservation);
 
 	reservation.save((error, reservation) => {
-		console.log('error vaut : ', error);
 		if (error) return res.status(400).json({ error });
 		if (reservation) {
 			res.status(201).json({

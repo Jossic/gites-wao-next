@@ -422,7 +422,7 @@ const ReservationForm = () => {
 							<FormControlLabel
 								control={
 									<Checkbox
-										name='checkMail'
+										name='contactMail'
 										inputRef={register}
 										defaultValue={false}
 									/>
@@ -432,7 +432,7 @@ const ReservationForm = () => {
 							<FormControlLabel
 								control={
 									<Checkbox
-										name='checkTel'
+										name='contactTel'
 										inputRef={register}
 										defaultValue={false}
 									/>
@@ -442,7 +442,7 @@ const ReservationForm = () => {
 							<FormControlLabel
 								control={
 									<Checkbox
-										name='checkAbritel'
+										name='contactAbritel'
 										inputRef={register}
 										defaultValue={false}
 									/>
@@ -452,7 +452,7 @@ const ReservationForm = () => {
 							<FormControlLabel
 								control={
 									<Checkbox
-										name='checkLeboncoin'
+										name='contactLeboncoin'
 										inputRef={register}
 										defaultValue={false}
 									/>
@@ -462,7 +462,7 @@ const ReservationForm = () => {
 							<FormControlLabel
 								control={
 									<Checkbox
-										name='checkAutre'
+										name='contactAutre'
 										inputRef={register}
 										defaultValue={false}
 									/>
