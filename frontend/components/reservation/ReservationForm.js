@@ -380,7 +380,7 @@ const ReservationForm = () => {
 						id='date-picker-dialog'
 						name='dateArrivee'
 						label="Date d'arrivée"
-						format='dd/MM/yyyy'
+						format='MM/dd/yyyy'
 						defaultValue=''
 						value={selectedDateArrivee}
 						onChange={handleDateChangeArrivee}
@@ -395,7 +395,7 @@ const ReservationForm = () => {
 						id='date-picker-dialog'
 						name='dateDepart'
 						label='Date de départ'
-						format='dd/MM/yyyy'
+						format='MM/dd/yyyy'
 						defaultValue=''
 						value={selectedDateDepart}
 						onChange={handleDateChangeDepart}

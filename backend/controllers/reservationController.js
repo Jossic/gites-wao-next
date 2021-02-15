@@ -2,6 +2,7 @@ import Reservation from '../models/ReservationModel.js';
 import asyncHandler from 'express-async-handler';
 import validateHuman from '../utils/validateHuman.js';
 import Client from '../models/clientModel.js';
+import Gite from '../models/giteModel.js';
 
 // @desc      Fetch all reservations
 // @route     GET /api/reservation
@@ -48,6 +49,7 @@ const createReservation = async (req, res) => {
 		tel,
 		mail,
 	} = req.body;
+	console.log('req.body vaut =>', req.body);
 
 	// const human = await validateHuman(token);
 	// if (!human) {
@@ -58,76 +60,73 @@ const createReservation = async (req, res) => {
 
 	//Checker l'adresse mail du client
 
-	Client.findOne({ mail }).exec((data) => {
-		console.log('après requete data vaut :', data);
-		if (data) {
-			console.log('data dans le if :', data);
-			data.nbVenu++;
-			// client.save()
-			res.json({ messageClient: 'il semble que vous soyez déjà venu' });
-		} else {
-			const client = new Client({
-				nom,
-				prenom,
-				adresse,
-				civilite,
-				cp,
-				ville,
-				pays,
-				tel,
-				mail,
-			});
-			console.log('client dans le back', client);
-			client.save((error, client) => {
-				console.log('ici client vaut :', client);
-				console.log('ici error vaut :', error);
-				if (error) return res.status(400).json({ error });
-				if (client) {
-					console.log('client enregistré');
-					res.status(201).json({
-						client,
-						message: 'client enregistré',
-					});
-				}
+	const dejaClient = await Client.findOne({ mail });
+	// console.log('après requete dejaClient vaut :', dejaClient);
+
+	if (dejaClient) {
+		dejaClient.nbReserv = dejaClient.nbReserv + 1;
+		const clientModifie = await dejaClient.save();
+
+		// res.json({
+		// 	clientModifie,
+		// 	// messageClient: 'il semble que vous soyez déjà venu',
+		// });
+	} else {
+		const client = new Client({
+			nom,
+			prenom,
+			adresse,
+			civilite,
+			cp,
+			ville,
+			pays,
+			tel,
+			mail,
+			nbVenu: Number(0),
+			nbReserv: Number(0),
+		});
+		console.log('client dans le back', client);
+		client.save((error, client) => {
+			if (error) return res.status(400).json({ error });
+			if (client) {
+				console.log('client enregistré');
+				res.status(201).json({
+					client,
+					message: 'client enregistré',
+				});
+			}
+		});
+	}
+
+	const ceGite = await Gite.findOne({ slug: gite });
+
+	const nouveauClient = await Client.findOne({ mail });
+
+	const reservation = new Reservation({
+		gite: ceGite._id,
+		client: nouveauClient._id,
+		nbPers,
+		nbEnf,
+		dateArrivee,
+		dateDepart,
+		nbChien,
+		contactPar,
+		litFait,
+	});
+
+	console.log('Reservation dans le back', reservation);
+
+	reservation.save((error, reservation) => {
+		console.log('error vaut : ', error);
+		if (error) return res.status(400).json({ error });
+		if (reservation) {
+			res.status(201).json({
+				reservation,
+				message:
+					'Votre reservation à bien été envoyé, nous reviendrons vers vous rapidement, redirection en cours...',
 			});
 		}
 	});
-
-	// const reservation = new Reservation({
-	// 	gite,
-	// 	nbPers,
-	// 	nbEnf,
-	// 	dateArrivee,
-	// 	dateDepart,
-	// 	nbChien,
-	// 	contactPar,
-	// 	litFait,
-	// 	client: {
-	// 		_id: client._id,
-	// 		nom: client.nom,
-	// 		prenom: client.prenom,
-	// 		adresse: client.adresse,
-	// 		civilite: client.civilite,
-	// 		cp: client.cp,
-	// 		ville: client.ville,
-	// 		pays: client.pays,
-	// 		tel: client.tel,
-	// 		mail: client.mail,
-	// 	},
-	// });
-
-	// console.log('Reservation dans le back', reservation);
-
-	// reservation.save((error, reservation) => {
-	// 	if (error) return res.status(400).json({ error });
-	// 	if (reservation) {
-	// 		res.status(201).json({
-	// 			reservation,
-	// 			message:
-	// 				'Votre reservation à bien été envoyé, nous reviendrons vers vous rapidement, redirection en cours...',
-	// 		});
-	// 	}
-	// });
 };
 
 // @desc      Delete a reservation
