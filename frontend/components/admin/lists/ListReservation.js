@@ -33,8 +33,10 @@ const useStyles = makeStyles((theme) => ({
 			marginTop: theme.spacing(2),
 		},
 	},
-	boxShadow:
-		'-1px 2px 5px 1px rgba(0, 0, 0, 0.7), -1px 2px 20px rgba(255, 255, 255, 0.6) inset',
+	nouveau: {
+		boxShadow:
+			'-1px 2px 5px 1px rgba(0, 0, 0, 0.7), -1px 2px 25px rgba(255, 255, 255, 0.8) inset',
+	},
 }));
 
 const ListReservation = ({ reservations, newReservation, gites, router }) => {
@@ -160,7 +162,7 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 			label: "Date d'arrivee",
 			options: {
 				filter: true,
-				sort: false,
+				sort: true,
 			},
 		},
 		{
@@ -168,7 +170,7 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 			label: 'Date de départ',
 			options: {
 				filter: true,
-				sort: false,
+				sort: true,
 			},
 		},
 
@@ -221,16 +223,7 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 				filter: false,
 				customBodyRender: (value, tableMeta, updateValue) => {
 					// console.log(tableMeta.rowData);
-					return !tableMeta.rowData[6] ? (
-						<IconButton>
-							<Link
-								href={`/admin/reservation/${tableMeta.rowData[0]}`}>
-								<a>
-									<ReplyIcon fontSize='large' />
-								</a>
-							</Link>
-						</IconButton>
-					) : (
+					return (
 						<IconButton>
 							<Link
 								href={`/admin/reservation/${tableMeta.rowData[0]}`}>
@@ -279,7 +272,7 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 						if (reservation.status == 'Nouvelle réservation') {
 							console.log('oui oui');
 							return {
-								className: classes.boxShadow,
+								className: classes.nouveau,
 								style: {
 									background: gite.couleur1,
 								},
