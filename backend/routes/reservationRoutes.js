@@ -6,6 +6,7 @@ import {
 	createReservation,
 	removeReservation,
 	updateReservation,
+	getNumberOfNewReservation,
 } from '../controllers/reservationController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
@@ -13,6 +14,7 @@ import { protect, admin } from '../middleware/authMiddleware.js';
 router.post('/reservation', createReservation);
 
 //Admin
+router.get('/reservation/count', getNumberOfNewReservation);
 router.get('/reservation', protect, admin, getAllReservations);
 router.get('/reservation/:id', protect, admin, getReservationById);
 router.delete('/reservation/:id', protect, admin, removeReservation);

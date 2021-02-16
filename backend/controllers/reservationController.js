@@ -26,6 +26,26 @@ const getReservationById = asyncHandler(async (req, res) => {
 	}
 });
 
+// @desc      Count number of new reservation
+// @route     GET /api/reservation/count
+// @access    Public
+const getNumberOfNewReservation = asyncHandler(async (req, res) => {
+	const reservation = await Reservation.find({
+		status: 'Nouvelle réservation',
+	});
+
+	console.log('reservation ', reservation);
+	console.log('reservation taille ', reservation.length);
+	if (reservation.length === 0) {
+		res.json(0);
+	} else if (reservation.length > 0) {
+		res.json(reservation.length);
+	} else {
+		res.status(404);
+		throw new Error('Pas de reservation trouvé');
+	}
+});
+
 // @desc      Create a Reservation
 // @route     POST /api/Reservation
 // @access    Private/Admin
@@ -148,7 +168,7 @@ const removeReservation = asyncHandler(async (req, res) => {
 	if (reservation) {
 		await reservation.remove();
 		res.json({
-			text: 'Reservation correctement supprimé',
+			message: 'Reservation correctement supprimé',
 		});
 	} else {
 		return res.json({
@@ -184,6 +204,7 @@ const updateReservation = asyncHandler(async (req, res) => {
 
 export {
 	createReservation,
+	getNumberOfNewReservation,
 	getAllReservations,
 	getReservationById,
 	removeReservation,

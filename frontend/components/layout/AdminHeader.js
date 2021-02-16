@@ -198,7 +198,7 @@ const AdminHeader = ({ children }) => {
 											aria-expanded='false'
 											aria-controls='collapseThree'>
 											<i className='fas fa-bed'></i>{' '}
-											Gestion des locations
+											Gestion des réservations
 										</button>
 									</h2>
 								</div>
@@ -212,10 +212,10 @@ const AdminHeader = ({ children }) => {
 										the third and final accordion panel.
 										This panel is hidden by default.
 									</div> */}
-									<Link href='/admin'>
+									<Link href='/admin/reservation'>
 										<a className='list-group-item list-group-item-action text-white bg-secondary'>
 											<i className='fas fa-arrow-right'></i>{' '}
-											Gestion des locations
+											Liste des réservations
 										</a>
 									</Link>
 								</div>

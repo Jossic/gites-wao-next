@@ -29,6 +29,16 @@ export const listAllReservations = (token) => {
 		.catch((err) => console.log(err));
 };
 
+export const countNouvelleReservation = () => {
+	return fetch(`${API}/reservation/count`, {
+		method: 'GET',
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
 export const listeOneReservation = (id, token) => {
 	return fetch(`${API}/reservation/${id}`, {
 		method: 'GET',
