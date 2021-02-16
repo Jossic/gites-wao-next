@@ -12,7 +12,6 @@ import QR from '../models/QRModel.js';
 // @route     GET /api/gites
 // @access    Public
 const getGites = asyncHandler(async (req, res) => {
-	console.log('listing des gites');
 	const gites = await Gite.find({});
 	res.json(gites);
 });

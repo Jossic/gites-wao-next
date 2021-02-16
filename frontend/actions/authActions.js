@@ -3,21 +3,21 @@ import { API } from '../config';
 import cookie from 'js-cookie';
 import Router from 'next/router';
 
-// export const handleResponse = (response) => {
-// 	if (response.status === 401) {
-// 		signout(() => {
-// 			Router.push({
-// 				pathname: '/login',
-// 				query: {
-// 					message:
-// 						'Votre cession à expiré, merci de vous reconnecter.',
-// 				},
-// 			});
-// 		});
-// 	} else {
-// 		return;
-// 	}
-// };
+export const handleResponse = (response) => {
+	if (response.status === 401) {
+		signout(() => {
+			Router.push({
+				pathname: '/login',
+				query: {
+					message:
+						'Votre cession à expiré, merci de vous reconnecter.',
+				},
+			});
+		});
+	} else {
+		return;
+	}
+};
 
 export const login = (user) => {
 	return fetch(`${API}/admin/login`, {

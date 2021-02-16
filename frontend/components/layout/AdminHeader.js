@@ -1,8 +1,7 @@
 import NProgress from 'nprogress';
 import Link from 'next/link';
 import Router from 'next/router';
-import { isAuth } from '../../actions/authActions';
-
+import { isAuth, logout } from '../../actions/authActions';
 import '../../node_modules/nprogress/nprogress.css';
 import { countMessageNonLus } from '../../actions/messageActions';
 import { useEffect, useState } from 'react';
@@ -287,6 +286,17 @@ const AdminHeader = ({ children }) => {
 								<li className='nav-item'>
 									<a className='nav-link' href='/'>
 										Voir le site
+									</a>
+								</li>
+								<li className='nav-item'>
+									<a
+										className='nav-link'
+										onClick={() =>
+											logout(() =>
+												Router.replace('/login')
+											)
+										}>
+										Deconnecter
 									</a>
 								</li>
 								{/* <li className='nav-item dropdown'>

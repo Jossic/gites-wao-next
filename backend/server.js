@@ -16,7 +16,7 @@ import pagesRoutes from './routes/pagesRoutes.js';
 import partenairesRoutes from './routes/partenairesRoutes.js';
 import messageRoutes from './routes/messageRoutes.js';
 import reservationRoutes from './routes/reservationRoutes.js';
-// import clientRoutes from './routes/clientRoutes.js';
+import clientRoutes from './routes/clientRoutes.js';
 // import AWS from 'aws-sdk';
 
 dotenv.config();
@@ -54,7 +54,7 @@ app.use('/api', pagesRoutes);
 app.use('/api', partenairesRoutes);
 app.use('/api', messageRoutes);
 app.use('/api', reservationRoutes);
-// app.use('/api', clientRoutes);
+app.use('/api', clientRoutes);
 
 // app.get('/api/config/paypal', (req, res) =>
 // 	res.send(process.env.PAYPAL_CLIENT_ID)

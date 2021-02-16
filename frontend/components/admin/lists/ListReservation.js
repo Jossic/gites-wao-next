@@ -1,16 +1,9 @@
-// import { Table } from 'reactstrap';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { getCookie } from '../../../actions/authActions';
-import { removeMessage } from '../../../actions/messageActions';
 import { makeStyles } from '@material-ui/core/styles';
 import MUIDataTable from 'mui-datatables';
-// import AddBoxIcon from '@material-ui/icons/AddBox';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import ReplyIcon from '@material-ui/icons/Reply';
-import FiberNewIcon from '@material-ui/icons/FiberNew';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -19,8 +12,8 @@ import MuiAlert from '@material-ui/lab/Alert';
 import Router from 'next/router';
 import { IconButton } from '@material-ui/core';
 import { removeReservation } from '../../../actions/reservationActions';
-import { listeDesGites, listGiteById } from '../../../actions/giteActions';
-import GiteNom from '../../../components/GiteNom';
+import GiteNom from '../../../components/admin/GiteNom';
+import ClientNom from '../../../components/admin/ClientNom';
 
 function Alert(props) {
 	return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -44,24 +37,6 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 
 	const token = getCookie('token');
 
-	// const [gites, setGites] = useState();
-
-	// const listerlesGites = () => {
-	// 	listeDesGites().then((data) => {
-	// 		console.log('data =>', data);
-	// 		if (data.error) {
-	// 			console.log(error);
-	// 		} else {
-	// 			setGites({ ...gites, data });
-	// 		}
-	// 	});
-	// };
-
-	// useEffect(() => {
-	// 	listerlesGites();
-	// }, []);
-
-	//Ajouter le delete et multiple delete
 	const [values, setvalues] = useState({
 		loading: false,
 		error: '',
@@ -135,6 +110,9 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 			options: {
 				filter: true,
 				sort: true,
+				customBodyRender: (value, tableMeta, updateValue) => {
+					return <ClientNom value={value} />;
+				},
 			},
 		},
 		{
@@ -142,8 +120,7 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 			label: 'Gite',
 			options: {
 				filter: true,
-				sort: false,
-
+				sort: true,
 				customBodyRender: (value, tableMeta, updateValue) => {
 					return <GiteNom value={value} />;
 				},
@@ -173,49 +150,6 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 				sort: true,
 			},
 		},
-
-		// {
-		// 	name: 'msg',
-		// 	label: 'Message',
-		// 	options: {
-		// 		filter: true,
-		// 		sort: false,
-		// 		customBodyRender: (value, tableMeta, updateValue) => {
-		// 			return <p>{value.substring(0, 20) + '...'}</p>;
-		// 		},
-		// 	},
-		// },
-		// {
-		// 	name: 'vu',
-		// 	label: 'Non lu',
-		// 	options: {
-		// 		filter: true,
-		// 		customBodyRender: (value, tableMeta, updateValue) => {
-		// 			return (
-		// 				!value && (
-		// 					<FiberNewIcon
-		// 						fontSize='large'
-		// 						style={{ color: 'green' }}
-		// 					/>
-		// 				)
-		// 			);
-		// 		},
-		// 	},
-		// },
-		// {
-		// 	name: 'repondu',
-		// 	label: 'Répondu',
-		// 	options: {
-		// 		filter: true,
-		// 		customBodyRender: (value, tableMeta, updateValue) => {
-		// 			return value ? (
-		// 				<CheckBoxIcon />
-		// 			) : (
-		// 				<CheckBoxOutlineBlankIcon />
-		// 			);
-		// 		},
-		// 	},
-		// },
 		{
 			name: 'Consulter',
 			options: {
@@ -263,14 +197,12 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 		filterType: 'checkbox',
 		selectableRows: 'none',
 		setRowProps: (row) => {
-			//Mettre style selon la courleur du gîte et format brillant selon le status
-			console.log('row =>', row[2].props.value); //Contient l'id de la ligne (du gîte)
+			//ajouter style selon le status
 
 			for (const gite of gites) {
 				if (row[2].props.value === gite._id) {
 					for (const reservation of reservations) {
 						if (reservation.status == 'Nouvelle réservation') {
-							console.log('oui oui');
 							return {
 								className: classes.nouveau,
 								style: {
@@ -278,7 +210,6 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 								},
 							};
 						} else {
-							console.log('non non');
 							return {
 								style: {
 									background: gite.couleur1,
