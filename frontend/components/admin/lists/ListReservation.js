@@ -33,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
 			marginTop: theme.spacing(2),
 		},
 	},
+	boxShadow:
+		'-1px 2px 5px 1px rgba(0, 0, 0, 0.7), -1px 2px 20px rgba(255, 255, 255, 0.6) inset',
 }));
 
 const ListReservation = ({ reservations, newReservation, gites, router }) => {
@@ -271,28 +273,26 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 			//Mettre style selon la courleur du gîte et format brillant selon le status
 			console.log('row =>', row[2].props.value); //Contient l'id de la ligne (du gîte)
 
-			// if (row[2].props.value === '6009db0262254c15a4d4ea3f') {
-			// 	return {
-			// 		style: {
-			// 			background: '#ff8000',
-			// 		},
-			// 	};
-			// } else if (row[2].props.value === '6009db6462254c15a4d4ea40') {
-			// 	return {
-			// 		style: {
-			// 			background: '#b01700',
-			// 		},
-			// 	};
-			// }
-
 			for (const gite of gites) {
 				if (row[2].props.value === gite._id) {
-					console.log('truuue');
-					return {
-						style: {
-							background: gite.couleur1,
-						},
-					};
+					for (const reservation of reservations) {
+						if (reservation.status == 'Nouvelle réservation') {
+							console.log('oui oui');
+							return {
+								className: classes.boxShadow,
+								style: {
+									background: gite.couleur1,
+								},
+							};
+						} else {
+							console.log('non non');
+							return {
+								style: {
+									background: gite.couleur1,
+								},
+							};
+						}
+					}
 				}
 			}
 		},
