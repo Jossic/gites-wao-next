@@ -6,8 +6,10 @@ import {
 	countNouvelleReservation,
 	listAllReservations,
 } from '../../../actions/reservationActions';
+import { getCookie } from '../../../actions/authActions';
 
 const Reservation = ({ reservations, newReservations }) => {
+	//
 	return (
 		<>
 			<AdminHeader>
@@ -29,7 +31,8 @@ const Reservation = ({ reservations, newReservations }) => {
 };
 
 export async function getServerSideProps(context) {
-	const res1 = await listAllReservations();
+	const token = context.req.cookies.token;
+	const res1 = await listAllReservations(token);
 	const reservations = await res1;
 	const res3 = await countNouvelleReservation();
 	const newReservations = await res3;

@@ -6,7 +6,7 @@ import Gite from '../models/giteModel.js';
 
 // @desc      Fetch all reservations
 // @route     GET /api/reservation
-// @access    Public
+// @access    Private/Admin
 const getAllReservations = asyncHandler(async (req, res) => {
 	const reservations = await Reservation.find({});
 	res.json(reservations);
@@ -14,7 +14,7 @@ const getAllReservations = asyncHandler(async (req, res) => {
 
 // @desc      Fetch one Reservation by Id
 // @route     GET /api/Reservation/:id
-// @access    Public
+// @access    Private/Admin
 const getReservationById = asyncHandler(async (req, res) => {
 	const reservation = await Reservation.findById(req.params.id);
 
@@ -48,7 +48,7 @@ const getNumberOfNewReservation = asyncHandler(async (req, res) => {
 
 // @desc      Create a Reservation
 // @route     POST /api/Reservation
-// @access    Private/Admin
+// @access    Public
 const createReservation = async (req, res) => {
 	const {
 		gite,
