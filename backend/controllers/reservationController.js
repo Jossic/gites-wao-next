@@ -62,12 +62,7 @@ const createReservation = async (req, res) => {
 
 	if (dejaClient) {
 		dejaClient.nbReserv = dejaClient.nbReserv + 1;
-		const clientModifie = await dejaClient.save();
-
-		// res.json({
-		// 	clientModifie,
-		// 	// messageClient: 'il semble que vous soyez déjà venu',
-		// });
+		await dejaClient.save();
 	} else {
 		const client = new Client({
 			nom,
@@ -97,6 +92,8 @@ const createReservation = async (req, res) => {
 
 	const nouveauClient = await Client.findOne({ mail });
 
+	//Vérifier si le client n'a pas déjà réservé avec les mêmes paramètres
+
 	const reservation = new Reservation({
 		gite: ceGite._id,
 		client: nouveauClient._id,
@@ -110,18 +107,37 @@ const createReservation = async (req, res) => {
 		dateRes: Date.now(),
 	});
 
-	console.log('Reservation dans le back', reservation);
-
-	reservation.save((error, reservation) => {
-		if (error) return res.status(400).json({ error });
-		if (reservation) {
-			res.status(201).json({
-				reservation,
-				message:
-					'Votre reservation à bien été envoyé, nous reviendrons vers vous rapidement, redirection en cours...',
-			});
-		}
+	const dejaReserve = await Reservation.findOne({
+		gite: reservation.gite,
+		client: reservation.client,
+		dateArrivee: reservation.dateArrivee,
+		dateDepart: reservation.dateDepart,
 	});
+
+	// console.log('dejaReserve =>', dejaReserve);
+	// console.log('Reservation dans le back', reservation);
+
+	if (dejaReserve) {
+		console.log('deja Reservé');
+		// throw new Error(
+		// 	'Il semble que vous ayez déjà effectué une réservation pour ce gîte à ces dates'
+		// );
+		return res.status(400).json({
+			dejaReserveMessage:
+				'Il semble que vous ayez déjà effectué une réservation pour ce gîte à ces dates',
+		});
+	} else {
+		reservation.save((error, reservation) => {
+			if (error) return res.status(400).json({ error });
+			if (reservation) {
+				res.status(201).json({
+					reservation,
+					message:
+						'Votre reservation à bien été envoyé, nous reviendrons vers vous rapidement, redirection en cours...',
+				});
+			}
+		});
+	}
 };
 
 // @desc      Delete a reservation

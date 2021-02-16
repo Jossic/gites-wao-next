@@ -40,12 +40,12 @@ const ListMessages = ({ messages, newMessages, router }) => {
 	//Ajouter le delete et multiple delete
 
 	const [values, setvalues] = useState({
-		open: false,
 		loading: false,
 		error: '',
 		success: '',
 		message: '',
 	});
+	const [open, setOpen] = useState(false);
 
 	const { loading, success, error, message } = values;
 
@@ -54,7 +54,8 @@ const ListMessages = ({ messages, newMessages, router }) => {
 			return;
 		}
 
-		setValues({ ...values, open: false });
+		setvalues({ ...values, success: false, error: false });
+		setOpen(false);
 	};
 
 	const deleteMessage = (id) => {

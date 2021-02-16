@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import HouseIcon from '@material-ui/icons/House';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { useForm, Controller } from 'react-hook-form';
 import {
@@ -29,6 +29,8 @@ import {
 	Switch,
 	TextField,
 	Input,
+	CircularProgress,
+	Snackbar,
 } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
@@ -37,6 +39,14 @@ import {
 	KeyboardDatePicker,
 } from '@material-ui/pickers';
 import { createReservation } from '../../actions/reservationActions';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { RECAPTCHA_SECRET_KEY } from '../../config';
+// import Alert from '@material-ui/lab/Alert';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+	return <MuiAlert elevation={6} variant='filled' {...props} />;
+}
 
 const QontoConnector = withStyles({
 	alternativeLabel: {
@@ -248,6 +258,7 @@ const ReservationForm = () => {
 	});
 
 	const [values, setValues] = useState({
+		open: false,
 		loading: false,
 		success: '',
 		error: '',
@@ -255,22 +266,7 @@ const ReservationForm = () => {
 	});
 	const { message, success, loading, error } = values;
 
-	// const handleChange = (name) => (e) => {
-	// 	console.log('handleChange name vaut =>', name);
-	// 	if (name === 'civilite') {
-	// 		setValue('civilite', e.target.value);
-	// 	} else if (name === 'gite') {
-	// 		setValue('gite', e.target.value);
-	// 	} else if (name === 'pays') {
-	// 		setValue('pays', e.target.value);
-	// 	}
-	// };
-
-	// React.useEffect(() => {
-	// 	register({ name: 'civilite' }); // custom register Antd input
-	// 	register({ name: 'gite' }); // custom register Antd input
-	// 	register({ name: 'pays' }); // custom register Antd input
-	// }, [register]);
+	const reRef = useRef();
 
 	const steps = getSteps();
 
@@ -295,6 +291,13 @@ const ReservationForm = () => {
 
 	const handleReset = () => {
 		setActiveStep(0);
+	};
+
+	const handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+			setValues({ ...values, open: false });
+			return;
+		}
 	};
 
 	const [gites, setGites] = useState([]);
@@ -337,19 +340,6 @@ const ReservationForm = () => {
 							</Select>
 						}
 					/>
-					{/* <Select
-						defaultValue='manola'
-						labelId='demo-simple-select-placeholder-label-label'
-						id='demo-simple-select-placeholder-label'
-						name='gite'
-						onChange={handleChange('gite')}
-						displayEmpty
-						className={classes.selectEmpty}>
-						{gites.map((gite, i) => (
-							<MenuItem value={gite.slug}>{gite.nom}</MenuItem>
-						))}
-					</Select> */}
-					{/* <FormHelperText>Réservation sur le gîte :</FormHelperText> */}
 				</FormControl>
 				<TextField
 					inputRef={register}
@@ -536,56 +526,8 @@ const ReservationForm = () => {
 							</Select>
 						}
 					/>
-
-					{/* <InputLabel
-						shrink
-						id='demo-simple-select-placeholder-label-label'>
-						Civilité
-					</InputLabel>
-					<Select
-						defaultValue='m'
-						// labelId='demo-simple-select-placeholder-label-label'
-						// id='demo-simple-select-placeholder-label'
-						name='civilite'
-						onChange={handleChange('civilite')}
-						displayEmpty
-						className={classes.selectEmpty}>
-						<MenuItem value='mmme'>M. & Mme</MenuItem>
-						<MenuItem value='mme'>Mme</MenuItem>
-						<MenuItem value='mlle'>Mlle</MenuItem>
-						<MenuItem value='m'>M.</MenuItem>
-						<MenuItem value='asso'>Association</MenuItem>
-						<MenuItem value='ce'>Comité d'entreprise</MenuItem>
-						<MenuItem value='soc'>Société</MenuItem>
-						<MenuItem value='entr'>Entreprise</MenuItem>
-						<MenuItem value='foyervie'>Foyer de vie</MenuItem>
-						<MenuItem value='foyeracc'>Foyer d'accueil</MenuItem>
-						<MenuItem value='famil'>Famille</MenuItem>
-						<MenuItem value='autre'>Autres</MenuItem>
-					</Select> */}
-					{/* <FormHelperText>Réservation sur le gîte :</FormHelperText> */}
 				</FormControl>
 
-				{/* <Controller
-						name='civilite'
-						control={control}
-						options={[
-							{ value: 'mmme', label: 'M. & Mme' },
-							{ value: 'mme', label: 'Mme' },
-							{ value: 'mlle', label: 'Mlle' },
-							{ value: 'm', label: 'M.' },
-							{ value: 'asso', label: 'Association' },
-							{ value: 'ce', label: "Comité d'entreprise" },
-							{ value: 'soc', label: 'Société' },
-							{ value: 'entr', label: 'Entreprise' },
-							{ value: 'foyervie', label: 'Foyer de vie' },
-							{ value: 'foyeracc', label: "Foyer d'accueil" },
-							{ value: 'famil', label: 'Famille' },
-							{ value: 'autre', label: 'Autres' },
-						]}
-						as={Select}
-						className={classes.formControl}
-					/> */}
 				<TextField
 					inputRef={register}
 					name='nom'
@@ -661,31 +603,6 @@ const ReservationForm = () => {
 							</Select>
 						}
 					/>
-
-					{/* <InputLabel
-						shrink
-						id='demo-simple-select-placeholder-label-label'>
-						Pays
-					</InputLabel>
-					<Select
-						defaultValue='france'
-						// labelId='demo-simple-select-placeholder-label-label'
-						// id='demo-simple-select-placeholder-label'
-						name='pays'
-						onChange={handleChange('pays')}
-						displayEmpty
-						className={classes.selectEmpty}>
-						<MenuItem value='france'>France</MenuItem>
-						<MenuItem value=''>--------</MenuItem>
-						<MenuItem value='autres'>Autres</MenuItem>
-						<MenuItem value='allemagne'>Allemagne</MenuItem>
-						<MenuItem value='angleterre'>Angleterre</MenuItem>
-						<MenuItem value='belgique'>Belgique</MenuItem>
-						<MenuItem value='hollande'>Hollande</MenuItem>
-						<MenuItem value='luxembourg'>Luxembourg</MenuItem>
-						<MenuItem value='suisse'>Suisse</MenuItem>
-					</Select> */}
-					{/* <FormHelperText>Pays</FormHelperText> */}
 				</FormControl>
 			</Grid>
 			<Grid container justify='space-around'>
@@ -728,14 +645,19 @@ const ReservationForm = () => {
 		}
 	}
 
-	const onSubmit = (data) => {
+	const onSubmit = async (data) => {
 		setValues({ ...values, loading: true });
+		data.token = await reRef.current.executeAsync();
+		reRef.current.reset();
 		console.log('onSubmit data =>', data);
 		createReservation(data).then((result) => {
 			console.log('result vaut =>', result);
 			if (result.error) {
-				console.log('une grosse erreur');
+				console.log('erreur', result.error);
 				setValues({ ...values, error: result.error });
+			} else if (result.dejaReserveMessage) {
+				console.log('deja reserve');
+				setValues({ ...values, error: result.dejaReserveMessage });
 			} else {
 				setValues({
 					...values,
@@ -752,6 +674,27 @@ const ReservationForm = () => {
 
 	return (
 		<Container>
+			{loading && <CircularProgress />}
+			{success && (
+				<Snackbar
+					open={open}
+					autoHideDuration={6000}
+					onClose={handleClose}>
+					<Alert onClose={handleClose} severity='success'>
+						{message}
+					</Alert>
+				</Snackbar>
+			)}
+			{error && (
+				<Snackbar
+					open={open}
+					autoHideDuration={6000}
+					onClose={handleClose}>
+					<Alert onClose={handleClose} severity='error'>
+						{error}
+					</Alert>
+				</Snackbar>
+			)}
 			<div className={classes.root}>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Stepper
@@ -812,6 +755,12 @@ const ReservationForm = () => {
 							</div>
 						)}
 					</div>
+					<ReCAPTCHA
+						sitekey={RECAPTCHA_SECRET_KEY}
+						ref={reRef}
+						size='invisible'
+						// onChange={onChange}
+					/>
 				</form>
 			</div>
 		</Container>
