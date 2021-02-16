@@ -108,8 +108,8 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 			name: 'client',
 			label: 'Client',
 			options: {
-				filter: true,
-				sort: true,
+				filter: true, // Voir pour ajouter un custom filter sur le nom du client
+				sort: true, // Voir pour ajouter un custom sort sur le nom du client
 				customBodyRender: (value, tableMeta, updateValue) => {
 					return <ClientNom value={value} />;
 				},
@@ -119,8 +119,8 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 			name: 'gite',
 			label: 'Gite',
 			options: {
-				filter: true,
-				sort: true,
+				filter: true, // Voir pour ajouter un custom filter sur le nom du gîte
+				sort: true, // Voir pour ajouter un custom sort sur le nom du gîte
 				customBodyRender: (value, tableMeta, updateValue) => {
 					return <GiteNom value={value} />;
 				},
@@ -198,7 +198,6 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 		selectableRows: 'none',
 		setRowProps: (row) => {
 			//ajouter style selon le status
-
 			for (const gite of gites) {
 				if (row[2].props.value === gite._id) {
 					for (const reservation of reservations) {

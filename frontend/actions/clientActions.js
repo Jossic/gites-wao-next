@@ -25,7 +25,6 @@ export const listAllClients = (token) => {
 // };
 
 export const getClientById = (id, token) => {
-	console.log('token dans action =>', token);
 	return fetch(`${API}/client/${id}`, {
 		method: 'GET',
 		headers: {
