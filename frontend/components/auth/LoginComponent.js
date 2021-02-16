@@ -6,8 +6,8 @@ import Link from 'next/link';
 
 const SigninComponent = () => {
 	const [values, setvalues] = useState({
-		email: '',
-		password: '',
+		email: 'jossic.lapierre@gmail.com',
+		password: '123456',
 		isAdmin: false,
 		error: '',
 		loading: false,

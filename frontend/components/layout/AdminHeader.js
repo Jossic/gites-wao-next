@@ -291,6 +291,7 @@ const AdminHeader = ({ children }) => {
 								<li className='nav-item'>
 									<a
 										className='nav-link'
+										style={{ cursor: 'pointer' }}
 										onClick={() =>
 											logout(() =>
 												Router.replace('/login')

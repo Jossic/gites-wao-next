@@ -8,7 +8,7 @@ const ClientNom = ({ value }) => {
 	const token = getCookie('token');
 
 	const listerUnClient = () => {
-		getClientById(value).then((data, token) => {
+		getClientById(value, token).then((data) => {
 			if (data.error) {
 				console.log(error);
 			} else {
@@ -21,7 +21,11 @@ const ClientNom = ({ value }) => {
 		listerUnClient();
 	}, []);
 
-	return <>{client.nom}</>;
+	return (
+		<>
+			{client.nom} {client.prenom}
+		</>
+	);
 };
 
 export default ClientNom;
