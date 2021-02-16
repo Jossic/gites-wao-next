@@ -34,8 +34,8 @@ const getNumberOfNewReservation = asyncHandler(async (req, res) => {
 		status: 'Nouvelle réservation',
 	});
 
-	console.log('reservation ', reservation);
-	console.log('reservation taille ', reservation.length);
+	// console.log('reservation ', reservation);
+	// console.log('reservation taille ', reservation.length);
 	if (reservation.length === 0) {
 		res.json(0);
 	} else if (reservation.length > 0) {
@@ -97,10 +97,10 @@ const createReservation = async (req, res) => {
 			nbVenu: Number(0),
 			nbReserv: Number(0),
 		});
-		console.log('client dans le back', client);
+		// console.log('client dans le back', client);
 		client.save((error, client) => {
-			console.log('error', error);
-			console.log('client', client);
+			// console.log('error', error);
+			// console.log('client', client);
 			if (error) return res.status(400).json({ error });
 			if (client) {
 				console.log('client enregistré');
@@ -138,7 +138,7 @@ const createReservation = async (req, res) => {
 	// console.log('Reservation dans le back', reservation);
 
 	if (dejaReserve) {
-		console.log('deja Reservé');
+		// console.log('deja Reservé');
 		// throw new Error(
 		// 	'Il semble que vous ayez déjà effectué une réservation pour ce gîte à ces dates'
 		// );

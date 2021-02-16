@@ -12,6 +12,7 @@ import QR from '../models/QRModel.js';
 // @route     GET /api/gites
 // @access    Public
 const getGites = asyncHandler(async (req, res) => {
+	console.log('listing des gites');
 	const gites = await Gite.find({});
 	res.json(gites);
 });
@@ -31,6 +32,14 @@ const getGitesNoms = asyncHandler(async (req, res) => {
 const getGiteByNom = asyncHandler(async (req, res) => {
 	const slug = req.params.slug;
 	const gite = await Gite.findOne({ slug });
+	res.json(gite);
+});
+
+// @desc      Fetch gite by nom
+// @route     GET /api/gite/id/:id
+// @access    Public
+const getGiteById = asyncHandler(async (req, res) => {
+	const gite = await Gite.findById(req.params.id);
 	res.json(gite);
 });
 
@@ -298,6 +307,7 @@ const updateQR = asyncHandler(async (req, res) => {
 export {
 	getGites,
 	getGiteByNom,
+	getGiteById,
 	deleteGite,
 	createGite,
 	updateGite,

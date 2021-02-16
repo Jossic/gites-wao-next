@@ -19,6 +19,8 @@ import MuiAlert from '@material-ui/lab/Alert';
 import Router from 'next/router';
 import { IconButton } from '@material-ui/core';
 import { removeReservation } from '../../../actions/reservationActions';
+import { listeDesGites, listGiteById } from '../../../actions/giteActions';
+import GiteNom from '../../../components/GiteNom';
 
 function Alert(props) {
 	return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -33,19 +35,36 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ListReservation = ({ reservations, newReservation, router }) => {
+const ListReservation = ({ reservations, newReservation, gites, router }) => {
 	const classes = useStyles();
 
 	const token = getCookie('token');
 
-	//Ajouter le delete et multiple delete
+	// const [gites, setGites] = useState();
 
+	// const listerlesGites = () => {
+	// 	listeDesGites().then((data) => {
+	// 		console.log('data =>', data);
+	// 		if (data.error) {
+	// 			console.log(error);
+	// 		} else {
+	// 			setGites({ ...gites, data });
+	// 		}
+	// 	});
+	// };
+
+	// useEffect(() => {
+	// 	listerlesGites();
+	// }, []);
+
+	//Ajouter le delete et multiple delete
 	const [values, setvalues] = useState({
 		loading: false,
 		error: '',
 		success: '',
 		message: '',
 	});
+
 	const [open, setOpen] = useState(false);
 
 	const { loading, success, error, message } = values;
@@ -120,6 +139,10 @@ const ListReservation = ({ reservations, newReservation, router }) => {
 			options: {
 				filter: true,
 				sort: false,
+
+				customBodyRender: (value, tableMeta, updateValue) => {
+					return <GiteNom value={value} />;
+				},
 			},
 		},
 		{
@@ -243,7 +266,36 @@ const ListReservation = ({ reservations, newReservation, router }) => {
 
 	const options = {
 		filterType: 'checkbox',
-		selectableRows: false,
+		selectableRows: 'none',
+		setRowProps: (row) => {
+			//Mettre style selon la courleur du gîte et format brillant selon le status
+			console.log('row =>', row[2].props.value); //Contient l'id de la ligne (du gîte)
+
+			// if (row[2].props.value === '6009db0262254c15a4d4ea3f') {
+			// 	return {
+			// 		style: {
+			// 			background: '#ff8000',
+			// 		},
+			// 	};
+			// } else if (row[2].props.value === '6009db6462254c15a4d4ea40') {
+			// 	return {
+			// 		style: {
+			// 			background: '#b01700',
+			// 		},
+			// 	};
+			// }
+
+			for (const gite of gites) {
+				if (row[2].props.value === gite._id) {
+					console.log('truuue');
+					return {
+						style: {
+							background: gite.couleur1,
+						},
+					};
+				}
+			}
+		},
 	};
 
 	return (

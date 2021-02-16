@@ -58,6 +58,16 @@ export const listGitesNoms = () => {
 		.catch((err) => console.log(err));
 };
 
+export const listGiteById = (id) => {
+	return fetch(`${API}/gite/id/${id}`, {
+		method: 'GET',
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
 export const createGite = (gite, token) => {
 	return fetch(`${API}/gite`, {
 		method: 'POST',

@@ -16,6 +16,7 @@ import {
 	getPhotosByNom,
 	getPhotosBySection,
 	getPhotoById,
+	getGiteById,
 } from '../controllers/giteController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
@@ -23,6 +24,7 @@ router.get('/');
 router.get('/gites', getGites);
 router.get('/gites/noms', getGitesNoms);
 router.get('/gite/:slug', getGiteByNom);
+router.get('/gite/id/:id', getGiteById);
 router.get('/photos/:nom', getPhotosByNom);
 router.get('/qr', getAllQR);
 router.get('/photos', getAllPhotos);
