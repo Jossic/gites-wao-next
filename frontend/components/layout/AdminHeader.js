@@ -256,13 +256,13 @@ const AdminHeader = ({ children }) => {
 							</a>
 						</Link>
 
-						<Link href='/admin'>
+						<Link href='/admin/users'>
 							<a className='list-group-item list-group-item-action text-white bg-dark'>
 								<i className='fas fa-user-friends'></i> Gestion
 								des utilisateurs
 							</a>
 						</Link>
-						<Link href='/admin'>
+						<Link href='/admin/mailer'>
 							<a className='list-group-item list-group-item-action text-white bg-dark'>
 								<i className='fas fa-envelope'></i> Gestion des
 								mails
