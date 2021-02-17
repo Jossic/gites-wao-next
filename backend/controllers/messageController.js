@@ -142,6 +142,27 @@ const messageResponse = asyncHandler(async (req, res) => {
 		res.status(404);
 		throw new Error('Message non trouvée');
 	}
+
+	console.log(message._id);
+
+	//Envoi du mail venant de soi-même au client
+	const emailData = {
+		from: process.env.NODE_MAILER_USER,
+		to: message.mail,
+		cc: process.env.NODE_MAILER_USER,
+		subject: `${process.env.APP_NAME} | Réponse à votre message`,
+		html: `
+		<h3>Votre message:</h3>
+		<p>${message.msg}</p>
+		<hr />
+        <h3>Notre réponse:</h3>
+		<p>${message.reponse}</p>
+		<a href='${process.env.APP_DOMAIN}'>Consulter notre site</a>
+        <hr />
+    `,
+	};
+
+	sendEmailWithNodemailer(req, res, emailData);
 });
 // @desc      Set Vu = true
 // @route     PUT /api/message/:id/vu
