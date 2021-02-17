@@ -238,7 +238,7 @@ function getSteps() {
 const ReservationForm = () => {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = useState(0);
-	const { control, register, handleSubmit, setValue } = useForm({
+	const { control, register, handleSubmit } = useForm({
 		shouldUnregister: false,
 		defaultValues: {
 			gite: 'manola',

@@ -122,8 +122,12 @@ const createReservation = async (req, res) => {
 		dateArrivee,
 		dateDepart,
 		nbChien,
+		mtAnimaux: nbChien * 3,
 		contactPar,
+		nbPersSup: nbPers > 15 ? nbPers - 15 : 0,
 		litFait,
+		ftLit: litFait && 100,
+		ftMenage: 150,
 		dateRes: Date.now(),
 	});
 

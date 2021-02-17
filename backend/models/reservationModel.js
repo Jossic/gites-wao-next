@@ -15,6 +15,7 @@ const reservationSchema = mongoose.Schema(
 		nbNuites: { type: Number },
 		status: { type: String, default: 'Nouvelle réservation' },
 		nbChien: { type: Number, default: 0 },
+		mtAnimaux: { type: Number, default: 0 },
 		contactMail: { type: Boolean },
 		contactTel: { type: Boolean },
 		contactAbritel: { type: Boolean },

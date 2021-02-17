@@ -168,7 +168,7 @@ const ReservationId = ({ reservation, router }) => {
 								<FormClient preloadedValues={client} />
 							</TabPanel>
 							<TabPanel value={value} index={3}>
-								<FormLocation />
+								<FormLocation preloadedValues={reservation} />
 							</TabPanel>
 							<TabPanel value={value} index={4}>
 								<FormContrat />

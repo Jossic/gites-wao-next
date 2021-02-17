@@ -175,7 +175,7 @@ const FormStatus = ({ preloadedValues }) => {
 						variant='contained'
 						color='primary'
 						className={classes.button}>
-						Valider
+						Valider les modifications
 					</Button>
 				</Grid>
 			</form>
