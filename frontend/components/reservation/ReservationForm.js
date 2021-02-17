@@ -485,6 +485,21 @@ const ReservationForm = () => {
 						label="Souhaitez-vous l'option lit fait à l'arrivée ?"
 					/>
 				</Grid>
+				<Grid container>
+					<FormControl className={classes.formControl}>
+						<TextField
+							inputRef={register}
+							name='infoCompl'
+							id='standard-number'
+							label='Informations complémentaires / Questions :'
+							multiline
+							rows={3}
+							InputLabelProps={{
+								shrink: true,
+							}}
+						/>
+					</FormControl>
+				</Grid>
 			</div>
 		</div>
 	);

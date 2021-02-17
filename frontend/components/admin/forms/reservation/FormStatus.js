@@ -118,119 +118,124 @@ const FormStatus = ({ preloadedValues }) => {
 				</Snackbar>
 			)}
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<Grid
-					container
-					direction='column'
-					justify='space-around'
-					alignItems='stretch'>
-					<Grid item>
+				<Grid container>
+					<FormControl className={classes.formControl}>
+						<MuiPickersUtilsProvider utils={DateFnsUtils}>
+							<KeyboardDatePicker
+								inputRef={register}
+								disableToolbar
+								variant='inline'
+								name='dateRes'
+								format='MM/dd/yyyy'
+								margin='normal'
+								id='date-picker-inline'
+								label='Date de réservation'
+								value={selectedDateRes}
+								onChange={handleDateChangeRes}
+								KeyboardButtonProps={{
+									'aria-label': 'change date',
+								}}
+							/>
+						</MuiPickersUtilsProvider>
+					</FormControl>
+
+					<FormControl className={classes.formControl}>
+						<InputLabel
+							shrink
+							id='demo-simple-select-placeholder-label-label'>
+							Status de la réservation
+						</InputLabel>
+
+						<Controller
+							control={control}
+							name='status'
+							as={
+								<Select id='status-select'>
+									<MenuItem value='Nouvelle réservation'>
+										Nouvelle réservation
+									</MenuItem>
+									<MenuItem value='Contrat envoyé'>
+										Contrat envoyé
+									</MenuItem>
+									<MenuItem value='Acompte/Contrat reçu'>
+										Acompte/Contrat reçu
+									</MenuItem>
+									<MenuItem value='Relance contrat non reçu'>
+										Relance contrat non reçu
+									</MenuItem>
+									<MenuItem value='Reservation terminée'>
+										Reservation terminée
+									</MenuItem>
+									<MenuItem value='Reservation/Contrat annulée'>
+										Reservation/Contrat annulée
+									</MenuItem>
+								</Select>
+							}
+						/>
+					</FormControl>
+
+					<FormControl className={classes.formControl}>
+						<TextField
+							inputRef={register}
+							name='infoCompl'
+							id='standard-number'
+							label='Message du locataire'
+							multiline
+							rows={3}
+							InputLabelProps={{
+								shrink: true,
+							}}
+						/>
+					</FormControl>
+
+					<FormControl className={classes.formControl}>
+						<TextField
+							inputRef={register}
+							name='commentaire'
+							id='standard-number'
+							label='Note spécifique'
+							multiline
+							rows={2}
+							InputLabelProps={{
+								shrink: true,
+							}}
+						/>
+					</FormControl>
+
+					{preloadedValues.dateContrat ? (
 						<FormControl className={classes.formControl}>
 							<MuiPickersUtilsProvider utils={DateFnsUtils}>
 								<KeyboardDatePicker
 									inputRef={register}
 									disableToolbar
 									variant='inline'
-									name='dateRes'
+									name='dateContrat'
 									format='MM/dd/yyyy'
 									margin='normal'
 									id='date-picker-inline'
-									label='Date de réservation'
-									value={selectedDateRes}
-									onChange={handleDateChangeRes}
+									label='Date de génération du contrat'
+									value={selectedDateContrat}
+									onChange={handleDateChangeContrat}
 									KeyboardButtonProps={{
 										'aria-label': 'change date',
 									}}
 								/>
 							</MuiPickersUtilsProvider>
 						</FormControl>
-					</Grid>
-					<Grid item>
-						<FormControl className={classes.formControl}>
-							<InputLabel
-								shrink
-								id='demo-simple-select-placeholder-label-label'>
-								Status de la réservation
-							</InputLabel>
-
-							<Controller
-								control={control}
-								name='status'
-								as={
-									<Select id='status-select'>
-										<MenuItem value='Nouvelle réservation'>
-											Nouvelle réservation
-										</MenuItem>
-										<MenuItem value='Contrat envoyé'>
-											Contrat envoyé
-										</MenuItem>
-										<MenuItem value='Acompte/Contrat reçu'>
-											Acompte/Contrat reçu
-										</MenuItem>
-										<MenuItem value='Relance contrat non reçu'>
-											Relance contrat non reçu
-										</MenuItem>
-										<MenuItem value='Reservation terminée'>
-											Reservation terminée
-										</MenuItem>
-										<MenuItem value='Reservation/Contrat annulée'>
-											Reservation/Contrat annulée
-										</MenuItem>
-									</Select>
-								}
-							/>
-						</FormControl>
-					</Grid>
-					<Grid item>
-						<FormControl className={classes.formControl}>
-							<TextField
-								inputRef={register}
-								name='commentaire'
-								id='standard-number'
-								label='Note spécifique'
-								multiline
-								rows={2}
-								InputLabelProps={{
-									shrink: true,
-								}}
-							/>
-						</FormControl>
-					</Grid>
-					<Grid item>
-						{preloadedValues.dateContrat ? (
-							<FormControl className={classes.formControl}>
-								<MuiPickersUtilsProvider utils={DateFnsUtils}>
-									<KeyboardDatePicker
-										inputRef={register}
-										disableToolbar
-										variant='inline'
-										name='dateContrat'
-										format='MM/dd/yyyy'
-										margin='normal'
-										id='date-picker-inline'
-										label='Date de génération du contrat'
-										value={selectedDateContrat}
-										onChange={handleDateChangeContrat}
-										KeyboardButtonProps={{
-											'aria-label': 'change date',
-										}}
-									/>
-								</MuiPickersUtilsProvider>
-							</FormControl>
-						) : (
-							<Button variant='contained' color='secondary'>
-								Générer le contrat
-							</Button>
-						)}
-					</Grid>
-
-					<Button
-						type='submit'
-						variant='contained'
-						color='primary'
-						className={classes.button}>
-						Valider les modifications
-					</Button>
+					) : (
+						<Button variant='contained' color='secondary'>
+							Générer le contrat
+						</Button>
+					)}
 				</Grid>
+				<Button
+					type='submit'
+					variant='contained'
+					color='primary'
+					style={{ width: '100%' }}
+					className={classes.button}>
+					Valider les modifications
+				</Button>
 			</form>
 		</>
 	);

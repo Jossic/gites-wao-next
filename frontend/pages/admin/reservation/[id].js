@@ -14,7 +14,18 @@ import EuroIcon from '@material-ui/icons/Euro';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
 import HouseIcon from '@material-ui/icons/House';
 import ReceiptIcon from '@material-ui/icons/Receipt';
-import { Grid, Paper, Button } from '@material-ui/core';
+import {
+	Grid,
+	Paper,
+	Button,
+	ButtonGroup,
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow,
+} from '@material-ui/core';
 import FormStatus from '../../../components/admin/forms/reservation/FormStatus';
 import FormClient from '../../../components/admin/forms/reservation/FormClient';
 import FormLocation from '../../../components/admin/forms/reservation/FormLocation';
@@ -112,17 +123,32 @@ const ReservationId = ({ reservation, router }) => {
 					<Grid
 						container
 						direction='row'
-						justify='flex-end'
+						justify='space-between'
 						alignItems='flex-start'
-						style={{ padding: '5px' }}>
-						<Button
-							variant='contained'
-							color='primary'
-							style={{ float: 'right' }}>
-							<Link href='/admin/reservation'>
-								<a>Retour</a>
-							</Link>
-						</Button>
+						style={{ padding: '8px' }}>
+						<Grid item>
+							<ButtonGroup
+								variant='contained'
+								color='secondary'
+								aria-label='contained primary button group'>
+								<Button>Générer Contrat</Button>
+								<Button>Générer Facture</Button>
+								<Button>Autre Action</Button>
+							</ButtonGroup>
+						</Grid>
+						<Grid item>
+							<Button variant='contained' color='primary'>
+								<Link href='/admin/reservation'>
+									<a
+										style={{
+											textDecoration: 'none',
+											color: 'white',
+										}}>
+										Retour
+									</a>
+								</Link>
+							</Button>
+						</Grid>
 					</Grid>
 					<Paper style={{ padding: '15px' }}>
 						<Grid container>
@@ -130,26 +156,55 @@ const ReservationId = ({ reservation, router }) => {
 								Informations tarifaires
 							</Typography>
 						</Grid>
-						<Grid container justify='center' spacing={5}>
-							<Grid item>Total sans supplément</Grid>
-							<Grid item>Supplément</Grid>
-							<Grid item>Taxes diverses</Grid>
-							<Grid item>Ménage</Grid>
-							<Grid item>Lit</Grid>
-							<Grid item>Animaux</Grid>
-							<Grid item>Remise</Grid>
-							<Grid item>Reste à payer</Grid>
-						</Grid>
-						<Grid container justify='center' spacing={5}>
-							<Grid item>€€€€€€€€€</Grid>
-							<Grid item>€€€€€€€€€</Grid>
-							<Grid item>€€€€€€€€€</Grid>
-							<Grid item>€€€€€€€€€</Grid>
-							<Grid item>€€€€€€€€€</Grid>
-							<Grid item>€€€€€€€€€</Grid>
-							<Grid item>€€€€€€€€€</Grid>
-							<Grid item>€€€€€€€€€</Grid>
-						</Grid>
+						<TableContainer component={Paper}>
+							<Table
+								className={classes.table}
+								aria-label='simple table'>
+								<TableHead>
+									<TableRow>
+										<TableCell>
+											Total sans supplément
+										</TableCell>
+										<TableCell>Supplément</TableCell>
+										<TableCell>Taxes diverses</TableCell>
+										<TableCell>Ménage</TableCell>
+										<TableCell>Lit</TableCell>
+										<TableCell>Animaux</TableCell>
+										<TableCell>Remise</TableCell>
+										<TableCell>Reste à payer</TableCell>
+									</TableRow>
+								</TableHead>
+								<TableBody>
+									<TableRow>
+										<TableCell>
+											{reservation.mtRes}€
+										</TableCell>
+										<TableCell>
+											{reservation.mtSuppl}€
+										</TableCell>
+										<TableCell>
+											{reservation.mtTaxesDiverses}€
+										</TableCell>
+										<TableCell>
+											{reservation.ftMenage}€
+										</TableCell>
+										<TableCell>
+											{reservation.ftLit}€
+										</TableCell>
+										<TableCell>
+											{reservation.mtAnimaux}€
+										</TableCell>
+										<TableCell>
+											{reservation.remise}€
+										</TableCell>
+										<TableCell>
+											{reservation.resteAPayer}€
+										</TableCell>
+									</TableRow>
+								</TableBody>
+							</Table>
+						</TableContainer>
+
 						<div className={classes.root}>
 							<AppBar position='static'>
 								<Tabs
