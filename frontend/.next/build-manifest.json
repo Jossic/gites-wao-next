@@ -14,6 +14,11 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
+    "/404": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/404.js"
+    ],
     "/_app": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
@@ -24,15 +29,20 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/reservation": [
+    "/admin/crud/images/add": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/reservation.js"
+      "static/chunks/pages/admin/crud/images/add.js"
     ],
-    "/admin/reservation/[id]": [
+    "/admin/gestionImages": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/reservation/[id].js"
+      "static/chunks/pages/admin/gestionImages.js"
+    ],
+    "/reservation": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/reservation.js"
     ]
   },
   "ampFirstPages": []

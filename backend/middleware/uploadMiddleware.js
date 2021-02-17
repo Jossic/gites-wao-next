@@ -65,7 +65,7 @@ const uploadAWSS3 = async (req, res) => {
 					location: data.Location,
 					nom: req.files.photos[i].name,
 				});
-
+				console.log('sauvegarde de la photo');
 				photo.save();
 			}
 		});

@@ -694,7 +694,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_hook_form__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _actions_authActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../actions/authActions */ "./actions/authActions.js");
 /* harmony import */ var _actions_partenairesActions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../actions/partenairesActions */ "./actions/partenairesActions.js");
-var _jsxFileName = "C:\\Users\\gites\\Dropbox\\gites-wao\\frontend\\components\\admin\\lists\\ListImages.js";
+var _jsxFileName = "C:\\Users\\jossi\\Dropbox\\JOSSIC\\6-development\\Devs\\gites-wao\\frontend\\components\\admin\\lists\\ListImages.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -1359,7 +1359,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_nprogress_nprogress_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../node_modules/nprogress/nprogress.css */ "./node_modules/nprogress/nprogress.css");
 /* harmony import */ var _node_modules_nprogress_nprogress_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_nprogress_nprogress_css__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _actions_messageActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions/messageActions */ "./actions/messageActions.js");
-var _jsxFileName = "C:\\Users\\gites\\Dropbox\\gites-wao\\frontend\\components\\layout\\AdminHeader.js";
+var _jsxFileName = "C:\\Users\\jossi\\Dropbox\\JOSSIC\\6-development\\Devs\\gites-wao\\frontend\\components\\layout\\AdminHeader.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -5836,7 +5836,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_auth_Admin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/auth/Admin */ "./components/auth/Admin.js");
 /* harmony import */ var _actions_giteActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/giteActions */ "./actions/giteActions.js");
 /* harmony import */ var _actions_authActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions/authActions */ "./actions/authActions.js");
-var _jsxFileName = "C:\\Users\\gites\\Dropbox\\gites-wao\\frontend\\pages\\admin\\gestionImages.js";
+var _jsxFileName = "C:\\Users\\jossi\\Dropbox\\JOSSIC\\6-development\\Devs\\gites-wao\\frontend\\pages\\admin\\gestionImages.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 

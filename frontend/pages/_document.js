@@ -30,6 +30,10 @@ class MyDocument extends Document {
 						content={darkTheme.palette.primary.main}
 					/>
 					<link
+						rel='shortcut icon'
+						href='https://gites-wao.s3.eu-west-3.amazonaws.com/IN4K3cR3kF-wao-transparent.png'
+					/>
+					<link
 						rel='stylesheet'
 						href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
 					/>
