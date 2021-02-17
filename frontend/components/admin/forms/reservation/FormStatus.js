@@ -49,7 +49,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FormStatus = ({ preloadedValues }) => {
-	console.log(preloadedValues);
 	const [selectedDateRes, setSelectedDateRes] = React.useState();
 	const [selectedDateContrat, setSelectedDateContrat] = React.useState();
 

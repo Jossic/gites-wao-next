@@ -701,7 +701,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! dayjs */ "dayjs");
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "C:\\Users\\jossi\\Dropbox\\JOSSIC\\6-development\\Devs\\gites-wao\\frontend\\components\\admin\\AfficheDate.js";
+var _jsxFileName = "C:\\Users\\gites\\Dropbox\\gites-wao\\frontend\\components\\admin\\AfficheDate.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -754,7 +754,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_Check__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Check__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _material_ui_icons_NotInterested__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/icons/NotInterested */ "@material-ui/icons/NotInterested");
 /* harmony import */ var _material_ui_icons_NotInterested__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_NotInterested__WEBPACK_IMPORTED_MODULE_8__);
-var _jsxFileName = "C:\\Users\\jossi\\Dropbox\\JOSSIC\\6-development\\Devs\\gites-wao\\frontend\\components\\admin\\ClientNom.js";
+var _jsxFileName = "C:\\Users\\gites\\Dropbox\\gites-wao\\frontend\\components\\admin\\ClientNom.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -957,7 +957,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_admin_GiteNom__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../components/admin/GiteNom */ "./components/admin/GiteNom.js");
 /* harmony import */ var _components_admin_ClientNom__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../components/admin/ClientNom */ "./components/admin/ClientNom.js");
 /* harmony import */ var _AfficheDate__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../AfficheDate */ "./components/admin/AfficheDate.js");
-var _jsxFileName = "C:\\Users\\jossi\\Dropbox\\JOSSIC\\6-development\\Devs\\gites-wao\\frontend\\components\\admin\\lists\\ListReservation.js";
+var _jsxFileName = "C:\\Users\\gites\\Dropbox\\gites-wao\\frontend\\components\\admin\\lists\\ListReservation.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -1401,7 +1401,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_nprogress_nprogress_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../node_modules/nprogress/nprogress.css */ "./node_modules/nprogress/nprogress.css");
 /* harmony import */ var _node_modules_nprogress_nprogress_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_nprogress_nprogress_css__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _actions_messageActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions/messageActions */ "./actions/messageActions.js");
-var _jsxFileName = "C:\\Users\\jossi\\Dropbox\\JOSSIC\\6-development\\Devs\\gites-wao\\frontend\\components\\layout\\AdminHeader.js";
+var _jsxFileName = "C:\\Users\\gites\\Dropbox\\gites-wao\\frontend\\components\\layout\\AdminHeader.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -5877,7 +5877,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_admin_lists_ListReservation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/admin/lists/ListReservation */ "./components/admin/lists/ListReservation.js");
 /* harmony import */ var _actions_reservationActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../actions/reservationActions */ "./actions/reservationActions.js");
 /* harmony import */ var _actions_giteActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../actions/giteActions */ "./actions/giteActions.js");
-var _jsxFileName = "C:\\Users\\jossi\\Dropbox\\JOSSIC\\6-development\\Devs\\gites-wao\\frontend\\pages\\admin\\reservation\\index.js";
+var _jsxFileName = "C:\\Users\\gites\\Dropbox\\gites-wao\\frontend\\pages\\admin\\reservation\\index.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 

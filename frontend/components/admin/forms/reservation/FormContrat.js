@@ -109,7 +109,7 @@ const FormContrat = ({ preloadedValues }) => {
 				<Grid container justify='space-around'>
 					<TextField
 						inputRef={register}
-						name='mtRes'
+						name='totalAPayer'
 						id='standard-number'
 						label='Montant de la réservation (sans suppl.)'
 						type='number'

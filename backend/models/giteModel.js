@@ -70,6 +70,24 @@ const giteSchema = mongoose.Schema(
 		calendrierLink: {
 			type: String,
 		},
+		tarifDeBase: {
+			type: Number,
+		},
+		tarifParPersParNuit: {
+			type: Number,
+		},
+		supplementParPers: {
+			type: Number,
+		},
+		nbPersMax: {
+			type: Number,
+		},
+		ftLit: {
+			type: Number,
+		},
+		ftMenage: {
+			type: Number,
+		},
 	},
 	{
 		timestamps: true,

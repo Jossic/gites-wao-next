@@ -11,6 +11,14 @@ const index = () => {
 					section)
 				</li>
 				<li>Rendu de la page accueil</li>
+				<li>
+					Génération d'un contrat : Télécharger le contrat en pdf ->
+					Prévisualisation dans modal et confirmation envoi au client
+					(exemple mail reçu transféré avec insertion du contrat).
+					Ajouter référence du contrat pour virement Ajouter dans le
+					corps du mail le lien pour générer le paiement
+				</li>
+				<li>Génération une facture : Télécharger la facture en xls</li>
 				<li>gestion des fichiers</li>
 				<li>update & delete image</li>
 				<li>

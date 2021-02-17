@@ -40,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FormClient = ({ preloadedValues }) => {
-	console.log(preloadedValues);
 	const token = getCookie('token');
 	const classes = useStyles();
 	const { control, register, handleSubmit } = useForm({

@@ -133,7 +133,8 @@ const ReservationId = ({ reservation, router }) => {
 								aria-label='contained primary button group'>
 								<Button>Générer Contrat</Button>
 								<Button>Générer Facture</Button>
-								<Button>Autre Action</Button>
+								<Button>Mail plateforme</Button>
+								<Button>Demander paiement</Button>
 							</ButtonGroup>
 						</Grid>
 						<Grid item>
@@ -177,7 +178,7 @@ const ReservationId = ({ reservation, router }) => {
 								<TableBody>
 									<TableRow>
 										<TableCell>
-											{reservation.mtRes}€
+											{reservation.totalAPayer}€
 										</TableCell>
 										<TableCell>
 											{reservation.mtSuppl}€

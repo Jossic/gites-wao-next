@@ -21,7 +21,7 @@ const reservationSchema = mongoose.Schema(
 		contactAbritel: { type: Boolean },
 		contactLeboncoin: { type: Boolean },
 		contactAutre: { type: Boolean },
-		mtRes: { type: Number, default: 0 },
+		totalAPayer: { type: Number, default: 0 },
 		mtTaxesDiverses: { type: Number, default: 0 },
 		caution: { type: Number, default: 350 },
 		resteAPayer: { type: Number },
