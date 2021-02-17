@@ -24,15 +24,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
+    "/admin/gestionDivers/alentours": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/admin/gestionDivers/alentours.js"
+    ],
     "/admin/mailer": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
       "static/chunks/pages/admin/mailer.js"
-    ],
-    "/admin/reservation": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/admin/reservation.js"
     ]
   },
   "ampFirstPages": []

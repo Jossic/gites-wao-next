@@ -14,6 +14,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Snackbar from '@material-ui/core/Snackbar';
 import { withRouter } from 'next/router';
 import MuiAlert from '@material-ui/lab/Alert';
+import CreateIcon from '@material-ui/icons/Create';
 import Router from 'next/router';
 import { IconButton } from '@material-ui/core';
 import { removeMailer } from '../../../actions/mailerActions';
@@ -146,13 +147,10 @@ const ListMailer = ({ mailers, router }) => {
 			options: {
 				filter: true,
 				customBodyRender: (value, tableMeta, updateValue) => {
-					return (
-						!value && (
-							<FiberNewIcon
-								fontSize='large'
-								style={{ color: 'green' }}
-							/>
-						)
+					return value ? (
+						<CheckBoxIcon />
+					) : (
+						<CheckBoxOutlineBlankIcon />
 					);
 				},
 			},
@@ -169,7 +167,7 @@ const ListMailer = ({ mailers, router }) => {
 							<Link
 								href={`/admin/messages/${tableMeta.rowData[0]}`}>
 								<a>
-									<VisibilityIcon fontSize='large' />
+									<CreateIcon fontSize='large' />
 								</a>
 							</Link>
 						</IconButton>

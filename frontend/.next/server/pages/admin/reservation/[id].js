@@ -491,7 +491,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_hook_form__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _actions_reservationActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../actions/reservationActions */ "./actions/reservationActions.js");
 /* harmony import */ var _actions_authActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../actions/authActions */ "./actions/authActions.js");
-var _jsxFileName = "C:\\Users\\gites\\Dropbox\\gites-wao\\frontend\\components\\admin\\forms\\reservation\\FormClient.js";
+var _jsxFileName = "C:\\Users\\jossi\\Dropbox\\JOSSIC\\6-development\\Devs\\gites-wao\\frontend\\components\\admin\\forms\\reservation\\FormClient.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -1051,7 +1051,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_hook_form__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _actions_reservationActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../actions/reservationActions */ "./actions/reservationActions.js");
 /* harmony import */ var _actions_authActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../actions/authActions */ "./actions/authActions.js");
-var _jsxFileName = "C:\\Users\\gites\\Dropbox\\gites-wao\\frontend\\components\\admin\\forms\\reservation\\FormContrat.js";
+var _jsxFileName = "C:\\Users\\jossi\\Dropbox\\JOSSIC\\6-development\\Devs\\gites-wao\\frontend\\components\\admin\\forms\\reservation\\FormContrat.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -1514,7 +1514,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_hook_form__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _actions_reservationActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../actions/reservationActions */ "./actions/reservationActions.js");
 /* harmony import */ var _actions_authActions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../actions/authActions */ "./actions/authActions.js");
-var _jsxFileName = "C:\\Users\\gites\\Dropbox\\gites-wao\\frontend\\components\\admin\\forms\\reservation\\FormLocation.js";
+var _jsxFileName = "C:\\Users\\jossi\\Dropbox\\JOSSIC\\6-development\\Devs\\gites-wao\\frontend\\components\\admin\\forms\\reservation\\FormLocation.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -2456,7 +2456,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _date_io_date_fns__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_date_io_date_fns__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _material_ui_pickers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/pickers */ "@material-ui/pickers");
 /* harmony import */ var _material_ui_pickers__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_pickers__WEBPACK_IMPORTED_MODULE_9__);
-var _jsxFileName = "C:\\Users\\gites\\Dropbox\\gites-wao\\frontend\\components\\admin\\forms\\reservation\\FormStatus.js";
+var _jsxFileName = "C:\\Users\\jossi\\Dropbox\\JOSSIC\\6-development\\Devs\\gites-wao\\frontend\\components\\admin\\forms\\reservation\\FormStatus.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -2929,7 +2929,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_lab_Alert__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/lab/Alert */ "@material-ui/lab/Alert");
 /* harmony import */ var _material_ui_lab_Alert__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_lab_Alert__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _actions_reservationActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../actions/reservationActions */ "./actions/reservationActions.js");
-var _jsxFileName = "C:\\Users\\gites\\Dropbox\\gites-wao\\frontend\\components\\layout\\AdminHeader.js";
+var _jsxFileName = "C:\\Users\\jossi\\Dropbox\\JOSSIC\\6-development\\Devs\\gites-wao\\frontend\\components\\layout\\AdminHeader.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -7482,7 +7482,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_clientActions__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../../actions/clientActions */ "./actions/clientActions.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_25__);
-var _jsxFileName = "C:\\Users\\gites\\Dropbox\\gites-wao\\frontend\\pages\\admin\\reservation\\[id].js";
+var _jsxFileName = "C:\\Users\\jossi\\Dropbox\\JOSSIC\\6-development\\Devs\\gites-wao\\frontend\\pages\\admin\\reservation\\[id].js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 

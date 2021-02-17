@@ -5,6 +5,7 @@ import {
 	countNouvelleReservation,
 	listAllReservations,
 } from '../../../actions/reservationActions';
+
 import { listeDesGites } from '../../../actions/giteActions';
 
 const Reservation = ({ reservations, newReservations, gites }) => {
