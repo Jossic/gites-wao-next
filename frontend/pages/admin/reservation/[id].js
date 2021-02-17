@@ -20,6 +20,9 @@ import FormClient from '../../../components/admin/forms/reservation/FormClient';
 import FormLocation from '../../../components/admin/forms/reservation/FormLocation';
 import FormPaiements from '../../../components/admin/forms/reservation/FormPaiements';
 import FormContrat from '../../../components/admin/forms/reservation/FormContrat';
+import { useEffect, useState } from 'react';
+import { getCookie } from '../../../actions/authActions';
+import { getClientById } from '../../../actions/clientActions';
 
 function TabPanel({ children, value, index, ...other }) {
 	return (
@@ -62,7 +65,25 @@ const useStyles = makeStyles((theme) => ({
 
 const ReservationId = ({ reservation, router }) => {
 	const classes = useStyles();
-	const [value, setValue] = React.useState(0);
+	const [value, setValue] = useState(0);
+
+	const [client, setClient] = useState({});
+
+	const token = getCookie('token');
+
+	const listerUnClient = () => {
+		getClientById(reservation.client, token).then((data) => {
+			if (data.error) {
+				console.log(error);
+			} else {
+				setClient(data);
+			}
+		});
+	};
+
+	useEffect(() => {
+		listerUnClient();
+	}, []);
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -144,7 +165,7 @@ const ReservationId = ({ reservation, router }) => {
 								<FormPaiements />
 							</TabPanel>
 							<TabPanel value={value} index={2}>
-								<FormClient />
+								<FormClient preloadedValues={client} />
 							</TabPanel>
 							<TabPanel value={value} index={3}>
 								<FormLocation />
