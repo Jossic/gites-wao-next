@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/admin": "pages/admin.js",
   "/admin/reservation/[id]": "pages/admin/reservation/[id].js",
-  "/admin/reservation": "pages/admin/reservation.js"
+  "/contact": "pages/contact.js"
 }

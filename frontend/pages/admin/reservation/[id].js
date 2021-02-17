@@ -138,7 +138,7 @@ const ReservationId = ({ reservation, router }) => {
 								</Tabs>
 							</AppBar>
 							<TabPanel value={value} index={0}>
-								<FormStatus />
+								<FormStatus preloadedValues={reservation} />
 							</TabPanel>
 							<TabPanel value={value} index={1}>
 								<FormPaiements />
