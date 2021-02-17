@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const mailerSchema = mongoose.Schema(
 	{
-		nom: { type: String, required: true },
+		nom: { type: String, required: true, unique: true },
 		description: { type: String, required: true },
 		sujet: { type: String, required: true },
 		corps: { type: {}, required: true },

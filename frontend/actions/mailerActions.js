@@ -1,9 +1,12 @@
 import fetch from 'isomorphic-fetch';
 import { API } from '../config';
 
-export const listAllMailers = () => {
+export const listAllMailers = (token) => {
 	return fetch(`${API}/mailer`, {
 		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
 	})
 		.then((response) => {
 			return response.json();
@@ -11,9 +14,12 @@ export const listAllMailers = () => {
 		.catch((err) => console.log(err));
 };
 
-export const listMailerById = (id) => {
+export const listMailerById = (id, token) => {
 	return fetch(`${API}/mailer/${id}`, {
 		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
 	})
 		.then((response) => {
 			return response.json();
@@ -26,6 +32,7 @@ export const createMailer = (mailer) => {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
 		},
 		body: JSON.stringify(mailer),
 	})

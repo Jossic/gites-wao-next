@@ -5,7 +5,7 @@ import Mailer from '../models/mailerModel.js';
 // @route     GET /api/mailer
 // @access    PubPrivate/Adminlic
 const getAllMailers = asyncHandler(async (req, res) => {
-	const mailers = await mailer.find({});
+	const mailers = await Mailer.find({});
 	res.json(mailers);
 });
 
