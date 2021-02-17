@@ -15,6 +15,13 @@ import {
 	TextareaAutosize,
 	TextField,
 } from '@material-ui/core';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+	MuiPickersUtilsProvider,
+	KeyboardTimePicker,
+	KeyboardDatePicker,
+} from '@material-ui/pickers';
+import dayjs from 'dayjs';
 import { withRouter } from 'next/router';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -45,7 +52,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FormLocation = ({ preloadedValues }) => {
-	console.log(preloadedValues);
+	const [selectedDateArrivee, setSelectedDateArrivee] = React.useState();
+	const [selectedDateDepart, setSelectedDateDepart] = React.useState();
+
+	const handleDateChangeArrivee = (date) => {
+		setSelectedDateArrivee(date);
+	};
+
+	const handleDateChangeDepart = (date) => {
+		setSelectedDateDepart(date);
+	};
+
 	const token = getCookie('token');
 	const classes = useStyles();
 	const { control, register, handleSubmit } = useForm({
@@ -53,14 +70,21 @@ const FormLocation = ({ preloadedValues }) => {
 	});
 
 	const [values, setValues] = useState({
-		heureArrivee: 'à partir de 17h',
-		heureDepart: 'à partir de 17h',
+		dateArrivee: dayjs(preloadedValues.dateArrivee).format('yyyy-MM-dd'),
+		dateDepart: preloadedValues.dateDepart,
 		loading: false,
 		success: '',
 		error: '',
 		message: '',
 	});
-	const { success, loading, error, message } = values;
+	const {
+		success,
+		loading,
+		error,
+		message,
+		dateArrivee,
+		dateDepart,
+	} = values;
 
 	const onSubmit = async (data) => {
 		console.log(data);
@@ -151,29 +175,43 @@ const FormLocation = ({ preloadedValues }) => {
 
 				<Grid container justify='space-around'>
 					<FormControl className={classes.formControl}>
-						<TextField
-							inputRef={register}
-							name='dateArrivee'
-							id='standard-number'
-							label='Date de début'
-							type='date'
-							InputLabelProps={{
-								shrink: true,
-							}}
-						/>
+						<MuiPickersUtilsProvider utils={DateFnsUtils}>
+							<KeyboardDatePicker
+								inputRef={register}
+								disableToolbar
+								variant='inline'
+								name='dateArrivee'
+								format='MM/dd/yyyy'
+								margin='normal'
+								id='date-picker-inline'
+								label='Date de début'
+								value={selectedDateArrivee}
+								onChange={handleDateChangeArrivee}
+								KeyboardButtonProps={{
+									'aria-label': 'change date',
+								}}
+							/>
+						</MuiPickersUtilsProvider>
 					</FormControl>
 
 					<FormControl className={classes.formControl}>
-						<TextField
-							inputRef={register}
-							name='dateDepart'
-							id='standard-number'
-							label='Date de fin'
-							type='date'
-							InputLabelProps={{
-								shrink: true,
-							}}
-						/>
+						<MuiPickersUtilsProvider utils={DateFnsUtils}>
+							<KeyboardDatePicker
+								inputRef={register}
+								disableToolbar
+								variant='inline'
+								name='dateDepart'
+								format='MM/dd/yyyy'
+								margin='normal'
+								id='date-picker-inline'
+								label='Date de début'
+								value={selectedDateDepart}
+								onChange={handleDateChangeDepart}
+								KeyboardButtonProps={{
+									'aria-label': 'change date',
+								}}
+							/>
+						</MuiPickersUtilsProvider>
 					</FormControl>
 				</Grid>
 				<Grid container justify='space-around'>

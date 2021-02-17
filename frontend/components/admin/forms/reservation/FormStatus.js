@@ -105,6 +105,19 @@ const FormStatus = ({ preloadedValues }) => {
 					justify='space-around'
 					alignItems='stretch'>
 					<Grid item>
+						<TextField
+							className={classes.formControl}
+							inputRef={register}
+							name='dateRes'
+							id='standard-number'
+							label='Date de réservation'
+							type='date'
+							InputLabelProps={{
+								shrink: true,
+							}}
+						/>
+					</Grid>
+					<Grid item>
 						<FormControl className={classes.formControl}>
 							<InputLabel
 								shrink

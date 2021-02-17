@@ -14,7 +14,7 @@ import EuroIcon from '@material-ui/icons/Euro';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
 import HouseIcon from '@material-ui/icons/House';
 import ReceiptIcon from '@material-ui/icons/Receipt';
-import { Grid, Paper } from '@material-ui/core';
+import { Grid, Paper, Button } from '@material-ui/core';
 import FormStatus from '../../../components/admin/forms/reservation/FormStatus';
 import FormClient from '../../../components/admin/forms/reservation/FormClient';
 import FormLocation from '../../../components/admin/forms/reservation/FormLocation';
@@ -23,6 +23,7 @@ import FormContrat from '../../../components/admin/forms/reservation/FormContrat
 import { useEffect, useState } from 'react';
 import { getCookie } from '../../../actions/authActions';
 import { getClientById } from '../../../actions/clientActions';
+import Link from 'next/link';
 
 function TabPanel({ children, value, index, ...other }) {
 	return (
@@ -94,10 +95,19 @@ const ReservationId = ({ reservation, router }) => {
 			<AdminHeader>
 				<Admin>
 					{/* Fil d'ariane */}
-					<h2 style={{ color: 'white' }}>
+					<Typography variant='h3' style={{ margin: '10px' }}>
 						Consultation de la réservation #
-					</h2>
-					<Paper>
+						<Button
+							variant='contained'
+							color='primary'
+							style={{ float: 'right' }}>
+							<Link href='/admin/reservation'>
+								<a>Retour</a>
+							</Link>
+						</Button>
+					</Typography>
+
+					<Paper style={{ margin: '10px' }}>
 						<Grid container>
 							<Typography variant='h4'>
 								Informations tarifaires
