@@ -14,6 +14,7 @@ import { IconButton } from '@material-ui/core';
 import { removeReservation } from '../../../actions/reservationActions';
 import GiteNom from '../../../components/admin/GiteNom';
 import ClientNom from '../../../components/admin/ClientNom';
+import AfficheDate from '../AfficheDate';
 
 function Alert(props) {
 	return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -140,14 +141,26 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 			options: {
 				filter: true,
 				sort: true,
+				customBodyRender: (value, tableMeta, updateValue) => {
+					// console.log(value);
+					// console.log(tableMeta.rowData[5]);
+					return (
+						<>
+							<AfficheDate value={value} />
+							<AfficheDate value={tableMeta.rowData[5]} />
+						</>
+					);
+				},
 			},
 		},
 		{
 			name: 'dateDepart',
 			label: 'Date de départ',
+
 			options: {
 				filter: true,
 				sort: true,
+				display: 'excluded',
 			},
 		},
 		{
