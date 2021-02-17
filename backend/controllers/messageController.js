@@ -74,6 +74,7 @@ const createMessage = async (req, res) => {
 				message,
 				text:
 					'Votre message à bien été envoyé, nous reviendrons vers vous rapidement, redirection en cours...',
+				text2: `Un nouveau message est arrivé, il est consultable <a href='${process.env.APP_DOMAIN}/admin/messages/${message._id}''>ici</a>`,
 			});
 		}
 	});

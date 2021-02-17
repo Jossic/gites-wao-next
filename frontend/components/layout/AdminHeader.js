@@ -5,12 +5,21 @@ import { isAuth, logout } from '../../actions/authActions';
 import '../../node_modules/nprogress/nprogress.css';
 import { countMessageNonLus } from '../../actions/messageActions';
 import { useEffect, useState } from 'react';
+import { Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
+import { countNouvelleReservation } from '../../actions/reservationActions';
+
+function Alert(props) {
+	return <MuiAlert elevation={6} variant='filled' {...props} />;
+}
 
 Router.onRouteChangeStart = (url) => NProgress.start();
 Router.onRouteChangeComplete = (url) => NProgress.done();
 Router.onRouteChangeError = (url) => NProgress.done();
 const AdminHeader = ({ children }) => {
 	const [newMessages, setNewMessages] = useState(0);
+	const [newReservation, setnewReservation] = useState(0);
+
 	const recupNonLus = () => {
 		countMessageNonLus().then((data) => {
 			if (data.error) {
@@ -21,11 +30,20 @@ const AdminHeader = ({ children }) => {
 		});
 	};
 
+	const recupNvleRes = () => {
+		countNouvelleReservation().then((data) => {
+			if (data.error) {
+				console.log(data.error);
+			} else {
+				setnewReservation(data);
+			}
+		});
+	};
+
 	useEffect(() => {
 		recupNonLus();
+		recupNvleRes();
 	}, []);
-
-	// const user = JSON.parse(localStorage.getItem('user'));
 
 	const user = {
 		name: 'Jossic LAPIERRE',
@@ -197,7 +215,12 @@ const AdminHeader = ({ children }) => {
 											aria-expanded='false'
 											aria-controls='collapseThree'>
 											<i className='fas fa-bed'></i>{' '}
-											Gestion des réservations
+											Gestion des réservations{' '}
+											{newReservation > 0 && (
+												<span class='badge badge-pill badge-success'>
+													{newReservation}
+												</span>
+											)}
 										</button>
 									</h2>
 								</div>
