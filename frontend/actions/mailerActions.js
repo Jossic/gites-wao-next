@@ -27,7 +27,7 @@ export const listMailerById = (id, token) => {
 		.catch((err) => console.log(err));
 };
 
-export const createMailer = (mailer) => {
+export const createMailer = (mailer, token) => {
 	return fetch(`${API}/mailer`, {
 		method: 'POST',
 		headers: {
