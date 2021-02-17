@@ -2,8 +2,8 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/admin/gestionImages": "pages/admin/gestionImages.js",
-  "/admin/crud/images/add": "pages/admin/crud/images/add.js",
-  "/reservation": "pages/reservation.js",
+  "/": "pages/index.js",
+  "/admin/messages": "pages/admin/messages.js",
+  "/contact": "pages/contact.js",
   "/404": "pages/404.js"
 }

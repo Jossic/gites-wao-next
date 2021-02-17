@@ -1,6 +1,7 @@
 import Message from '../models/MessageModel.js';
 import asyncHandler from 'express-async-handler';
 import validateHuman from '../utils/validateHuman.js';
+import sendEmailWithNodemailer from '../utils/email.js';
 
 // @desc      Fetch all Messages
 // @route     GET /api/messages
@@ -76,6 +77,24 @@ const createMessage = async (req, res) => {
 			});
 		}
 	});
+
+	//Envoi du mail venant de soi-même à soi-même car impossible de générer un envoi de l'adresse du client
+	const emailData = {
+		from: process.env.NODE_MAILER_USER,
+		to: process.env.NODE_MAILER_USER,
+		subject: `${process.env.APP_NAME} | Message via le formulaire de contact`,
+		text: `${process.env.APP_NAME} \n Venant de: ${nom} \n email: ${mail} \n Son message: ${msg}`,
+		html: `
+        <h4>Email reçu du formulaire de contact:</h4>
+        <p>Nom: ${nom}</p>
+        <p>Email: ${mail}</p>
+        <p>Tel: ${tel}</p>
+        <p>Message: ${msg}</p>
+        <hr />
+    `,
+	};
+
+	sendEmailWithNodemailer(req, res, emailData);
 };
 
 // @desc      Delete a Message

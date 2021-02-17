@@ -1,6 +1,6 @@
-const nodeMailer = require('nodemailer');
+import nodeMailer from 'nodemailer';
 
-exports.sendEmailWithNodemailer = (req, res, emailData) => {
+const sendEmailWithNodemailer = (req, res, emailData) => {
 	const transporter = nodeMailer.createTransport({
 		host: 'smtp.gmail.com',
 		port: 587,
@@ -18,10 +18,12 @@ exports.sendEmailWithNodemailer = (req, res, emailData) => {
 	return transporter
 		.sendMail(emailData)
 		.then((info) => {
-			console.log(`Message sent: ${info.response}`);
-			return res.json({
-				success: true,
-			});
+			console.log(`Message envoyé: ${info.response}`);
+			// return res.json({
+			// 	success: true,
+			// });
 		})
 		.catch((err) => console.log(`Problem sending email: ${err}`));
 };
+
+export default sendEmailWithNodemailer;

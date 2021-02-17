@@ -20905,7 +20905,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _darkTheme__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./darkTheme */ "./pages/darkTheme.js");
 
 
-var _jsxFileName = "C:\\Users\\gites\\Dropbox\\gites-wao\\frontend\\pages\\_app.js",
+var _jsxFileName = "C:\\Users\\jossi\\Dropbox\\JOSSIC\\6-development\\Devs\\gites-wao\\frontend\\pages\\_app.js",
     _s = $RefreshSig$();
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
@@ -21380,7 +21380,7 @@ module.exports = content.locals || {};
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! next-client-pages-loader?page=%2F_app&absolutePagePath=private-next-pages%2F_app.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F_app&absolutePagePath=private-next-pages%2F_app.js!./");
-module.exports = __webpack_require__(/*! C:\Users\gites\Dropbox\gites-wao\frontend\node_modules\next\dist\client\router.js */"./node_modules/next/dist/client/router.js");
+module.exports = __webpack_require__(/*! C:\Users\jossi\Dropbox\JOSSIC\6-development\Devs\gites-wao\frontend\node_modules\next\dist\client\router.js */"./node_modules/next/dist/client/router.js");
 
 
 /***/ })
