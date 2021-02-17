@@ -143,8 +143,6 @@ const messageResponse = asyncHandler(async (req, res) => {
 		throw new Error('Message non trouvée');
 	}
 
-	console.log(message._id);
-
 	//Envoi du mail venant de soi-même au client
 	const emailData = {
 		from: process.env.NODE_MAILER_USER,

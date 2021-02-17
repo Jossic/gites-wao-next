@@ -3,6 +3,7 @@ import asyncHandler from 'express-async-handler';
 import validateHuman from '../utils/validateHuman.js';
 import Client from '../models/clientModel.js';
 import Gite from '../models/giteModel.js';
+import sendEmailWithNodemailer from '../utils/email.js';
 
 // @desc      Fetch all reservations
 // @route     GET /api/reservation
@@ -162,6 +163,20 @@ const createReservation = async (req, res) => {
 			}
 		});
 	}
+
+	//Envoi du mail venant de soi-même au client
+	const emailData = {
+		from: process.env.NODE_MAILER_USER,
+		to: process.env.NODE_MAILER_USER,
+		subject: `${process.env.APP_NAME} | Demande de réservation gîte ${ceGite._id}`,
+		html: `
+			<h3>A faire :</h3>
+			<p>Lister les éléments de la location</p>
+			<hr />
+		`,
+	};
+
+	sendEmailWithNodemailer(req, res, emailData);
 };
 
 // @desc      Delete a reservation
