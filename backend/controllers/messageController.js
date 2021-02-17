@@ -77,6 +77,7 @@ const createMessage = async (req, res) => {
 			});
 		}
 	});
+	console.log(message._id);
 
 	//Envoi du mail venant de soi-même à soi-même car impossible de générer un envoi de l'adresse du client
 	const emailData = {
@@ -85,6 +86,9 @@ const createMessage = async (req, res) => {
 		subject: `${process.env.APP_NAME} | Message via le formulaire de contact`,
 		text: `${process.env.APP_NAME} \n Venant de: ${nom} \n email: ${mail} \n Son message: ${msg}`,
 		html: `
+		<h3>Consulter le message et y répondre ?  </h3>
+		<button type="button"><a href='${process.env.APP_DOMAIN}/admin/messages/${message._id}'>Répondre via l'app</a></button>
+		<hr />
         <h4>Email reçu du formulaire de contact:</h4>
         <p>Nom: ${nom}</p>
         <p>Email: ${mail}</p>
