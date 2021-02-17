@@ -138,9 +138,12 @@ const FormContrat = ({ preloadedValues }) => {
 						<Controller
 							control={control}
 							name='heureArrivee'
-							defaultValue=''
+							defaultValue='Aucune remise'
 							as={
 								<Select id='heureArrivee-select'>
+									<MenuItem value='Aucune remise'>
+										Aucune remise
+									</MenuItem>
 									<MenuItem value='Remise exceptionnelle'>
 										Remise exceptionnelle
 									</MenuItem>

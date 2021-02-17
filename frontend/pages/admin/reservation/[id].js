@@ -95,8 +95,26 @@ const ReservationId = ({ reservation, router }) => {
 			<AdminHeader>
 				<Admin>
 					{/* Fil d'ariane */}
-					<Typography variant='h3' style={{ margin: '10px' }}>
-						Consultation de la réservation #
+					<Grid container>
+						<Grid item>
+							<Typography variant='h5' style={{ margin: '10px' }}>
+								Consultation de la réservation
+								<Typography style={{ color: 'red' }}>
+									#{reservation._id}
+								</Typography>
+								<Typography style={{ color: 'green' }}>
+									{client.civilite} {client.nom}{' '}
+									{client.prenom}
+								</Typography>
+							</Typography>
+						</Grid>
+					</Grid>
+					<Grid
+						container
+						direction='row'
+						justify='flex-end'
+						alignItems='flex-start'
+						style={{ padding: '5px' }}>
 						<Button
 							variant='contained'
 							color='primary'
@@ -105,9 +123,8 @@ const ReservationId = ({ reservation, router }) => {
 								<a>Retour</a>
 							</Link>
 						</Button>
-					</Typography>
-
-					<Paper style={{ margin: '10px' }}>
+					</Grid>
+					<Paper style={{ padding: '15px' }}>
 						<Grid container>
 							<Typography variant='h4'>
 								Informations tarifaires

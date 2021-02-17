@@ -9,6 +9,7 @@ import {
 	Snackbar,
 	TextareaAutosize,
 	TextField,
+	Typography,
 } from '@material-ui/core';
 import { withRouter } from 'next/router';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -17,6 +18,13 @@ import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { updateReservation } from '../../../../actions/reservationActions';
 import { getCookie } from '../../../../actions/authActions';
+
+import DateFnsUtils from '@date-io/date-fns';
+import {
+	MuiPickersUtilsProvider,
+	KeyboardTimePicker,
+	KeyboardDatePicker,
+} from '@material-ui/pickers';
 
 function Alert(props) {
 	return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -41,6 +49,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FormStatus = ({ preloadedValues }) => {
+	console.log(preloadedValues);
+	const [selectedDateRes, setSelectedDateRes] = React.useState();
+	const [selectedDateContrat, setSelectedDateContrat] = React.useState();
+
+	const handleDateChangeRes = (date) => {
+		setSelectedDateRes(date);
+	};
+
+	const handleDateChangeContrat = (date) => {
+		setSelectedDateContrat(date);
+	};
 	const token = getCookie('token');
 	const classes = useStyles();
 	const { control, register, handleSubmit } = useForm({
@@ -105,17 +124,25 @@ const FormStatus = ({ preloadedValues }) => {
 					justify='space-around'
 					alignItems='stretch'>
 					<Grid item>
-						<TextField
-							className={classes.formControl}
-							inputRef={register}
-							name='dateRes'
-							id='standard-number'
-							label='Date de réservation'
-							type='date'
-							InputLabelProps={{
-								shrink: true,
-							}}
-						/>
+						<FormControl className={classes.formControl}>
+							<MuiPickersUtilsProvider utils={DateFnsUtils}>
+								<KeyboardDatePicker
+									inputRef={register}
+									disableToolbar
+									variant='inline'
+									name='dateRes'
+									format='MM/dd/yyyy'
+									margin='normal'
+									id='date-picker-inline'
+									label='Date de réservation'
+									value={selectedDateRes}
+									onChange={handleDateChangeRes}
+									KeyboardButtonProps={{
+										'aria-label': 'change date',
+									}}
+								/>
+							</MuiPickersUtilsProvider>
+						</FormControl>
 					</Grid>
 					<Grid item>
 						<FormControl className={classes.formControl}>
@@ -169,18 +196,31 @@ const FormStatus = ({ preloadedValues }) => {
 						</FormControl>
 					</Grid>
 					<Grid item>
-						<FormControl className={classes.formControl}>
-							<TextField
-								inputRef={register}
-								name='dateContrat'
-								id='standard-number'
-								label='Date de génération du contrat'
-								type='date'
-								InputLabelProps={{
-									shrink: true,
-								}}
-							/>
-						</FormControl>
+						{preloadedValues.dateContrat ? (
+							<FormControl className={classes.formControl}>
+								<MuiPickersUtilsProvider utils={DateFnsUtils}>
+									<KeyboardDatePicker
+										inputRef={register}
+										disableToolbar
+										variant='inline'
+										name='dateContrat'
+										format='MM/dd/yyyy'
+										margin='normal'
+										id='date-picker-inline'
+										label='Date de génération du contrat'
+										value={selectedDateContrat}
+										onChange={handleDateChangeContrat}
+										KeyboardButtonProps={{
+											'aria-label': 'change date',
+										}}
+									/>
+								</MuiPickersUtilsProvider>
+							</FormControl>
+						) : (
+							<Button variant='contained' color='secondary'>
+								Générer le contrat
+							</Button>
+						)}
 					</Grid>
 
 					<Button
