@@ -1,15 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { getCookie } from '../../../actions/authActions';
-import { removeMessage } from '../../../actions/messageActions';
 import { makeStyles } from '@material-ui/core/styles';
 import MUIDataTable from 'mui-datatables';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import ReplyIcon from '@material-ui/icons/Reply';
-import FiberNewIcon from '@material-ui/icons/FiberNew';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import VisibilityIcon from '@material-ui/icons/Visibility';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Snackbar from '@material-ui/core/Snackbar';
 import { withRouter } from 'next/router';
@@ -18,6 +14,7 @@ import CreateIcon from '@material-ui/icons/Create';
 import Router from 'next/router';
 import { IconButton } from '@material-ui/core';
 import { removeMailer } from '../../../actions/mailerActions';
+import { withSnackbar } from '../../HOC/Snackbar';
 
 function Alert(props) {
 	return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -32,52 +29,25 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ListMailer = ({ mailers, router }) => {
+const ListMailer = ({ mailers, router, snackbarShowMessage }) => {
 	const classes = useStyles();
 
 	const token = getCookie('token');
 
 	//Ajouter le delete et multiple delete
 
-	const [values, setvalues] = useState({
-		loading: false,
-		error: '',
-		success: '',
-		message: '',
-	});
-	const [open, setOpen] = useState(false);
-
-	const { loading, success, error, message } = values;
-
-	const handleClose = (event, reason) => {
-		if (reason === 'clickaway') {
-			return;
-		}
-
-		setvalues({ ...values, success: false, error: false });
-		setOpen(false);
-	};
+	const [loading, setLoading] = useState(false);
 
 	const deleteMailer = (id) => {
-		setvalues({ ...values, loading: true });
+		setLoading(true);
 		removeMailer(id, token).then((data) => {
 			console.log('data vaut', data);
 			if (data.error) {
-				setvalues({
-					...values,
-					loading: false,
-					error: true,
-					success: false,
-				});
+				setLoading(false);
+				snackbarShowMessage(`${data.error}`);
 			} else {
-				setvalues({
-					...values,
-					open: true,
-					loading: false,
-					error: '',
-					success: true,
-					message: data.text,
-				});
+				setLoading(false);
+				snackbarShowMessage(`${data.text}`, 'success');
 				setTimeout(() => {
 					router.reload();
 				}, 3000);
@@ -131,8 +101,8 @@ const ListMailer = ({ mailers, router }) => {
 			},
 		},
 		{
-			name: 'declencheurDate',
-			label: 'Date déclenchement',
+			name: 'declencheur',
+			label: 'Déclencheur',
 			options: {
 				filter: true,
 				sort: false,
@@ -165,7 +135,7 @@ const ListMailer = ({ mailers, router }) => {
 					return (
 						<IconButton>
 							<Link
-								href={`/admin/messages/${tableMeta.rowData[0]}`}>
+								href={`/admin/crud/mailer/${tableMeta.rowData[0]}`}>
 								<a>
 									<CreateIcon fontSize='large' />
 								</a>
@@ -206,26 +176,6 @@ const ListMailer = ({ mailers, router }) => {
 	return (
 		<>
 			{loading && <CircularProgress />}
-			{success && (
-				<Snackbar
-					open={open}
-					autoHideDuration={6000}
-					onClose={handleClose}>
-					<Alert onClose={handleClose} severity='success'>
-						{message}
-					</Alert>
-				</Snackbar>
-			)}
-			{error && (
-				<Snackbar
-					open={open}
-					autoHideDuration={6000}
-					onClose={handleClose}>
-					<Alert onClose={handleClose} severity='error'>
-						{error}
-					</Alert>
-				</Snackbar>
-			)}
 
 			<MUIDataTable
 				title={'Mailers'}
@@ -237,4 +187,4 @@ const ListMailer = ({ mailers, router }) => {
 	);
 };
 
-export default withRouter(ListMailer);
+export default withRouter(withSnackbar(ListMailer));

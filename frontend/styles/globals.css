@@ -15,6 +15,10 @@ a {
 	box-sizing: border-box;
 }
 
+.ql-editor {
+	min-height: 250px;
+}
+
 #nprogress .bar {
 	height: 4px !important;
 }

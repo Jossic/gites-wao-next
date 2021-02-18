@@ -130,7 +130,7 @@ const FormCreateMailer = ({ snackbarShowMessage }) => {
 						gite
 					</InputLabel>
 					<Controller
-						style={{ paddingTop: '30px' }}
+						style={{ paddingTop: '30px', minHeight: '300px' }}
 						as={ReactQuill}
 						control={control}
 						name='corps'
