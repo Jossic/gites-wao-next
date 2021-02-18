@@ -55,14 +55,14 @@ export const removeMailer = (id, token) => {
 		.catch((err) => console.log(err));
 };
 
-export const updateMailer = (response, id, token) => {
+export const updateMailer = (mailer, id, token) => {
 	return fetch(`${API}/mailer/${id}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`,
 		},
-		body: JSON.stringify(response),
+		body: JSON.stringify(mailer),
 	})
 		.then((response) => {
 			return response.json();

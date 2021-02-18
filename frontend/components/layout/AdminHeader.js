@@ -268,7 +268,7 @@ const AdminHeader = ({ children }) => {
 								mails
 							</a>
 						</Link>
-						<Link href='/admin'>
+						<Link href='/admin/clients'>
 							<a className='list-group-item list-group-item-action text-white bg-dark'>
 								<i className='fas fa-user-tag'></i> Gestion des
 								clients

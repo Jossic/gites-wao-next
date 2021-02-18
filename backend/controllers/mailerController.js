@@ -84,7 +84,6 @@ const updateMailer = asyncHandler(async (req, res) => {
 	} = req.body;
 
 	const mailer = await Mailer.findById(req.params.id);
-	console.log('mailer apres requete', mailer);
 	if (mailer) {
 		nom && (mailer.nom = nom);
 		description && (mailer.description = description);

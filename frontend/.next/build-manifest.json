@@ -29,15 +29,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/crud/mailer/[id]": [
+    "/admin": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/crud/mailer/[id].js"
+      "static/chunks/pages/admin.js"
     ],
-    "/admin/mailer": [
+    "/admin/clients": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/mailer.js"
+      "static/chunks/pages/admin/clients.js"
     ]
   },
   "ampFirstPages": []
