@@ -6,8 +6,7 @@ const mailerSchema = mongoose.Schema(
 		description: { type: String, required: true },
 		sujet: { type: String, required: true },
 		corps: { type: {}, required: true },
-		declencheurDate: { type: Date },
-		declencheurAction: { type: String },
+		declencheur: { type: String },
 		actif: { type: Boolean, default: false },
 	},
 	{

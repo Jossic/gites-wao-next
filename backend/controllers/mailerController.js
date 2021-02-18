@@ -27,23 +27,14 @@ const getMailerById = asyncHandler(async (req, res) => {
 // @route     POST /api/mailer
 // @access    Private/Admin
 const createMailer = async (req, res) => {
-	const {
-		nom,
-		description,
-		sujet,
-		corps,
-		declencheurDate,
-		declencheurAction,
-		actif,
-	} = req.body;
+	const { nom, description, sujet, corps, declencheur, actif } = req.body;
 
 	const mailer = new Mailer({
 		nom,
 		description,
 		sujet,
 		corps,
-		declencheurDate,
-		declencheurAction,
+		declencheur,
 		actif,
 	});
 
@@ -87,8 +78,8 @@ const updateMailer = asyncHandler(async (req, res) => {
 		description,
 		sujet,
 		corps,
-		declencheurDate,
-		declencheurAction,
+		declencheur,
+
 		actif,
 	} = req.body;
 
@@ -99,8 +90,7 @@ const updateMailer = asyncHandler(async (req, res) => {
 		description && (mailer.description = description);
 		sujet && (mailer.sujet = sujet);
 		corps && (mailer.corps = corps);
-		declencheurDate && (mailer.declencheurDate = declencheurDate);
-		declencheurAction && (mailer.declencheurAction = declencheurAction);
+		declencheur && (mailer.declencheur = declencheur);
 		actif && (mailer.actif = actif);
 
 		const updatedMailer = await mailer.save();

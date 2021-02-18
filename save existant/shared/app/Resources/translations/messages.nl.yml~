@@ -1,0 +1,169 @@
+Board.tittle1.t1: slaapplaatsen
+Board.tittle1.t2: 'gîte tarieven (€)'
+Board.tittle1.t3: 'Voor 1 tot %nbPersForBaseRate% personen'
+Board.tittle1.t4: 'vullen per dag per persoon meer dan %nbPersForBaseRate%'
+Board.tittle1.titre: 'Huisje met het hele jaar door verwarmd binnenzwembad'
+Board.tittle2.t1: '2 NACHTEN (aankomst vrijdag 17u, vertrek zondag 17u)'
+Board.tittle2.t2: '3 NACHTEN (big weekend)'
+Board.tittle2.t3: '4 NACHTEN (big weekend)'
+Board.tittle2.t4: '1 NACHTEN'
+Board.tittle2.titre: 'PLAATS IN WEEKEND'
+Board.tittle3.t1: LAAGSEIZOEN
+Board.tittle3.t2: 'GEMIDDELD SEIZOEN (schoolvakanties alle zones)'
+Board.tittle3.t3: 'HOOGSEIZOEN (juli en augustus) alleen per week te huur'
+Board.tittle3.t4: 'IN ZEER HOOG SEIZOEN Kerstmis week'
+Board.tittle3.t5: 'IN ZEER Hoogseizoen Week NIEUWJAAR'
+Board.tittle3.titre: 'VERHUUR 1 WEEK'
+Board.tittle4.t1: 'Per persoon per nacht met toepassing van een plafond'
+Board.tittle4.t10: '6 nachten'
+Board.tittle4.t11: '7 nachten'
+Board.tittle4.t2: 'Voorbeeld 1 : 4 personen voor 3 nachten toegepaste tarief'
+Board.tittle4.t3: '2Voorbeeld 2 : 10 personen voor 3 nachten berekende prijs'
+Board.tittle4.t4: 'aanbrengen onderstaande plafond'
+Board.tittle4.t5: nacht
+Board.tittle4.t6: nachten
+Board.tittle4.t7: '3 nachten'
+Board.tittle4.t8: '4 nachten'
+Board.tittle4.t9: '5 nachten'
+Board.tittle4.titre: 'HUUR OUT weekend en schoolvakanties minimaal 2 nachten'
+Board.tittle4.text: null
+Board.tittle4.do_simulation: null
+bottom.tittle1.text1: 'Vacation groepen van huizen uitgerust met zwembad, spa, infrarood sauna, biljart, tafelvoetbal, trampoline, speeltuin. sportvissers, krijgt u toegang tot een vijver in 2 villa''s. Ideaal voor een succesvolle bijeenkomsten, zal deze accommodaties grote capaciteit tot 50 personen groepen van vrienden en families (business seminar, verjaardag, familiereünie, terugtocht, vrienden ontmoeten, begrafenis leven jongen, meisje) aan te passen.'
+bottom.tittle1.titre: 'Gites WAO - 4 landhuizen 4 tot 12 kamers'
+bottom.tittle2.text2: 'Wij zijn gevestigd in Frankrijk in het departement Ardennes (in het hart van Europa), waar u kunt genieten van de natuur, bossen en de rust van het platteland voor het geluk van het samenzijn.'
+bottom.tittle2.titre: plaats
+dispo.tittle1: 'Beschikbaarheid van cottage'
+dispo.tittle2: '-DISPONIBILITES du gîte : Als u klikt op het evenement, heb je de aankomst- en vertrektijden..'
+dispo.tittle3: '-Voor de maanden juli, augustus we alleen volle weken te huren van zaterdag tot zaterdag. Voor de week van Kerstmis en Nieuwjaar, we huren volle weken afhankelijk Eve dag. Buiten deze periodes, verhuren wij op de vraag, maar als je een volle week willen, we verhuren van vrijdag tot vrijdag.'
+divers.tittle1: 'Enkele foto''s van onze campagne'
+divers.tittle2.t1: '\"Ardennes Roues Libres\" biedt een fietsverhuur, download prijzen en contactgegevens hieronder :'
+divers.tittle2.t2: 'Download de kalender van de gebeurtenissen die door de toeristische dienst van het land Montmédy. Klik op de onderstaande link. :'
+divers.tittle2.titre: 'Sommige restaurants en cateraars in de buurt van onze huizen.'
+divers.tittle3.t1: 'Plezier en entertainment in de Ardennen.'
+divers.tittle3.t2: 'We zijn een paar kilometer van de Meuse, een aantal activiteiten in de buurlanden.'
+divers.tittle3.t3: 'En we zijn ook een paar kilometer van België in onze Belgische vrienden ontdekt.'
+divers.tittle3.t4: 'en elders !!!.'
+divers.tittle3.t5: 'En na al zijn bezoeken, kunt u de dag in het zwembad te beëindigen en een goede nacht rustig slapen in onze huizen.'
+divers.tittle3.titre: 'Om onze regio, een aantal links die u misschien een idee om uw verblijf te verbeteren zal geven ontdekken.'
+error.403.message: 'Toegang geweigerd'
+error.404.message: 'Pagina niet gevonden'
+error.500.message: 'Internal Server Error'
+error.title: Fout
+flashBag.contactNo: 'Uw aanvraag is niet verzonden'
+flashBag.contactYes: 'Uw aanvraag is verzonden'
+global.form.addInfo: 'Aanvullende informatie / vragen :'
+global.form.address: Adres
+global.form.city: Stad
+global.form.cityCountry: Land
+global.form.civility: Beleefdheid
+global.form.contactedBy: 'Voor het invullen van dit formulier, hebben wij u al gecontacteerd door :'
+global.form.content: Bericht
+global.form.date: 'Datum van het verblijf'
+global.form.email: e-mail
+global.form.firstname: Voornaam
+global.form.lastname: Naam
+global.form.name: Naam/Pseudo
+global.form.nbChildren: 'Waaronder kinderen - 18'
+global.form.nbDSheets: 'Aantal twin vellen (het verstrekken van eventueel later) :'
+global.form.nbPers: 'Aantal personen in totaal'
+global.form.nbSheets: 'Aantal losse vellen (het verstrekken van eventueel later) :'
+global.form.no: Niet
+global.form.option.bed: 'Wil je ''bedden bij aankomst "(betaalde optie)? zo niet, dan wordt het beddengoed nog steeds gratis verstrekt.'
+global.form.option.dog: 'Hond € 3 / dag / pet'
+global.form.phone: Telefoon
+global.form.postcode: postcode
+global.form.submit: Sturen
+global.form.yes: Ja
+global.lodge: Thuis
+home.home: Welkom
+home.important: null
+home.welcome.title: 'Klik op het tabblad van het huis om alle foto''s te bekijken'
+home.welcome.text: "Onze 4 huisjes met een capaciteit van 2 tot 50 personen zijn hier om u te verwelkomen.\nHet vervolgkeuzemenu onder elke gite geeft u meer informatie en foto's.\nVul voor elke huuraanvraag het tabblad <a href='%url%'>Boeking</a> in."
+home.welcome.contact: 'Klik op de knop om het contactformulier te openen :'
+home.tittle2.publicity: reclame
+home.tittle2.text12: 'U kunt onze folder downloaden door te klikken op de onderstaande link,'
+home.tittle2.text13: Vouw
+home.tittle3.adress: 'Adresse : SAS WAO - 1 Route de Nouart - 08240 Fossé - Frankrijk'
+home.tittle3.text14: 'Wij zijn gevestigd in het Zuid-Oosten van de Ardennen, op 4 km van Buzancy de hoofdstad van het kanton waar u de belangrijkste winkels, op 40 km van Sedan en zijn kasteel, 85 km van Reims en zijn kelders te vinden, op 60 km van Verdun en haar geschiedenis. In de buurt van de Belgische grens en Luxemburg kunt u het een klein uitstapje te maken. Onze woningen bevinden zich in kleine dorpen waar rust is verzekerd, kunt u prachtige wandelingen maken of met de fiets te midden van de valleien en bossen. Ideaal voor gezin met kinderen en dieren. Om te profiteren van de activiteiten in de regio klik op deze <a href="%url%">link</a>.'
+interieur.tittle1: 'Binnen in het huisje'
+lodge.add.success: 'Le gite a été ajouté'
+lodge.lodge: 'Liste des gîtes'
+navbar.divers: Divers
+navbar.guestbook: gastenboek
+navbar.lodge.dispo: Beschikbaarheid
+navbar.lodge.interieur: binnen
+navbar.lodge.piscine: zwembad
+navbar.lodge.presentation: presentatie
+navbar.lodge.tarifs: Prijzen
+navbar.partenaire: Partners
+navbar.projet: projecten
+navbar.proximite: nabijgelegen
+navbar.questions: Vragen
+navbar.reservation: boeking
+navbar.simulation: 'simulatie tarieven'
+pool.tittle1: Zwembad
+presentation.tittle1: 'cottage Presentatie'
+presentation.tittle2: 'het huisje videopresentatie'
+presentation.tittle3.t1: 'We leven in Fossé, dank u om ons een beetje te bellen voor aankomst. We zullen er naartoe te gaan om u te verwelkomen.'
+presentation.tittle3.t2: 'Download Routebeschrijving (pdf)'
+presentation.tittle3.titre: 'Instructies voor uw aankomst :'
+questions.tittle1.q1: '-Zijn er veel huizen ?'
+questions.tittle1.r1: 'We hebben drie huizen nu, maar onze ontwikkeling van het toerisme project omvat 4 extra wooneenheden, waarvan zal voornamelijk gereserveerd worden voor het huwelijk-type evenementen, familiereünie, etc ... U kunt de site zoeken naar meer informatie.'
+questions.tittle1.titre: 'Voorkomende vragen van onze vorige huurders.'
+rate.tittle1.t1: '-De tarieven van de onderstaande tabel zijn voor 1-%nbPersForBaseRate% personen. Het beddengoed is voorzien.'
+rate.tittle1.titre: 'Het huisje tarieven'
+rate.tittle2.t1: '-Optioneel schoonmaak voor 1-13 personen. Beyond 13, het pakket is verplicht: %cleaningRate% €.'
+rate.tittle2.t2: '-Option : "bedden bij aankomst" %bedRate% €/persoon pakket.'
+rate.tittle2.t3: '-Pakket dier: 3 € per dag per dier.'
+rate.tittle2.titre: 'OPTIE OPTIES :'
+rate.tittle3.t1: 'Toeristenbelasting :'
+rate.tittle3.t2: '€ per dag per persoon ouder dan 18 jaar.'
+rate.tittle3.titre: 'VERPLICHT TAX :'
+simulation.result.warn: null
+simualtion.result.print_label: null
+simulation.result.header.lodge: null
+simulation.result.header.desc: null
+simulation.result.header.nights: null
+simulation.result.header.week: null
+simulation.result.header.lodge_booked: null
+simulation.result.body.supp_pers: null
+simulation.result.body.supp_tax: null
+simulation.result.body.supp_animals: null
+simulation.result.body.supp_bed: null
+simulation.result.body.total: null
+simulation.result.body.low_season: null
+simulation.result.body.middle_season: null
+simulation.result.body.low_or_middle_season: null
+simulation.result.footer.asterisk.cleaning: null
+simulation.result.footer.asterisk.tax: null
+simulation.result.button.reset: null
+simulation.result.exception.1: null
+simulation.result.exception.2: null
+simulation.result.exception.3: null
+simulation.result.exception.4: null
+simulation.result.exception.5: null
+simulation.result.exception.6: null
+simulation.result.exception.7: null
+reservation.title: null
+reservation.services.title: 'verleende diensten'
+reservation.services.text: "Huishoudelijke producten worden verstrekt, evenals huishoudlinnen: hoeslakens, dekbedovertrekken, kussenslopen, dekens. Een week voor uw aankomst ontvangt u een e-mail waarin u wordt gevraagd uw behoeften te communiceren in enkele en dubbele vellen. Deze diensten zijn bij de prijs inbegrepen, maar als u wilt dat de bedden bij aankomst worden opgemaakt, wordt er een toeslag in rekening gebracht.\n\nElk huisje is voorzien van WIFI, de toegangscodes worden de week voor aankomst per e-mail meegedeeld."
+reservation.booking_conditions.title: Boekingsvoorwaarden
+reservation.booking_conditions.text: "De reservering wordt van kracht na ontvangst van een aanbetaling van 30% van het totale bedrag van de prijs van het verblijf en een gedateerd en ondertekend exemplaar van het contract dat u per post ontvangt.\nHet saldo, dat wil zeggen de resterende 70%, zal worden betaald bij aankomst. De statuten worden geaccepteerd per cheque, overschrijving, vakantievouchers of contant.\nBij aankomst wordt een aanbetaling gevraagd (tussen 300 en 400 €, afhankelijk van het huisje), maar deze wordt niet geïncasseerd. Na uw verblijf ontvangt u per e-mail een scan van de vernietigde aanbetaling, behalve in geval van schade."
+reservation.cancellation_policy.title: Annuleringsbeleid
+reservation.cancellation_policy.text: "De ondertekening van het contract verbindt de twee partijen definitief.\nAls de huurder 60 dagen voor aankomst afziet van de huur, wordt de aanbetaling terugbetaald.\nTussen 1 dag en 60 dagen als het ons lukt om opnieuw te verhuren, wordt de aanbetaling ook terugbetaald. Anders gaat de aanbetaling verloren."
+reservation.cancellation_insurance.title: Annuleringsverzekering
+reservation.cancellation_insurance.text: "Als u meer informatie wenst over het annuleringsverzekeringsvoorstel van onze partnerclevacances,\ndownload het onderstaande document:"
+reservation.cancellation_insurance.link_text: 'Argumentaire annuleringsverzekering.'
+reservation.global_information.title: Informations
+reservation.global_information.text: "Als u meer informatie wilt voordat u een definitieve reservering maakt, vult u het formulier in <a href=\"{{ path('home_homepage') }}\">contact de l'accueil</a>\n"
+reservation.form_flow.title: Boeking
+reservation.form_flow.step.1: 'uw gegevens'
+reservation.form_flow.step.2: 'Optional options'
+reservation.form_flow.step.3: 'Informatie over verhuur'
+reservation.form_flow.step.4: null
+reservation.form_flow.buttons.next: null
+reservation.form_flow.buttons.back: null
+reservation.form_flow.buttons.finish: null
+reservation.form_flow.buttons.reset: null
+reservation.form_flow.bed_info: null
+reservation.form_flow.link_to_plan: null

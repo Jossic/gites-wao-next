@@ -1,0 +1,166 @@
+Board.tittle1.t1: couchages
+Board.tittle1.t2: 'Tarifs (€) du gîte'
+Board.tittle1.t3: 'Pour 1 à %nbPersForBaseRate% personnes'
+Board.tittle1.t4: 'supplément par jour et par personne au delà de %nbPersForBaseRate%'
+Board.tittle1.titre: 'Gîte avec piscine couverte chauffée toute l''année'
+Board.tittle2.t1: '2 NUITEES (arrivée vendredi 17h, départ dimanche 17h)'
+Board.tittle2.t2: '3 NUITEES (grand week end: exemple avec jour férié)'
+Board.tittle2.t3: '4 NUITEES (grand week end)'
+Board.tittle2.t4: '1 NUITEE'
+Board.tittle2.titre: 'LOCATION EN WEEK END'
+Board.tittle3.t1: 'EN BASSE SAISON'
+Board.tittle3.t2: 'EN MOYENNE SAISON (vacances scolaires toutes zones confondues)'
+Board.tittle3.t3: 'EN HAUTE SAISON (juillet & août) location uniquement à la semaine'
+Board.tittle3.t4: 'EN TRES HAUTE SAISON semaine de noël'
+Board.tittle3.t5: 'EN TRES HAUTE SAISON semaine du NOUVEL AN'
+Board.tittle3.titre: 'LOCATION 1 SEMAINE'
+Board.tittle4.t1: 'Par personne et par nuit avec application d''un plafond'
+Board.tittle4.t10: '6 nuitées'
+Board.tittle4.t11: '7 nuitées'
+Board.tittle4.t2: '1er exemple 4 personnes pour 3 nuits tarif appliqué'
+Board.tittle4.t3: '2ème exemple 10 personnes pour 3 nuits tarif calculé'
+Board.tittle4.t4: 'application du plafond ci-dessous'
+Board.tittle4.t5: nuitée
+Board.tittle4.t6: nuitées
+Board.tittle4.t7: '3 nuitées'
+Board.tittle4.t8: '4 nuitées'
+Board.tittle4.t9: '5 nuitées'
+Board.tittle4.titre: 'LOCATION HORS WEEK END et vacances scolaires minimum 2 nuitées'
+Board.tittle4.text: 'Pour mieux connaître le prix exact à payer, cliquez sur le bouton suivant'
+Board.tittle4.do_simulation: 'Faire une simulation de tarif'
+bottom.tittle1.text1: 'Locations saisonnières de cottages de groupes équipés de piscine, spa, cabine infrarouge, billard, baby-foot, trampoline, aire de jeux. Amateurs de pêche, vous aurez accès à un étang dans 2 des villas. Idéal pour réussir des rassemblements, ces hébergements de grande capacité jusque 50 personnes conviendront aux groupes d''amis et aux familles (séminaire d''entreprise, team building, anniversaire, cousinade, retraite, réunion entre amis, enterrement vie garçon, fille).'
+bottom.tittle1.titre: 'Gites WAO - 4 gîtes ruraux de 4 à 12 chambres'
+bottom.tittle2.text2: 'Nous sommes situés en France dans le département des ardennes (au coeur de l''Europe) où vous pourrez profiter de la nature, des forêts et du calme de nos campagnes pour le bonheur d''être ensemble.'
+bottom.tittle2.titre: 'Région Champagne-Ardenne'
+dispo.tittle1: 'Disponibilités du gite'
+dispo.tittle2: '-DISPONIBILITES du gîte : si vous cliquez sur l''évènement, vous avez les horaires d''arrivée et de départ.'
+dispo.tittle3: '-Pour les mois de juillet, Août nous ne louons que des semaines complètes du samedi au samedi. Pour les semaines de noël et nouvel an, nous louons des semaines complètes qui dépendent des jours de réveillon. En dehors de ces périodes, nous louons à la demande, mais si vous souhaitez une semaine complète, nous louons du vendredi au vendredi.'
+divers.tittle1: 'Quelques photos de notre campagne'
+divers.tittle2.t1: '\"Ardennes Roues Libres\" vous propose son service de location de vélos, téléchargement des tarifs et coordonnées ci-dessous :'
+divers.tittle2.t2: 'Télécharger le calendrier des manifestations créé par l''office du tourisme du pays de Montmédy en Meuse. Cliquez sur le lien ci-dessous :'
+divers.tittle2.titre: 'Quelques restaurants et traiteurs à proximité de nos gîtes.'
+divers.tittle3.t1: 'Distractions et divertissements dans les Ardennes.'
+divers.tittle3.t2: 'Nous sommes à quelques km de la meuse, quelques activités chez nos voisins.'
+divers.tittle3.t3: 'Et nous sommes aussi à quelques km de la Belgique, découverte chez nos amis Belges.'
+divers.tittle3.t4: 'et ailleurs !!!.'
+divers.tittle3.t5: 'Et après toutes ses visites, vous pourrez terminer la journée dans la piscine et passer une bonne nuit de sommeil au calme dans nos gîtes.'
+divers.tittle3.titre: 'Pour découvrir notre région, quelques liens qui vous donneront peut-être une idée pour agrémenter votre séjour.'
+error.403.message: 'Accès refusé'
+error.404.message: 'Page non trouvée'
+error.500.message: 'Erreur interne du serveur'
+error.title: Erreur
+flashBag.contactNo: 'Votre demande de contact n''a pas été envoyé'
+flashBag.contactYes: 'Votre demande de contact a été envoyé'
+global.form.addInfo: 'Informations complémentaires / Questions :'
+global.form.address: Adresse
+global.form.city: Ville
+global.form.cityCountry: Pays
+global.form.civility: Civilité
+global.form.contactedBy: 'Avant de remplir ce formulaire, nous avez vous déjà contacté par :'
+global.form.content: Message
+global.form.date: 'Dates du séjour'
+global.form.email: Mail
+global.form.firstname: Prénom
+global.form.lastname: Nom
+global.form.name: Nom/Pseudo
+global.form.nbChildren: 'Dont enfants - 18 ans'
+global.form.nbDSheets: 'Nombre de draps doubles :'
+global.form.nbPers: 'Nombre de personnes au total'
+global.form.nbSheets: 'Nombre de draps simples :'
+global.form.no: Non
+global.form.option.bed: 'Voulez vous les "Lits faits à l''arrivée" (option payante) ? si non, le linge de lits est quand même fourni sans supplément.'
+global.form.option.dog: 'Chien 3€/jour/animal'
+global.form.phone: Téléphone
+global.form.postcode: 'Code Postal'
+global.form.submit: Envoyer
+global.form.yes: Oui
+global.lodge: Gîte
+home.home: Accueil
+home.important: "Vous cherchez un grand gîte avec piscine\nNous avons ce qu'il vous faut !"
+home.welcome.title: 'Cliquez sur l''onglet du gîte pour voir toutes les photos'
+home.welcome.text: "Nos 4 gîtes d'une capacité de 2 à 55 personnes sont là pour vous accueillir.\nLe menu déroulant sous chaque gîte vous donnera plus d'informations et de photos.\nPour toute demande de location compléter l'onglet  <a href=\"%url%\">Réservation</a>."
+home.welcome.contact: 'Si vous avez une question, cliquez sur le bouton pour ouvrir le formulaire de contact :'
+home.tittle2.publicity: Publicité
+home.tittle2.text12: 'Vous pouvez télécharger notre dépliant publicitaire en cliquant sur le lien ci-dessous'
+home.tittle2.text13: Dépliant
+home.tittle3.adress: 'Adresse : SAS WAO - 1 Route de Nouart - 08240 Fossé'
+home.tittle3.text14: 'Nous sommes situés au Sud Est des Ardennes, à 4 km de Buzancy le chef lieu de canton où vous pourrez trouver les principaux commerces, à 40 km de Sedan et son château fort, à 85 km de Reims et ses caves, à 60 km de Verdun et son histoire. Proche de la frontière Belge et du Luxembourg vous pourrez y faire une petite virée. Nos gîtes sont situés dans des petits villages où le calme est assuré, vous pourrez faire de belles balades à pied ou à vélo au milieu des vallées et des forêts. Idéal pour famille avec enfants et animaux. Pour profiter des activités de la région cliquez sur ce <a href="%url%">lien</a>.'
+interieur.tittle1: 'Intérieur du gîte'
+lodge.add.success: 'Le gite a été ajouté'
+lodge.lodge: 'Liste des gîtes'
+navbar.divers: Divers
+navbar.guestbook: 'Livre d''or'
+navbar.lodge.dispo: Disponibilités
+navbar.lodge.interieur: Intérieur
+navbar.lodge.piscine: Piscine
+navbar.lodge.presentation: Présentation
+navbar.lodge.tarifs: Tarifs
+navbar.partenaire: Partenaires
+navbar.projet: Projets
+navbar.proximite: 'A proximité'
+navbar.questions: Questions
+navbar.reservation: Réservation
+navbar.simulation: 'Simulation Tarifs'
+pool.tittle1: 'Piscine du gite'
+presentation.tittle1: 'Présentation du gite'
+presentation.tittle2: 'Vidéo de présentation du gîte'
+presentation.tittle3.t1: 'Nous habitons à Fossé, merci de nous appeler un peu avant votre arrivée. Nous nous rendrons sur place pour vous accueillir.'
+presentation.tittle3.t2: 'Télécharger Itinéraire (pdf)'
+presentation.tittle3.titre: 'Instructions pour l''arrivée au gîte'
+rate.tittle1.t1: '-Les tarifs du tableau ci-dessous sont pour 1 à %nbPersForBaseRate% personnes. Le linge de lits est fourni.'
+rate.tittle1.titre: 'Tarifs du gite'
+rate.tittle2.t1: '-Forfait ménage facultatif pour 1 à 13 personnes. Au delà de 13, le forfait est obligatoire : %cleaningRate% €.'
+rate.tittle2.t2: '-Option  : "Lits faits à l''arrivée" forfait de %bedRate% €/personne.'
+rate.tittle2.t3: '-Forfait animal : 3 € par jour et par animal.'
+rate.tittle2.titre: 'OPTIONS FACULTATIVES :'
+rate.tittle3.t1: 'Taxe de séjour :'
+rate.tittle3.t2: '€ par jour et par personne de plus de 18 ans.'
+rate.tittle3.titre: 'TAXE OBLIGATOIRE :'
+simulation.result.warn: '<b>Attention :</b> La majorité des cas sont traités, mais le résultat est sous réserve de validation'
+simualtion.result.print_label: 'Imprimer ce devis'
+simulation.result.header.lodge: 'Devis tout compris - Gite %lodgeName%'
+simulation.result.header.desc: '%nbNights% nuitée(s) - %nbPers% personnes au total dont %nbChildren% moins de 18 ans'
+simulation.result.header.nights: '{1} Nuitée|]1,Inf] Nuitées'
+simulation.result.header.week: '{1} Semaine|]1,Inf] Semaines'
+simulation.result.header.lodge_booked: 'Le gîte semble réservé, vérifier les dates et heures sur le <a href="%path%">calendrier</a> (si jour de départ ou d''arrivée, la réservation est possible)'
+simulation.result.body.supp_pers: 'Supplément %lodge.supplement% €/nuit/personne au-delà de %lodge.nbPersForBaseRate%'
+simulation.result.body.supp_tax: 'Taxes diverses'
+simulation.result.body.supp_animals: 'Chiens 3€/nuit/animal'
+simulation.result.body.supp_bed: 'Lits fait à l''arrivée %lodge.bedRate% €/personne'
+simulation.result.body.total: Total
+simulation.result.body.low_season: '(basse saison)'
+simulation.result.body.middle_season: '(moyenne saison)'
+simulation.result.body.low_or_middle_season: 'Pour savoir quel sera votre tarif vérifiez la saison sur le <a href="%path%" style="color:blue;text-decoration:underline;">calendrier</a>. Les vacances scolaires toutes zones confondues sont en moyenne saison.'
+simulation.result.footer.asterisk.cleaning: 'Ménage inclus, draps fournis'
+simulation.result.footer.asterisk.tax: 'Les taxes diverses sont dues au propriétaire à l''arrivée. Ne s''appliquent pas aux enfants de moins de 18 ans.'
+simulation.result.button.reset: 'Recommencer la simulation'
+simulation.result.exception.1: 'Attention, sauf cas exceptionnel, les locations en juillet et août se font uniquement à la semaine'
+simulation.result.exception.2: 'Cette simulation n''est pas un cas classique. Vous pouvez faire une demande de devis par le formulaire de <a href="%path%">contact</a> sur la page d''accueil.'
+simulation.result.exception.3: 'La location pendant Noël se fait uniquement à la semaine'
+simulation.result.exception.4: 'La location pendant le nouvel an se fait uniquement à la semaine'
+simulation.result.exception.5: 'Cette simulation n''est pas un cas classique (plus de 4 nuitées en week-end / hors week-end). Vous pouvez faire une demande de devis par le formulaire de <a  href="%path%">contact</a> sur la page d''accueil.'
+simulation.result.exception.6: 'On ne loue pas pour 0 nuitée'
+simulation.result.exception.7: 'Impossible, nous ne louons pas plus de 30 nuitées'
+reservation.title: Réservation
+reservation.services.title: Services
+reservation.services.text: "Les produits ménagers sont fournis, de même que le linge de maison : draps housse, housses de couette, taies d’oreillers, couvertures.\n Le ménage est compris.\n Une semaine avant votre arrivée, vous recevrez un mail vous demandant de nous communiquer vos besoins en draps simples et doubles. Ces services sont compris dans le tarif, mais si vous souhaitez que les lits soient faits à l'arrivée, un supplément vous sera facturé.\nChaque gîte est équipé de WIFI, les codes d’accès vous seront communiqués par mail dans la semaine qui précède votre arrivée.\n"
+reservation.global_information.title: Informations
+reservation.global_information.text: "Si vous souhaitez de plus amples renseignements avant de réserver définitivement, remplissez le formulaire de <a href=\"%homepage%\">contact de l'accueil</a>\n"
+reservation.booking_conditions.title: 'Conditions de réservation'
+reservation.booking_conditions.text: "La réservation deviendra effective dès réception d’un chèque d’acompte de 30% du montant total du prix du séjour et d’un exemplaire daté et signé du contrat que vous allez recevoir par mail.\nLe solde, c’est-à-dire les 70% restant, sera versé à l’arrivée. Les règlements sont acceptés par chèque, virement, chèques vacances ou en espèces.\nUn chèque de caution (entre 300 et 400 € selon le gîte) vous sera demandé à votre arrivée, mais ne sera pas encaissé. Après votre séjour un scan de la caution détruite vous sera transmis par courriel, sauf en cas de dégâts.\n"
+reservation.cancellation_policy.title: 'Politique d’annulation'
+reservation.cancellation_policy.text: "La signature du contrat engage les deux parties de façon définitive.\nSi le locataire renonce à la location 60 jours avant l’arrivée, l’acompte est remboursé.\nEntre 1 jour et 60 jours si nous réussissons à relouer, l’acompte est  également remboursé.  Sinon l’acompte est perdu.\n"
+reservation.cancellation_insurance.title: 'Assurance annulation'
+reservation.cancellation_insurance.text: "Si vous souhaitez avoir plus d'informations sur la proposition d'assurance annulation de notre partenaire clevacances,\ntélécharger le document ci-dessous :\n"
+reservation.cancellation_insurance.link_text: 'Argumentaire assurance annulation.'
+reservation.form_flow.title: Réservation
+reservation.form_flow.step.1: 'Vos coordonnées'
+reservation.form_flow.step.2: 'Options Facultatives'
+reservation.form_flow.step.3: 'Informations sur la location'
+reservation.form_flow.step.4: Confirmation
+reservation.form_flow.buttons.next: Suivant
+reservation.form_flow.buttons.back: Retour
+reservation.form_flow.buttons.finish: Valider
+reservation.form_flow.buttons.reset: Recommencer
+reservation.form_flow.bed_info: 'Pour que cette option soit prise en compte, il faudra compléter et nous retourner l’annexe du contrat que vous recevrez 1 semaine avant votre arrivée, merci de votre compréhension'
+reservation.form_flow.link_to_plan: 'Télécharger la description des couchages du gite'

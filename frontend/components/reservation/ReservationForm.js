@@ -477,7 +477,7 @@ const ReservationForm = () => {
 						control={
 							<Switch
 								inputRef={register}
-								checked={true}
+								defaultChecked
 								name='litFait'
 								color='primary'
 							/>
