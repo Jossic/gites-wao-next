@@ -14,6 +14,8 @@ const clientSchema = mongoose.Schema(
 		nbVenu: { type: Number },
 		nbReserv: { type: Number },
 		commentaire: { type: String },
+		newsletter: { type: Boolean },
+		noteSpecifique: { type: String }, //Annotation en cas de mauvais payeur, client mécontent, etc...
 	},
 	{
 		timestamps: true,

@@ -52,7 +52,7 @@ const ListClients = ({ clients, router, snackbarShowMessage }) => {
 			options: {
 				filter: true,
 				sort: true,
-				display: false,
+				// display: false,
 			},
 		},
 		{
@@ -64,35 +64,32 @@ const ListClients = ({ clients, router, snackbarShowMessage }) => {
 			},
 		},
 		{
-			name: 'description',
-			label: 'Description',
+			name: 'tel',
+			label: 'Tel',
 			options: {
 				filter: true,
 				sort: false,
 			},
 		},
 		{
-			name: 'sujet',
-			label: 'Sujet',
+			name: 'mail',
+			label: 'Mail',
 			options: {
 				filter: true,
 				sort: false,
 			},
 		},
 		{
-			name: 'declencheur',
-			label: 'Déclencheur',
+			name: 'nbVenu',
+			label: 'Nombre de venu',
 			options: {
 				filter: true,
 				sort: false,
-				customBodyRender: (value, tableMeta, updateValue) => {
-					return <p>{value}</p>;
-				},
 			},
 		},
 		{
-			name: 'actif',
-			label: 'Actif',
+			name: 'newsletter',
+			label: 'Newsletter',
 			options: {
 				filter: true,
 				customBodyRender: (value, tableMeta, updateValue) => {
@@ -114,7 +111,7 @@ const ListClients = ({ clients, router, snackbarShowMessage }) => {
 					return (
 						<IconButton>
 							<Link
-								href={`/admin/crud/mailer/${tableMeta.rowData[0]}`}>
+								href={`/admin/crud/clients/${tableMeta.rowData[0]}`}>
 								<a>
 									<CreateIcon fontSize='large' />
 								</a>
