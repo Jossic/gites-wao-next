@@ -8,6 +8,7 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { withRouter } from 'next/router';
 import CreateIcon from '@material-ui/icons/Create';
+import WidgetsIcon from '@material-ui/icons/Widgets';
 import { IconButton } from '@material-ui/core';
 import { withSnackbar } from '../../HOC/Snackbar';
 import { removeClient } from '../../../actions/clientActions';
@@ -102,7 +103,7 @@ const ListClients = ({ clients, router, snackbarShowMessage }) => {
 			},
 		},
 		{
-			name: 'Modifier',
+			name: 'Consulter',
 			options: {
 				sort: false,
 				filter: false,
@@ -111,9 +112,9 @@ const ListClients = ({ clients, router, snackbarShowMessage }) => {
 					return (
 						<IconButton>
 							<Link
-								href={`/admin/crud/clients/${tableMeta.rowData[0]}`}>
+								href={`/admin/clients/${tableMeta.rowData[0]}`}>
 								<a>
-									<CreateIcon fontSize='large' />
+									<WidgetsIcon fontSize='large' />
 								</a>
 							</Link>
 						</IconButton>

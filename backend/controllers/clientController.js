@@ -1,5 +1,7 @@
 import Client from '../models/ClientModel.js';
 import asyncHandler from 'express-async-handler';
+import Mailer from '../models/mailerModel.js';
+import sendEmailWithNodemailer from '../utils/email.js';
 
 // @desc      Fetch all clients
 // @route     GET /api/client
@@ -62,4 +64,26 @@ const updateClient = asyncHandler(async (req, res) => {
 	}
 });
 
-export { getAllClients, getClientById, removeClient, updateClient };
+// @desc      update a client
+// @route     PUT /api/client/:id
+// @access    Private/Admin
+const sendEmail = asyncHandler(async (req, res) => {
+	const mailer = await Mailer.findById('602ecbcf578176230cc2a670');
+	console.log(mailer);
+	// console.log(req);
+	// console.log(res);
+	//Envoi du mail venant de soi-même au client
+	const emailData = {
+		from: process.env.NODE_MAILER_USER,
+		to: process.env.NODE_MAILER_USER,
+		subject: `${mailer.sujet}`,
+		html: `${mailer.corps}`,
+	};
+
+	sendEmailWithNodemailer(req, res, emailData);
+	res.json({
+		message: 'Mail envoyé',
+	});
+});
+
+export { getAllClients, getClientById, removeClient, updateClient, sendEmail };

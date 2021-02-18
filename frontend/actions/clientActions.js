@@ -64,3 +64,17 @@ export const updateClient = (client, id, token) => {
 		})
 		.catch((err) => console.log(err));
 };
+
+export const envoiEmail = (id, token) => {
+	return fetch(`${API}/client/${id}/mailer`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
