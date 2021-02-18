@@ -16,8 +16,7 @@ import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import { QuillModules, QuillFormats } from '../../../util/quill';
 import { withRouter } from 'next/router';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { getCookie } from '../../../actions/authActions';
@@ -25,17 +24,11 @@ import { createMailer } from '../../../actions/mailerActions';
 import Router from 'next/router';
 import { withSnackbar } from '../../HOC/Snackbar';
 
-function Alert(props) {
-	return <MuiAlert elevation={6} variant='filled' {...props} />;
-}
+// function Alert(props) {
+// 	return <MuiAlert elevation={6} variant='filled' {...props} />;
+// }
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		width: '100%',
-		'& > * + *': {
-			marginTop: theme.spacing(2),
-		},
-	},
 	button: {
 		marginRight: theme.spacing(1),
 		marginTop: theme.spacing(2),
@@ -53,20 +46,10 @@ const useStyles = makeStyles((theme) => ({
 
 const FormCreateMailer = ({ snackbarShowMessage }) => {
 	const token = getCookie('token');
-	console.log('snackbarShowMessage->', snackbarShowMessage);
 	const classes = useStyles();
 	const { control, register, handleSubmit } = useForm({
 		// defaultValues: ,
 	});
-	// const [open, setOpen] = useState(false);
-
-	const handleClose = (event, reason) => {
-		if (reason === 'clickaway') {
-			return;
-		}
-
-		setOpen(false);
-	};
 
 	const [values, setValues] = useState({
 		loading: false,
@@ -84,7 +67,7 @@ const FormCreateMailer = ({ snackbarShowMessage }) => {
 			if (result.error) {
 				setValues({ ...values, error: result.error });
 				// setOpen(true);
-				snackbarShowMessage(`error`);
+				snackbarShowMessage(`${result.error}`);
 			} else {
 				setValues({
 					...values,
@@ -104,30 +87,7 @@ const FormCreateMailer = ({ snackbarShowMessage }) => {
 	return (
 		<>
 			{loading && <CircularProgress />}
-			{/* {success && (
-				<div className={classes.root}>
-					<Snackbar
-						open={open}
-						autoHideDuration={6000}
-						onClose={handleClose}>
-						<Alert onClose={handleClose} severity='success'>
-							{message}
-						</Alert>
-					</Snackbar>
-				</div>
-			)}
-			{error && (
-				<div className={classes.root}>
-					<Snackbar
-						open={open}
-						autoHideDuration={6000}
-						onClose={handleClose}>
-						<Alert onClose={handleClose} severity='error'>
-							{error}
-						</Alert>
-					</Snackbar>
-				</div>
-			)} */}
+
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<TextField
 					className={classes.textField}
@@ -181,49 +141,42 @@ const FormCreateMailer = ({ snackbarShowMessage }) => {
 					/>
 				</FormControl>
 
-				<Grid
-					container
-					direction='row'
-					justify='center'
-					alignItems='center'>
-					<Grid item>
-						<FormControl className={classes.formControl}>
-							<InputLabel
-								shrink
-								id='demo-simple-select-placeholder-label-label'>
-								Déclencheur (date)
-							</InputLabel>
-							<Controller
-								control={control}
-								name='declencheur'
-								as={
-									<Select
-										id='declencheur-select'
-										defaultValue=''>
-										<ListSubheader>Manuel</ListSubheader>
-										<MenuItem value='Envoi manuel'>
-											Envoi manuel
-										</MenuItem>
-										<ListSubheader>Date</ListSubheader>
-										<MenuItem value='7 jours avant arrivée'>
-											7 jours avant arrivée
-										</MenuItem>
-										<MenuItem value='7 jours après le départ'>
-											7 jours après le départ
-										</MenuItem>
-										<ListSubheader>Action</ListSubheader>
-										<MenuItem value='à la validation du contrat'>
-											à la validation du contrat
-										</MenuItem>
-										<MenuItem value='Autre exemple'>
-											Autre exemple
-										</MenuItem>
-									</Select>
-								}
-							/>
-						</FormControl>
-					</Grid>
-				</Grid>
+				<FormControl className={classes.formControl}>
+					<InputLabel
+						shrink
+						id='demo-simple-select-placeholder-label-label'>
+						Déclencheur
+					</InputLabel>
+					<Controller
+						control={control}
+						name='declencheur'
+						as={
+							<Select
+								id='declencheur-select'
+								defaultValue='Envoi manuel'>
+								<ListSubheader>Manuel</ListSubheader>
+								<MenuItem value='Envoi manuel'>
+									Envoi manuel
+								</MenuItem>
+								<ListSubheader>Date</ListSubheader>
+								<MenuItem value='7 jours avant arrivée'>
+									7 jours avant arrivée
+								</MenuItem>
+								<MenuItem value='7 jours après le départ'>
+									7 jours après le départ
+								</MenuItem>
+								<ListSubheader>Action</ListSubheader>
+								<MenuItem value='à la validation du contrat'>
+									à la validation du contrat
+								</MenuItem>
+								<MenuItem value='Autre exemple'>
+									Autre exemple
+								</MenuItem>
+							</Select>
+						}
+					/>
+				</FormControl>
+
 				<Grid
 					container
 					direction='row'

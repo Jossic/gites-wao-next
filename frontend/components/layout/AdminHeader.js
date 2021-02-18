@@ -217,7 +217,7 @@ const AdminHeader = ({ children }) => {
 											<i className='fas fa-bed'></i>{' '}
 											Gestion des réservations{' '}
 											{newReservation > 0 && (
-												<span class='badge badge-pill badge-success'>
+												<span className='badge badge-pill badge-success'>
 													{newReservation}
 												</span>
 											)}
@@ -249,7 +249,7 @@ const AdminHeader = ({ children }) => {
 								<i className='fas fa-comments'></i> Messages
 								{'  '}
 								{newMessages > 0 && (
-									<span class='badge badge-pill badge-info'>
+									<span className='badge badge-pill badge-info'>
 										{newMessages}
 									</span>
 								)}
