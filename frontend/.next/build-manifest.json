@@ -24,15 +24,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/crud/users/create": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/admin/crud/users/create.js"
-    ],
     "/admin/users": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
       "static/chunks/pages/admin/users.js"
+    ],
+    "/admin/users/[id]": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/admin/users/[id].js"
     ]
   },
   "ampFirstPages": []

@@ -9,14 +9,14 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
-import HistoryIcon from '@material-ui/icons/History';
 import ChatIcon from '@material-ui/icons/Chat';
 import { Grid, Paper, Button, ButtonGroup } from '@material-ui/core';
-import FormClient from '../../../components/admin/forms/reservation/FormClient';
 import { useState } from 'react';
-import { getClientById, envoiEmail } from '../../../actions/clientActions';
 import Link from 'next/link';
 import { getCookie } from '../../../actions/authActions';
+import { getUserById } from '../../../actions/userActions';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import FormUpdateUser from '../../../components/admin/forms/FormUpdateUser';
 
 function TabPanel({ children, value, index, ...other }) {
 	return (
@@ -57,24 +57,13 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ClientId = ({ client, router }) => {
+const UserId = ({ user, router }) => {
 	const classes = useStyles();
 	const token = getCookie('token');
 	const [value, setValue] = useState(0);
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
-	};
-
-	const envoiMail = () => {
-		envoiEmail(router.query.id, token).then((data) => {
-			console.log('data vaut', data);
-			if (data.error) {
-				console.log(data.error);
-			} else {
-				console.log('message envoyé');
-			}
-		});
 	};
 
 	return (
@@ -85,9 +74,9 @@ const ClientId = ({ client, router }) => {
 					<Grid container>
 						<Grid item>
 							<Typography variant='h5' style={{ margin: '10px' }}>
-								Gestion du client {client.nom} {client.prenom}
+								Gestion de l'utilisateur {user.name}
 								<Typography style={{ color: 'red' }}>
-									#{client._id}
+									#{user._id}
 								</Typography>
 							</Typography>
 						</Grid>
@@ -103,16 +92,14 @@ const ClientId = ({ client, router }) => {
 								variant='contained'
 								color='secondary'
 								aria-label='contained primary button group'>
-								<Button onClick={envoiMail}>
-									Envoyer mail
-								</Button>
+								<Button>Bouton</Button>
 								<Button>Bouton</Button>
 								<Button>Bouton</Button>
 							</ButtonGroup>
 						</Grid>
 						<Grid item>
 							<Button variant='contained' color='primary'>
-								<Link href='/admin/clients'>
+								<Link href='/admin/users'>
 									<a
 										style={{
 											textDecoration: 'none',
@@ -126,9 +113,7 @@ const ClientId = ({ client, router }) => {
 					</Grid>
 					<Paper style={{ padding: '15px' }}>
 						<Grid container>
-							<Typography variant='h4'>
-								Informations tarifaires
-							</Typography>
+							<Typography variant='h4'>Informations</Typography>
 						</Grid>
 
 						<div className={classes.root}>
@@ -138,15 +123,15 @@ const ClientId = ({ client, router }) => {
 									onChange={handleChange}
 									variant='fullWidth'
 									scrollButtons='off'
-									aria-label='client'>
+									aria-label='user'>
 									<Tab
-										icon={<ContactMailIcon />}
-										aria-label='Infos du client'
+										icon={<VpnKeyIcon />}
+										aria-label='Gestion des droits'
 										{...a11yProps(0)}
 									/>
 									<Tab
-										icon={<HistoryIcon />}
-										aria-label='Historique du client'
+										icon={<ContactMailIcon />}
+										aria-label='Formulaire de modifications'
 										{...a11yProps(1)}
 									/>
 									<Tab
@@ -154,33 +139,17 @@ const ClientId = ({ client, router }) => {
 										aria-label='Messagerie'
 										{...a11yProps(2)}
 									/>
-									{/* <Tab
-										icon={<HouseIcon />}
-										aria-label='Location'
-										{...a11yProps(3)}
-									/>
-									<Tab
-										icon={<ReceiptIcon />}
-										aria-label='Contrat'
-										{...a11yProps(4)}
-									/> */}
 								</Tabs>
 							</AppBar>
 							<TabPanel value={value} index={0}>
-								<FormClient preloadedValues={client} />
+								Gestion des droits
 							</TabPanel>
 							<TabPanel value={value} index={1}>
-								{/* <FormPaiements /> */}
+								<FormUpdateUser user={user} />
 							</TabPanel>
 							<TabPanel value={value} index={2}>
 								{/*  */}
 							</TabPanel>
-							{/* <TabPanel value={value} index={3}>
-								<FormLocation preloadedValues={reservation} />
-							</TabPanel>
-							<TabPanel value={value} index={4}>
-								<FormContrat />
-							</TabPanel> */}
 						</div>
 					</Paper>
 				</Admin>
@@ -191,15 +160,14 @@ const ClientId = ({ client, router }) => {
 
 export async function getServerSideProps(context) {
 	const token = context.req.cookies.token;
-	const res1 = await getClientById(context.params.id, token);
-	const client = await res1;
-	// Recup client, gite, paiement
+	const res1 = await getUserById(context.params.id, token);
+	const user = await res1;
 
 	return {
 		props: {
-			client,
+			user,
 		},
 	};
 }
 
-export default withRouter(ClientId);
+export default withRouter(UserId);

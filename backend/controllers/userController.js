@@ -112,21 +112,23 @@ const removeUser = asyncHandler(async (req, res) => {
 // @route     PUT /api/user/:id
 // @access    Private/Admin
 const updateUser = asyncHandler(async (req, res) => {
-	const { reponse } = req.body;
+	const { name, email, password, isAdmin } = req.body;
 
 	const user = await User.findById(req.params.id);
 	console.log('user apres requete', user);
 	if (user) {
-		reponse && (user.reponse = reponse);
-
+		name && (user.name = name);
+		email && (user.email = email);
+		password && (user.password = password);
+		isAdmin && (user.isAdmin = isAdmin);
 		const updatedUser = await user.save();
 		res.json({
 			updatedUser,
-			message: 'User bien ajouté',
+			message: 'Modifications effectuées',
 		});
 	} else {
 		res.status(404);
-		throw new Error('User non trouvée');
+		throw new Error('Utilisateur non trouvée');
 	}
 });
 
