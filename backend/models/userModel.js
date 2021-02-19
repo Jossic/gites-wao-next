@@ -23,7 +23,7 @@ const userSchema = mongoose.Schema(
 			require: true,
 		},
 		isAdmin: {
-			type: Boolean,
+			type: Boolean, //Ajouter 3 niveaux : 0-Admin, 1-salariés, 2-utilisateurs
 			require: true,
 			default: false,
 		},
