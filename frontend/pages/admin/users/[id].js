@@ -17,6 +17,7 @@ import { getCookie } from '../../../actions/authActions';
 import { getUserById } from '../../../actions/userActions';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import FormUpdateUser from '../../../components/admin/forms/FormUpdateUser';
+import FormDroits from '../../../components/admin/forms/FormDroits';
 
 function TabPanel({ children, value, index, ...other }) {
 	return (
@@ -142,7 +143,7 @@ const UserId = ({ user, router }) => {
 								</Tabs>
 							</AppBar>
 							<TabPanel value={value} index={0}>
-								Gestion des droits
+								<FormDroits />
 							</TabPanel>
 							<TabPanel value={value} index={1}>
 								<FormUpdateUser user={user} />
