@@ -64,4 +64,101 @@ const logout = (req, res) => {
 	});
 };
 
-export { authUser, registerUser, logout };
+// @desc      Fetch all users
+// @route     GET /api/user
+// @access    Private/Admin
+const getAllUsers = asyncHandler(async (req, res) => {
+	const users = await User.find({});
+	res.json(users);
+});
+
+// @desc      Fetch one User by Id
+// @route     GET /api/user/:id
+// @access    Private/Admin
+const getUserById = asyncHandler(async (req, res) => {
+	const user = await User.findById(req.params.id);
+
+	if (user) {
+		res.json(user);
+	} else {
+		res.status(404);
+		throw new Error('User non trouvé');
+	}
+});
+
+// @desc      Create a user
+// @route     POST /api/user
+// @access    Private/Admin
+const createUser = async (req, res) => {
+	const { name, email, avatar, password, isAdmin } = req.body;
+
+	const user = new User({
+		name,
+		email,
+		avatar,
+		password,
+		isAdmin: false,
+	});
+
+	console.log('User dans le back', user);
+
+	user.save((error, user) => {
+		if (error) return res.status(400).json({ error });
+		if (user) {
+			res.status(201).json({
+				user,
+				message: 'Utilisateur créé, redirection en cours...',
+			});
+		}
+	});
+};
+
+// @desc      Delete a user
+// @route     GET /api/user/:id
+// @access    Private/Admin
+const removeUser = asyncHandler(async (req, res) => {
+	const user = await User.findById(req.params.id);
+	if (user) {
+		await user.remove();
+		res.json({
+			text: 'Utilisateur correctement supprimé',
+		});
+	} else {
+		return res.json({
+			error: err,
+		});
+	}
+});
+
+// @desc      update a user
+// @route     PUT /api/user/:id
+// @access    Private/Admin
+const updateUser = asyncHandler(async (req, res) => {
+	const { reponse } = req.body;
+
+	const user = await User.findById(req.params.id);
+	console.log('user apres requete', user);
+	if (user) {
+		reponse && (user.reponse = reponse);
+
+		const updatedUser = await user.save();
+		res.json({
+			updatedUser,
+			message: 'User bien ajouté',
+		});
+	} else {
+		res.status(404);
+		throw new Error('User non trouvée');
+	}
+});
+
+export {
+	authUser,
+	registerUser,
+	logout,
+	createUser,
+	updateUser,
+	removeUser,
+	getAllUsers,
+	getUserById,
+};

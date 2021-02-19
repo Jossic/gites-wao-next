@@ -11,6 +11,7 @@ import WidgetsIcon from '@material-ui/icons/Widgets';
 import { IconButton } from '@material-ui/core';
 import { withSnackbar } from '../../HOC/Snackbar';
 import { removeUser } from '../../../actions/userActions';
+import Image from 'next/image';
 
 const ListUsers = ({ users, router, snackbarShowMessage }) => {
 	const token = getCookie('token');
@@ -56,7 +57,7 @@ const ListUsers = ({ users, router, snackbarShowMessage }) => {
 			},
 		},
 		{
-			name: 'nom',
+			name: 'name',
 			label: 'Nom',
 			options: {
 				filter: true,
@@ -64,32 +65,36 @@ const ListUsers = ({ users, router, snackbarShowMessage }) => {
 			},
 		},
 		{
-			name: 'tel',
-			label: 'Tel',
+			name: 'email',
+			label: 'Email',
 			options: {
 				filter: true,
 				sort: false,
 			},
 		},
+
 		{
-			name: 'mail',
-			label: 'Mail',
+			name: 'avatar',
+			label: 'Avatar',
 			options: {
 				filter: true,
 				sort: false,
+				customBodyRender: (value, tableMeta, updateValue) => {
+					console.log(value);
+					return (
+						<Image
+							src={value}
+							alt='Avatar'
+							width={75}
+							height={75}
+						/>
+					);
+				},
 			},
 		},
 		{
-			name: 'nbVenu',
-			label: 'Nombre de venu',
-			options: {
-				filter: true,
-				sort: false,
-			},
-		},
-		{
-			name: 'newsletter',
-			label: 'Newsletter',
+			name: 'isAdmin',
+			label: 'Admin',
 			options: {
 				filter: true,
 				customBodyRender: (value, tableMeta, updateValue) => {
