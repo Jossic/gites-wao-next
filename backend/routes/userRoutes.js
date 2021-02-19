@@ -5,7 +5,6 @@ import {
 	authUser,
 	registerUser,
 	logout,
-	createUser,
 	getAllUsers,
 	getUserById,
 	removeUser,
@@ -13,12 +12,11 @@ import {
 } from '../controllers/userController.js';
 import { admin, protect } from '../middleware/authMiddleware.js';
 
-router.route('/admin').post(registerUser);
 router.post('/admin/login', authUser);
 router.post('/admin/logout', logout);
 
 //Public
-router.post('/user', createUser); //Inutile car créé avec reservation
+router.post('/user', protect, admin, registerUser);
 
 //Admin
 router.get('/user', protect, admin, getAllUsers);

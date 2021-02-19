@@ -14,22 +14,27 @@ export const listAllUsers = (token) => {
 		.catch((err) => console.log(err));
 };
 
-// export const countNouvelleReservation = () => {
-// 	return fetch(`${API}/reservation/count`, {
-// 		method: 'GET',
-// 	})
-// 		.then((response) => {
-// 			return response.json();
-// 		})
-// 		.catch((err) => console.log(err));
-// };
-
 export const getUserById = (id, token) => {
 	return fetch(`${API}/user/${id}`, {
 		method: 'GET',
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
+export const createUser = (user, token) => {
+	return fetch(`${API}/user`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify(user),
 	})
 		.then((response) => {
 			return response.json();

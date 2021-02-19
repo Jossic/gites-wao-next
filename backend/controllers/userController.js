@@ -25,15 +25,18 @@ const authUser = asyncHandler(async (req, res) => {
 });
 
 // @desc    Register a new user
-// @route   POST /api/admin
+// @route   POST /api/user
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-	const { name, email, password } = req.body;
+	const { name, email, password, isAdmin } = req.body;
 
 	const userExists = await User.findOne({ email });
 
 	if (userExists) {
-		res.status(400);
+		res.status(400).json({
+			error: 'Cet utilisateur existe déjà',
+		});
+
 		throw new Error('Cet utilisateur existe déjà');
 	}
 
@@ -41,6 +44,7 @@ const registerUser = asyncHandler(async (req, res) => {
 		name,
 		email,
 		password,
+		isAdmin,
 	});
 
 	if (user) {
@@ -50,6 +54,7 @@ const registerUser = asyncHandler(async (req, res) => {
 			email: user.email,
 			isAdmin: user.isAdmin,
 			token: generateToken(user._id),
+			message: 'Utilisateur créé, redirection en cours...',
 		});
 	} else {
 		res.status(400);
@@ -85,33 +90,6 @@ const getUserById = asyncHandler(async (req, res) => {
 		throw new Error('User non trouvé');
 	}
 });
-
-// @desc      Create a user
-// @route     POST /api/user
-// @access    Private/Admin
-const createUser = async (req, res) => {
-	const { name, email, avatar, password, isAdmin } = req.body;
-
-	const user = new User({
-		name,
-		email,
-		avatar,
-		password,
-		isAdmin: false,
-	});
-
-	console.log('User dans le back', user);
-
-	user.save((error, user) => {
-		if (error) return res.status(400).json({ error });
-		if (user) {
-			res.status(201).json({
-				user,
-				message: 'Utilisateur créé, redirection en cours...',
-			});
-		}
-	});
-};
 
 // @desc      Delete a user
 // @route     GET /api/user/:id
@@ -156,7 +134,6 @@ export {
 	authUser,
 	registerUser,
 	logout,
-	createUser,
 	updateUser,
 	removeUser,
 	getAllUsers,

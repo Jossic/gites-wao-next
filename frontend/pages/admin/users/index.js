@@ -26,7 +26,7 @@ const Users = ({ users }) => {
 						</Grid>
 						<Grid item>
 							<Button variant='contained' color='primary'>
-								<Link href='/admin/crud/mailer/create'>
+								<Link href='/admin/crud/users/create'>
 									<a
 										style={{
 											textDecoration: 'none',
