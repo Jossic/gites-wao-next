@@ -4,5 +4,6 @@
   "/_error": "pages/_error.js",
   "/admin/users/[id]": "pages/admin/users/[id].js",
   "/admin": "pages/admin.js",
-  "/404": "pages/404.js"
+  "/404": "pages/404.js",
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js"
 }

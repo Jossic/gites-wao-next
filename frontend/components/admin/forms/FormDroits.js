@@ -80,7 +80,9 @@ const FormDroits = ({ snackbarShowMessage, router, user }) => {
 									Consultation
 								</TableCell>
 								<TableCell align='center'>Ecriture</TableCell>
-								<TableCell align='center'>Modifier</TableCell>
+								<TableCell align='center'>
+									Modification
+								</TableCell>
 								<TableCell align='center'>
 									Suppression
 								</TableCell>

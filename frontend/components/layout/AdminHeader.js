@@ -1,13 +1,15 @@
 import NProgress from 'nprogress';
 import Link from 'next/link';
 import Router from 'next/router';
-import { isAuth, logout } from '../../actions/authActions';
+import { getCookie, isAuth, logout } from '../../actions/authActions';
 import '../../node_modules/nprogress/nprogress.css';
 import { countMessageNonLus } from '../../actions/messageActions';
 import { useEffect, useState } from 'react';
 import { Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import { countNouvelleReservation } from '../../actions/reservationActions';
+import { getUserById } from '../../actions/userActions';
+import Image from 'next/image';
 
 function Alert(props) {
 	return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -19,6 +21,8 @@ Router.onRouteChangeError = (url) => NProgress.done();
 const AdminHeader = ({ children }) => {
 	const [newMessages, setNewMessages] = useState(0);
 	const [newReservation, setnewReservation] = useState(0);
+	const [user, setUser] = useState(0);
+	const token = getCookie('token');
 
 	const recupNonLus = () => {
 		countMessageNonLus().then((data) => {
@@ -39,16 +43,22 @@ const AdminHeader = ({ children }) => {
 			}
 		});
 	};
+	const recupUser = () => {
+		getUserById(isAuth()._id, token).then((data) => {
+			if (data.error) {
+				console.log(data.error);
+			} else {
+				setUser(data);
+			}
+		});
+	};
 
 	useEffect(() => {
 		recupNonLus();
 		recupNvleRes();
+		recupUser();
 	}, []);
 
-	const user = {
-		name: 'Jossic LAPIERRE',
-		isAdmin: true,
-	};
 	return (
 		<>
 			<div className='d-flex' id='wrapper'>
@@ -58,17 +68,15 @@ const AdminHeader = ({ children }) => {
 					</div>
 					<div className='sidebar-header'>
 						<div className='user-pic text-center pb-2'>
-							{/* <img
-								className='img-responsive img-rounded'
-								src='/images/logov4-1024x496.png'
-								alt='User picture'
-							/> */}
-							<i
-								className='far fa-user-circle'
-								style={{
-									color: 'white',
-									fontSize: '40px',
-								}}></i>
+							{user && (
+								<Image
+									className='img-responsive img-rounded'
+									src={user.avatar}
+									alt='User picture'
+									width={50}
+									height={50}
+								/>
+							)}
 						</div>
 						{isAuth && (
 							<div className='user-info text-white text-center pb-3'>
@@ -364,5 +372,18 @@ const AdminHeader = ({ children }) => {
 		</>
 	);
 };
+
+export async function getServerSideProps(context) {
+	console.log('context', context);
+	const token = context.req.cookies.token;
+	const res1 = await getUserById(context.params.id, token);
+	const mailer = await res1;
+
+	return {
+		props: {
+			mailer,
+		},
+	};
+}
 
 export default AdminHeader;
