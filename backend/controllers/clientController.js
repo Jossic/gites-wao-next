@@ -64,15 +64,13 @@ const updateClient = asyncHandler(async (req, res) => {
 	}
 });
 
-// @desc      update a client
-// @route     PUT /api/client/:id
+// @desc      send a mail
+// @route     PUT /api/client/:id/mailer
 // @access    Private/Admin
 const sendEmail = asyncHandler(async (req, res) => {
-	const mailer = await Mailer.findById('602ecbcf578176230cc2a670');
-	console.log(mailer);
-	// console.log(req);
-	// console.log(res);
-	//Envoi du mail venant de soi-même au client
+	const mailer = await Mailer.findById('602ecbcf578176230cc2a670'); //try with this id
+	// console.log(mailer);
+
 	const emailData = {
 		from: process.env.NODE_MAILER_USER,
 		to: process.env.NODE_MAILER_USER,

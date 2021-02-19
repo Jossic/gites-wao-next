@@ -10,6 +10,7 @@ import {
 	TextField,
 	Grid,
 	ListSubheader,
+	ButtonGroup,
 } from '@material-ui/core';
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -110,9 +111,32 @@ const FormUpdateMailer = ({ snackbarShowMessage, preloadedValues, router }) => {
 						l'ajouter dans les balises suivantes : ${}
 						Liste des variables disponibles : client, reservation,
 						gite
+						<Grid container style={{ margin: '10px' }}>
+							<Button variant='contained' color='primary'>
+								client.name
+							</Button>
+							<Button variant='contained' color='primary'>
+								client.firstname
+							</Button>
+							<Button variant='contained' color='primary'>
+								client.address
+							</Button>
+							<Button variant='contained' color='primary'>
+								client.zip
+							</Button>
+							<Button variant='contained' color='primary'>
+								client.city
+							</Button>
+							<Button variant='contained' color='default'>
+								booking.arrival
+							</Button>
+							<Button variant='contained' color='default'>
+								booking.end
+							</Button>
+						</Grid>
 					</InputLabel>
 					<Controller
-						style={{ paddingTop: '30px', minHeight: '300px' }}
+						style={{ paddingTop: '60px', minHeight: '300px' }}
 						as={ReactQuill}
 						control={control}
 						name='corps'
