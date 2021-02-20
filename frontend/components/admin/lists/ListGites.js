@@ -29,7 +29,7 @@ const ListGites = ({ gites, router, snackbarShowMessage }) => {
 				snackbarShowMessage(`${data.error}`);
 			} else {
 				setLoading(false);
-				snackbarShowMessage(`${data.text}`, 'success');
+				snackbarShowMessage(`${data.message}`, 'success');
 				setTimeout(() => {
 					router.reload();
 				}, 3000);

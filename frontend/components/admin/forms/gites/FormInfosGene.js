@@ -54,6 +54,30 @@ const FormInfosGene = ({ classes, register }) => {
 					shrink: true,
 				}}
 			/>
+			<TextField
+				className={classes.textField}
+				inputRef={register}
+				name='couleur1'
+				id='standard-number'
+				type='color'
+				// defaultValue='#AAAAAA'
+				label='Couleur de fond'
+				InputLabelProps={{
+					shrink: true,
+				}}
+			/>
+			<TextField
+				className={classes.textField}
+				inputRef={register}
+				name='couleur2'
+				id='standard-number'
+				// defaultValue='#111111'
+				type='color'
+				label='Couleur du texte'
+				InputLabelProps={{
+					shrink: true,
+				}}
+			/>
 			<FormControlLabel
 				className={classes.textField}
 				control={

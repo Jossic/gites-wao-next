@@ -92,12 +92,6 @@ const giteSchema = mongoose.Schema(
 			//Ex 1135 sur brinchette
 			type: Number,
 		},
-		ftMenage: {
-			type: Number,
-		},
-		ftLit: {
-			type: Number,
-		},
 		nPers: {
 			type: Number,
 			default: 15,
@@ -108,6 +102,12 @@ const giteSchema = mongoose.Schema(
 		},
 		tarifParPersParNuit: {
 			//hors WE et vacances scolaires
+			type: Number,
+		},
+		ftMenage: {
+			type: Number,
+		},
+		ftLit: {
 			type: Number,
 		},
 		coefficients: {
