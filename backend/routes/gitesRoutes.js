@@ -33,7 +33,7 @@ router.get('/photos/section/:section', getPhotosBySection);
 
 // Routes espaces admin
 router.post('/gite', protect, admin, createGite);
-router.put('/gite/:slug', protect, admin, updateGite);
+router.put('/gite/:id', protect, admin, updateGite);
 router.delete('/gite/:slug', protect, admin, deleteGite);
 router.get('/qr/:id', protect, admin, getQRById);
 router.post('/qr', protect, admin, createQR);

@@ -24,7 +24,6 @@ import PageviewIcon from '@material-ui/icons/Pageview';
 import { Container, CircularProgress } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { getCookie } from '../../../../actions/authActions';
-import Router from 'next/router';
 
 function Alert(props) {
 	return <MuiAlert elevation={6} variant='filled' {...props} />;

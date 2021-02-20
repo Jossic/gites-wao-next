@@ -73,19 +73,7 @@ const FormInfosPratiques = ({ classes, register }) => {
 			<TextField
 				className={classes.textField}
 				inputRef={register}
-				name='ftLit'
-				type='number'
-				id='standard-number'
-				label="Montant de l'option lit fait à l'arrivée"
-				InputLabelProps={{
-					shrink: true,
-				}}
-			/>
-
-			<TextField
-				className={classes.textField}
-				inputRef={register}
-				name='troisNuitees'
+				name='coefficients.troisNuitees'
 				type='number'
 				id='standard-number'
 				label='Coefficient appliqué pour le tarif sur 3 nuitées'
@@ -96,7 +84,7 @@ const FormInfosPratiques = ({ classes, register }) => {
 			<TextField
 				className={classes.textField}
 				inputRef={register}
-				name='quatreNuitees'
+				name='coefficients.quatreNuitees'
 				type='number'
 				id='standard-number'
 				label='Coefficient appliqué pour le tarif sur 4 nuitées'
@@ -107,7 +95,7 @@ const FormInfosPratiques = ({ classes, register }) => {
 			<TextField
 				className={classes.textField}
 				inputRef={register}
-				name='uneNuitee'
+				name='coefficients.uneNuitee'
 				type='number'
 				id='standard-number'
 				label='Coefficient appliqué pour le tarif sur une nuitée'
@@ -118,7 +106,7 @@ const FormInfosPratiques = ({ classes, register }) => {
 			<TextField
 				className={classes.textField}
 				inputRef={register}
-				name='basseSaison'
+				name='coefficients.basseSaison'
 				type='number'
 				id='standard-number'
 				label='Coefficient appliqué pour le tarif en basse saison'
@@ -129,7 +117,7 @@ const FormInfosPratiques = ({ classes, register }) => {
 			<TextField
 				className={classes.textField}
 				inputRef={register}
-				name='moyenneSaison'
+				name='coefficients.moyenneSaison'
 				type='number'
 				id='standard-number'
 				label='Coefficient appliqué pour le tarif en moyenne saison'
@@ -140,7 +128,7 @@ const FormInfosPratiques = ({ classes, register }) => {
 			<TextField
 				className={classes.textField}
 				inputRef={register}
-				name='hauteSaison'
+				name='coefficients.hauteSaison'
 				type='number'
 				id='standard-number'
 				label='Coefficient appliqué pour le tarif en haute saison'
@@ -151,7 +139,7 @@ const FormInfosPratiques = ({ classes, register }) => {
 			<TextField
 				className={classes.textField}
 				inputRef={register}
-				name='noel'
+				name='coefficients.noel'
 				type='number'
 				id='standard-number'
 				label='Coefficient appliqué pour le tarif en trés haute saison (Noël)'
@@ -162,7 +150,7 @@ const FormInfosPratiques = ({ classes, register }) => {
 			<TextField
 				className={classes.textField}
 				inputRef={register}
-				name='nouvelAn'
+				name='coefficients.nouvelAn'
 				type='number'
 				id='standard-number'
 				label='Coefficient appliqué pour le tarif en trés haute saison (Nouvel an)'

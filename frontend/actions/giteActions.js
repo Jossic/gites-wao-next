@@ -100,8 +100,8 @@ export const deleteGite = (slug, token) => {
 		.catch((err) => console.log(err));
 };
 
-export const updateGite = (gite, slug, token) => {
-	return fetch(`${API}/gite/${slug}`, {
+export const updateGite = (gite, id, token) => {
+	return fetch(`${API}/gite/${id}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',

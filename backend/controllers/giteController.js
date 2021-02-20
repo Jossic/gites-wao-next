@@ -185,12 +185,15 @@ const createGite = (req, res) => {
 // @route     PUT /api/gites/:slug
 // @access    Private/Admin
 const updateGite = asyncHandler(async (req, res) => {
-	const slug = req.params.slug.toLowerCase();
 	const {
 		nom,
+		adresse,
+		cp,
+		ville,
+		capaciteMax,
+		actif,
 		mtitle,
 		presGiteSEO,
-		mdesc,
 		couleur1,
 		couleur2,
 		videoLink,
@@ -202,11 +205,24 @@ const updateGite = asyncHandler(async (req, res) => {
 		equipementPiscine,
 		texte,
 		detailGite,
-		capacite,
 		calendrierLink,
+		tarifDeBase,
+		nPers,
+		supplementParPers,
+		tarifParPersParNuit,
+		ftMenage,
+		ftLit,
+		troisNuitees,
+		quatreNuitees,
+		uneNuitee,
+		basseSaison,
+		moyenneSaison,
+		hauteSaison,
+		noel,
+		nouvelAn,
 	} = req.body;
 
-	const gite = await Gite.findOne({ slug });
+	const gite = await Gite.findById(req.params.id);
 
 	if (gite) {
 		let arrayOfEquipementExterieur =
@@ -217,9 +233,14 @@ const updateGite = asyncHandler(async (req, res) => {
 			equipementPiscine && equipementPiscine.split(',');
 
 		nom && (gite.nom = nom);
+		adresse && (gite.adresse = adresse);
+		cp && (gite.cp = cp);
+		ville && (gite.ville = ville);
+		capaciteMax && (gite.capaciteMax = capaciteMax);
+		actif && (gite.actif = actif);
 		mtitle && (gite.mtitle = mtitle);
 		presGiteSEO && (gite.presGiteSEO = presGiteSEO);
-		mdesc && (gite.mdesc = stripHtml(presGiteSEO.substring(0, 160)));
+		presGiteSEO && (gite.mdesc = stripHtml(presGiteSEO.substring(0, 160)));
 		nom && (gite.slug = slugify(nom).toLowerCase());
 		couleur1 && (gite.couleur1 = couleur1);
 		couleur2 && (gite.couleur2 = couleur2);
@@ -232,11 +253,27 @@ const updateGite = asyncHandler(async (req, res) => {
 		nom && (gite.equipementPiscine = arrayOfEquipementPiscine);
 		texte && (gite.texte = texte);
 		detailGite && (gite.detailGite = detailGite);
-		capacite && (gite.capacite = capacite);
 		calendrierLink && (gite.calendrierLink = calendrierLink);
+		tarifDeBase && (gite.tarifDeBase = tarifDeBase);
+		nPers && (gite.nPers = nPers);
+		supplementParPers && (gite.supplementParPers = supplementParPers);
+		tarifParPersParNuit && (gite.tarifParPersParNuit = tarifParPersParNuit);
+		ftMenage && (gite.ftMenage = ftMenage);
+		ftLit && (gite.ftLit = ftLit);
+		troisNuitees && (gite.coefficients.troisNuitees = troisNuitees);
+		quatreNuitees && (gite.coefficients.quatreNuitees = quatreNuitees);
+		uneNuitee && (gite.coefficients.uneNuitee = uneNuitee);
+		basseSaison && (gite.coefficients.basseSaison = basseSaison);
+		moyenneSaison && (gite.coefficients.moyenneSaison = moyenneSaison);
+		hauteSaison && (gite.coefficients.hauteSaison = hauteSaison);
+		noel && (gite.coefficients.noel = noel);
+		nouvelAn && (gite.coefficients.nouvelAn = nouvelAn);
 
 		const updatedGite = await gite.save();
-		res.json(updatedGite);
+		res.json({
+			updatedGite,
+			message: 'Les modifications ont bien été prises en compte.',
+		});
 	} else {
 		res.status(404);
 		throw new Error('Gite non trouvé');
