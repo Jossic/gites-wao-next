@@ -64,7 +64,8 @@ const giteSchema = mongoose.Schema(
 			min: 20,
 			max: 2000000,
 		},
-		capaciteMAx: {
+		//idem ?
+		capaciteMax: {
 			type: Number,
 		},
 		nbCouchage: {
@@ -105,6 +106,10 @@ const giteSchema = mongoose.Schema(
 			hauteSaison: { type: Number, default: 180 },
 			noel: { type: Number, default: 670 },
 			nouvelAn: { type: Number, default: 200 },
+		},
+		actif: {
+			type: Boolean,
+			default: false,
 		},
 	},
 	{
