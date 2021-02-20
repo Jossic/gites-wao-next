@@ -7,7 +7,7 @@ const giteSchema = mongoose.Schema(
 			type: String,
 			unique: true,
 		},
-		addresse: {
+		adresse: {
 			type: String,
 		},
 		cp: {
