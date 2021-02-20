@@ -90,6 +90,11 @@ const deleteGite = asyncHandler(async (req, res) => {
 const createGite = (req, res) => {
 	const {
 		nom,
+		adresse,
+		cp,
+		ville,
+		capaciteMax,
+		actif,
 		mtitle,
 		presGiteSEO,
 		couleur1,
@@ -103,9 +108,21 @@ const createGite = (req, res) => {
 		equipementPiscine,
 		texte,
 		detailGite,
-		reviews,
-		capacite,
 		calendrierLink,
+		tarifDeBase,
+		nPers,
+		supplementParPers,
+		tarifParPersParNuit,
+		ftMenage,
+		ftLit,
+		troisNuitees,
+		quatreNuitees,
+		uneNuitee,
+		basseSaison,
+		moyenneSaison,
+		hauteSaison,
+		noel,
+		nouvelAn,
 	} = req.body;
 
 	let arrayOfEquipementExterieur =
@@ -117,6 +134,11 @@ const createGite = (req, res) => {
 
 	const gite = new Gite({
 		nom,
+		adresse,
+		cp,
+		ville,
+		capaciteMax,
+		actif,
 		mtitle,
 		presGiteSEO,
 		mdesc: stripHtml(presGiteSEO.substring(0, 160)),
@@ -132,9 +154,21 @@ const createGite = (req, res) => {
 		equipementPiscine: arrayOfEquipementPiscine,
 		texte,
 		detailGite,
-		reviews,
-		capacite,
 		calendrierLink,
+		tarifDeBase,
+		nPers,
+		supplementParPers,
+		tarifParPersParNuit,
+		ftMenage,
+		ftLit,
+		troisNuitees,
+		quatreNuitees,
+		uneNuitee,
+		basseSaison,
+		moyenneSaison,
+		hauteSaison,
+		noel,
+		nouvelAn,
 	});
 
 	console.log('gite dans le back', gite);
