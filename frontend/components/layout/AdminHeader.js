@@ -146,7 +146,7 @@ const AdminHeader = ({ children }) => {
 									aria-labelledby='headingOne'
 									data-parent='#accordionExample'>
 									{/* <div className='card-body'> */}
-									<Link href='/admin/gestionPages'>
+									<Link href='/admin/gites'>
 										<a className='list-group-item list-group-item-action text-white bg-secondary'>
 											<i className='fas fa-arrow-right'></i>{' '}
 											Gestion des gîtes

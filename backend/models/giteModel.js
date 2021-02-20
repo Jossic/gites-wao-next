@@ -64,29 +64,47 @@ const giteSchema = mongoose.Schema(
 			min: 20,
 			max: 2000000,
 		},
-		capacite: {
+		capaciteMAx: {
+			type: Number,
+		},
+		nbCouchage: {
 			type: Number,
 		},
 		calendrierLink: {
 			type: String,
 		},
+		//Elements calcul du tarif
 		tarifDeBase: {
+			//Ex 1135 sur brinchette
 			type: Number,
 		},
-		tarifParPersParNuit: {
-			type: Number,
-		},
-		supplementParPers: {
-			type: Number,
-		},
-		nbPersMax: {
+		ftMenage: {
 			type: Number,
 		},
 		ftLit: {
 			type: Number,
 		},
-		ftMenage: {
+		nPers: {
 			type: Number,
+			default: 15,
+		},
+		supplementParPers: {
+			//Au dela de 15 personnes
+			type: Number,
+		},
+		tarifParPersParNuit: {
+			//hors WE et vacances scolaires
+			type: Number,
+		},
+		coefficients: {
+			troisNuitees: { type: Number, default: 220 },
+			quatreNuitees: { type: Number, default: 430 },
+			uneNuitee: { type: Number, default: 80 },
+			basseSaison: { type: Number, default: 380 },
+			moyenneSaison: { type: Number, default: 160 },
+			hauteSaison: { type: Number, default: 180 },
+			noel: { type: Number, default: 670 },
+			nouvelAn: { type: Number, default: 200 },
 		},
 	},
 	{
