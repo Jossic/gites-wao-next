@@ -1,9 +1,10 @@
-import { listGitesNoms } from '../../../../actions/giteActions';
+import { createGite, listGitesNoms } from '../../../../actions/giteActions';
 import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
+import { withRouter } from 'next/router';
 import StepLabel from '@material-ui/core/StepLabel';
 import Check from '@material-ui/icons/Check';
 import StepConnector from '@material-ui/core/StepConnector';
@@ -12,21 +13,17 @@ import Typography from '@material-ui/core/Typography';
 import { useEffect, useState, useRef } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { withSnackbar } from '../../../HOC/Snackbar';
-import {
-	Checkbox,
-	Container,
-	FormControl,
-	FormControlLabel,
-	FormGroup,
-	FormLabel,
-	InputLabel,
-	MenuItem,
-	Select,
-	Switch,
-	TextField,
-	CircularProgress,
-} from '@material-ui/core';
+import FormInfosGene from '../../../../components/admin/forms/gites/FormInfosGene';
+import FormInfosDiverses from '../../../../components/admin/forms/gites/FormInfosDiverses';
+import FormInfosPratiques from '../../../../components/admin/forms/gites/FormInfosPratiques';
+import FormInfosPages from '../../../../components/admin/forms/gites/FormInfosPages';
+import PictureInPictureAltIcon from '@material-ui/icons/PictureInPictureAlt';
+import StarsIcon from '@material-ui/icons/Stars';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import PageviewIcon from '@material-ui/icons/Pageview';
+import { Container, CircularProgress } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import { getCookie } from '../../../../actions/authActions';
 
 function Alert(props) {
 	return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -209,6 +206,10 @@ const useStyles = makeStyles((theme) => ({
 	selectEmpty: {
 		marginTop: theme.spacing(2),
 	},
+	textField: {
+		margin: theme.spacing(1),
+		width: '80%',
+	},
 }));
 
 function getSteps() {
@@ -222,11 +223,16 @@ function getSteps() {
 
 const FormCreateGite = ({ snackbarShowMessage, router, gite }) => {
 	const classes = useStyles();
+	const token = getCookie('token');
 	const [activeStep, setActiveStep] = useState(0);
 	const { control, register, handleSubmit } = useForm({
 		shouldUnregister: false,
 		defaultValues: {
 			nom: 'test',
+			adresse: 'test',
+			cp: '08240',
+			ville: 'fossé',
+			capaciteMax: '20',
 			mtitle: '',
 			presGiteSEO: '',
 			texteExterieur: `Texte de l'exterieur`,
@@ -237,7 +243,7 @@ const FormCreateGite = ({ snackbarShowMessage, router, gite }) => {
 			equipementPiscine: 'truc1,truc2,truc3,truc4,truc5',
 			texte: '',
 			detailGite: '',
-			capacite: '20',
+
 			videoLink: '',
 			calendrierLink: '',
 			couleur1: '#AAAAAA',
@@ -245,29 +251,11 @@ const FormCreateGite = ({ snackbarShowMessage, router, gite }) => {
 		},
 	});
 
-	const [values, setValues] = useState({
-		open: false,
-		loading: false,
-		success: '',
-		error: '',
-		message: '',
-	});
-	const { message, success, loading, error } = values;
+	const [loading, setLoading] = useState(false);
 
 	const reRef = useRef();
 
 	const steps = getSteps();
-
-	const [selectedDateArrivee, setSelectedDateArrivee] = useState();
-
-	const handleDateChangeArrivee = (date) => {
-		setSelectedDateArrivee(date);
-	};
-	const [selectedDateDepart, setSelectedDateDepart] = useState();
-
-	const handleDateChangeDepart = (date) => {
-		setSelectedDateDepart(date);
-	};
 
 	const handleNext = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -281,362 +269,10 @@ const FormCreateGite = ({ snackbarShowMessage, router, gite }) => {
 		setActiveStep(0);
 	};
 
-	const handleClose = (event, reason) => {
-		if (reason === 'clickaway') {
-			setValues({ ...values, open: false });
-			return;
-		}
-	};
-
-	const [gites, setGites] = useState([]);
-
-	const listDesGites = () => {
-		listGitesNoms().then((data) => {
-			if (data.error) {
-				console.log(error);
-			} else {
-				setGites(...gites, data);
-			}
-		});
-	};
-
-	useEffect(() => {
-		listDesGites();
-	}, []);
-
-	const infoLoc = () => (
-		<div className=''>
-			<h2>Informations sur la location</h2>
-
-			<Grid container justify='space-around'>
-				<FormControl className={classes.formControl}>
-					<InputLabel
-						shrink
-						id='demo-simple-select-placeholder-label-label'>
-						Réservation sur le gîte :
-					</InputLabel>
-					<Controller
-						control={control}
-						name='gite'
-						as={
-							<Select id='gite-select'>
-								{gites.map((gite, i) => (
-									<MenuItem key={gite.slug} value={gite.slug}>
-										{gite.nom}
-									</MenuItem>
-								))}
-							</Select>
-						}
-					/>
-				</FormControl>
-				<TextField
-					inputRef={register}
-					name='nbPers'
-					id='standard-number'
-					label='Nombre de personnes total'
-					type='number'
-					InputLabelProps={{
-						shrink: true,
-					}}
-				/>
-				<TextField
-					inputRef={register}
-					name='nbEnf'
-					id='standard-number'
-					label='Dont enfants de moins de 18 ans'
-					type='number'
-					InputLabelProps={{
-						shrink: true,
-					}}
-				/>
-			</Grid>
-			<MuiPickersUtilsProvider utils={DateFnsUtils}>
-				<Grid container justify='space-around'>
-					<KeyboardDatePicker
-						inputRef={register}
-						margin='normal'
-						id='date-picker-dialog'
-						name='dateArrivee'
-						label="Date d'arrivée"
-						format='MM/dd/yyyy'
-						defaultValue=''
-						value={selectedDateArrivee}
-						onChange={handleDateChangeArrivee}
-						KeyboardButtonProps={{
-							'aria-label': 'change date',
-						}}
-					/>
-
-					<KeyboardDatePicker
-						inputRef={register}
-						margin='normal'
-						id='date-picker-dialog'
-						name='dateDepart'
-						label='Date de départ'
-						format='MM/dd/yyyy'
-						defaultValue=''
-						value={selectedDateDepart}
-						onChange={handleDateChangeDepart}
-						KeyboardButtonProps={{
-							'aria-label': 'change date',
-						}}
-					/>
-				</Grid>
-			</MuiPickersUtilsProvider>
-		</div>
-	);
-	const infoComp = () => (
-		<div>
-			<h2>Informations supplémentaires</h2>
-			<div className={classes.root}>
-				<FormControl
-					component='fieldset'
-					className={classes.formControl}>
-					<FormLabel component='legend'>
-						Merci d'indiquer si vous nous avez déja contacté par :
-					</FormLabel>
-					<FormGroup>
-						<Grid container justify='space-around'>
-							<FormControlLabel
-								control={
-									<Checkbox
-										name='contactMail'
-										inputRef={register}
-										defaultValue={false}
-									/>
-								}
-								label='Mail'
-							/>
-							<FormControlLabel
-								control={
-									<Checkbox
-										name='contactTel'
-										inputRef={register}
-										defaultValue={false}
-									/>
-								}
-								label='Téléphone'
-							/>
-							<FormControlLabel
-								control={
-									<Checkbox
-										name='contactAbritel'
-										inputRef={register}
-										defaultValue={false}
-									/>
-								}
-								label='Abritel'
-							/>
-							<FormControlLabel
-								control={
-									<Checkbox
-										name='contactLeboncoin'
-										inputRef={register}
-										defaultValue={false}
-									/>
-								}
-								label='Leboncoin'
-							/>
-							<FormControlLabel
-								control={
-									<Checkbox
-										name='contactAutre'
-										inputRef={register}
-										defaultValue={false}
-									/>
-								}
-								label='Autre'
-							/>
-						</Grid>
-					</FormGroup>
-					{/* <FormHelperText>Be careful</FormHelperText> */}
-				</FormControl>
-				<Grid container justify='space-around'>
-					<TextField
-						inputRef={register}
-						name='nbChien'
-						id='standard-number'
-						label='Nombre de chien ? (3€/jour/animal)'
-						type='number'
-						InputLabelProps={{
-							shrink: true,
-						}}
-					/>
-					<FormControlLabel
-						control={
-							<Switch
-								inputRef={register}
-								defaultChecked
-								name='litFait'
-								color='primary'
-							/>
-						}
-						label="Souhaitez-vous l'option lit fait à l'arrivée ?"
-					/>
-				</Grid>
-				<Grid container>
-					<FormControl className={classes.formControl}>
-						<TextField
-							inputRef={register}
-							name='infoCompl'
-							id='standard-number'
-							label='Informations complémentaires / Questions :'
-							multiline
-							rows={3}
-							InputLabelProps={{
-								shrink: true,
-							}}
-						/>
-					</FormControl>
-				</Grid>
-			</div>
-		</div>
-	);
-	const Coord = () => (
-		<div>
-			<h2>Vos coordonnées</h2>
-
-			<Grid container justify='space-around'>
-				<FormControl className={classes.formControl}>
-					<InputLabel
-						shrink
-						id='demo-simple-select-placeholder-label-label'>
-						Civilité
-					</InputLabel>
-					<Controller
-						control={control}
-						name='civilite'
-						as={
-							<Select id='civilite-select'>
-								<MenuItem value='mmme'>M. & Mme</MenuItem>
-								<MenuItem value='mme'>Mme</MenuItem>
-								<MenuItem value='mlle'>Mlle</MenuItem>
-								<MenuItem value='m'>M.</MenuItem>
-								<MenuItem value='asso'>Association</MenuItem>
-								<MenuItem value='ce'>
-									Comité d'entreprise
-								</MenuItem>
-								<MenuItem value='soc'>Société</MenuItem>
-								<MenuItem value='entr'>Entreprise</MenuItem>
-								<MenuItem value='foyervie'>
-									Foyer de vie
-								</MenuItem>
-								<MenuItem value='foyeracc'>
-									Foyer d'accueil
-								</MenuItem>
-								<MenuItem value='famil'>Famille</MenuItem>
-								<MenuItem value='autre'>Autres</MenuItem>
-							</Select>
-						}
-					/>
-				</FormControl>
-
-				<TextField
-					inputRef={register}
-					name='nom'
-					id='standard-number'
-					label='Nom'
-					InputLabelProps={{
-						shrink: true,
-					}}
-				/>
-				<TextField
-					inputRef={register}
-					name='prenom'
-					id='standard-number'
-					label='Prénom'
-					InputLabelProps={{
-						shrink: true,
-					}}
-				/>
-			</Grid>
-			<Grid container justify='space-around'>
-				<TextField
-					inputRef={register}
-					name='adresse'
-					id='standard-number'
-					label='Adresse'
-					InputLabelProps={{
-						shrink: true,
-					}}
-				/>
-				<TextField
-					inputRef={register}
-					name='cp'
-					id='standard-number'
-					label='Code Postal'
-					InputLabelProps={{
-						shrink: true,
-					}}
-				/>
-				<TextField
-					inputRef={register}
-					name='ville'
-					id='standard-number'
-					label='Ville'
-					InputLabelProps={{
-						shrink: true,
-					}}
-				/>
-				<FormControl className={classes.formControl}>
-					<InputLabel
-						shrink
-						id='demo-simple-select-placeholder-label-label'>
-						Pays
-					</InputLabel>
-
-					<Controller
-						control={control}
-						name='pays'
-						as={
-							<Select id='pays-select'>
-								<MenuItem value='france'>France</MenuItem>
-								<MenuItem value=''>--------</MenuItem>
-								<MenuItem value='autres'>Autres</MenuItem>
-								<MenuItem value='allemagne'>Allemagne</MenuItem>
-								<MenuItem value='angleterre'>
-									Angleterre
-								</MenuItem>
-								<MenuItem value='belgique'>Belgique</MenuItem>
-								<MenuItem value='hollande'>Hollande</MenuItem>
-								<MenuItem value='luxembourg'>
-									Luxembourg
-								</MenuItem>
-								<MenuItem value='suisse'>Suisse</MenuItem>
-							</Select>
-						}
-					/>
-				</FormControl>
-			</Grid>
-			<Grid container justify='space-around'>
-				<TextField
-					inputRef={register}
-					name='tel'
-					id='standard-number'
-					label='Téléphone'
-					InputLabelProps={{
-						shrink: true,
-					}}
-				/>
-				<TextField
-					inputRef={register}
-					name='mail'
-					id='standard-number'
-					label='Email'
-					type='mail'
-					InputLabelProps={{
-						shrink: true,
-					}}
-				/>
-			</Grid>
-		</div>
-	);
-	const recap = () => <p>JSON.stringify()</p>;
-
 	function getStepContent(step) {
 		switch (step) {
 			case 0:
-				return <FormInfosGene />;
+				return <FormInfosGene classes={classes} register={register} />;
 			case 1:
 				return <FormInfosDiverses />;
 			case 2:
@@ -649,30 +285,30 @@ const FormCreateGite = ({ snackbarShowMessage, router, gite }) => {
 	}
 
 	const onSubmit = async (data) => {
-		setValues({ ...values, loading: true });
-		data.token = await reRef.current.executeAsync();
-		reRef.current.reset();
-		console.log('onSubmit data =>', data);
-		createReservation(data).then((result) => {
-			console.log('result vaut =>', result);
-			if (result.error) {
-				console.log('erreur', result.error);
-				setValues({ ...values, error: result.error });
-			} else if (result.dejaReserveMessage) {
-				console.log('deja reserve');
-				setValues({ ...values, error: result.dejaReserveMessage });
-			} else {
-				setValues({
-					...values,
-					success: true,
-					loading: false,
-					message: result.message,
-				});
-				// setTimeout(() => {
-				// 	Router.push('/');
-				// }, 3000);
-			}
-		});
+		console.log('submit');
+		console.log('data vaut:', data);
+		// setLoading(true);
+		// data.token = await reRef.current.executeAsync();
+		// reRef.current.reset();
+		// console.log('onSubmit data =>', data);
+		// createGite(data, token).then((result) => {
+		// 	console.log('result vaut =>', result);
+		// 	if (result.error) {
+		// 		setLoading(false);
+		// 		snackbarShowMessage(`${result.error}`);
+		// 	} else if (result.dejaReserveMessage) {
+		// 		setLoading(false);
+		// 		snackbarShowMessage(`${result.dejaReserveMessage}`);
+		// 	} else {
+		// 		setLoading(false);
+		// 		snackbarShowMessage(`${result.message}`, 'success');
+		// 		// setTimeout(() => {
+		// 		// 	Router.push(`/admin/gites`, null, {
+		// 		// 		shallow: true,
+		// 		// 	});
+		// 		// }, 3000);
+		// 	}
+		// });
 	};
 
 	return (
@@ -694,6 +330,8 @@ const FormCreateGite = ({ snackbarShowMessage, router, gite }) => {
 						))}
 					</Stepper>
 					<div>
+						{console.log('step :', activeStep)}
+						{console.log('lenght :', steps.length)}
 						{activeStep === steps.length ? (
 							<div>
 								{/* Voir pout ajouter isSubmited === true */}
@@ -718,6 +356,7 @@ const FormCreateGite = ({ snackbarShowMessage, router, gite }) => {
 										className={classes.button}>
 										Retour
 									</Button>
+									{/* A revoir */}
 									{activeStep === steps.length - 1 ? (
 										<Button
 											type='submit'
@@ -739,12 +378,6 @@ const FormCreateGite = ({ snackbarShowMessage, router, gite }) => {
 							</div>
 						)}
 					</div>
-					<ReCAPTCHA
-						sitekey={RECAPTCHA_SECRET_KEY}
-						ref={reRef}
-						size='invisible'
-						// onChange={onChange}
-					/>
 				</form>
 			</div>
 		</Container>
