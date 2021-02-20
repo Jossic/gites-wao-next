@@ -138,7 +138,7 @@ const ListGites = ({ gites, router, snackbarShowMessage }) => {
 					// console.log(tableMeta.rowData);
 					return (
 						<IconButton>
-							<Link href={`/admin/gite/${tableMeta.rowData[0]}`}>
+							<Link href={`/admin/gites/${tableMeta.rowData[0]}`}>
 								<a>
 									<WidgetsIcon fontSize='large' />
 								</a>

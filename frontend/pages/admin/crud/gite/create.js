@@ -1,4 +1,4 @@
-import FormCreateGite from '../../../../components/admin/FormCreateGite';
+import FormCreateGite from '../../../../components/admin/forms/gites/FormCreateGite';
 import Admin from '../../../../components/auth/Admin';
 import AdminHeader from '../../../../components/layout/AdminHeader';
 

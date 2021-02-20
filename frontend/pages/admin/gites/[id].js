@@ -8,16 +8,18 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import ContactMailIcon from '@material-ui/icons/ContactMail';
-import ChatIcon from '@material-ui/icons/Chat';
 import { Grid, Paper, Button, ButtonGroup } from '@material-ui/core';
 import { useState } from 'react';
+import PictureInPictureAltIcon from '@material-ui/icons/PictureInPictureAlt';
+import StarsIcon from '@material-ui/icons/Stars';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import Link from 'next/link';
-import { getCookie } from '../../../actions/authActions';
-import { getUserById } from '../../../actions/userActions';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
-import FormUpdateUser from '../../../components/admin/forms/FormUpdateUser';
-import FormDroits from '../../../components/admin/forms/FormDroits';
+import PageviewIcon from '@material-ui/icons/Pageview';
+import { listGiteById } from '../../../actions/giteActions';
+import FormInfosGene from '../../../components/admin/forms/gites/FormInfosGene';
+import FormInfosDiverses from '../../../components/admin/forms/gites/FormInfosDiverses';
+import FormInfosPratiques from '../../../components/admin/forms/gites/FormInfosPratiques';
+import FormInfosPages from '../../../components/admin/forms/gites/FormInfosPages';
 
 function TabPanel({ children, value, index, ...other }) {
 	return (
@@ -58,9 +60,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const UserId = ({ user, router }) => {
+const GiteId = ({ gite, router }) => {
 	const classes = useStyles();
-	const token = getCookie('token');
 	const [value, setValue] = useState(0);
 
 	const handleChange = (event, newValue) => {
@@ -75,9 +76,9 @@ const UserId = ({ user, router }) => {
 					<Grid container>
 						<Grid item>
 							<Typography variant='h5' style={{ margin: '10px' }}>
-								Gestion de l'utilisateur {user.name}
+								Gestion du gîte {gite.nom}
 								<Typography style={{ color: 'red' }}>
-									#{user._id}
+									#{gite._id}
 								</Typography>
 							</Typography>
 						</Grid>
@@ -100,7 +101,7 @@ const UserId = ({ user, router }) => {
 						</Grid>
 						<Grid item>
 							<Button variant='contained' color='primary'>
-								<Link href='/admin/users'>
+								<Link href='/admin/gites'>
 									<a
 										style={{
 											textDecoration: 'none',
@@ -126,30 +127,43 @@ const UserId = ({ user, router }) => {
 									scrollButtons='off'
 									aria-label='user'>
 									<Tab
-										icon={<VpnKeyIcon />}
-										aria-label='Gestion des droits'
+										icon={<StarsIcon />}
+										aria-label='Infos générales'
 										{...a11yProps(0)}
 									/>
 									<Tab
-										icon={<ContactMailIcon />}
-										aria-label='Formulaire de modifications'
+										icon={<PictureInPictureAltIcon />}
+										aria-label='Infos diverses'
 										{...a11yProps(1)}
 									/>
 									<Tab
-										icon={<ChatIcon />}
-										aria-label='Messagerie'
+										icon={<MonetizationOnIcon />}
+										aria-label='Infos pratiques/tarifs'
 										{...a11yProps(2)}
 									/>
+									<Tab
+										icon={<PageviewIcon />}
+										aria-label='Infos pages/SEO'
+										{...a11yProps(3)}
+									/>
+									{/* <Tab
+										icon={<PageviewIcon />}
+										aria-label='Infos pages/SEO'
+										{...a11yProps(2)}
+									/> */}
 								</Tabs>
 							</AppBar>
 							<TabPanel value={value} index={0}>
-								<FormDroits />
+								<FormInfosGene />
 							</TabPanel>
 							<TabPanel value={value} index={1}>
-								<FormUpdateUser user={user} />
+								<FormInfosDiverses />
 							</TabPanel>
 							<TabPanel value={value} index={2}>
-								{/*  */}
+								<FormInfosPratiques />
+							</TabPanel>
+							<TabPanel value={value} index={3}>
+								<FormInfosPages />
 							</TabPanel>
 						</div>
 					</Paper>
@@ -160,15 +174,14 @@ const UserId = ({ user, router }) => {
 };
 
 export async function getServerSideProps(context) {
-	const token = context.req.cookies.token;
-	const res1 = await getUserById(context.params.id, token);
-	const user = await res1;
+	const res1 = await listGiteById(context.params.id);
+	const gite = await res1;
 
 	return {
 		props: {
-			user,
+			gite,
 		},
 	};
 }
 
-export default withRouter(UserId);
+export default withRouter(GiteId);

@@ -2,10 +2,28 @@ import mongoose from 'mongoose';
 
 const giteSchema = mongoose.Schema(
 	{
+		//Infos générales
 		nom: {
 			type: String,
 			unique: true,
 		},
+		addresse: {
+			type: String,
+		},
+		cp: {
+			type: String,
+		},
+		ville: {
+			type: String,
+		},
+		capaciteMax: {
+			type: Number,
+		},
+		actif: {
+			type: Boolean,
+			default: false,
+		},
+		//Infos pages / SEO
 		mtitle: {
 			type: String,
 		},
@@ -20,16 +38,13 @@ const giteSchema = mongoose.Schema(
 			unique: true,
 			index: true,
 		},
-
 		couleur1: {
 			type: String,
 		},
 		couleur2: {
 			type: String,
 		},
-		videoLink: {
-			type: String,
-		},
+
 		texteExterieur: {
 			type: {},
 			min: 20,
@@ -64,16 +79,14 @@ const giteSchema = mongoose.Schema(
 			min: 20,
 			max: 2000000,
 		},
-		//idem ?
-		capaciteMax: {
-			type: Number,
-		},
-		nbCouchage: {
-			type: Number,
+		//Infos diverses
+		videoLink: {
+			type: String,
 		},
 		calendrierLink: {
 			type: String,
 		},
+
 		//Elements calcul du tarif
 		tarifDeBase: {
 			//Ex 1135 sur brinchette
@@ -106,10 +119,6 @@ const giteSchema = mongoose.Schema(
 			hauteSaison: { type: Number, default: 180 },
 			noel: { type: Number, default: 670 },
 			nouvelAn: { type: Number, default: 200 },
-		},
-		actif: {
-			type: Boolean,
-			default: false,
 		},
 	},
 	{
