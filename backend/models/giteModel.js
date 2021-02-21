@@ -110,6 +110,7 @@ const giteSchema = mongoose.Schema(
 		ftLit: {
 			type: Number,
 		},
+		caution: { type: Number, default: 350 },
 		coefficients: {
 			troisNuitees: { type: Number, default: 220 },
 			quatreNuitees: { type: Number, default: 430 },

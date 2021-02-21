@@ -69,6 +69,17 @@ const FormInfosPratiques = ({ classes, register }) => {
 					shrink: true,
 				}}
 			/>
+			<TextField
+				className={classes.textField}
+				inputRef={register}
+				name='caution'
+				type='number'
+				id='standard-number'
+				label='Montant de la caution'
+				InputLabelProps={{
+					shrink: true,
+				}}
+			/>
 
 			<TextField
 				className={classes.textField}

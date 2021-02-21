@@ -212,6 +212,7 @@ const updateGite = asyncHandler(async (req, res) => {
 		tarifParPersParNuit,
 		ftMenage,
 		ftLit,
+		caution,
 		troisNuitees,
 		quatreNuitees,
 		uneNuitee,
@@ -260,6 +261,7 @@ const updateGite = asyncHandler(async (req, res) => {
 		tarifParPersParNuit && (gite.tarifParPersParNuit = tarifParPersParNuit);
 		ftMenage && (gite.ftMenage = ftMenage);
 		ftLit && (gite.ftLit = ftLit);
+		caution && (gite.caution = caution);
 		troisNuitees && (gite.coefficients.troisNuitees = troisNuitees);
 		quatreNuitees && (gite.coefficients.quatreNuitees = quatreNuitees);
 		uneNuitee && (gite.coefficients.uneNuitee = uneNuitee);
