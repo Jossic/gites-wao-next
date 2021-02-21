@@ -1,5 +1,6 @@
 import Layout from '../components/layout/Layout';
-import Link from 'next/link';
+import { listeDesGites } from '../actions/giteActions';
+import FormCalculTarif from '../components/admin/forms/FormCalculTarif';
 
 const Tarifs = ({ gites }) => {
 	return (
