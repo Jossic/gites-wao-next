@@ -7,7 +7,7 @@ const calendarIdLauberoye = process.env.CALENDAR_ID_LAUBEROYE;
 const calendarIdPetitNay = process.env.CALENDAR_ID_PETIT_NAY;
 const calendarIdTest = process.env.CALENDAR_ID_TEST;
 
-const SCOPES = 'https://www.googleapis.com/auth.calendar';
+const SCOPES = 'https://www.googleapis.com/auth/calendar';
 const calendar = google.calendar({ version: 'v3' });
 
 const auth = new google.auth.JWT(
@@ -19,13 +19,15 @@ const auth = new google.auth.JWT(
 
 const TIMEOFFSET = '+01:00';
 
-const getEvents = async (dateDebut, dateFin) => {
+const getEvents = async (req, res) => {
+	console.log('ici');
+	// console.log(req.params);
 	try {
 		let response = await calendar.events.list({
 			auth,
 			calendarId: calendarIdTest,
-			timeMin: dateDebut,
-			timeMax: dateFin,
+			timeMin: req.params.dateDebut,
+			timeMax: req.params.dateFin,
 		});
 
 		let items = response['data']['items'];

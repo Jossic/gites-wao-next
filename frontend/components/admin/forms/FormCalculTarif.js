@@ -15,6 +15,8 @@ import {
 	KeyboardTimePicker,
 	KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { getCalendar } from '../../../actions/calendarActions';
+import { getCookie } from '../../../actions/authActions';
 
 const useStyles = makeStyles((theme) => ({
 	form: {
@@ -41,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 const FormCalculTarif = ({ gites }) => {
 	const { control, register, handleSubmit } = useForm();
 	const classes = useStyles();
+	const token = getCookie('token');
 	const [selectedDateDebut, setSelectedDateDebut] = React.useState();
 	const [selectedDateFin, setSelectedDateFin] = React.useState();
 	const [data, setData] = React.useState();
@@ -56,9 +59,12 @@ const FormCalculTarif = ({ gites }) => {
 	const onSubmit = (data) => {
 		const { dateDebut, dateFin, giteSelec, nbChien, nbEnf, nbPers } = data;
 		const dateD = dayjs(dateDebut);
-		let tarif;
-
 		const dateF = dayjs(dateFin);
+		let tarif;
+		getCalendar(token, dateD, dateF).then((result) => {
+			console.log(result);
+		});
+
 		const nuitee = dateF.diff(dateD, 'day');
 		for (const gite of gites) {
 			// console.log(gite.slug);
