@@ -56,17 +56,24 @@ const FormCalculTarif = ({ gites }) => {
 	const onSubmit = (data) => {
 		const { dateDebut, dateFin, giteSelec, nbChien, nbEnf, nbPers } = data;
 		const dateD = dayjs(dateDebut);
+		let tarif;
+
 		const dateF = dayjs(dateFin);
 		const nuitee = dateF.diff(dateD, 'day');
 		for (const gite of gites) {
-			// console.log(gite);
+			// console.log(gite.slug);
+			// console.log(giteSelec);
 			if (gite.slug === giteSelec) {
-				console.log(true);
+				const tarifDeBase = gite.tarifDeBase;
+				// console.log(tarifDeBase);
+				tarif = tarifDeBase * nuitee;
+				// console.log(tarif);
+				setData({ ...data, nuitee, tarif });
 			} else {
-				console.log(false);
+				// console.log(false);
 			}
 		}
-		setData({ ...data, nuitee });
+		setData({ ...data, nuitee, tarif });
 	};
 
 	return (
@@ -81,7 +88,7 @@ const FormCalculTarif = ({ gites }) => {
 					control={control}
 					name='giteSelec'
 					as={
-						<Select id='declencheur-select' defaultValue='manola'>
+						<Select id='declencheur-select' defaultValue=''>
 							{gites.map((gite) => (
 								<MenuItem value={gite.slug} key={gite.slug}>
 									{gite.nom}

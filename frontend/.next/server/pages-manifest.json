@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/tarifs": "pages/tarifs.js",
-  "/reservation": "pages/reservation.js",
-  "/404": "pages/404.js"
+  "/admin/gites/[id]": "pages/admin/gites/[id].js",
+  "/tarifs": "pages/tarifs.js"
 }
