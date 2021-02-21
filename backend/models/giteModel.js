@@ -44,7 +44,6 @@ const giteSchema = mongoose.Schema(
 		couleur2: {
 			type: String,
 		},
-
 		texteExterieur: {
 			type: {},
 			min: 20,
@@ -86,7 +85,9 @@ const giteSchema = mongoose.Schema(
 		calendrierLink: {
 			type: String,
 		},
-
+		calendarId: {
+			type: String,
+		},
 		//Elements calcul du tarif
 		tarifDeBase: {
 			//Ex 1135 sur brinchette
