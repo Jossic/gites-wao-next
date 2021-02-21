@@ -3,5 +3,6 @@
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
   "/admin": "pages/admin.js",
-  "/tarifs": "pages/tarifs.js"
+  "/tarifs": "pages/tarifs.js",
+  "/404": "pages/404.js"
 }
