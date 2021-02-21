@@ -61,15 +61,17 @@ const FormCalculTarif = ({ gites }) => {
 		const dateD = dayjs(dateDebut);
 		const dateF = dayjs(dateFin);
 		let tarif;
-		getCalendar(token, dateD, dateF).then((result) => {
-			console.log(result);
-		});
 
 		const nuitee = dateF.diff(dateD, 'day');
 		for (const gite of gites) {
-			// console.log(gite.slug);
 			// console.log(giteSelec);
 			if (gite.slug === giteSelec) {
+				console.log(gite.calendarId);
+				getCalendar(token, gite.calendarId, dateD, dateF).then(
+					(result) => {
+						console.log(result);
+					}
+				);
 				const tarifDeBase = gite.tarifDeBase;
 				// console.log(tarifDeBase);
 				tarif = tarifDeBase * nuitee;

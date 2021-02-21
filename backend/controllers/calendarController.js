@@ -66,11 +66,10 @@ auth.authorize(function (err, tokens) {
 });
 
 const getEvents = async (req, res) => {
-	console.log('ici');
 	// console.log(req.params);
 	try {
 		let response = await calendar.events.list({
-			calendarId: calendarIdTest,
+			calendarId: req.params.calendarId,
 			timeMin: dayjs(req.params.dateDebut).format('YYYY-MM-DDT00:01:00Z'),
 			timeMax: dayjs(req.params.dateFin).format('YYYY-MM-DDT23:59:00Z'),
 			timeZone: 'GMT+01:00',

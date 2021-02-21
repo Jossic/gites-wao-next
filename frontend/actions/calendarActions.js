@@ -1,8 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import { API } from '../config';
 
-export const getCalendar = (token, dateDebut, dateFin) => {
-	return fetch(`${API}/calendar/${dateDebut}/${dateFin}`, {
+export const getCalendar = (token, calendarId, dateDebut, dateFin) => {
+	return fetch(`${API}/calendar/${calendarId}/${dateDebut}/${dateFin}`, {
 		method: 'GET',
 		headers: {
 			Authorization: `Bearer ${token}`,

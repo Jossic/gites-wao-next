@@ -4,6 +4,11 @@ import { getEvents } from '../controllers/calendarController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
 //Admin
-router.get('/calendar/:dateDebut/:dateFin', protect, admin, getEvents);
+router.get(
+	'/calendar/:calendarId/:dateDebut/:dateFin',
+	protect,
+	admin,
+	getEvents
+);
 
 export default router;
