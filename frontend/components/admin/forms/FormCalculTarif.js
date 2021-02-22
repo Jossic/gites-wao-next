@@ -67,30 +67,117 @@ const FormCalculTarif = ({ gites }) => {
 		const { dateDebut, dateFin, giteSelec, nbChien, nbEnf, nbPers } = data;
 		const dateD = dayjs(dateDebut);
 		const dateF = dayjs(dateFin);
-
+		console.log(dateD);
 		getVacances(dateD, dateF).then((result) => {
-			console.log('result vaut', result);
+			// console.log('result vaut', result);
 			setIsVacances(result.vacances);
 			// return result.vacances;
 		});
 
-		console.log('Vacances vaut =>', isVacances);
-		let tarif;
+		getDejaLoue(gite.calendarId, dateD, dateF).then((result) => {
+			console.log(result);
+		});
+
+		// console.log('Vacances vaut =>', isVacances);
+		let prixTotal;
 
 		const nuitee = dateF.diff(dateD, 'day');
+		// Si nuitée > 30 - erreur
+		// Si vacances - quelles vacances c'est ? - été puis noel puis nvl an
+
 		for (const gite of gites) {
-			// console.log(giteSelec);
 			if (gite.slug === giteSelec) {
-				if (isVacances) {
-					console.log('on est en vancances');
-					// Si le nombre de nuitée est <7, on check si c'est hors WE et VS
-					if (nuitee < 7) {
+				// On récupère le gîte selectionné
+				if (nuitee === 7 || nuitee === 14 || nuitee === 21) {
+					if (isVacances) {
+						console.log('on est en vancances');
+						if (
+							dayjs(dateD).isBetween(
+								dayjs().month(6),
+								dayjs().month(7),
+								null,
+								'[]'
+							)
+						) {
+							console.log('on est en haute saison à la semaine');
+							return (prixTotal =
+								ftMenage +
+								gite.tarifDeBase +
+								gite.coefficients.basseSaison +
+								gite.coefficients.moyenneSaison +
+								gite.coefficients.hauteSaison);
+						} else if (
+							dayjs()
+								.dayOfYear(358)
+								.isBetween(dateD, dateF, null, '[]')
+						) {
+							console.log('on est à noel à la semaine');
+							return (prixTotal =
+								ftMenage +
+								gite.tarifDeBase +
+								gite.coefficients.basseSaison +
+								gite.coefficients.moyenneSaison +
+								gite.coefficients.hauteSaison +
+								gite.coefficients.noel);
+						} else if (
+							dayjs()
+								.dayOfYear(365)
+								.isBetween(dateD, dateF, null, '[]')
+						) {
+							console.log('on est au nouvel an à la semaine');
+							return (prixTotal =
+								ftMenage +
+								gite.tarifDeBase +
+								gite.coefficients.basseSaison +
+								gite.coefficients.moyenneSaison +
+								gite.coefficients.hauteSaison +
+								gite.coefficients.noel +
+								gite.coefficients.nouvelAn);
+						} else {
+							console.log(
+								'On est dans le cas 7 nuitées en vacances scolaires moyenne saison'
+							);
+						}
+					} else {
+						console.log('Cas 7 nuitées hors vacances');
 					}
-					// Sinon c'est en week-end, on applique le tarif par nuitée (voir si on loue moins de 7 jours en moyenne+)
-				} else if (dayjs().day(6).isBetween(dateD, dateF, null, '[]')) {
-					console.log('en week-end');
+				} else if (nuitee < 7) {
+					console.log('Cas nuitées inférieure à 7');
+					if (dayjs().day(6).isBetween(dateD, dateF, null, '[]')) {
+						console.log('Cas en week-end moins de 7 nuits');
+						if (nuitee === 1) {
+							console.log(
+								'Cas week-end 1 nuit + msg avertissement'
+							);
+						} else if (nuitee === 2) {
+							console.log('Cas week-end 2 nuits');
+						} else if (nuitee === 3) {
+							console.log('Cas week-end 3 nuits');
+						} else if (nuitee === 4) {
+							console.log('Cas week-end 4 nuits');
+						} else if (nuitee === 5) {
+							console.log('Cas week-end 5 nuits');
+						} else if (nuitee === 6) {
+							console.log('Cas week-end 6 nuits');
+						} else {
+							console.log(
+								'Autres cas week-end inférieur à 7 nuits - Peu probable...'
+							);
+						}
+					} else {
+						console.log('Cas moins de 7 nuits et sans samedi');
+						if (isVacances) {
+							console.log(
+								'Cas hors WE moins de 7 nuits mais en vacances - Tarif sans tenir compte du plafond'
+							);
+						} else {
+							console.log(
+								'Cas hors WE moins de 7 nuits mais en vacances - Tarif avec plafond'
+							);
+						}
+					}
 				} else {
-					console.log('autre cas');
+					console.log('Autres cas nuit > 7 et !== de 14 et 21');
 				}
 
 				// getCalendarById(gite.calendarId, dateD, dateF).then(

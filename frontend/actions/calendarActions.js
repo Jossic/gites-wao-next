@@ -10,6 +10,15 @@ export const getCalendarById = (calendarId, dateDebut, dateFin) => {
 		})
 		.catch((err) => console.log(err));
 };
+export const getDejaLoue = (calendarId, dateDebut, dateFin) => {
+	return fetch(`${API}/calendar/loue/${calendarId}/${dateDebut}/${dateFin}`, {
+		method: 'GET',
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
 
 export const getVacances = (dateDebut, dateFin) => {
 	return fetch(`${API}/calendar/${dateDebut}/${dateFin}`, {

@@ -37,11 +37,11 @@ const getVacances = asyncHandler(async (req, res) => {
 		let items = response['data']['items'];
 
 		if (items.length === 0) {
-			console.log(false);
+			// console.log(false);
 			res.json({ vacances: false });
 			return false;
 		} else {
-			console.log(true);
+			// console.log(true);
 			res.json({ vacances: true });
 			return true;
 		}
@@ -71,5 +71,23 @@ const getEvents = async (req, res) => {
 		return 0;
 	}
 };
+const getDejaLoue = async (req, res) => {
+	// console.log(req.params);
+	try {
+		let response = await calendar.events.list({
+			calendarId: req.params.calendarId,
+			timeMin: dayjs(req.params.dateDebut).format('YYYY-MM-DDT00:01:00Z'),
+			timeMax: dayjs(req.params.dateFin).format('YYYY-MM-DDT23:59:00Z'),
+			timeZone: 'GMT+01:00',
+		});
 
-export { getEvents, getVacances };
+		let items = response['data']['items'];
+		console.log(items);
+		return items;
+	} catch (error) {
+		console.log(error);
+		return 0;
+	}
+};
+
+export { getEvents, getVacances, getDejaLoue };
