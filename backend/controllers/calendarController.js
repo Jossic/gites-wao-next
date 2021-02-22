@@ -1,12 +1,9 @@
 import { google } from 'googleapis';
+import asyncHandler from 'express-async-handler';
 import dayjs from 'dayjs';
 
 const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
-const calendarIdManola = process.env.CALENDAR_ID_MANOLA;
-const calendarIdBrinchette = process.env.CALENDAR_ID_BRINCHETTE;
-const calendarIdLauberoye = process.env.CALENDAR_ID_LAUBEROYE;
-const calendarIdPetitNay = process.env.CALENDAR_ID_PETIT_NAY;
-const calendarIdTest = process.env.CALENDAR_ID_TEST;
+const calendarIdVacances = process.env.CALENDAR_ID_VACANCES;
 
 const SCOPES = 'https://www.googleapis.com/auth/calendar';
 
@@ -18,43 +15,6 @@ const auth = new google.auth.JWT(
 );
 
 const calendar = google.calendar({ version: 'v3', auth });
-const TIMEOFFSET = 'Europe/Paris';
-
-// const dateTimeForCalendar = () => {
-// 	let date = new Date();
-
-// 	let year = date.getFullYear();
-// 	let month = date.getMonth() + 1;
-// 	if (month < 10) {
-// 		month = `0${month}`;
-// 	}
-// 	let day = date.getDate();
-// 	if (day < 10) {
-// 		day = `0${day}`;
-// 	}
-// 	let hour = date.getHours();
-// 	if (hour < 10) {
-// 		hour = `0${hour}`;
-// 	}
-// 	let minute = date.getMinutes();
-// 	if (minute < 10) {
-// 		minute = `0${minute}`;
-// 	}
-
-// 	let newDateTime = `${year}-${month}-${day}T${hour}:${minute}:00.000${TIMEOFFSET}`;
-
-// 	let event = new Date(Date.parse(newDateTime));
-
-// 	let startDate = event;
-// 	let endDate = new Date(
-// 		new Date(startDate).setHours(startDate.getHours() + 1)
-// 	);
-
-// 	return {
-// 		start: startDate,
-// 		end: endDate,
-// 	};
-// };
 
 auth.authorize(function (err, tokens) {
 	if (err) {
@@ -62,6 +22,34 @@ auth.authorize(function (err, tokens) {
 		return;
 	} else {
 		console.log('Successfully connected!');
+	}
+});
+
+const getVacances = asyncHandler(async (req, res) => {
+	try {
+		let response = await calendar.events.list({
+			calendarId: calendarIdVacances,
+			timeMin: dayjs(req.params.dateDebut).format('YYYY-MM-DDT00:01:00Z'),
+			timeMax: dayjs(req.params.dateFin).format('YYYY-MM-DDT23:59:00Z'),
+			timeZone: 'GMT+01:00',
+		});
+
+		let items = response['data']['items'];
+
+		if (items.length === 0) {
+			console.log(false);
+			res.json({ vacances: false });
+			return false;
+		} else {
+			console.log(true);
+			res.json({ vacances: true });
+			return true;
+		}
+
+		// return items;
+	} catch (error) {
+		console.log(error);
+		return 0;
 	}
 });
 
@@ -84,4 +72,4 @@ const getEvents = async (req, res) => {
 	}
 };
 
-export { getEvents };
+export { getEvents, getVacances };

@@ -1,6 +1,8 @@
 import DateFnsUtils from '@date-io/date-fns';
 import { useForm, Controller } from 'react-hook-form';
 import dayjs from 'dayjs';
+import isBetween from 'dayjs/plugin/isBetween';
+dayjs.extend(isBetween);
 import {
 	Button,
 	FormControl,
@@ -15,7 +17,11 @@ import {
 	KeyboardTimePicker,
 	KeyboardDatePicker,
 } from '@material-ui/pickers';
-import { getCalendar } from '../../../actions/calendarActions';
+import {
+	getCalendar,
+	getCalendarById,
+	getVacances,
+} from '../../../actions/calendarActions';
 import { getCookie } from '../../../actions/authActions';
 
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +52,8 @@ const FormCalculTarif = ({ gites }) => {
 	const token = getCookie('token');
 	const [selectedDateDebut, setSelectedDateDebut] = React.useState();
 	const [selectedDateFin, setSelectedDateFin] = React.useState();
-	const [data, setData] = React.useState();
+	const [infos, setInfos] = React.useState();
+	const [isVacances, setIsVacances] = React.useState();
 
 	const handleDateChangeDebut = (date) => {
 		setSelectedDateDebut(date);
@@ -60,28 +67,47 @@ const FormCalculTarif = ({ gites }) => {
 		const { dateDebut, dateFin, giteSelec, nbChien, nbEnf, nbPers } = data;
 		const dateD = dayjs(dateDebut);
 		const dateF = dayjs(dateFin);
+
+		getVacances(dateD, dateF).then((result) => {
+			console.log('result vaut', result);
+			setIsVacances(result.vacances);
+			// return result.vacances;
+		});
+
+		console.log('Vacances vaut =>', isVacances);
 		let tarif;
 
 		const nuitee = dateF.diff(dateD, 'day');
 		for (const gite of gites) {
 			// console.log(giteSelec);
 			if (gite.slug === giteSelec) {
-				console.log(gite.calendarId);
-				getCalendar(token, gite.calendarId, dateD, dateF).then(
-					(result) => {
-						console.log(result);
+				if (isVacances) {
+					console.log('on est en vancances');
+					// Si le nombre de nuitée est <7, on check si c'est hors WE et VS
+					if (nuitee < 7) {
 					}
-				);
+					// Sinon c'est en week-end, on applique le tarif par nuitée (voir si on loue moins de 7 jours en moyenne+)
+				} else if (dayjs().day(6).isBetween(dateD, dateF, null, '[]')) {
+					console.log('en week-end');
+				} else {
+					console.log('autre cas');
+				}
+
+				// getCalendarById(gite.calendarId, dateD, dateF).then(
+				// 	(result) => {
+				// 		console.log(result);
+				// 	}
+				// );
 				const tarifDeBase = gite.tarifDeBase;
 				// console.log(tarifDeBase);
-				tarif = tarifDeBase * nuitee;
+				// tarif = tarifDeBase * nuitee;
 				// console.log(tarif);
-				setData({ ...data, nuitee, tarif });
+				// setInfos({ ...infos, nuitee, tarif });
 			} else {
 				// console.log(false);
 			}
 		}
-		setData({ ...data, nuitee, tarif });
+		// setInfos({ ...infos, nuitee, tarif });
 	};
 
 	return (
@@ -186,7 +212,7 @@ const FormCalculTarif = ({ gites }) => {
 				className={classes.button}>
 				Calculer le tarif
 			</Button>
-			{data && JSON.stringify(data)}
+			{infos && JSON.stringify(infos)}
 		</form>
 	);
 };
