@@ -25,6 +25,9 @@ auth.authorize(function (err, tokens) {
 	}
 });
 
+// @desc      Est-ce qu'on est en vacances
+// @route     GET /api/calendar/:dateDebut/:dateFin
+// @access    Public
 const getVacances = asyncHandler(async (req, res) => {
 	try {
 		let response = await calendar.events.list({
@@ -53,7 +56,10 @@ const getVacances = asyncHandler(async (req, res) => {
 	}
 });
 
-const getEvents = async (req, res) => {
+// @desc      Est-ce que c'est déjà loué
+// @route     GET /api/calendar/loue/:calendarId/:dateDebut/:dateFin
+// @access    Public
+const getDejaLoue = async (req, res) => {
 	// console.log(req.params);
 	try {
 		let response = await calendar.events.list({
@@ -64,14 +70,28 @@ const getEvents = async (req, res) => {
 		});
 
 		let items = response['data']['items'];
-		console.log(items);
-		return items;
+
+		if (items.length === 0) {
+			// console.log(false);
+			res.json({ loue: false });
+			return false;
+		} else {
+			// console.log(true);
+			res.json({ loue: true });
+			return true;
+		}
+
+		// return items;
 	} catch (error) {
 		console.log(error);
 		return 0;
 	}
 };
-const getDejaLoue = async (req, res) => {
+
+// @desc      Delete a client
+// @route     GET /api/client/:id
+// @access    Private/Admin
+const getEvents = async (req, res) => {
 	// console.log(req.params);
 	try {
 		let response = await calendar.events.list({
