@@ -1,15 +1,42 @@
 import dayjs from 'dayjs';
+import axios from 'axios';
+import Gite from '../models/giteModel.js';
 import isBetween from 'dayjs/plugin/isBetween.js';
 dayjs.extend(isBetween);
 
-export const calculTarifDeBase = (
+export const calculTarifDeBase = async (
 	gite,
 	nbPers,
 	dateArrivee,
 	dateDepart,
 	nbNuites
 ) => {
+	const ceGite = await Gite.findOne({ slug: gite });
 	// Si déjà loué, retourner res.json({message : "Ce gîte est déjà loué aux périodes indiquées"})
+
+	const dateDAPI = dayjs(dateArrivee).format('YYYY-MM-DDT00:01:00Z');
+	const dateFAPI = dayjs(dateDepart).format('YYYY-MM-DDT00:01:00Z');
+
+	const dejaLoue = await axios
+		.get(
+			`http://localhost:8000/api/calendar/loue/${ceGite.calendarId}/${dateDAPI}/${dateFAPI}`
+		)
+		.then((result) => {
+			console.log('dejaLoue vaut', result.data.loue);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+
+	const isVacances = await axios
+		.get(`http://localhost:8000/api/calendar/${dateDAPI}/${dateFAPI}`)
+		.then((result) => {
+			console.log('isVacances vaut', result.data.vacances);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+
 	// Recup calendar pour déjà loué et pour vacances
 
 	if (nbNuites === 7 || nbNuites === 14 || nbNuites === 21) {
@@ -23,11 +50,11 @@ export const calculTarifDeBase = (
 				)
 			) {
 				return (
-					gite.ftMenage +
-					gite.tarifDeBase +
-					gite.coefficients.basseSaison +
-					gite.coefficients.moyenneSaison +
-					gite.coefficients.hauteSaison
+					ceGite.ftMenage +
+					ceGite.tarifDeBase +
+					ceGite.coefficients.basseSaison +
+					ceGite.coefficients.moyenneSaison +
+					ceGite.coefficients.hauteSaison
 				);
 			} else if (
 				dayjs()
@@ -35,12 +62,12 @@ export const calculTarifDeBase = (
 					.isBetween(dateArrivee, dateDepart, null, '[]')
 			) {
 				return (
-					gite.ftMenage +
-					gite.tarifDeBase +
-					gite.coefficients.basseSaison +
-					gite.coefficients.moyenneSaison +
-					gite.coefficients.hauteSaison +
-					gite.coefficients.noel
+					ceGite.ftMenage +
+					ceGite.tarifDeBase +
+					ceGite.coefficients.basseSaison +
+					ceGite.coefficients.moyenneSaison +
+					ceGite.coefficients.hauteSaison +
+					ceGite.coefficients.noel
 				);
 			} else if (
 				dayjs()
@@ -48,37 +75,45 @@ export const calculTarifDeBase = (
 					.isBetween(dateArrivee, dateDepart, null, '[]')
 			) {
 				return (
-					gite.ftMenage +
-					gite.tarifDeBase +
-					gite.coefficients.basseSaison +
-					gite.coefficients.moyenneSaison +
-					gite.coefficients.hauteSaison +
-					gite.coefficients.noel +
-					gite.coefficients.nouvelAn
+					ceGite.ftMenage +
+					ceGite.tarifDeBase +
+					ceGite.coefficients.basseSaison +
+					ceGite.coefficients.moyenneSaison +
+					ceGite.coefficients.hauteSaison +
+					ceGite.coefficients.noel +
+					ceGite.coefficients.nouvelAn
 				);
 			} else {
 				return (
-					gite.ftMenage +
-					gite.tarifDeBase +
-					gite.coefficients.basseSaison +
-					gite.coefficients.moyenneSaison
+					ceGite.ftMenage +
+					ceGite.tarifDeBase +
+					ceGite.coefficients.basseSaison +
+					ceGite.coefficients.moyenneSaison
 				);
 			}
 		} else {
 			return (
-				gite.ftMenage + gite.tarifDeBase + gite.coefficients.basseSaison
+				ceGite.ftMenage +
+				ceGite.tarifDeBase +
+				ceGite.coefficients.basseSaison
 			);
 		}
 	} else if (nbNuites < 7) {
 		if (dayjs().day(6).isBetween(dateArrivee, dateDepart, null, '[]')) {
 			if (nbNuites === 1) {
-				return gite.ftMenage + gite.tarifDeBase / 2 + gite.uneNuitee;
+				return (
+					ceGite.ftMenage + ceGite.tarifDeBase / 2 + ceGite.uneNuitee
+				);
 			} else if (nbNuites === 2) {
-				return gite.ftMenage + gite.tarifDeBase;
+				return ceGite.ftMenage + ceGite.tarifDeBase;
 			} else if (nbNuites === 3) {
-				return gite.ftMenage + gite.tarifDeBase + gite.troisNuitees;
+				return (
+					ceGite.ftMenage + ceGite.tarifDeBase + ceGite.troisNuitees
+				);
 			} else if (nbNuites === 4) {
-				return gite.ftMenage + gite.tarifDeBase + gite.quatreNuitees;
+				return (
+					ceGite.ftMenage + ceGite.tarifDeBase + ceGite.quatreNuitees
+				);
 			} else if (nbNuites === 5) {
 				console.log('Cas week-end 5 nuits - Quel tarif ? Voir Maman');
 				return;
@@ -94,57 +129,57 @@ export const calculTarifDeBase = (
 			if (isVacances) {
 				if (nbNuites === 1) {
 					return (
-						((gite.tarifDeBase +
-							gite.coefficients.basseSaison +
-							gite.coefficients.moyenneSaison) /
+						((ceGite.tarifDeBase +
+							ceGite.coefficients.basseSaison +
+							ceGite.coefficients.moyenneSaison) /
 							7) *
 							1 +
-						gite.ftMenage
+						ceGite.ftMenage
 					);
 				} else if (nbNuites === 2) {
 					return (
-						((gite.tarifDeBase +
-							gite.coefficients.basseSaison +
-							gite.coefficients.moyenneSaison) /
+						((ceGite.tarifDeBase +
+							ceGite.coefficients.basseSaison +
+							ceGite.coefficients.moyenneSaison) /
 							7) *
 							2 +
-						gite.ftMenage
+						ceGite.ftMenage
 					);
 				} else if (nbNuites === 3) {
 					return (
-						((gite.tarifDeBase +
-							gite.coefficients.basseSaison +
-							gite.coefficients.moyenneSaison) /
+						((ceGite.tarifDeBase +
+							ceGite.coefficients.basseSaison +
+							ceGite.coefficients.moyenneSaison) /
 							7) *
 							3 +
-						gite.ftMenage
+						ceGite.ftMenage
 					);
 				} else if (nbNuites === 4) {
 					return (
-						((gite.tarifDeBase +
-							gite.coefficients.basseSaison +
-							gite.coefficients.moyenneSaison) /
+						((ceGite.tarifDeBase +
+							ceGite.coefficients.basseSaison +
+							ceGite.coefficients.moyenneSaison) /
 							7) *
 							4 +
-						gite.ftMenage
+						ceGite.ftMenage
 					);
 				} else if (nbNuites === 5) {
 					return (
-						((gite.tarifDeBase +
-							gite.coefficients.basseSaison +
-							gite.coefficients.moyenneSaison) /
+						((ceGite.tarifDeBase +
+							ceGite.coefficients.basseSaison +
+							ceGite.coefficients.moyenneSaison) /
 							7) *
 							5 +
-						gite.ftMenage
+						ceGite.ftMenage
 					);
 				} else if (nbNuites === 6) {
 					return (
-						((gite.tarifDeBase +
-							gite.coefficients.basseSaison +
-							gite.coefficients.moyenneSaison) /
+						((ceGite.tarifDeBase +
+							ceGite.coefficients.basseSaison +
+							ceGite.coefficients.moyenneSaison) /
 							7) *
 							6 +
-						gite.ftMenage
+						ceGite.ftMenage
 					);
 				} else {
 					console.log(
@@ -154,27 +189,33 @@ export const calculTarifDeBase = (
 			} else {
 				if (nbNuites === 1) {
 					return (
-						gite.ftMenage + nbPers * gite.tarifParPersParNuit * 1
+						ceGite.ftMenage +
+						nbPers * ceGite.tarifParPersParNuit * 1
 					);
 				} else if (nbNuites === 2) {
 					return (
-						gite.ftMenage + nbPers * gite.tarifParPersParNuit * 2
+						ceGite.ftMenage +
+						nbPers * ceGite.tarifParPersParNuit * 2
 					);
 				} else if (nbNuites === 3) {
 					return (
-						gite.ftMenage + nbPers * gite.tarifParPersParNuit * 3
+						ceGite.ftMenage +
+						nbPers * ceGite.tarifParPersParNuit * 3
 					);
 				} else if (nbNuites === 4) {
 					return (
-						gite.ftMenage + nbPers * gite.tarifParPersParNuit * 4
+						ceGite.ftMenage +
+						nbPers * ceGite.tarifParPersParNuit * 4
 					);
 				} else if (nbNuites === 5) {
 					return (
-						gite.ftMenage + nbPers * gite.tarifParPersParNuit * 5
+						ceGite.ftMenage +
+						nbPers * ceGite.tarifParPersParNuit * 5
 					);
 				} else if (nbNuites === 6) {
 					return (
-						gite.ftMenage + nbPers * gite.tarifParPersParNuit * 6
+						ceGite.ftMenage +
+						nbPers * ceGite.tarifParPersParNuit * 6
 					);
 				}
 			}

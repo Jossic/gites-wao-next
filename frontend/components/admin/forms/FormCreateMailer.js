@@ -186,7 +186,6 @@ const FormCreateMailer = ({ snackbarShowMessage }) => {
 						control={
 							<Switch
 								inputRef={register}
-								// checked={true}
 								name='actif'
 								defaultChecked
 								color='primary'

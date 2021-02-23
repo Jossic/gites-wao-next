@@ -7,6 +7,7 @@ import isBetween from 'dayjs/plugin/isBetween.js';
 dayjs.extend(isBetween);
 import Gite from '../models/giteModel.js';
 import sendEmailWithNodemailer from '../utils/email.js';
+import { calculTarifDeBase } from '../utils/calculTarif.js';
 
 // @desc      Fetch all reservations
 // @route     GET /api/reservation
@@ -82,6 +83,7 @@ const createReservation = async (req, res) => {
 	} = req.body;
 	// console.log('req.body vaut =>', req.body);
 
+	console.log(newsletter);
 	const human = await validateHuman(token);
 	if (!human) {
 		res.status(400);
@@ -93,7 +95,7 @@ const createReservation = async (req, res) => {
 
 	if (dejaClient) {
 		dejaClient.nbReserv = dejaClient.nbReserv + 1;
-		newsletter && (dejaClient.newsletter = dejaClient);
+		newsletter && (dejaClient.newsletter = newsletter);
 		await dejaClient.save();
 	} else {
 		const client = new Client({
@@ -145,24 +147,42 @@ const createReservation = async (req, res) => {
 		contactAbritel,
 		contactLeboncoin,
 		contactAutre,
-		nbPersSup: nbPers > 15 ? nbPers - 15 : 0,
 		litFait,
-		ftLit: litFait && 100,
 		infoCompl,
 		taxeSejour: 0,
-		totalTarifSuppl: nbPersSup * ceGite.supplementParPers * nbNuites,
-		resteAPayer: totalTarifBase + totalTarifSuppl + ftLit + taxeSejour,
 		dateRes: Date.now(),
 	});
+
+	litFait && (reservation.ftLit = nbPers * 5);
+
+	reservation.nPers = ceGite.nPers;
+
+	reservation.nbPersSup =
+		nbPers > reservation.nPers ? nbPers - reservation.nPers : 0;
+
+	reservation.totalTarifSuppl =
+		reservation.nbPersSup * ceGite.supplementParPers * reservation.nbNuites;
+
+	console.log('nbPersSup =>', reservation.nbPersSup);
+	console.log('supplementParPers =>', reservation.supplementParPers);
+	console.log('nbNuites =>', reservation.nbNuites);
+	console.log('totalTarifSuppl =>', reservation.totalTarifSuppl);
 
 	reservation.totalTarifBase = calculTarifDeBase(
 		gite,
 		nbPers,
 		dateArrivee,
 		dateDepart,
-		nbNuites
+		reservation.nbNuites
 	);
+	console.log('totalTarifBase', reservation.totalTarifBase);
 
+	reservation.resteAPayer =
+		reservation.totalTarifBase +
+		reservation.totalTarifSuppl +
+		reservation.ftLit +
+		reservation.taxeSejour;
+	console.log('resteAPayer', reservation.resteAPayer);
 	const dejaReserve = await Reservation.findOne({
 		gite: reservation.gite,
 		client: reservation.client,
@@ -170,8 +190,8 @@ const createReservation = async (req, res) => {
 		dateDepart: reservation.dateDepart,
 	});
 
-	// console.log('dejaReserve =>', dejaReserve);
-	// console.log('Reservation dans le back', reservation);
+	// // console.log('dejaReserve =>', dejaReserve);
+	// // console.log('Reservation dans le back', reservation);
 
 	if (dejaReserve) {
 		// console.log('deja Reservé');

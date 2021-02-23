@@ -15,15 +15,9 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import {
 	MuiPickersUtilsProvider,
-	KeyboardTimePicker,
 	KeyboardDatePicker,
 } from '@material-ui/pickers';
-import {
-	getCalendar,
-	getCalendarById,
-	getDejaLoue,
-	getVacances,
-} from '../../../actions/calendarActions';
+import { getDejaLoue, getVacances } from '../../../actions/calendarActions';
 import { getCookie } from '../../../actions/authActions';
 import { useState } from 'react';
 

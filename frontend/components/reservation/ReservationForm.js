@@ -21,7 +21,6 @@ import {
 	FormControl,
 	FormControlLabel,
 	FormGroup,
-	FormHelperText,
 	FormLabel,
 	InputLabel,
 	MenuItem,
@@ -29,7 +28,6 @@ import {
 	Switch,
 	TextField,
 	CircularProgress,
-	Snackbar,
 } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
@@ -40,12 +38,7 @@ import {
 import { createReservation } from '../../actions/reservationActions';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { RECAPTCHA_SECRET_KEY } from '../../config';
-// import Alert from '@material-ui/lab/Alert';
-import MuiAlert from '@material-ui/lab/Alert';
-
-function Alert(props) {
-	return <MuiAlert elevation={6} variant='filled' {...props} />;
-}
+import { withSnackbar } from '../HOC/Snackbar';
 
 const QontoConnector = withStyles({
 	alternativeLabel: {
@@ -235,7 +228,7 @@ function getSteps() {
 	];
 }
 
-const ReservationForm = () => {
+const ReservationForm = ({ snackbarShowMessage }) => {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = useState(0);
 	const { control, register, handleSubmit } = useForm({
@@ -246,6 +239,7 @@ const ReservationForm = () => {
 			nbEnf: 5,
 			nbChien: 1,
 			litFait: true,
+			newsletter: true,
 			nom: 'Lapierre',
 			prenom: 'Jossic',
 			adresse: '18 rue test',
@@ -256,14 +250,7 @@ const ReservationForm = () => {
 		},
 	});
 
-	const [values, setValues] = useState({
-		open: false,
-		loading: false,
-		success: '',
-		error: '',
-		message: '',
-	});
-	const { message, success, loading, error } = values;
+	const [loading, setLoading] = useState(false);
 
 	const reRef = useRef();
 
@@ -290,13 +277,6 @@ const ReservationForm = () => {
 
 	const handleReset = () => {
 		setActiveStep(0);
-	};
-
-	const handleClose = (event, reason) => {
-		if (reason === 'clickaway') {
-			setValues({ ...values, open: false });
-			return;
-		}
 	};
 
 	const [gites, setGites] = useState([]);
@@ -484,6 +464,17 @@ const ReservationForm = () => {
 						}
 						label="Souhaitez-vous l'option lit fait à l'arrivée ?"
 					/>
+					<FormControlLabel
+						control={
+							<Switch
+								inputRef={register}
+								defaultChecked
+								name='newsletter'
+								color='primary'
+							/>
+						}
+						label='Souscrire à notre newsletter pour bénéficier de remises et offres promotionnelles ?'
+					/>
 				</Grid>
 				<Grid container>
 					<FormControl className={classes.formControl}>
@@ -640,17 +631,6 @@ const ReservationForm = () => {
 					}}
 				/>
 			</Grid>
-			<FormControlLabel
-				control={
-					<Switch
-						inputRef={register}
-						name='newsletter'
-						defaultChecked
-						color='primary'
-					/>
-				}
-				label='Souscrire à notre newletter pour bénéficier de remises et offres promotionnelles ?'
-			/>
 		</div>
 	);
 	const recap = () => <p>JSON.stringify()</p>;
@@ -671,25 +651,23 @@ const ReservationForm = () => {
 	}
 
 	const onSubmit = async (data) => {
-		setValues({ ...values, loading: true });
+		setLoading(true);
 		data.token = await reRef.current.executeAsync();
 		reRef.current.reset();
 		console.log('onSubmit data =>', data);
 		createReservation(data).then((result) => {
 			console.log('result vaut =>', result);
 			if (result.error) {
-				console.log('erreur', result.error);
-				setValues({ ...values, error: result.error });
+				console.log(result.error);
+				snackbarShowMessage(`${result.error}`);
+				setLoading(false);
 			} else if (result.dejaReserveMessage) {
-				console.log('deja reserve');
-				setValues({ ...values, error: result.dejaReserveMessage });
+				snackbarShowMessage(`${result.dejaReserveMessage}`);
+				setLoading(false);
 			} else {
-				setValues({
-					...values,
-					success: true,
-					loading: false,
-					message: result.message,
-				});
+				setLoading(false);
+				snackbarShowMessage(`${result.message}`, 'success');
+
 				// setTimeout(() => {
 				// 	Router.push('/');
 				// }, 3000);
@@ -700,26 +678,7 @@ const ReservationForm = () => {
 	return (
 		<Container>
 			{loading && <CircularProgress />}
-			{success && (
-				<Snackbar
-					open={open}
-					autoHideDuration={6000}
-					onClose={handleClose}>
-					<Alert onClose={handleClose} severity='success'>
-						{message}
-					</Alert>
-				</Snackbar>
-			)}
-			{error && (
-				<Snackbar
-					open={open}
-					autoHideDuration={6000}
-					onClose={handleClose}>
-					<Alert onClose={handleClose} severity='error'>
-						{error}
-					</Alert>
-				</Snackbar>
-			)}
+
 			<div className={classes.root}>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Stepper
@@ -792,4 +751,4 @@ const ReservationForm = () => {
 	);
 };
 
-export default ReservationForm;
+export default withSnackbar(ReservationForm);

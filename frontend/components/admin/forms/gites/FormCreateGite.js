@@ -25,10 +25,6 @@ import { Container, CircularProgress } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { getCookie } from '../../../../actions/authActions';
 
-function Alert(props) {
-	return <MuiAlert elevation={6} variant='filled' {...props} />;
-}
-
 const QontoConnector = withStyles({
 	alternativeLabel: {
 		top: 10,
