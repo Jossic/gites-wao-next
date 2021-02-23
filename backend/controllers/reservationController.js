@@ -152,7 +152,9 @@ const createReservation = async (req, res) => {
 		dateRes: Date.now(),
 	});
 
-	litFait && (reservation.ftLit = nbPers * 5);
+	litFait && (reservation.totalFtLit = nbPers * ceGite.ftLit);
+
+	reservation.totalTfMenage = ceGite.ftMenage;
 
 	reservation.nPers = ceGite.nPers;
 	reservation.nbPersSup =
@@ -173,7 +175,7 @@ const createReservation = async (req, res) => {
 	reservation.resteAPayer =
 		reservation.totalTarifBase +
 		reservation.totalTarifSuppl +
-		reservation.ftLit +
+		reservation.totalFtLit +
 		reservation.taxeSejour;
 	// console.log('resteAPayer', reservation.resteAPayer);
 	const dejaReserve = await Reservation.findOne({

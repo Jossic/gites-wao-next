@@ -136,6 +136,14 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 			},
 		},
 		{
+			name: 'dateRes',
+			label: 'Date de réservation',
+			options: {
+				filter: true,
+				sort: true,
+			},
+		},
+		{
 			name: 'dateArrivee',
 			label: "Date d'arrivee",
 			options: {

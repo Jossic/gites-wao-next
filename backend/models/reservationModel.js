@@ -29,6 +29,8 @@ const reservationSchema = mongoose.Schema(
 		labelRemise: { type: String },
 		infoCompl: { type: String },
 		litFait: { type: Boolean, default: false },
+		totalFtLit: { type: Number },
+		totalTfMenage: { type: Number },
 		commentaire: { type: String },
 	},
 	{

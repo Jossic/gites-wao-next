@@ -52,8 +52,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FormLocation = ({ preloadedValues }) => {
-	const [selectedDateArrivee, setSelectedDateArrivee] = React.useState();
-	const [selectedDateDepart, setSelectedDateDepart] = React.useState();
+	const [selectedDateArrivee, setSelectedDateArrivee] = React.useState(
+		preloadedValues.dateArrivee
+	);
+	const [selectedDateDepart, setSelectedDateDepart] = React.useState(
+		preloadedValues.dateDepart
+	);
 
 	const handleDateChangeArrivee = (date) => {
 		setSelectedDateArrivee(date);
@@ -69,36 +73,16 @@ const FormLocation = ({ preloadedValues }) => {
 		defaultValues: preloadedValues,
 	});
 
-	const [values, setValues] = useState({
-		dateArrivee: dayjs(preloadedValues.dateArrivee).format('yyyy-MM-dd'),
-		dateDepart: preloadedValues.dateDepart,
-		loading: false,
-		success: '',
-		error: '',
-		message: '',
-	});
-	const {
-		success,
-		loading,
-		error,
-		message,
-		dateArrivee,
-		dateDepart,
-	} = values;
+	const [loading, setLoading] = useState(false);
 
 	const onSubmit = async (data) => {
 		console.log(data);
-		setValues({ ...values, loading: true });
+		setLoading(true);
 		updateReservation(data, router.query.id, token).then((result) => {
 			if (result.error) {
-				setValues({ ...values, error: result.error });
+				setLoading(false);
 			} else {
-				setValues({
-					...values,
-					success: true,
-					loading: false,
-					message: result.message,
-				});
+				setLoading(false);
 				// setTimeout(() => {
 				// 	Router.push('/admin/gestionDivers/partenaires');
 				// }, 3000);
@@ -109,26 +93,7 @@ const FormLocation = ({ preloadedValues }) => {
 	return (
 		<>
 			{loading && <CircularProgress />}
-			{success && (
-				<Snackbar
-					open={open}
-					autoHideDuration={6000}
-					onClose={handleClose}>
-					<Alert onClose={handleClose} severity='success'>
-						{message}
-					</Alert>
-				</Snackbar>
-			)}
-			{error && (
-				<Snackbar
-					open={open}
-					autoHideDuration={6000}
-					onClose={handleClose}>
-					<Alert onClose={handleClose} severity='error'>
-						{error}
-					</Alert>
-				</Snackbar>
-			)}
+
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<Grid container justify='space-around'>
 					<TextField
@@ -418,7 +383,7 @@ const FormLocation = ({ preloadedValues }) => {
 				<Grid container justify='space-around'>
 					<TextField
 						inputRef={register}
-						name='ftLit'
+						name='totalFtLit'
 						id='standard-number'
 						label='Montant forfait lit'
 						type='number'
@@ -428,7 +393,7 @@ const FormLocation = ({ preloadedValues }) => {
 					/>
 					<TextField
 						inputRef={register}
-						name='ftMenage'
+						name='totalTfMenage'
 						id='standard-number'
 						label='Montant forfait ménage'
 						type='number'
