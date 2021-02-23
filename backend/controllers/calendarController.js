@@ -61,6 +61,7 @@ const getVacances = asyncHandler(async (req, res) => {
 // @access    Public
 const getDejaLoue = async (req, res) => {
 	// console.log(req.params);
+	console.log(req.params.calendarId);
 	try {
 		let response = await calendar.events.list({
 			calendarId: req.params.calendarId,
@@ -71,12 +72,13 @@ const getDejaLoue = async (req, res) => {
 
 		let items = response['data']['items'];
 
+		// console.log(items);
 		if (items.length === 0) {
-			// console.log(false);
+			console.log(false);
 			res.json({ loue: false });
 			return false;
 		} else {
-			// console.log(true);
+			console.log(true);
 			res.json({ loue: true });
 			return true;
 		}
@@ -88,8 +90,8 @@ const getDejaLoue = async (req, res) => {
 	}
 };
 
-// @desc      Delete a client
-// @route     GET /api/client/:id
+// @desc      Get event between 2 dates
+// @route     GET /api/calendar/:calendarId/:dateDebut/:dateFin
 // @access    Private/Admin
 const getEvents = async (req, res) => {
 	// console.log(req.params);
@@ -102,7 +104,7 @@ const getEvents = async (req, res) => {
 		});
 
 		let items = response['data']['items'];
-		console.log(items);
+		// console.log(items);
 		return items;
 	} catch (error) {
 		console.log(error);

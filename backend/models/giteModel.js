@@ -88,6 +88,10 @@ const giteSchema = mongoose.Schema(
 		calendarId: {
 			type: String,
 		},
+		bandeau: {
+			type: String,
+		},
+
 		//Elements calcul du tarif
 		tarifDeBase: {
 			//Ex 1135 sur brinchette

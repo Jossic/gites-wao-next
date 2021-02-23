@@ -79,6 +79,16 @@ const FormInfosGene = ({ classes, register, preloadedValues }) => {
 					shrink: true,
 				}}
 			/>
+			<TextField
+				className={classes.textField}
+				inputRef={register}
+				name='bandeau'
+				id='standard-number'
+				label='Texte du bandeau - Laisser vide pour ne pas le faire apparaitre'
+				InputLabelProps={{
+					shrink: true,
+				}}
+			/>
 			<FormControlLabel
 				className={classes.textField}
 				control={

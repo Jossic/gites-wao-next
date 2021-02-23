@@ -78,6 +78,28 @@ const FormInfosGene = ({ classes, register }) => {
 					shrink: true,
 				}}
 			/>
+			<TextField
+				className={classes.textField}
+				inputRef={register}
+				name='bandeau'
+				id='standard-number'
+				label='Texte du bandeau - Laisser vide pour ne pas le faire apparaitre'
+				InputLabelProps={{
+					shrink: true,
+				}}
+			/>
+			<FormControlLabel
+				className={classes.textField}
+				control={
+					<Switch
+						inputRef={register}
+						name='actif'
+						defaultChecked
+						color='primary'
+					/>
+				}
+				label='Visible'
+			/>
 			<FormControlLabel
 				className={classes.textField}
 				control={
