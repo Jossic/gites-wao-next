@@ -135,7 +135,13 @@ const FormCalculTarif = ({ gites }) => {
 									gite.coefficients.moyenneSaison +
 									gite.coefficients.hauteSaison
 							);
-							setPrixSuppl();
+							if (nbPers > gite.nPers) {
+								setPrixSuppl(
+									(nbPers - gite.nPers) *
+										gite.supplementParPers *
+										nuitee
+								);
+							}
 						} else if (
 							dayjs()
 								.dayOfYear(358)
@@ -150,7 +156,13 @@ const FormCalculTarif = ({ gites }) => {
 									gite.coefficients.hauteSaison +
 									gite.coefficients.noel
 							);
-							setPrixSuppl();
+							if (nbPers > gite.nPers) {
+								setPrixSuppl(
+									(nbPers - gite.nPers) *
+										gite.supplementParPers *
+										nuitee
+								);
+							}
 						} else if (
 							dayjs()
 								.dayOfYear(365)
@@ -166,7 +178,13 @@ const FormCalculTarif = ({ gites }) => {
 									gite.coefficients.noel +
 									gite.coefficients.nouvelAn
 							);
-							setPrixSuppl();
+							if (nbPers > gite.nPers) {
+								setPrixSuppl(
+									(nbPers - gite.nPers) *
+										gite.supplementParPers *
+										nuitee
+								);
+							}
 						} else {
 							console.log(
 								'On est dans le cas 7 nuitées en vacances scolaires moyenne saison'
@@ -178,7 +196,13 @@ const FormCalculTarif = ({ gites }) => {
 									gite.coefficients.basseSaison +
 									gite.coefficients.moyenneSaison
 							);
-							setPrixSuppl();
+							if (nbPers > gite.nPers) {
+								setPrixSuppl(
+									(nbPers - gite.nPers) *
+										gite.supplementParPers *
+										nuitee
+								);
+							}
 						}
 					} else {
 						console.log('Cas 7 nuitées hors vacances');
@@ -188,7 +212,13 @@ const FormCalculTarif = ({ gites }) => {
 								gite.tarifDeBase +
 								gite.coefficients.basseSaison
 						);
-						setPrixSuppl();
+						if (nbPers > gite.nPers) {
+							setPrixSuppl(
+								(nbPers - gite.nPers) *
+									gite.supplementParPers *
+									nuitee
+							);
+						}
 					}
 				} else if (nuitee < 7) {
 					console.log('Cas général : nuitées inférieure à 7');
@@ -205,7 +235,13 @@ const FormCalculTarif = ({ gites }) => {
 									gite.tarifDeBase / 2 +
 									gite.uneNuitee
 							);
-							setPrixSuppl();
+							if (nbPers > gite.nPers) {
+								setPrixSuppl(
+									(nbPers - gite.nPers) *
+										gite.supplementParPers *
+										nuitee
+								);
+							}
 							setAvertissement({
 								message:
 									'En week end nous louons 2 nuitées, (très exceptionnelement 1 seule)',
@@ -214,7 +250,13 @@ const FormCalculTarif = ({ gites }) => {
 							console.log('Cas week-end 2 nuits');
 							//
 							setPrixTotal(gite.ftMenage + gite.tarifDeBase);
-							setPrixSuppl();
+							if (nbPers > gite.nPers) {
+								setPrixSuppl(
+									(nbPers - gite.nPers) *
+										gite.supplementParPers *
+										nuitee
+								);
+							}
 						} else if (nuitee === 3) {
 							console.log('Cas week-end 3 nuits');
 							//
@@ -223,7 +265,13 @@ const FormCalculTarif = ({ gites }) => {
 									gite.tarifDeBase +
 									gite.troisNuitees
 							);
-							setPrixSuppl();
+							if (nbPers > gite.nPers) {
+								setPrixSuppl(
+									(nbPers - gite.nPers) *
+										gite.supplementParPers *
+										nuitee
+								);
+							}
 						} else if (nuitee === 4) {
 							console.log('Cas week-end 4 nuits');
 							//
@@ -232,21 +280,39 @@ const FormCalculTarif = ({ gites }) => {
 									gite.tarifDeBase +
 									gite.quatreNuitees
 							);
-							setPrixSuppl();
+							if (nbPers > gite.nPers) {
+								setPrixSuppl(
+									(nbPers - gite.nPers) *
+										gite.supplementParPers *
+										nuitee
+								);
+							}
 						} else if (nuitee === 5) {
 							console.log(
 								'Cas week-end 5 nuits - Quel tarif ? Voir Maman'
 							);
 							//
 							setPrixTotal();
-							setPrixSuppl();
+							if (nbPers > gite.nPers) {
+								setPrixSuppl(
+									(nbPers - gite.nPers) *
+										gite.supplementParPers *
+										nuitee
+								);
+							}
 						} else if (nuitee === 6) {
 							console.log(
 								'Cas week-end 6 nuits - Quel tarif ? Voir Maman'
 							);
 							//
 							setPrixTotal();
-							setPrixSuppl();
+							if (nbPers > gite.nPers) {
+								setPrixSuppl(
+									(nbPers - gite.nPers) *
+										gite.supplementParPers *
+										nuitee
+								);
+							}
 						} else {
 							console.log(
 								'Autres cas week-end inférieur à 7 nuits - Inpossible...'
@@ -266,27 +332,20 @@ const FormCalculTarif = ({ gites }) => {
 								);
 								//
 
-								if (nbPers < gite.nPers) {
-									setPrixTotal(
-										((gite.tarifDeBase +
-											gite.coefficients.basseSaison +
-											gite.coefficients.moyenneSaison) /
-											7) *
-											1 +
-											gite.ftMenage
-									);
-									setPrixSuppl();
-								} else {
-									setPrixTotal(
-										((gite.tarifDeBase +
-											gite.coefficients.basseSaison +
-											gite.coefficients.moyenneSaison) /
-											7) *
-											1 +
-											gite.ftMenage
-									);
+								setPrixTotal(
+									((gite.tarifDeBase +
+										gite.coefficients.basseSaison +
+										gite.coefficients.moyenneSaison) /
+										7) *
+										1 +
+										gite.ftMenage
+								);
+
+								if (nbPers > gite.nPers) {
 									setPrixSuppl(
-										nbPers * gite.supplementParPers * 1
+										(nbPers - gite.nPers) *
+											gite.supplementParPers *
+											nuitee
 									);
 								}
 							} else if (nuitee === 2) {
@@ -294,28 +353,20 @@ const FormCalculTarif = ({ gites }) => {
 									'Cas hors week-end 2 nuits mais en vacances'
 								);
 								//
-								if (nbPers < gite.nPers) {
-									console.log(`Moins de ${gite.nPers} pers`);
-									setPrixTotal(
-										((gite.tarifDeBase +
-											gite.coefficients.basseSaison +
-											gite.coefficients.moyenneSaison) /
-											7) *
-											2 +
-											gite.ftMenage
-									);
-									setPrixSuppl();
-								} else {
-									setPrixTotal(
-										((gite.tarifDeBase +
-											gite.coefficients.basseSaison +
-											gite.coefficients.moyenneSaison) /
-											7) *
-											2 +
-											gite.ftMenage
-									);
+
+								setPrixTotal(
+									((gite.tarifDeBase +
+										gite.coefficients.basseSaison +
+										gite.coefficients.moyenneSaison) /
+										7) *
+										2 +
+										gite.ftMenage
+								);
+								if (nbPers > gite.nPers) {
 									setPrixSuppl(
-										nbPers * gite.supplementParPers * 2
+										(nbPers - gite.nPers) *
+											gite.supplementParPers *
+											nuitee
 									);
 								}
 							} else if (nuitee === 3) {
@@ -323,31 +374,21 @@ const FormCalculTarif = ({ gites }) => {
 									'Cas hors week-end 3 nuits mais en vacances'
 								);
 								//
-								if (nbPers < gite.nPers) {
-									console.log('ici');
-									console.log(gite.tarifParPersParNuit);
-									console.log(gite.ftMenage);
-									console.log(nbPers);
-									setPrixTotal(
-										((gite.tarifDeBase +
-											gite.coefficients.basseSaison +
-											gite.coefficients.moyenneSaison) /
-											7) *
-											3 +
-											gite.ftMenage
-									);
-									setPrixSuppl();
-								} else {
-									setPrixTotal(
-										((gite.tarifDeBase +
-											gite.coefficients.basseSaison +
-											gite.coefficients.moyenneSaison) /
-											7) *
-											3 +
-											gite.ftMenage
-									);
+
+								setPrixTotal(
+									((gite.tarifDeBase +
+										gite.coefficients.basseSaison +
+										gite.coefficients.moyenneSaison) /
+										7) *
+										3 +
+										gite.ftMenage
+								);
+
+								if (nbPers > gite.nPers) {
 									setPrixSuppl(
-										nbPers * gite.supplementParPers * 3
+										(nbPers - gite.nPers) *
+											gite.supplementParPers *
+											nuitee
 									);
 								}
 							} else if (nuitee === 4) {
@@ -355,27 +396,20 @@ const FormCalculTarif = ({ gites }) => {
 									'Cas hors week-end 4 nuits mais en vacances'
 								);
 								//
-								if (nbPers < gite.nPers) {
-									setPrixTotal(
-										((gite.tarifDeBase +
-											gite.coefficients.basseSaison +
-											gite.coefficients.moyenneSaison) /
-											7) *
-											4 +
-											gite.ftMenage
-									);
-									setPrixSuppl();
-								} else {
-									setPrixTotal(
-										((gite.tarifDeBase +
-											gite.coefficients.basseSaison +
-											gite.coefficients.moyenneSaison) /
-											7) *
-											4 +
-											gite.ftMenage
-									);
+
+								setPrixTotal(
+									((gite.tarifDeBase +
+										gite.coefficients.basseSaison +
+										gite.coefficients.moyenneSaison) /
+										7) *
+										4 +
+										gite.ftMenage
+								);
+								if (nbPers > gite.nPers) {
 									setPrixSuppl(
-										nbPers * gite.supplementParPers * 4
+										(nbPers - gite.nPers) *
+											gite.supplementParPers *
+											nuitee
 									);
 								}
 							} else if (nuitee === 5) {
@@ -383,26 +417,20 @@ const FormCalculTarif = ({ gites }) => {
 									'Cas hors week-end 5 nuits mais en vacances'
 								);
 								//
-								if (nbPers < gite.nPers) {
-									setPrixTotal(
-										((gite.tarifDeBase +
-											gite.coefficients.basseSaison +
-											gite.coefficients.moyenneSaison) /
-											7) *
-											5 +
-											gite.ftMenage
-									);
-								} else {
-									setPrixTotal(
-										((gite.tarifDeBase +
-											gite.coefficients.basseSaison +
-											gite.coefficients.moyenneSaison) /
-											7) *
-											5 +
-											gite.ftMenage
-									);
+
+								setPrixTotal(
+									((gite.tarifDeBase +
+										gite.coefficients.basseSaison +
+										gite.coefficients.moyenneSaison) /
+										7) *
+										5 +
+										gite.ftMenage
+								);
+								if (nbPers > gite.nPers) {
 									setPrixSuppl(
-										nbPers * gite.supplementParPers * 5
+										(nbPers - gite.nPers) *
+											gite.supplementParPers *
+											nuitee
 									);
 								}
 							} else if (nuitee === 6) {
@@ -410,26 +438,20 @@ const FormCalculTarif = ({ gites }) => {
 									'Cas hors week-end 6 nuits mais en vacances'
 								);
 								//
-								if (nbPers < gite.nPers) {
-									setPrixTotal(
-										((gite.tarifDeBase +
-											gite.coefficients.basseSaison +
-											gite.coefficients.moyenneSaison) /
-											7) *
-											6 +
-											gite.ftMenage
-									);
-								} else {
-									setPrixTotal(
-										((gite.tarifDeBase +
-											gite.coefficients.basseSaison +
-											gite.coefficients.moyenneSaison) /
-											7) *
-											6 +
-											gite.ftMenage
-									);
+
+								setPrixTotal(
+									((gite.tarifDeBase +
+										gite.coefficients.basseSaison +
+										gite.coefficients.moyenneSaison) /
+										7) *
+										6 +
+										gite.ftMenage
+								);
+								if (nbPers > gite.nPers) {
 									setPrixSuppl(
-										nbPers * gite.supplementParPers * 6
+										(nbPers - gite.nPers) *
+											gite.supplementParPers *
+											nuitee
 									);
 								}
 							} else {
@@ -448,22 +470,15 @@ const FormCalculTarif = ({ gites }) => {
 								);
 								//
 
-								if (nbPers < gite.nPers) {
-									setPrixTotal(
-										gite.ftMenage +
-											nbPers *
-												gite.tarifParPersParNuit *
-												1
-									);
-								} else {
-									setPrixTotal(
-										gite.ftMenage +
-											nbPers *
-												gite.tarifParPersParNuit *
-												1
-									);
+								setPrixTotal(
+									gite.ftMenage +
+										nbPers * gite.tarifParPersParNuit * 1
+								);
+								if (nbPers > gite.nPers) {
 									setPrixSuppl(
-										nbPers * gite.supplementParPers * 1
+										(nbPers - gite.nPers) *
+											gite.supplementParPers *
+											nuitee
 									);
 								}
 							} else if (nuitee === 2) {
@@ -471,22 +486,16 @@ const FormCalculTarif = ({ gites }) => {
 									'Cas hors week-end 2 nuits et hors vacances'
 								);
 								//
-								if (nbPers < gite.nPers) {
-									setPrixTotal(
-										gite.ftMenage +
-											nbPers *
-												gite.tarifParPersParNuit *
-												2
-									);
-								} else {
-									setPrixTotal(
-										gite.ftMenage +
-											nbPers *
-												gite.tarifParPersParNuit *
-												2
-									);
+
+								setPrixTotal(
+									gite.ftMenage +
+										nbPers * gite.tarifParPersParNuit * 2
+								);
+								if (nbPers > gite.nPers) {
 									setPrixSuppl(
-										nbPers * gite.supplementParPers * 2
+										(nbPers - gite.nPers) *
+											gite.supplementParPers *
+											nuitee
 									);
 								}
 							} else if (nuitee === 3) {
@@ -494,23 +503,16 @@ const FormCalculTarif = ({ gites }) => {
 									'Cas hors week-end 3 nuits et hors vacances'
 								);
 								//
-								if (nbPers < gite.nPers) {
-									console.log('ici');
-									setPrixTotal(
-										gite.ftMenage +
-											nbPers *
-												gite.tarifParPersParNuit *
-												3
-									);
-								} else {
-									setPrixTotal(
-										gite.ftMenage +
-											nbPers *
-												gite.tarifParPersParNuit *
-												3
-									);
+
+								setPrixTotal(
+									gite.ftMenage +
+										nbPers * gite.tarifParPersParNuit * 3
+								);
+								if (nbPers > gite.nPers) {
 									setPrixSuppl(
-										nbPers * gite.supplementParPers * 3
+										(nbPers - gite.nPers) *
+											gite.supplementParPers *
+											nuitee
 									);
 								}
 							} else if (nuitee === 4) {
@@ -518,22 +520,16 @@ const FormCalculTarif = ({ gites }) => {
 									'Cas hors week-end 4 nuits et hors vacances'
 								);
 								//
-								if (nbPers < gite.nPers) {
-									setPrixTotal(
-										gite.ftMenage +
-											nbPers *
-												gite.tarifParPersParNuit *
-												4
-									);
-								} else {
-									setPrixTotal(
-										gite.ftMenage +
-											nbPers *
-												gite.tarifParPersParNuit *
-												4
-									);
+
+								setPrixTotal(
+									gite.ftMenage +
+										nbPers * gite.tarifParPersParNuit * 4
+								);
+								if (nbPers > gite.nPers) {
 									setPrixSuppl(
-										nbPers * gite.supplementParPers * 4
+										(nbPers - gite.nPers) *
+											gite.supplementParPers *
+											nuitee
 									);
 								}
 							} else if (nuitee === 5) {
@@ -541,22 +537,16 @@ const FormCalculTarif = ({ gites }) => {
 									'Cas hors week-end 5 nuits et hors vacances'
 								);
 								//
-								if (nbPers < gite.nPers) {
-									setPrixTotal(
-										gite.ftMenage +
-											nbPers *
-												gite.tarifParPersParNuit *
-												5
-									);
-								} else {
-									setPrixTotal(
-										gite.ftMenage +
-											nbPers *
-												gite.tarifParPersParNuit *
-												5
-									);
+
+								setPrixTotal(
+									gite.ftMenage +
+										nbPers * gite.tarifParPersParNuit * 5
+								);
+								if (nbPers > gite.nPers) {
 									setPrixSuppl(
-										nbPers * gite.supplementParPers * 5
+										(nbPers - gite.nPers) *
+											gite.supplementParPers *
+											nuitee
 									);
 								}
 							} else if (nuitee === 6) {
@@ -564,22 +554,16 @@ const FormCalculTarif = ({ gites }) => {
 									'Cas hors week-end 6 nuits et hors vacances'
 								);
 								//
-								if (nbPers < gite.nPers) {
-									setPrixTotal(
-										gite.ftMenage +
-											nbPers *
-												gite.tarifParPersParNuit *
-												6
-									);
-								} else {
-									setPrixTotal(
-										gite.ftMenage +
-											nbPers *
-												gite.tarifParPersParNuit *
-												6
-									);
+
+								setPrixTotal(
+									gite.ftMenage +
+										nbPers * gite.tarifParPersParNuit * 6
+								);
+								if (nbPers > gite.nPers) {
 									setPrixSuppl(
-										nbPers * gite.supplementParPers * 6
+										(nbPers - gite.nPers) *
+											gite.supplementParPers *
+											nuitee
 									);
 								}
 							}

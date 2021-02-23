@@ -2,6 +2,9 @@ import Reservation from '../models/ReservationModel.js';
 import asyncHandler from 'express-async-handler';
 import validateHuman from '../utils/validateHuman.js';
 import Client from '../models/clientModel.js';
+import dayjs from 'dayjs';
+import isBetween from 'dayjs/plugin/isBetween.js';
+dayjs.extend(isBetween);
 import Gite from '../models/giteModel.js';
 import sendEmailWithNodemailer from '../utils/email.js';
 
@@ -58,8 +61,13 @@ const createReservation = async (req, res) => {
 		dateArrivee,
 		dateDepart,
 		nbChien,
-		contactPar,
+		contactMail,
+		contactTel,
+		contactAbritel,
+		contactLeboncoin,
+		contactAutre,
 		litFait,
+		infoCompl,
 		nom,
 		prenom,
 		adresse,
@@ -69,20 +77,23 @@ const createReservation = async (req, res) => {
 		pays,
 		tel,
 		mail,
+		newsletter,
+		token,
 	} = req.body;
 	// console.log('req.body vaut =>', req.body);
 
-	// const human = await validateHuman(token);
-	// if (!human) {
-	// 	res.status(400);
-	// 	res.json({ error: 'Vous avez été reconnu en tant que robot' });
-	// 	return;
-	// }
+	const human = await validateHuman(token);
+	if (!human) {
+		res.status(400);
+		res.json({ error: 'Vous avez été reconnu en tant que robot' });
+		return;
+	}
 
 	const dejaClient = await Client.findOne({ mail });
 
 	if (dejaClient) {
 		dejaClient.nbReserv = dejaClient.nbReserv + 1;
+		newsletter && (dejaClient.newsletter = dejaClient);
 		await dejaClient.save();
 	} else {
 		const client = new Client({
@@ -97,6 +108,7 @@ const createReservation = async (req, res) => {
 			mail,
 			nbVenu: Number(0),
 			nbReserv: Number(0),
+			newsletter,
 		});
 		// console.log('client dans le back', client);
 		client.save((error, client) => {
@@ -115,6 +127,9 @@ const createReservation = async (req, res) => {
 
 	//Vérifier si le client n'a pas déjà réservé avec les mêmes paramètres
 
+	const dateD = dayjs(dateArrivee);
+	const dateF = dayjs(dateDepart);
+
 	const reservation = new Reservation({
 		gite: ceGite._id,
 		client: nouveauClient._id,
@@ -122,15 +137,31 @@ const createReservation = async (req, res) => {
 		nbEnf,
 		dateArrivee,
 		dateDepart,
+		nbNuites: dateF.diff(dateD, 'day'),
 		nbChien,
 		mtAnimaux: nbChien * 3,
-		contactPar,
+		contactMail,
+		contactTel,
+		contactAbritel,
+		contactLeboncoin,
+		contactAutre,
 		nbPersSup: nbPers > 15 ? nbPers - 15 : 0,
 		litFait,
 		ftLit: litFait && 100,
-		ftMenage: 150,
+		infoCompl,
+		taxeSejour: 0,
+		totalTarifSuppl: nbPersSup * ceGite.supplementParPers * nbNuites,
+		resteAPayer: totalTarifBase + totalTarifSuppl + ftLit + taxeSejour,
 		dateRes: Date.now(),
 	});
+
+	reservation.totalTarifBase = calculTarifDeBase(
+		gite,
+		nbPers,
+		dateArrivee,
+		dateDepart,
+		nbNuites
+	);
 
 	const dejaReserve = await Reservation.findOne({
 		gite: reservation.gite,

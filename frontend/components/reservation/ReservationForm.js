@@ -640,6 +640,17 @@ const ReservationForm = () => {
 					}}
 				/>
 			</Grid>
+			<FormControlLabel
+				control={
+					<Switch
+						inputRef={register}
+						name='newsletter'
+						defaultChecked
+						color='primary'
+					/>
+				}
+				label='Souscrire à notre newletter pour bénéficier de remises et offres promotionnelles ?'
+			/>
 		</div>
 	);
 	const recap = () => <p>JSON.stringify()</p>;

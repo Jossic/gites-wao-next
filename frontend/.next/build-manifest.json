@@ -24,15 +24,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/gites/[id]": [
+    "/contact": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/gites/[id].js"
+      "static/chunks/pages/contact.js"
     ],
-    "/tarifs": [
+    "/reservation": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/tarifs.js"
+      "static/chunks/pages/reservation.js"
     ]
   },
   "ampFirstPages": []
