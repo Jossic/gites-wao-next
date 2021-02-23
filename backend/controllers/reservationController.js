@@ -124,7 +124,6 @@ const createReservation = async (req, res) => {
 	}
 
 	const ceGite = await Gite.findOne({ slug: gite });
-
 	const nouveauClient = await Client.findOne({ mail });
 
 	//Vérifier si le client n'a pas déjà réservé avec les mêmes paramètres
@@ -156,19 +155,13 @@ const createReservation = async (req, res) => {
 	litFait && (reservation.ftLit = nbPers * 5);
 
 	reservation.nPers = ceGite.nPers;
-
 	reservation.nbPersSup =
 		nbPers > reservation.nPers ? nbPers - reservation.nPers : 0;
 
 	reservation.totalTarifSuppl =
 		reservation.nbPersSup * ceGite.supplementParPers * reservation.nbNuites;
 
-	console.log('nbPersSup =>', reservation.nbPersSup);
-	console.log('supplementParPers =>', reservation.supplementParPers);
-	console.log('nbNuites =>', reservation.nbNuites);
-	console.log('totalTarifSuppl =>', reservation.totalTarifSuppl);
-
-	reservation.totalTarifBase = calculTarifDeBase(
+	reservation.totalTarifBase = await calculTarifDeBase(
 		gite,
 		nbPers,
 		dateArrivee,
@@ -182,7 +175,7 @@ const createReservation = async (req, res) => {
 		reservation.totalTarifSuppl +
 		reservation.ftLit +
 		reservation.taxeSejour;
-	console.log('resteAPayer', reservation.resteAPayer);
+	// console.log('resteAPayer', reservation.resteAPayer);
 	const dejaReserve = await Reservation.findOne({
 		gite: reservation.gite,
 		client: reservation.client,

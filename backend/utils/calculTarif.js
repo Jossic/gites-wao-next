@@ -3,6 +3,8 @@ import axios from 'axios';
 import Gite from '../models/giteModel.js';
 import isBetween from 'dayjs/plugin/isBetween.js';
 dayjs.extend(isBetween);
+import dayOfYear from 'dayjs/plugin/dayOfYear.js';
+dayjs.extend(dayOfYear);
 
 export const calculTarifDeBase = async (
 	gite,
@@ -16,13 +18,15 @@ export const calculTarifDeBase = async (
 
 	const dateDAPI = dayjs(dateArrivee).format('YYYY-MM-DDT00:01:00Z');
 	const dateFAPI = dayjs(dateDepart).format('YYYY-MM-DDT00:01:00Z');
+	const dateDayJSD = dateArrivee;
+	const dateDayJSF = dateDepart;
 
 	const dejaLoue = await axios
 		.get(
 			`http://localhost:8000/api/calendar/loue/${ceGite.calendarId}/${dateDAPI}/${dateFAPI}`
 		)
 		.then((result) => {
-			console.log('dejaLoue vaut', result.data.loue);
+			return result.data.loue;
 		})
 		.catch((err) => {
 			console.log(err);
@@ -31,7 +35,7 @@ export const calculTarifDeBase = async (
 	const isVacances = await axios
 		.get(`http://localhost:8000/api/calendar/${dateDAPI}/${dateFAPI}`)
 		.then((result) => {
-			console.log('isVacances vaut', result.data.vacances);
+			return result.data.vacances;
 		})
 		.catch((err) => {
 			console.log(err);
@@ -42,13 +46,14 @@ export const calculTarifDeBase = async (
 	if (nbNuites === 7 || nbNuites === 14 || nbNuites === 21) {
 		if (isVacances) {
 			if (
-				dayjs(dateArrivee).isBetween(
+				dayjs(dateDayJSD).isBetween(
 					dayjs().month(6),
 					dayjs().month(7),
 					null,
 					'[]'
 				)
 			) {
+				console.log('1');
 				return (
 					ceGite.ftMenage +
 					ceGite.tarifDeBase +
@@ -59,8 +64,9 @@ export const calculTarifDeBase = async (
 			} else if (
 				dayjs()
 					.dayOfYear(358)
-					.isBetween(dateArrivee, dateDepart, null, '[]')
+					.isBetween(dateDayJSD, dateDayJSF, null, '[]')
 			) {
+				console.log('2');
 				return (
 					ceGite.ftMenage +
 					ceGite.tarifDeBase +
@@ -72,8 +78,9 @@ export const calculTarifDeBase = async (
 			} else if (
 				dayjs()
 					.dayOfYear(365)
-					.isBetween(dateArrivee, dateDepart, null, '[]')
+					.isBetween(dateDayJSD, dateDayJSF, null, '[]')
 			) {
+				console.log('3');
 				return (
 					ceGite.ftMenage +
 					ceGite.tarifDeBase +
@@ -84,14 +91,24 @@ export const calculTarifDeBase = async (
 					ceGite.coefficients.nouvelAn
 				);
 			} else {
-				return (
+				console.log('4');
+				console.log('ftMenage =>', ceGite.ftMenage);
+				console.log('tarifDeBase =>', ceGite.tarifDeBase);
+				console.log('basseSaison =>', ceGite.coefficients.basseSaison);
+				console.log(
+					'moyenneSaison =>',
+					ceGite.coefficients.moyenneSaison
+				);
+				const tarif =
 					ceGite.ftMenage +
 					ceGite.tarifDeBase +
 					ceGite.coefficients.basseSaison +
-					ceGite.coefficients.moyenneSaison
-				);
+					ceGite.coefficients.moyenneSaison;
+				console.log('tarif vaut', tarif);
+				return tarif;
 			}
 		} else {
+			console.log('5');
 			return (
 				ceGite.ftMenage +
 				ceGite.tarifDeBase +
@@ -99,7 +116,7 @@ export const calculTarifDeBase = async (
 			);
 		}
 	} else if (nbNuites < 7) {
-		if (dayjs().day(6).isBetween(dateArrivee, dateDepart, null, '[]')) {
+		if (dayjs().day(6).isBetween(dateDayJSD, dateDayJSF, null, '[]')) {
 			if (nbNuites === 1) {
 				return (
 					ceGite.ftMenage + ceGite.tarifDeBase / 2 + ceGite.uneNuitee

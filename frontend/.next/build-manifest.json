@@ -24,25 +24,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/gites": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/admin/gites.js"
-    ],
-    "/admin/gites/[id]": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/admin/gites/[id].js"
-    ],
     "/admin/reservation": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
       "static/chunks/pages/admin/reservation.js"
     ],
-    "/reservation": [
+    "/admin/reservation/[id]": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/reservation.js"
+      "static/chunks/pages/admin/reservation/[id].js"
     ]
   },
   "ampFirstPages": []

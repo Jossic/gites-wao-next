@@ -3,6 +3,8 @@ import { useForm, Controller } from 'react-hook-form';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 dayjs.extend(isBetween);
+import dayOfYear from 'dayjs/plugin/dayOfYear.js';
+dayjs.extend(dayOfYear);
 import Link from 'next/link';
 import {
 	Button,
