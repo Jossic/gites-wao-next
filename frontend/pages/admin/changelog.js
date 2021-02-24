@@ -107,7 +107,7 @@ const Changelog = () => {
 				</li>
 			</ul>
 			<Typography variant='h4' component='h4'>
-				Modifications
+				Updated
 			</Typography>
 			<ul>
 				<li>
@@ -134,6 +134,16 @@ const Changelog = () => {
 				<li>
 					<span className={classes.root}>To fixe</span> Gestion des
 					réservations - Corriger le tri sur client et sur gîte
+				</li>
+				<li>
+					<span className={classes.root}>To fixe</span> Réservations -
+					Afficher le tarif avec le récap avant de valider la
+					réservation
+				</li>
+				<li>
+					<span className={classes.root}>To fixe</span> Gestion des
+					mailers - récupéré les variables pour les gérer
+					dynamiquement.
 				</li>
 			</ul>
 		</AdminHeader>

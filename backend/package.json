@@ -32,6 +32,7 @@
 		"multer": "^1.4.2",
 		"multer-s3": "^2.9.0",
 		"nodemailer": "^6.4.18",
+		"pdfkit": "^0.11.0",
 		"shortid": "^2.2.16",
 		"slugify": "^1.4.6",
 		"string-strip-html": "^7.0.3",

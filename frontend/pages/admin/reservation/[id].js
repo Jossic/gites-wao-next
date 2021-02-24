@@ -254,7 +254,7 @@ const ReservationId = ({ reservation, router }) => {
 								<FormLocation preloadedValues={reservation} />
 							</TabPanel>
 							<TabPanel value={value} index={4}>
-								<FormContrat />
+								<FormContrat preloadedValues={reservation} />
 							</TabPanel>
 						</div>
 					</Paper>

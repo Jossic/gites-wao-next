@@ -12,6 +12,7 @@ import { protect, admin } from '../middleware/authMiddleware.js';
 
 //Public
 router.post('/reservation', createReservation);
+router.post('/reservation/contract/:reservation', createReservation);
 
 //Admin
 router.get('/reservation/count', getNumberOfNewReservation);

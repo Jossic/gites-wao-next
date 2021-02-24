@@ -31,6 +31,7 @@ const reservationSchema = mongoose.Schema(
 		litFait: { type: Boolean, default: false },
 		totalFtLit: { type: Number },
 		totalTfMenage: { type: Number },
+		mtCaution: { type: Number, default: 350 },
 		commentaire: { type: String },
 	},
 	{

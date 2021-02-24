@@ -24,6 +24,8 @@ import FormInfosPratiquesUpdate from '../../../components/admin/forms/gites/Form
 import FormInfosPagesUpdate from '../../../components/admin/forms/gites/FormInfosPagesUpdate';
 import { getCookie } from '../../../actions/authActions';
 import Router from 'next/router';
+import ReceiptIcon from '@material-ui/icons/Receipt';
+import FormInfosContrat from '../../../components/admin/forms/gites/FormInfosContrat';
 
 function TabPanel({ children, value, index, ...other }) {
 	return (
@@ -192,11 +194,11 @@ const GiteId = ({ gite, router, snackbarShowMessage }) => {
 										aria-label='Infos pages/SEO'
 										{...a11yProps(3)}
 									/>
-									{/* <Tab
-										icon={<PageviewIcon />}
-										aria-label='Infos pages/SEO'
-										{...a11yProps(2)}
-									/> */}
+									<Tab
+										icon={<ReceiptIcon />}
+										aria-label='Contrat'
+										{...a11yProps(4)}
+									/>
 								</Tabs>
 							</AppBar>
 							<form onSubmit={handleSubmit(onSubmit)}>
@@ -224,6 +226,13 @@ const GiteId = ({ gite, router, snackbarShowMessage }) => {
 								<TabPanel value={value} index={3}>
 									<FormInfosPagesUpdate
 										classes={classes}
+										preloadedValues={gite}
+										register={register}
+									/>
+								</TabPanel>
+								<TabPanel value={value} index={4}>
+									<FormInfosContrat
+										lasses={classes}
 										preloadedValues={gite}
 										register={register}
 									/>

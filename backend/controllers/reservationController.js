@@ -152,6 +152,7 @@ const createReservation = async (req, res) => {
 		dateRes: Date.now(),
 	});
 
+	reservation.caution = ceGite.caution;
 	litFait && (reservation.totalFtLit = nbPers * ceGite.ftLit);
 
 	reservation.totalTfMenage = ceGite.ftMenage;
@@ -225,6 +226,23 @@ const createReservation = async (req, res) => {
 	sendEmailWithNodemailer(req, res, emailData);
 };
 
+// @desc      Generate a contract
+// @route     GET /api/reservation/contract/:reservation
+// @access    Private/Admin
+const createContract = asyncHandler(async (req, res) => {
+	const reservation = await Reservation.findById(req.params.id);
+	if (reservation) {
+		await reservation.remove();
+		res.json({
+			message: 'Reservation correctement supprimé',
+		});
+	} else {
+		return res.json({
+			error: err,
+		});
+	}
+});
+
 // @desc      Delete a reservation
 // @route     GET /api/reservation
 // @access    Private/Admin
@@ -269,6 +287,7 @@ const updateReservation = asyncHandler(async (req, res) => {
 
 export {
 	createReservation,
+	createContract,
 	getNumberOfNewReservation,
 	getAllReservations,
 	getReservationById,
