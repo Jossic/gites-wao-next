@@ -9,12 +9,12 @@ import { withRouter } from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { updateReservation } from '../../../../actions/reservationActions';
 import { getCookie } from '../../../../actions/authActions';
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import { QuillModules, QuillFormats } from '../../../../util/quill';
 import { withSnackbar } from '../../../HOC/Snackbar';
+import { updateGite } from '../../../../actions/giteActions';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -35,16 +35,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const FormInfosContrat = ({ snackbarShowMessage, preloadedValues }) => {
+const FormInfosContrat = ({ snackbarShowMessage, preloadedValues, router }) => {
 	const token = getCookie('token');
 	const classes = useStyles();
 	const { control, register, handleSubmit } = useForm({
 		defaultValues: preloadedValues,
-	});
-
-	const [values, setValues] = useState({
-		heureArrivee: 'à partir de 17h',
-		heureDepart: 'à partir de 17h',
 	});
 
 	const [loading, setLoading] = useState(false);

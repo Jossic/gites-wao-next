@@ -221,6 +221,11 @@ const updateGite = asyncHandler(async (req, res) => {
 		hauteSaison,
 		noel,
 		nouvelAn,
+		ctDesignationTitre,
+		ctPrincipCarac,
+		ctSituLog,
+		ctDescLog,
+		nbKmDeLaMaison,
 	} = req.body;
 
 	const gite = await Gite.findById(req.params.id);
@@ -270,6 +275,11 @@ const updateGite = asyncHandler(async (req, res) => {
 		hauteSaison && (gite.coefficients.hauteSaison = hauteSaison);
 		noel && (gite.coefficients.noel = noel);
 		nouvelAn && (gite.coefficients.nouvelAn = nouvelAn);
+		ctDesignationTitre && (gite.ctDesignationTitre = ctDesignationTitre);
+		ctPrincipCarac && (gite.ctPrincipCarac = ctPrincipCarac);
+		ctSituLog && (gite.ctSituLog = ctSituLog);
+		ctDescLog && (gite.ctDescLog = ctDescLog);
+		nbKmDeLaMaison && (gite.nbKmDeLaMaison = nbKmDeLaMaison);
 
 		const updatedGite = await gite.save();
 		res.json({
