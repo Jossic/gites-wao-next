@@ -1,7 +1,6 @@
 import { FormControlLabel, Switch, TextField, Button } from '@material-ui/core';
 
 const FormInfosGene = ({ classes, register, preloadedValues }) => {
-	console.log('vite ici vaut', preloadedValues);
 	return (
 		<>
 			<TextField

@@ -46,13 +46,7 @@ class MyDocument extends Document {
 					{/* React Quill CDN */}
 					<link
 						rel='stylesheet'
-						href='node_modules/react-quill/dist/quill.snow.css'
-					/>
-
-					<link
-						rel='stylesheet'
-						href='//cdn.quilljs.com/1.2.6/quill.snow.css'
-					/>
+						href='https://unpkg.com/react-quill@1.3.3/dist/quill.snow.css'></link>
 					{/* <link
 						rel='stylesheet'
 						href='https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css'

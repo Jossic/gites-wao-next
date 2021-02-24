@@ -139,7 +139,7 @@ const giteSchema = mongoose.Schema(
 		ctPrincipCarac: { type: {} },
 		ctSituLog: { type: {} },
 		ctDescLog: { type: {} },
-		ctDureeLoc: { type: {} },
+		nbKmDeLaMaison: { type: Number },
 	},
 	{
 		timestamps: true,
