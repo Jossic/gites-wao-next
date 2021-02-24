@@ -178,19 +178,19 @@ const ReservationId = ({ reservation, router }) => {
 								<TableBody>
 									<TableRow>
 										<TableCell>
-											{reservation.totalAPayer}€
+											{reservation.totalTarifBase}€
 										</TableCell>
 										<TableCell>
-											{reservation.mtSuppl}€
+											{reservation.totalTarifSuppl}€
 										</TableCell>
 										<TableCell>
-											{reservation.mtTaxesDiverses}€
+											{reservation.taxeSejour}€
 										</TableCell>
 										<TableCell>
-											{reservation.ftMenage}€
+											{reservation.totalTfMenage}€
 										</TableCell>
 										<TableCell>
-											{reservation.ftLit}€
+											{reservation.totalFtLit}€
 										</TableCell>
 										<TableCell>
 											{reservation.mtAnimaux}€

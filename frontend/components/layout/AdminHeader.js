@@ -10,6 +10,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import { countNouvelleReservation } from '../../actions/reservationActions';
 import { getUserById } from '../../actions/userActions';
 import Image from 'next/image';
+import PagesIcon from '@material-ui/icons/Pages';
 
 function Alert(props) {
 	return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -280,6 +281,11 @@ const AdminHeader = ({ children }) => {
 							<a className='list-group-item list-group-item-action text-white bg-dark'>
 								<i className='fas fa-user-tag'></i> Gestion des
 								clients
+							</a>
+						</Link>
+						<Link href='/admin/changelog'>
+							<a className='list-group-item list-group-item-action text-white bg-dark'>
+								<PagesIcon /> Changelog
 							</a>
 						</Link>
 					</div>

@@ -132,7 +132,7 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 			label: 'Status',
 			options: {
 				filter: true,
-				sort: false,
+				sort: true,
 			},
 		},
 		{
