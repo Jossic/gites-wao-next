@@ -8,6 +8,8 @@ dayjs.extend(isBetween);
 import Gite from '../models/giteModel.js';
 import sendEmailWithNodemailer from '../utils/email.js';
 import { calculTarifDeBase } from '../utils/calculTarif.js';
+import PDFDocument from 'pdfkit';
+import fs from 'fs';
 
 // @desc      Fetch all reservations
 // @route     GET /api/reservation
@@ -231,16 +233,40 @@ const createReservation = async (req, res) => {
 // @access    Private/Admin
 const createContract = asyncHandler(async (req, res) => {
 	const reservation = await Reservation.findById(req.params.id);
-	if (reservation) {
-		await reservation.remove();
-		res.json({
-			message: 'Reservation correctement supprimé',
-		});
-	} else {
-		return res.json({
-			error: err,
-		});
-	}
+
+	const doc = new PDFDocument();
+
+	doc.pipe(fs.createWriteStream('contract.pdf')); // write to PDF
+	doc.pipe(res); // HTTP response
+	// doc.addPage({
+	// 	margins: {
+	// 		top: 30,
+	// 		bottom: 30,
+	// 		left: 200,
+	// 		right: 200,
+	// 	},
+	// });
+	doc.fontSize(10);
+	doc.text('My Sample PDF Document - Page 1', {
+		width: 300,
+		align: 'left',
+	});
+	doc.moveDown();
+	doc.text('My Sample PDF Document - Page 1', {
+		width: 300,
+		align: 'left',
+	});
+	doc.rect(doc.x, 0, 410, doc.y).stroke();
+
+	doc.addPage();
+
+	doc.text('My Sample PDF Document - Page 2');
+
+	doc.end();
+
+	// res.json({
+	// 	message: 'Ok !!!',
+	// });
 });
 
 // @desc      Delete a reservation

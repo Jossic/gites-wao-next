@@ -31,6 +31,10 @@ const Changelog = () => {
 					forme des pages du site partie visible par le client
 				</li>
 				<li>
+					<span className={classes.root}>Unreleased</span> Update
+					reservation controller et gérer les remises
+				</li>
+				<li>
 					<span className={classes.root}>Unreleased</span> Permettre
 					d'ajouter un tri sur les photos (par page et par section)
 				</li>
@@ -82,6 +86,11 @@ const Changelog = () => {
 				New functionnality
 			</Typography>
 			<ul>
+				<li>
+					<span className={classes.root}>Added</span> 24/02/2020 -
+					21:46 - Dans la partie gîte, ajout d'un 5eme onglet pour
+					ajouter certaines informations personnalisées sur le contrat
+				</li>
 				<li>
 					<span className={classes.root}>Added</span> Partie gestion
 					des utilisateurs, création, modification, suppression.

@@ -4,6 +4,7 @@ import {
 	getAllReservations,
 	getReservationById,
 	createReservation,
+	createContract,
 	removeReservation,
 	updateReservation,
 	getNumberOfNewReservation,
@@ -12,7 +13,12 @@ import { protect, admin } from '../middleware/authMiddleware.js';
 
 //Public
 router.post('/reservation', createReservation);
-router.post('/reservation/contract/:reservation', createReservation);
+router.post(
+	'/reservation/contract/:reservation',
+	protect,
+	admin,
+	createContract
+);
 
 //Admin
 router.get('/reservation/count', getNumberOfNewReservation);

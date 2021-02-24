@@ -15,6 +15,21 @@ export const createReservation = (reservation) => {
 		})
 		.catch((err) => console.log(err));
 };
+export const createContract = (reservation, client, token) => {
+	console.log('dans action createContract', reservation);
+	return fetch(`${API}/reservation/contract/:reservation`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify([reservation, client]),
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
 
 export const listAllReservations = (token) => {
 	return fetch(`${API}/reservation`, {

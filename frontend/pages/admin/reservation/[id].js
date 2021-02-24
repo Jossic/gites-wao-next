@@ -1,7 +1,11 @@
 import AdminHeader from '../../../components/layout/AdminHeader';
 import Admin from '../../../components/auth/Admin';
 import { withRouter } from 'next/router';
-import { listeOneReservation } from '../../../actions/reservationActions';
+import {
+	createContract,
+	listeOneReservation,
+} from '../../../actions/reservationActions';
+import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -32,9 +36,11 @@ import FormLocation from '../../../components/admin/forms/reservation/FormLocati
 import FormPaiements from '../../../components/admin/forms/reservation/FormPaiements';
 import FormContrat from '../../../components/admin/forms/reservation/FormContrat';
 import { useEffect, useState } from 'react';
+import { withSnackbar } from '../../../components/HOC/Snackbar';
 import { getCookie } from '../../../actions/authActions';
 import { getClientById } from '../../../actions/clientActions';
 import Link from 'next/link';
+import Router from 'next/router';
 
 function TabPanel({ children, value, index, ...other }) {
 	return (
@@ -75,13 +81,17 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ReservationId = ({ reservation, router }) => {
+const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 	const classes = useStyles();
+	const token = getCookie('token');
 	const [value, setValue] = useState(0);
 
 	const [client, setClient] = useState({});
+	const [loading, setLoading] = useState(false);
 
-	const token = getCookie('token');
+	const { control, register, handleSubmit } = useForm({
+		defaultValues: reservation,
+	});
 
 	const listerUnClient = () => {
 		getClientById(reservation.client, token).then((data) => {
@@ -97,8 +107,43 @@ const ReservationId = ({ reservation, router }) => {
 		listerUnClient();
 	}, []);
 
+	const generateContract = () => {
+		setLoading(true);
+		createContract(reservation, client, token).then((result) => {
+			console.log('result', result);
+			if (result.error) {
+				setLoading(false);
+				snackbarShowMessage(`${result.error}`);
+			} else {
+				setLoading(false);
+				snackbarShowMessage(`${result.message}`, 'success');
+				// setTimeout(() => {
+				// 	Router.reload();
+				// }, 3000);
+			}
+		});
+	};
+
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
+	};
+
+	const onSubmit = async (data) => {
+		console.log(data);
+		setLoading(true);
+		updateGite(data, router.query.id, token).then((result) => {
+			console.log('result', result);
+			if (result.error) {
+				setLoading(false);
+				snackbarShowMessage(`${result.error}`);
+			} else {
+				setLoading(false);
+				snackbarShowMessage(`${result.message}`, 'success');
+				setTimeout(() => {
+					Router.reload();
+				}, 3000);
+			}
+		});
 	};
 
 	return (
@@ -131,7 +176,9 @@ const ReservationId = ({ reservation, router }) => {
 								variant='contained'
 								color='secondary'
 								aria-label='contained primary button group'>
-								<Button>Générer Contrat</Button>
+								<Button onClick={generateContract}>
+									Générer Contrat
+								</Button>
 								<Button>Générer Facture</Button>
 								<Button>Mail plateforme</Button>
 								<Button>Demander paiement</Button>
@@ -241,46 +288,29 @@ const ReservationId = ({ reservation, router }) => {
 									/>
 								</Tabs>
 							</AppBar>
-							<TabPanel value={value} index={0}>
-								<FormStatus preloadedValues={reservation} />
-							</TabPanel>
-							<TabPanel value={value} index={1}>
-								<FormPaiements />
-							</TabPanel>
-							<TabPanel value={value} index={2}>
-								<FormClient preloadedValues={client} />
-							</TabPanel>
-							<TabPanel value={value} index={3}>
-								<FormLocation preloadedValues={reservation} />
-							</TabPanel>
-							<TabPanel value={value} index={4}>
-								<FormContrat preloadedValues={reservation} />
-							</TabPanel>
+							<form onSubmit={handleSubmit(onSubmit)}>
+								<TabPanel value={value} index={0}>
+									<FormStatus preloadedValues={reservation} />
+								</TabPanel>
+								<TabPanel value={value} index={1}>
+									<FormPaiements />
+								</TabPanel>
+								<TabPanel value={value} index={2}>
+									<FormClient preloadedValues={client} />
+								</TabPanel>
+								<TabPanel value={value} index={3}>
+									<FormLocation
+										preloadedValues={reservation}
+									/>
+								</TabPanel>
+								<TabPanel value={value} index={4}>
+									<FormContrat
+										preloadedValues={reservation}
+									/>
+								</TabPanel>
+							</form>
 						</div>
 					</Paper>
-
-					{/* 					
-					{success && (
-						<Snackbar
-							open={open}
-							autoHideDuration={6000}
-							onClose={handleClose}>
-							<Alert onClose={handleClose} severity='success'>
-								{text}
-							</Alert>
-						</Snackbar>
-					)}
-					{loading && <CircularProgress />}
-					{error && (
-						<Snackbar
-							open={open}
-							autoHideDuration={6000}
-							onClose={handleClose}>
-							<Alert onClose={handleClose} severity='error'>
-								{error}
-							</Alert>
-						</Snackbar>
-					)} */}
 				</Admin>
 			</AdminHeader>
 		</>
@@ -300,4 +330,4 @@ export async function getServerSideProps(context) {
 	};
 }
 
-export default withRouter(ReservationId);
+export default withRouter(withSnackbar(ReservationId));
