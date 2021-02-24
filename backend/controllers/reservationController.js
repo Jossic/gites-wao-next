@@ -233,34 +233,36 @@ const createReservation = async (req, res) => {
 // @access    Private/Admin
 const createContract = asyncHandler(async (req, res) => {
 	const reservation = await Reservation.findById(req.params.id);
-
+	// console.log(req.body);
 	const doc = new PDFDocument();
 
-	doc.pipe(fs.createWriteStream('contract.pdf')); // write to PDF
+	const date = Date.now();
+	doc.pipe(fs.createWriteStream(`contract-${date}.pdf`)); // write to PDF
 	doc.pipe(res); // HTTP response
-	// doc.addPage({
-	// 	margins: {
-	// 		top: 30,
-	// 		bottom: 30,
-	// 		left: 200,
-	// 		right: 200,
-	// 	},
-	// });
+
 	doc.fontSize(10);
-	doc.text('My Sample PDF Document - Page 1', {
-		width: 300,
-		align: 'left',
+	doc.text(`Entre la société : Siège social`, 16, 82, {
+		align: 'center',
+		width: 253,
 	});
-	doc.moveDown();
-	doc.text('My Sample PDF Document - Page 1', {
-		width: 300,
-		align: 'left',
+	doc.text(`SAS WAO`, {
+		align: 'center',
+		width: 253,
 	});
-	doc.rect(doc.x, 0, 410, doc.y).stroke();
+	doc.text(`1 Route de Nouart`, {
+		align: 'center',
+		width: 253,
+	});
+	doc.text(`08240 Fossé, FRANCE`, {
+		align: 'center',
+		width: 253,
+	});
+	doc.rect(15, 80, 253, 118).stroke();
+	doc.fill('grey');
 
-	doc.addPage();
-
-	doc.text('My Sample PDF Document - Page 2');
+	doc.rect(340, 80, 253, 118).stroke();
+	doc.fill('grey');
+	// doc.addPage();
 
 	doc.end();
 
