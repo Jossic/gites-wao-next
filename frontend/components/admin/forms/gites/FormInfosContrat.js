@@ -1,31 +1,12 @@
-import {
-	Button,
-	Checkbox,
-	CircularProgress,
-	FormControl,
-	FormControlLabel,
-	FormGroup,
-	FormLabel,
-	Grid,
-	InputLabel,
-	MenuItem,
-	Select,
-	Snackbar,
-	Switch,
-	TextareaAutosize,
-	TextField,
-} from '@material-ui/core';
+import { Button, CircularProgress, FormControl } from '@material-ui/core';
 import { withRouter } from 'next/router';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import MuiAlert from '@material-ui/lab/Alert';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { updateReservation } from '../../../../actions/reservationActions';
 import { getCookie } from '../../../../actions/authActions';
-
-function Alert(props) {
-	return <MuiAlert elevation={6} variant='filled' {...props} />;
-}
+import dynamic from 'next/dynamic';
+const Editor = dynamic(() => import('../../Editor'), { ssr: false });
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -44,7 +25,19 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const FormContrat = ({ preloadedValues }) => {
+const FormInfosContrat = ({ preloadedValues }) => {
+	const editorRef = useRef();
+	const [isEditorLoaded, setIsEditorLoaded] = useState(false);
+	const { CKEditor, ClassicEditor } = editorRef.current || {};
+
+	useEffect(() => {
+		editorRef.current = {
+			CKEditor: require('@ckeditor/ckeditor5-react'),
+			ClassicEditor: require('@ckeditor/ckeditor5-build-classic'),
+		};
+		setIsEditorLoaded(true);
+	}, []);
+
 	console.log(preloadedValues);
 	const token = getCookie('token');
 	const classes = useStyles();
@@ -85,145 +78,145 @@ const FormContrat = ({ preloadedValues }) => {
 	return (
 		<>
 			{loading && <CircularProgress />}
-			{success && (
-				<Snackbar
-					open={open}
-					autoHideDuration={6000}
-					onClose={handleClose}>
-					<Alert onClose={handleClose} severity='success'>
-						{message}
-					</Alert>
-				</Snackbar>
-			)}
-			{error && (
-				<Snackbar
-					open={open}
-					autoHideDuration={6000}
-					onClose={handleClose}>
-					<Alert onClose={handleClose} severity='error'>
-						{error}
-					</Alert>
-				</Snackbar>
-			)}
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<Grid container justify='space-around'>
-					<TextField
-						inputRef={register}
-						name='totalTarifBase'
-						id='standard-number'
-						label='Montant de la réservation (sans suppl.)'
-						type='number'
-						InputLabelProps={{
-							shrink: true,
-						}}
-					/>
-				</Grid>
-				<Grid container justify='space-around'>
-					<TextField
-						inputRef={register}
-						name='remise'
-						id='standard-number'
-						label='Remise ou supplément (en €)'
-						type='number'
-						InputLabelProps={{
-							shrink: true,
-						}}
-					/>
-					<FormControl className={classes.formControl}>
-						<InputLabel
-							shrink
-							id='demo-simple-select-placeholder-label-label'>
-							Motif de la remise
-						</InputLabel>
-						<Controller
-							control={control}
-							name='heureArrivee'
-							defaultValue='Aucune remise'
-							as={
-								<Select id='heureArrivee-select'>
-									<MenuItem value='Aucune remise'>
-										Aucune remise
-									</MenuItem>
-									<MenuItem value='Remise exceptionnelle'>
-										Remise exceptionnelle
-									</MenuItem>
-									<MenuItem value='Remise pour plusieurs séjours'>
-										Remise pour plusieurs séjours
-									</MenuItem>
-									<MenuItem value='Remise pour enfants'>
-										Remise pour enfants
-									</MenuItem>
-									<MenuItem value='Ménage offert'>
-										Ménage offert
-									</MenuItem>
-									<MenuItem value='Ménage offert et remise enfant(s)'>
-										Ménage offert et remise enfant(s)
-									</MenuItem>
-									<MenuItem value='Ménage offert et chien(s) gratuit(s)'>
-										Ménage offert et chien(s) gratuit(s)
-									</MenuItem>
-									<MenuItem value='Chien(s) gratuit(s)'>
-										Chien(s) gratuit(s)
-									</MenuItem>
-									<MenuItem value='Remise fidélité'>
-										Remise fidélité
-									</MenuItem>
-									<MenuItem value='Ajustement taxes diverses'>
-										Ajustement taxes diverses
-									</MenuItem>
-									<MenuItem value='Complément pour arrivée en matinée'>
-										Complément pour arrivée en matinée
-									</MenuItem>
-									<MenuItem value='Remise diverse'>
-										Remise diverse
-									</MenuItem>
-									<MenuItem value='Ajout divers'>
-										Ajout divers
-									</MenuItem>
-									<MenuItem value='Complément'>
-										Complément
-									</MenuItem>
-									<MenuItem value='Offre spéciale'>
-										Offre spéciale
-									</MenuItem>
-								</Select>
-							}
-						/>
-					</FormControl>
-				</Grid>
 
-				<Grid container justify='space-around'>
-					<TextField
-						inputRef={register}
-						name='taxeSejour'
-						id='standard-number'
-						label='Montant des taxes diverses'
-						type='number'
-						InputLabelProps={{
-							shrink: true,
-						}}
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<FormControl className={classes.formControl}>
+					<Controller
+						style={{ paddingTop: '60px', minHeight: '300px' }}
+						as={Editor}
+						control={control}
+						name='ctDesignationTitre'
+						placeholder='Corps du mail ici...'
 					/>
-					<TextField
-						inputRef={register}
-						name='totalTarifSuppl'
-						id='standard-number'
-						label='Montant total suppl. /nuit/pers'
-						type='number'
-						InputLabelProps={{
-							shrink: true,
-						}}
+				</FormControl>
+				<FormControl className={classes.formControl}>
+					<Controller
+						style={{ paddingTop: '60px', minHeight: '300px' }}
+						as={Editor}
+						control={control}
+						name='ctPrincipCarac'
+						placeholder='Corps du mail ici...'
 					/>
-					<TextField
-						inputRef={register}
-						name='mtCaution'
-						id='standard-number'
-						label='Montant de la caution'
-						type='number'
-						InputLabelProps={{
-							shrink: true,
-						}}
+				</FormControl>
+				<FormControl className={classes.formControl}>
+					<Controller
+						style={{ paddingTop: '60px', minHeight: '300px' }}
+						as={Editor}
+						control={control}
+						name='ctSituLog'
+						placeholder='Corps du mail ici...'
 					/>
-				</Grid>
+				</FormControl>
+				<FormControl className={classes.formControl}>
+					<Controller
+						style={{ paddingTop: '60px', minHeight: '300px' }}
+						as={Editor}
+						control={control}
+						name='ctDescLog'
+						placeholder='Corps du mail ici...'
+					/>
+				</FormControl>
+				<FormControl className={classes.formControl}>
+					<Controller
+						style={{ paddingTop: '60px', minHeight: '300px' }}
+						as={Editor}
+						control={control}
+						name='ctDureeLoc'
+						placeholder='Corps du mail ici...'
+					/>
+				</FormControl>
+				{/* <Editor value='' onChange={(v) => console.log(v)} /> */}
+
+				{/* <CKEditor
+					editor={ClassicEditor}
+					data='<p>Hello from CKEditor 5!</p>'
+					onReady={(editor) => {
+						// You can store the "editor" and use when it is needed.
+						console.log('Editor is ready to use!', editor);
+					}}
+					onChange={(event, editor) => {
+						const data = editor.getData();
+						console.log({ event, editor, data });
+					}}
+					onBlur={(event, editor) => {
+						console.log('Blur.', editor);
+					}}
+					onFocus={(event, editor) => {
+						console.log('Focus.', editor);
+					}}
+				/>
+				<CKEditor
+					editor={ClassicEditor}
+					data='<p>Hello from CKEditor 5!</p>'
+					onReady={(editor) => {
+						// You can store the "editor" and use when it is needed.
+						console.log('Editor is ready to use!', editor);
+					}}
+					onChange={(event, editor) => {
+						const data = editor.getData();
+						console.log({ event, editor, data });
+					}}
+					onBlur={(event, editor) => {
+						console.log('Blur.', editor);
+					}}
+					onFocus={(event, editor) => {
+						console.log('Focus.', editor);
+					}}
+				/>
+				<CKEditor
+					editor={ClassicEditor}
+					data='<p>Hello from CKEditor 5!</p>'
+					onReady={(editor) => {
+						// You can store the "editor" and use when it is needed.
+						console.log('Editor is ready to use!', editor);
+					}}
+					onChange={(event, editor) => {
+						const data = editor.getData();
+						console.log({ event, editor, data });
+					}}
+					onBlur={(event, editor) => {
+						console.log('Blur.', editor);
+					}}
+					onFocus={(event, editor) => {
+						console.log('Focus.', editor);
+					}}
+				/>
+				<CKEditor
+					editor={ClassicEditor}
+					data='<p>Hello from CKEditor 5!</p>'
+					onReady={(editor) => {
+						// You can store the "editor" and use when it is needed.
+						console.log('Editor is ready to use!', editor);
+					}}
+					onChange={(event, editor) => {
+						const data = editor.getData();
+						console.log({ event, editor, data });
+					}}
+					onBlur={(event, editor) => {
+						console.log('Blur.', editor);
+					}}
+					onFocus={(event, editor) => {
+						console.log('Focus.', editor);
+					}}
+				/>
+				<CKEditor
+					editor={ClassicEditor}
+					data='<p>Hello from CKEditor 5!</p>'
+					onReady={(editor) => {
+						// You can store the "editor" and use when it is needed.
+						console.log('Editor is ready to use!', editor);
+					}}
+					onChange={(event, editor) => {
+						const data = editor.getData();
+						console.log({ event, editor, data });
+					}}
+					onBlur={(event, editor) => {
+						console.log('Blur.', editor);
+					}}
+					onFocus={(event, editor) => {
+						console.log('Focus.', editor);
+					}}
+				/> */}
 				<Button
 					type='submit'
 					variant='contained'
@@ -236,4 +229,4 @@ const FormContrat = ({ preloadedValues }) => {
 	);
 };
 
-export default withRouter(FormContrat);
+export default withRouter(FormInfosContrat);

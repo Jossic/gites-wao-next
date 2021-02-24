@@ -1,4 +1,10 @@
 {
+  "../../Editor": [
+    {
+      "id": "./components/admin/Editor.js",
+      "file": "static/chunks/1.js"
+    }
+  ],
   "./dev/noop": [
     {
       "id": "./node_modules/next/dist/client/dev/noop.js",

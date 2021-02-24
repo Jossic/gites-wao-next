@@ -19,6 +19,14 @@ const giteSchema = mongoose.Schema(
 		capaciteMax: {
 			type: Number,
 		},
+		RIB: {
+			IBAN: {
+				type: String,
+				default: 'FR76 1020 6084 0398 3877 2925 093',
+			},
+			BIC: { type: String, default: 'AGRIFRPP802' },
+			TITULAIRE: { type: String, default: 'SAS WAO' },
+		},
 		actif: {
 			type: Boolean,
 			default: false,
@@ -126,6 +134,12 @@ const giteSchema = mongoose.Schema(
 			noel: { type: Number, default: 670 },
 			nouvelAn: { type: Number, default: 200 },
 		},
+		//Elements du contrat
+		ctDesignationTitre: { type: String },
+		ctPrincipCarac: { type: {} },
+		ctSituLog: { type: {} },
+		ctDescLog: { type: {} },
+		ctDureeLoc: { type: {} },
 	},
 	{
 		timestamps: true,
