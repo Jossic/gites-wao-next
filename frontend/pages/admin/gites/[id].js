@@ -99,7 +99,7 @@ const GiteId = ({ gite, router, snackbarShowMessage }) => {
 	};
 
 	const onSubmit = async (data) => {
-		console.log(data);
+		// console.log(data);
 		setLoading(true);
 		updateGite(data, router.query.id, token).then((result) => {
 			console.log('result', result);
@@ -109,9 +109,9 @@ const GiteId = ({ gite, router, snackbarShowMessage }) => {
 			} else {
 				setLoading(false);
 				snackbarShowMessage(`${result.message}`, 'success');
-				setTimeout(() => {
-					Router.reload();
-				}, 3000);
+				// setTimeout(() => {
+				// 	Router.reload();
+				// }, 3000);
 			}
 		});
 	};

@@ -45,7 +45,7 @@ const FormInfosContrat = ({ snackbarShowMessage, preloadedValues, router }) => {
 	const [loading, setLoading] = useState(false);
 
 	const onSubmit = async (data) => {
-		console.log(data);
+		console.log('data vaut', data);
 		setLoading(true);
 		updateGite(data, router.query.id, token).then((result) => {
 			if (result.error) {
@@ -76,12 +76,31 @@ const FormInfosContrat = ({ snackbarShowMessage, preloadedValues, router }) => {
 						}}
 					/>
 				</FormControl>
+				<InputLabel style={{ margin: '20px 10px 10px 15px' }}>
+					Partie principales caractéristiques de la ségination des
+					lieux
+				</InputLabel>
 				<FormControl className={classes.formControl}>
-					<InputLabel>
-						Partie principales caractéristiques de la ségination des
-						lieux
-					</InputLabel>
 					<Controller
+						control={control}
+						style={{ paddingTop: '60px', minHeight: '300px' }}
+						name='ctPrincipCarac'
+						render={({ onChange, onBlur, value }) => (
+							<ReactQuill
+								theme='snow'
+								modules={QuillModules}
+								formats={QuillFormats}
+								onChange={(
+									description,
+									delta,
+									source,
+									editor
+								) => onChange(editor.getContents())}
+								value={value || ''}
+							/>
+						)}
+					/>
+					{/* <Controller
 						style={{ paddingTop: '60px', minHeight: '300px' }}
 						as={ReactQuill}
 						control={control}
@@ -89,11 +108,34 @@ const FormInfosContrat = ({ snackbarShowMessage, preloadedValues, router }) => {
 						placeholder='Corps du mail ici...'
 						modules={QuillModules}
 						formats={QuillFormats}
-					/>
+					/> */}
 				</FormControl>
+				{/* // Haut droit bas gauche */}
+				<InputLabel style={{ margin: '20px 10px 10px 15px' }}>
+					Partie situation du logement
+				</InputLabel>
 				<FormControl className={classes.formControl}>
-					<InputLabel>Partie situation du logement</InputLabel>
 					<Controller
+						control={control}
+						style={{ paddingTop: '60px', minHeight: '300px' }}
+						name='ctSituLog'
+						render={({ onChange, onBlur, value }) => (
+							<ReactQuill
+								theme='snow'
+								modules={QuillModules}
+								formats={QuillFormats}
+								onChange={(
+									description,
+									delta,
+									source,
+									editor
+								) => onChange(editor.getContents())}
+								value={value || ''}
+							/>
+						)}
+					/>
+
+					{/* <Controller
 						style={{ paddingTop: '60px', minHeight: '300px' }}
 						as={ReactQuill}
 						control={control}
@@ -101,11 +143,32 @@ const FormInfosContrat = ({ snackbarShowMessage, preloadedValues, router }) => {
 						placeholder='Corps du mail ici...'
 						modules={QuillModules}
 						formats={QuillFormats}
-					/>
+					/> */}
 				</FormControl>
+				<InputLabel style={{ margin: '20px 10px 10px 15px' }}>
+					Partie descriptif du logement{' '}
+				</InputLabel>
 				<FormControl className={classes.formControl}>
-					<InputLabel>Partie descriptif du logement </InputLabel>
 					<Controller
+						control={control}
+						style={{ paddingTop: '60px', minHeight: '300px' }}
+						name='ctDescLog'
+						render={({ onChange, onBlur, value }) => (
+							<ReactQuill
+								theme='snow'
+								modules={QuillModules}
+								formats={QuillFormats}
+								onChange={(
+									description,
+									delta,
+									source,
+									editor
+								) => onChange(editor.getContents())}
+								value={value || ''}
+							/>
+						)}
+					/>
+					{/* <Controller
 						style={{ paddingTop: '60px', minHeight: '300px' }}
 						as={ReactQuill}
 						control={control}
@@ -113,7 +176,7 @@ const FormInfosContrat = ({ snackbarShowMessage, preloadedValues, router }) => {
 						placeholder='Corps du mail ici...'
 						modules={QuillModules}
 						formats={QuillFormats}
-					/>
+					/> */}
 				</FormControl>
 				<TextField
 					className={classes.textField}
