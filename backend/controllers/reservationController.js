@@ -11,6 +11,7 @@ import { calculTarifDeBase } from '../utils/calculTarif.js';
 import PDFDocument from 'pdfkit';
 import fs from 'fs';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
+import puppeteer from 'puppeteer';
 
 // @desc      Fetch all reservations
 // @route     GET /api/reservation
@@ -233,6 +234,39 @@ const createReservation = async (req, res) => {
 // @route     GET /api/reservation/contract/:reservation
 // @access    Private/Admin
 const createContract = asyncHandler(async (req, res) => {
+	const date = Date.now();
+	const { _id } = req.body;
+	console.log(_id);
+	(async () => {
+		const browser = await puppeteer.launch();
+		const page = await browser.newPage();
+		await page.goto(
+			`http://localhost:3000/admin/reservation/${_id}/contract`,
+			{
+				waitUntil: 'networkidle2',
+			}
+		);
+		await page.pdf({
+			path: `contract-${date}.pdf`,
+			format: 'A4',
+			printBackground: true,
+		});
+
+		await browser.close();
+	})();
+
+	// const browser = await puppeteer.launch();
+	// console.log('browser ok');
+	// const page = await browser.newPage();
+	// console.log('page ok');
+	// await page.goto(
+	// 	'http://localhost:3000/admin/reservation/60357e3e41545848acd00d01/contract'
+	// );
+	// console.log('goto ok');
+	// await page.pdf({ path: `contract-${date}.pdf`, format: 'A4' });
+	// console.log('pdf ok');
+	// await browser.close();
+
 	// 	const {
 	// 		nbChien,
 	// 		mtAnimaux,

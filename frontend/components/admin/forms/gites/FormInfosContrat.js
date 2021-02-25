@@ -76,12 +76,13 @@ const FormInfosContrat = ({ snackbarShowMessage, preloadedValues, router }) => {
 						}}
 					/>
 				</FormControl>
-				<InputLabel style={{ margin: '20px 10px 10px 15px' }}>
-					Partie principales caractéristiques de la ségination des
-					lieux
-				</InputLabel>
 				<FormControl className={classes.formControl}>
-					<Controller
+					<InputLabel style={{ margin: '20px 10px 10px 15px' }}>
+						Partie principales caractéristiques de la ségination des
+						lieux
+					</InputLabel>
+					{/* // Utilisation avec les deltas
+					 <Controller
 						control={control}
 						style={{ paddingTop: '60px', minHeight: '300px' }}
 						name='ctPrincipCarac'
@@ -99,8 +100,8 @@ const FormInfosContrat = ({ snackbarShowMessage, preloadedValues, router }) => {
 								value={value || ''}
 							/>
 						)}
-					/>
-					{/* <Controller
+					/> */}
+					<Controller
 						style={{ paddingTop: '60px', minHeight: '300px' }}
 						as={ReactQuill}
 						control={control}
@@ -108,14 +109,14 @@ const FormInfosContrat = ({ snackbarShowMessage, preloadedValues, router }) => {
 						placeholder='Corps du mail ici...'
 						modules={QuillModules}
 						formats={QuillFormats}
-					/> */}
+					/>
 				</FormControl>
 				{/* // Haut droit bas gauche */}
-				<InputLabel style={{ margin: '20px 10px 10px 15px' }}>
-					Partie situation du logement
-				</InputLabel>
 				<FormControl className={classes.formControl}>
-					<Controller
+					<InputLabel style={{ margin: '20px 10px 10px 15px' }}>
+						Partie situation du logement
+					</InputLabel>
+					{/* <Controller
 						control={control}
 						style={{ paddingTop: '60px', minHeight: '300px' }}
 						name='ctSituLog'
@@ -133,9 +134,9 @@ const FormInfosContrat = ({ snackbarShowMessage, preloadedValues, router }) => {
 								value={value || ''}
 							/>
 						)}
-					/>
+					/> */}
 
-					{/* <Controller
+					<Controller
 						style={{ paddingTop: '60px', minHeight: '300px' }}
 						as={ReactQuill}
 						control={control}
@@ -143,13 +144,13 @@ const FormInfosContrat = ({ snackbarShowMessage, preloadedValues, router }) => {
 						placeholder='Corps du mail ici...'
 						modules={QuillModules}
 						formats={QuillFormats}
-					/> */}
+					/>
 				</FormControl>
-				<InputLabel style={{ margin: '20px 10px 10px 15px' }}>
-					Partie descriptif du logement{' '}
-				</InputLabel>
 				<FormControl className={classes.formControl}>
-					<Controller
+					<InputLabel style={{ margin: '20px 10px 10px 15px' }}>
+						Partie descriptif du logement{' '}
+					</InputLabel>
+					{/* <Controller
 						control={control}
 						style={{ paddingTop: '60px', minHeight: '300px' }}
 						name='ctDescLog'
@@ -167,8 +168,8 @@ const FormInfosContrat = ({ snackbarShowMessage, preloadedValues, router }) => {
 								value={value || ''}
 							/>
 						)}
-					/>
-					{/* <Controller
+					/> */}
+					<Controller
 						style={{ paddingTop: '60px', minHeight: '300px' }}
 						as={ReactQuill}
 						control={control}
@@ -176,7 +177,7 @@ const FormInfosContrat = ({ snackbarShowMessage, preloadedValues, router }) => {
 						placeholder='Corps du mail ici...'
 						modules={QuillModules}
 						formats={QuillFormats}
-					/> */}
+					/>
 				</FormControl>
 				<TextField
 					className={classes.textField}

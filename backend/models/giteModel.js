@@ -99,6 +99,9 @@ const giteSchema = mongoose.Schema(
 		bandeau: {
 			type: String,
 		},
+		vignetteLink: {
+			type: String,
+		},
 
 		//Elements calcul du tarif
 		tarifDeBase: {

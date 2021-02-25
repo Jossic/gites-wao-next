@@ -37,6 +37,16 @@ export const getClientById = (id, token) => {
 		.catch((err) => console.log(err));
 };
 
+export const afficheClient = (id) => {
+	return fetch(`${API}/client/${id}`, {
+		method: 'GET',
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
 export const removeClient = (id, token) => {
 	return fetch(`${API}/client/${id}`, {
 		method: 'DELETE',

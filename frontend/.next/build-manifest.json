@@ -24,15 +24,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/admin.js"
-    ],
     "/admin/reservation/[id]": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
       "static/chunks/pages/admin/reservation/[id].js"
+    ],
+    "/admin/reservation/[id]/contract": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/admin/reservation/[id]/contract.js"
     ]
   },
   "ampFirstPages": []

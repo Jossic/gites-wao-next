@@ -3,5 +3,5 @@
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
   "/admin/reservation/[id]": "pages/admin/reservation/[id].js",
-  "/admin": "pages/admin.js"
+  "/admin/reservation/[id]/contract": "pages/admin/reservation/[id]/contract.js"
 }

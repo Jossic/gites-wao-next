@@ -15,15 +15,15 @@ export const createReservation = (reservation) => {
 		})
 		.catch((err) => console.log(err));
 };
-export const createContract = (reservation, client, token) => {
+export const createContract = (reservation) => {
 	console.log('dans action createContract', reservation);
 	return fetch(`${API}/reservation/contract/:reservation`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: `Bearer ${token}`,
+			// Authorization: `Bearer ${token}`,
 		},
-		body: JSON.stringify({ reservation, client }),
+		body: JSON.stringify(reservation),
 	})
 		.then((response) => {
 			return response.json();
@@ -60,6 +60,16 @@ export const listeOneReservation = (id, token) => {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
+export const afficheReservation = (id) => {
+	return fetch(`${API}/reservation/${id}/contract`, {
+		method: 'GET',
 	})
 		.then((response) => {
 			return response.json();

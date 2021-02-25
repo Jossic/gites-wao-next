@@ -11,6 +11,7 @@ import { protect, admin } from '../middleware/authMiddleware.js';
 
 //Public
 // router.post('/client', createClient); //Inutile car créé avec reservation
+router.get('/client/:id', getClientById);
 
 //Admin
 router.get('/client', protect, admin, getAllClients);
