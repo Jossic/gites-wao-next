@@ -510,24 +510,28 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 						name='civilite'
 						as={
 							<Select id='civilite-select'>
-								<MenuItem value='mmme'>M. & Mme</MenuItem>
-								<MenuItem value='mme'>Mme</MenuItem>
-								<MenuItem value='mlle'>Mlle</MenuItem>
-								<MenuItem value='m'>M.</MenuItem>
-								<MenuItem value='asso'>Association</MenuItem>
-								<MenuItem value='ce'>
+								<MenuItem value='M. & Mme'>M. & Mme</MenuItem>
+								<MenuItem value='Mme'>Mme</MenuItem>
+								<MenuItem value='Mlle'>Mlle</MenuItem>
+								<MenuItem value='M.'>M.</MenuItem>
+								<MenuItem value='Association'>
+									Association
+								</MenuItem>
+								<MenuItem value="Comité d'entreprise">
 									Comité d'entreprise
 								</MenuItem>
-								<MenuItem value='soc'>Société</MenuItem>
-								<MenuItem value='entr'>Entreprise</MenuItem>
-								<MenuItem value='foyervie'>
+								<MenuItem value='Société'>Société</MenuItem>
+								<MenuItem value='Entreprise'>
+									Entreprise
+								</MenuItem>
+								<MenuItem value='Foyer de vie'>
 									Foyer de vie
 								</MenuItem>
-								<MenuItem value='foyeracc'>
+								<MenuItem value="Foyer d'accueil">
 									Foyer d'accueil
 								</MenuItem>
-								<MenuItem value='famil'>Famille</MenuItem>
-								<MenuItem value='autre'>Autres</MenuItem>
+								<MenuItem value='Famille'>Famille</MenuItem>
+								<MenuItem value='Autres'>Autres</MenuItem>
 							</Select>
 						}
 					/>

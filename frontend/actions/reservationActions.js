@@ -23,7 +23,7 @@ export const createContract = (reservation, client, token) => {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`,
 		},
-		body: JSON.stringify([reservation, client]),
+		body: JSON.stringify({ reservation, client }),
 	})
 		.then((response) => {
 			return response.json();
