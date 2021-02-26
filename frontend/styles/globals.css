@@ -17,6 +17,21 @@ a {
 
 .ql-editor {
 	min-height: 250px;
+	line-height: 1.42;
+}
+
+.editor :first-child {
+	padding-top: 0px;
+}
+
+.editor p {
+	margin: 0;
+	font-size: 14px;
+}
+.editor h1,
+.editor h2,
+.editor h3 {
+	padding-top: 16px;
 }
 
 #nprogress .bar {

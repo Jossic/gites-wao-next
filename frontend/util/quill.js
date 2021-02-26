@@ -1,4 +1,7 @@
 export const QuillModules = {
+	clipboard: {
+		matchVisual: false,
+	},
 	toolbar: [
 		[
 			// { header: '1' },
@@ -6,7 +9,7 @@ export const QuillModules = {
 			{ header: [1, 2, 3, 4, 5, 6] },
 			{ font: [] },
 		],
-		[{ size: [8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30] }],
+		[{ size: ['small', false, 'large', 'huge'] }],
 		[{ color: ['black', 'white', 'red', 'blue', 'green', 'yellow'] }],
 		['bold', 'italic', 'underline', 'strike', 'blockquote'],
 		[{ list: 'ordered' }, { list: 'bullet' }],

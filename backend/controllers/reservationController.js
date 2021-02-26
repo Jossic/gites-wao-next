@@ -235,6 +235,7 @@ const createReservation = async (req, res) => {
 // @access    Private/Admin
 const createContract = asyncHandler(async (req, res) => {
 	const date = Date.now();
+	const DELTA = 0.27;
 	const { _id } = req.body;
 	console.log(_id);
 	(async () => {
@@ -250,6 +251,9 @@ const createContract = asyncHandler(async (req, res) => {
 			path: `contract-${date}.pdf`,
 			format: 'A4',
 			printBackground: true,
+			footerTemplate:
+				'<div class="footer" style="font-size: 10px;color: #999; margin: 15px 0;clear:both; position: relative; top: 20px;font-family:my-font"><p>Footer text</p></div>',
+			displayHeaderFooter: true,
 		});
 
 		await browser.close();
