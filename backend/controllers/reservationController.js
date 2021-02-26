@@ -235,7 +235,6 @@ const createReservation = async (req, res) => {
 // @access    Private/Admin
 const createContract = asyncHandler(async (req, res) => {
 	const date = Date.now();
-	const DELTA = 0.27;
 	const { _id } = req.body;
 	console.log(_id);
 	(async () => {
@@ -251,9 +250,20 @@ const createContract = asyncHandler(async (req, res) => {
 			path: `contract-${date}.pdf`,
 			format: 'A4',
 			printBackground: true,
-			footerTemplate:
-				'<div class="footer" style="font-size: 10px;color: #999; margin: 15px 0;clear:both; position: relative; top: 20px;font-family:my-font"><p>Footer text</p></div>',
 			displayHeaderFooter: true,
+			footerTemplate: `
+			<div class="footer" style="font-size: 6px;color: #999; position: relative; bottom: 15px; left: 20px;">
+			<p>VOS INITIALES</p>
+						</div>
+						<div class="footer" style="font-size: 6px;color: #999; position: relative; bottom: 15px; left: 250px;">
+			<p>CHOEUR D'ENFANTS DU HAINAUT 27/08/2021 PETIT NAY</p>
+						</div>`,
+			margin: {
+				top: '20px',
+				bottom: '150px',
+				right: '25px',
+				left: '25px',
+			},
 		});
 
 		await browser.close();

@@ -23,12 +23,11 @@ const ReservationId = ({ reservation, client, gite }) => {
 	const useStyles = makeStyles((theme) => ({
 		root: {
 			flexGrow: 1,
-			width: '95%',
-			margin: '25px',
+			width: '100%',
 		},
 		paper: {
 			height: 230,
-			width: 500,
+			width: 480,
 			backgroundColor: '#dddddd',
 			textAlign: 'center',
 		},
@@ -184,24 +183,27 @@ const ReservationId = ({ reservation, client, gite }) => {
 						<div className='editor'>
 							{renderHTML(gite.ctDescLog)}
 						</div>
-						<Grid>
-							<Paper className={classes.paperTitleColor}>
-								Durée de la location :
-							</Paper>
-						</Grid>
+						<div>
+							<Grid>
+								<Paper className={classes.paperTitleColor}>
+									Durée de la location :
+								</Paper>
+							</Grid>
 
-						<p className={classes.lineHeightP}>
-							La présente location est consentie et acceptée pour
-							une durée de : 2 nuitées Elle commence le vendredi
-							27 août 2021 à partir de 17h et se terminera le
-							dimanche 29 août 2021 au plus tard à 17h Elle ne
-							pourra en aucun cas être prorogée, sauf accord écrit
-							et préalable du propriétaire. Pour nous permettre de
-							nous organiser, (le gîte est à 4 km de l’habitation
-							principale du propriétaire), vous devez nous avertir
-							quelques jours à l'avance de votre heure d'arrivée
-							(par mail ou téléphone).
-						</p>
+							<p className={classes.lineHeightP}>
+								La présente location est consentie et acceptée
+								pour une durée de : 2 nuitées Elle commence le
+								vendredi 27 août 2021 à partir de 17h et se
+								terminera le dimanche 29 août 2021 au plus tard
+								à 17h Elle ne pourra en aucun cas être prorogée,
+								sauf accord écrit et préalable du propriétaire.
+								Pour nous permettre de nous organiser, (le gîte
+								est à 4 km de l’habitation principale du
+								propriétaire), vous devez nous avertir quelques
+								jours à l'avance de votre heure d'arrivée (par
+								mail ou téléphone).
+							</p>
+						</div>
 						<Grid>
 							<Paper className={classes.paperTitleColor}>
 								Prix en Euros
