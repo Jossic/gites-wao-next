@@ -113,7 +113,7 @@ const giteSchema = mongoose.Schema(
 			default: 15,
 		},
 		supplementParPers: {
-			//Au dela de 15 personnes
+			//Au dela de 15-20 personnes
 			type: Number,
 		},
 		tarifParPersParNuit: {

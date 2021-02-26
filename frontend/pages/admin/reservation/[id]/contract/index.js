@@ -180,7 +180,9 @@ const ReservationId = ({ reservation, client, gite }) => {
 						<Typography className={classes.typoSouligne}>
 							Description du logement :
 						</Typography>
-						<div className='editor'>
+						<div
+							className='editor'
+							style={{ marginBottom: '70px' }}>
 							{renderHTML(gite.ctDescLog)}
 						</div>
 						<div>
@@ -210,7 +212,151 @@ const ReservationId = ({ reservation, client, gite }) => {
 							</Paper>
 						</Grid>
 
-						<p className={classes.lineHeightP}></p>
+						<p className={classes.lineHeightP}>
+							<div>
+								<span style={{ textAlign: 'left' }}>
+									La présente location saisonnière a lieu
+									moyennant la somme de (minimum fixe de base)
+								</span>
+								<span
+									style={{
+										float: 'right',
+										backgroundColor: 'yellow',
+									}}>
+									{reservation.totalTarifBase},00 €
+								</span>
+							</div>
+							<div>
+								<span style={{ textAlign: 'left' }}>
+									Tarif par personne supplémentaire au-delà du
+									minimum fixe : {gite.supplementParPers} €
+									par nuit et par personne, soit :{' '}
+									{reservation.nbPersSup}
+								</span>
+								<span
+									style={{
+										float: 'right',
+										backgroundColor: 'yellow',
+									}}>
+									{reservation.totalTarifSuppl},00 €
+								</span>
+							</div>
+							<div>
+								<span style={{ textAlign: 'left' }}>
+									Il comprend les charges (télévision, eau,
+									électricité), le ménage et la fourniture des
+									draps et taies
+								</span>
+							</div>
+							<div>
+								<span style={{ textAlign: 'left' }}>
+									Supplément par animal 3 € par jour.
+								</span>
+								<span
+									style={{
+										float: 'right',
+										backgroundColor: 'yellow',
+									}}>
+									{/* {reservation.} */}
+								</span>
+							</div>
+							<div>
+								<span style={{ textAlign: 'left' }}>
+									Forfait lits faits à l'arrivée :{' '}
+									{gite.ftLit}
+									€/personne
+								</span>
+								<span
+									style={{
+										float: 'right',
+										backgroundColor: 'yellow',
+									}}>
+									{reservation.totalFtLit},00 €
+								</span>
+							</div>
+							<div>
+								<span style={{ textAlign: 'left' }}>
+									Taxes diverses calculées sur Nbre de
+									personnes de + de 18 ans :{' '}
+									{reservation.nbEnf} Nbre nuitées :
+									{reservation.nbNuites}
+								</span>
+								<span
+									style={{
+										float: 'right',
+										backgroundColor: 'yellow',
+									}}>
+									{/* {reservation.} */}
+								</span>
+							</div>
+							<div>
+								<span style={{ textAlign: 'right' }}>
+									Réglement à transmettre avec votre contrat
+									signé (selon les modalités ci-après) à titre
+									d'acompte :
+								</span>
+								<span
+									style={{
+										float: 'right',
+										backgroundColor: 'yellow',
+									}}>
+									{reservation.resteAPayer},00 €
+								</span>
+							</div>
+							<div>
+								<span style={{ textAlign: 'left' }}>
+									soit par virement (IBAN dans partie
+									société), ou chèque à l'ordre de SAS WAO, ou
+									chèques vacances (envoi au siège social)
+								</span>
+								<span
+									style={{
+										float: 'right',
+										backgroundColor: 'yellow',
+									}}>
+									{/* {reservation.} Voir pour montant de l'acompte */}
+								</span>
+							</div>
+							<div>
+								<span style={{ textAlign: 'left' }}>
+									Nous demandons un envoi en recommandé
+									uniquement pour les chèques vacances.
+								</span>
+								<span
+									style={{
+										float: 'right',
+										backgroundColor: 'yellow',
+									}}>
+									{/* {reservation.} */}
+								</span>
+							</div>
+							<div>
+								<span style={{ textAlign: 'left' }}>
+									Après votre séjour un scan de la caution
+									détruite vous sera transmis par courriel,
+									sauf en cas de dégâts.
+								</span>
+								<span
+									style={{
+										float: 'right',
+										backgroundColor: 'yellow',
+									}}>
+									{reservation.mtCaution},00 €
+								</span>
+							</div>
+							<span
+								style={{
+									fontWeight: 'bold',
+									textDecoration: 'underline',
+								}}>
+								La réservation deviendra effective dès lors que
+								le locataire aura retourné un exemplaire daté et
+								signé du présent contrat avant le 04/05/2020
+								accompagné du chèque. Au-delà de cette date, la
+								réservation sera caduque et le propriétaire
+								disposera librement du logement.
+							</span>
+						</p>
 						<Grid>
 							<Paper className={classes.paperTitleColor}>
 								Assurances
@@ -327,6 +473,32 @@ const ReservationId = ({ reservation, client, gite }) => {
 							domiciles respectifs. Toutefois en cas de litige, le
 							tribunal des lieux loués sera seul compétent.
 						</p>
+					</Grid>
+
+					<Grid
+						container
+						direction='row'
+						justify='space-between'
+						spacing={4}
+						alignItems='flex-end'
+						style={{ marginTop: '20px' }}>
+						<Grid item>
+							<p>
+								Fait en deux exemplaires à Fossé le {Date.now()}
+							</p>
+							<p>Signature du propriétaire,</p>
+						</Grid>
+						<Grid item>
+							<p>
+								J’ai pris connaissance des conditions de
+								location ci-dessus
+							</p>
+							<p style={{ marginBottom: '20px' }}>Date :</p>
+							<p>
+								Signature du locataire (précédé de la mention lu
+								et approuvé)
+							</p>
+						</Grid>
 					</Grid>
 				</div>
 			</ThemeProvider>
