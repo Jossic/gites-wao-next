@@ -18,6 +18,14 @@ import EuroIcon from '@material-ui/icons/Euro';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
 import HouseIcon from '@material-ui/icons/House';
 import ReceiptIcon from '@material-ui/icons/Receipt';
+import React from 'react';
+
+import dynamic from 'next/dynamic';
+
+const PdfViewer = dynamic(
+	() => import('../../../../components/admin/PDFViewer'),
+	{ ssr: false }
+);
 import {
 	Grid,
 	Paper,
@@ -33,6 +41,7 @@ import {
 	Fade,
 	TableRow,
 } from '@material-ui/core';
+
 import FormStatus from '../../../../components/admin/forms/reservation/FormStatus';
 import FormClient from '../../../../components/admin/forms/reservation/FormClient';
 import FormLocation from '../../../../components/admin/forms/reservation/FormLocation';
@@ -100,6 +109,8 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 	const token = getCookie('token');
 	const [value, setValue] = useState(0);
 
+	const [pdf, setPdf] = useState({});
+
 	const [client, setClient] = useState({});
 	const [loading, setLoading] = useState(false);
 
@@ -133,7 +144,6 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 
 	const generateContract = () => {
 		setLoading(true);
-
 		createContract(reservation).then((result) => {
 			console.log('result pdf', result.pdf);
 			if (result.error) {
@@ -142,6 +152,7 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 			} else {
 				setLoading(false);
 				snackbarShowMessage(`${result.message}`, 'success');
+				setPdf(result.pdf);
 				setOpen(true);
 				// setTimeout(() => {
 				// 	Router.reload();
@@ -355,7 +366,7 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 									Transition modal
 								</h2>
 								<p id='transition-modal-description'>
-									react-transition-group animates me.
+									<iframe src={pdf.data} />
 								</p>
 							</div>
 						</Fade>
