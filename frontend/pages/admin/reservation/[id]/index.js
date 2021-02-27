@@ -28,6 +28,9 @@ import {
 	TableCell,
 	TableContainer,
 	TableHead,
+	Modal,
+	Backdrop,
+	Fade,
 	TableRow,
 } from '@material-ui/core';
 import FormStatus from '../../../../components/admin/forms/reservation/FormStatus';
@@ -79,6 +82,17 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: '#585858',
 		minHeight: '50vh',
 	},
+	modal: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	paper: {
+		backgroundColor: theme.palette.background.paper,
+		border: '2px solid #000',
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing(2, 4, 3),
+	},
 }));
 
 const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
@@ -92,6 +106,16 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 	const { control, register, handleSubmit } = useForm({
 		defaultValues: reservation,
 	});
+
+	const [open, setOpen] = React.useState(false);
+
+	const handleOpen = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
 
 	const listerUnClient = () => {
 		getClientById(reservation.client, token).then((data) => {
@@ -109,14 +133,16 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 
 	const generateContract = () => {
 		setLoading(true);
+
 		createContract(reservation).then((result) => {
-			console.log('result', result);
+			console.log('result pdf', result.pdf);
 			if (result.error) {
 				setLoading(false);
 				snackbarShowMessage(`${result.error}`);
 			} else {
 				setLoading(false);
 				snackbarShowMessage(`${result.message}`, 'success');
+				setOpen(true);
 				// setTimeout(() => {
 				// 	Router.reload();
 				// }, 3000);
@@ -311,6 +337,29 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 							</form>
 						</div>
 					</Paper>
+
+					<Modal
+						aria-labelledby='transition-modal-title'
+						aria-describedby='transition-modal-description'
+						className={classes.modal}
+						open={open}
+						onClose={handleClose}
+						closeAfterTransition
+						BackdropComponent={Backdrop}
+						BackdropProps={{
+							timeout: 500,
+						}}>
+						<Fade in={open}>
+							<div className={classes.paper}>
+								<h2 id='transition-modal-title'>
+									Transition modal
+								</h2>
+								<p id='transition-modal-description'>
+									react-transition-group animates me.
+								</p>
+							</div>
+						</Fade>
+					</Modal>
 				</Admin>
 			</AdminHeader>
 		</>

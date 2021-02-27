@@ -141,7 +141,7 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 			options: {
 				filter: true,
 				sort: true,
-				sortOrder: 'desc',
+				sortDirection: 'desc',
 			},
 		},
 		{

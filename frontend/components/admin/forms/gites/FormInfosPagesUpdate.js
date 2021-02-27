@@ -60,7 +60,7 @@ const FormInfosPages = ({ classes, register, gite }) => {
 				inputRef={register}
 				name='equipementExterieur'
 				id='standard-number'
-				label='equipementExterieur (séparer les équipements par une virgule ",").'
+				label='Equipement extérieur (séparer les équipements par une virgule ",").'
 				InputLabelProps={{
 					shrink: true,
 				}}

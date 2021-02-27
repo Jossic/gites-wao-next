@@ -16,7 +16,6 @@ export const createReservation = (reservation) => {
 		.catch((err) => console.log(err));
 };
 export const createContract = (reservation) => {
-	console.log('dans action createContract', reservation);
 	return fetch(`${API}/reservation/contract/:reservation`, {
 		method: 'POST',
 		headers: {

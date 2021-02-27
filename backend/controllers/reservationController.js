@@ -250,7 +250,7 @@ const createContract = asyncHandler(async (req, res) => {
 				waitUntil: 'networkidle2',
 			}
 		);
-		await page.pdf({
+		const pdf = await page.pdf({
 			path: `contract-${date}.pdf`,
 			format: 'A4',
 			printBackground: true,
@@ -270,6 +270,8 @@ const createContract = asyncHandler(async (req, res) => {
 			},
 		});
 
+		res.contentType('application/pdf');
+		res.json({ pdf, message: 'Contrat généré' });
 		await browser.close();
 	})();
 });
