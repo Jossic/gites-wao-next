@@ -12,6 +12,7 @@ import PDFDocument from 'pdfkit';
 import fs from 'fs';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import puppeteer from 'puppeteer';
+import Blob from 'blob';
 
 // @desc      Fetch all reservations
 // @route     GET /api/reservation
@@ -269,6 +270,10 @@ const createContract = asyncHandler(async (req, res) => {
 				left: '25px',
 			},
 		});
+		console.log('pdf >', pdf);
+
+		// const blobPDF = new Blob([pdf], { type: 'application/pdf' });
+		// console.log('blobPDF >', blobPDF);
 
 		res.contentType('application/pdf');
 		res.json({ pdf, message: 'Contrat généré' });

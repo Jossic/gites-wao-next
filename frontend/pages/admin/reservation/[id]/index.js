@@ -19,6 +19,7 @@ import ContactMailIcon from '@material-ui/icons/ContactMail';
 import HouseIcon from '@material-ui/icons/House';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import React from 'react';
+import Blob from 'blob';
 
 import dynamic from 'next/dynamic';
 
@@ -150,9 +151,13 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 				setLoading(false);
 				snackbarShowMessage(`${result.error}`);
 			} else {
+				const blobPDF = new Blob([result.pdf], {
+					type: 'application/pdf',
+				});
+				console.log('blob pdf', blobPDF);
 				setLoading(false);
 				snackbarShowMessage(`${result.message}`, 'success');
-				setPdf(result.pdf);
+				setPdf(blobPDF);
 				setOpen(true);
 				// setTimeout(() => {
 				// 	Router.reload();
@@ -366,7 +371,7 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 									Transition modal
 								</h2>
 								<p id='transition-modal-description'>
-									<iframe src={pdf.data} />
+									<iframe src={pdf} />
 								</p>
 							</div>
 						</Fade>
