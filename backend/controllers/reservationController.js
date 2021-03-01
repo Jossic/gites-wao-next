@@ -232,27 +232,30 @@ const createReservation = async (req, res) => {
 };
 
 // @desc      Generate a contract
-// @route     GET /api/reservation/contract/:reservation
+// @route     POST /api/reservation/contract/:reservation
 // @access    Private/Admin
 const createContract = asyncHandler(async (req, res) => {
-	const { _id } = req.body;
+	// const { _id } = req.params.reservation;
 
-	const reservation = await Reservation.findById(_id);
+	const reservation = await Reservation.findById(req.params.reservation);
+	console.log(req.params);
 	const gite = await Gite.findById(reservation.gite);
 	const client = await Client.findById(reservation.client);
 
 	const date = Date.now();
+	const pathPDF = `contract-${date}.pdf`;
+
 	(async () => {
 		const browser = await puppeteer.launch();
 		const page = await browser.newPage();
 		await page.goto(
-			`http://localhost:3000/admin/reservation/${_id}/contract`,
+			`http://localhost:3000/admin/reservation/${req.params.reservation}/contract`,
 			{
 				waitUntil: 'networkidle2',
 			}
 		);
 		const pdf = await page.pdf({
-			path: `contract-${date}.pdf`,
+			path: pathPDF,
 			format: 'A4',
 			printBackground: true,
 			displayHeaderFooter: true,
@@ -270,14 +273,21 @@ const createContract = asyncHandler(async (req, res) => {
 				left: '25px',
 			},
 		});
-		console.log('pdf >', pdf);
+
+		await browser.close();
+		var data = fs.readFileSync(`./${pathPDF}`);
+
+		// console.log('pdf >', pdf);
 
 		// const blobPDF = new Blob([pdf], { type: 'application/pdf' });
 		// console.log('blobPDF >', blobPDF);
 
+		// res.contentType('application/pdf');
+		// res.sendFile(pathPDF, options);
+
+		const options = { root: './' };
 		res.contentType('application/pdf');
-		res.json({ pdf, message: 'Contrat généré' });
-		await browser.close();
+		res.send(data);
 	})();
 });
 

@@ -16,16 +16,16 @@ export const createReservation = (reservation) => {
 		.catch((err) => console.log(err));
 };
 export const createContract = (reservation) => {
-	return fetch(`${API}/reservation/contract/:reservation`, {
-		method: 'POST',
+	return fetch(`${API}/reservation/contract/${reservation}`, {
+		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
 			// Authorization: `Bearer ${token}`,
 		},
-		body: JSON.stringify(reservation),
 	})
 		.then((response) => {
-			return response.json();
+			console.log('response action', response);
+			return response.blob();
 		})
 		.catch((err) => console.log(err));
 };

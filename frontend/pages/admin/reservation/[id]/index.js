@@ -41,6 +41,7 @@ import {
 	Backdrop,
 	Fade,
 	TableRow,
+	CircularProgress,
 } from '@material-ui/core';
 
 import FormStatus from '../../../../components/admin/forms/reservation/FormStatus';
@@ -145,19 +146,15 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 
 	const generateContract = () => {
 		setLoading(true);
-		createContract(reservation).then((result) => {
-			console.log('result pdf', result.pdf);
+		createContract(reservation._id).then((result) => {
+			console.log('log', URL.createObjectURL(result));
 			if (result.error) {
 				setLoading(false);
 				snackbarShowMessage(`${result.error}`);
 			} else {
-				const blobPDF = new Blob([result.pdf], {
-					type: 'application/pdf',
-				});
-				console.log('blob pdf', blobPDF);
+				setPdf(URL.createObjectURL(result));
 				setLoading(false);
 				snackbarShowMessage(`${result.message}`, 'success');
-				setPdf(blobPDF);
 				setOpen(true);
 				// setTimeout(() => {
 				// 	Router.reload();
@@ -219,7 +216,11 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 								color='secondary'
 								aria-label='contained primary button group'>
 								<Button onClick={generateContract}>
-									Générer Contrat
+									{loading ? (
+										<CircularProgress />
+									) : (
+										'Générer Contrat'
+									)}
 								</Button>
 								<Button>Générer Facture</Button>
 								<Button>Mail plateforme</Button>
@@ -371,7 +372,9 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 									Transition modal
 								</h2>
 								<p id='transition-modal-description'>
-									<iframe src={pdf} />
+									<PdfViewer file={pdf}></PdfViewer>
+
+									{/* <iframe src={pdf} /> */}
 								</p>
 							</div>
 						</Fade>
