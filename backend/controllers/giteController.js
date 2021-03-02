@@ -227,16 +227,24 @@ const updateGite = asyncHandler(async (req, res) => {
 		ctDescLog,
 		nbKmDeLaMaison,
 	} = req.body;
-
+	console.log(equipementExterieur);
 	const gite = await Gite.findById(req.params.id);
 
 	if (gite) {
-		let arrayOfEquipementExterieur =
-			gite.equipementExterieur && equipementExterieur.split(',');
-		let arrayOfEquipementInterieur =
-			gite.equipementInterieur && equipementInterieur.split(',');
-		let arrayOfEquipementPiscine =
-			gite.equipementPiscine && equipementPiscine.split(',');
+		let arrayOfEquipementExterieur = [];
+		equipementExterieur &&
+			(arrayOfEquipementExterieur = equipementExterieur.split(','));
+		gite.equipementExterieur = arrayOfEquipementExterieur;
+		let arrayOfEquipementInterieur = [];
+		equipementInterieur &&
+			(arrayOfEquipementInterieur = equipementInterieur.split(','));
+		gite.equipementInterieur = arrayOfEquipementInterieur;
+		let arrayOfEquipementPiscine = [];
+		equipementPiscine &&
+			(arrayOfEquipementPiscine = equipementPiscine.split(','));
+		gite.equipementPiscine = arrayOfEquipementPiscine;
+
+		console.log(arrayOfEquipementExterieur);
 
 		nom && (gite.nom = nom);
 		adresse && (gite.adresse = adresse);

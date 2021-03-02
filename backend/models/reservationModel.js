@@ -26,6 +26,7 @@ const reservationSchema = mongoose.Schema(
 		totalTarifBase: { type: Number, default: 0 },
 		totalTarifSuppl: { type: Number, default: 0 },
 		resteAPayer: { type: Number },
+		acompte: { type: Number },
 		taxeSejour: { type: Number, default: 0 },
 		remise: { type: Number, default: 0 },
 		labelRemise: { type: String },

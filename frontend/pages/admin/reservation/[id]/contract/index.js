@@ -194,16 +194,27 @@ const ReservationId = ({ reservation, client, gite }) => {
 
 							<p className={classes.lineHeightP}>
 								La présente location est consentie et acceptée
-								pour une durée de : 2 nuitées Elle commence le
-								vendredi 27 août 2021 à partir de 17h et se
-								terminera le dimanche 29 août 2021 au plus tard
-								à 17h Elle ne pourra en aucun cas être prorogée,
+								pour une durée de :{' '}
+								<span style={{ backgroundColor: 'yellow' }}>
+									2 nuitées
+								</span>
+								. <br /> Elle commence le{' '}
+								<span style={{ backgroundColor: 'yellow' }}>
+									{reservation.dateArrivee}{' '}
+									{reservation.heureArrivee}
+								</span>{' '}
+								et se terminera le{' '}
+								<span style={{ backgroundColor: 'yellow' }}>
+									{reservation.dateDepart}{' '}
+									{reservation.heureDepart}
+								</span>
+								. Elle ne pourra en aucun cas être prorogée,
 								sauf accord écrit et préalable du propriétaire.
 								Pour nous permettre de nous organiser, (le gîte
-								est à 4 km de l’habitation principale du
-								propriétaire), vous devez nous avertir quelques
-								jours à l'avance de votre heure d'arrivée (par
-								mail ou téléphone).
+								est à {gite.nbKmDeLaMaison} km de l’habitation
+								principale du propriétaire), vous devez nous
+								avertir quelques jours à l'avance de votre heure
+								d'arrivée (par mail ou téléphone).
 							</p>
 						</div>
 						<Grid>
@@ -229,9 +240,20 @@ const ReservationId = ({ reservation, client, gite }) => {
 							<div>
 								<span style={{ textAlign: 'left' }}>
 									Tarif par personne supplémentaire au-delà du
-									minimum fixe : {gite.supplementParPers} €
+									minimum fixe :{' '}
+									<span
+										style={{
+											color: 'red',
+										}}>
+										{gite.supplementParPers},00 €
+									</span>{' '}
 									par nuit et par personne, soit :{' '}
-									{reservation.nbPersSup}
+									<span
+										style={{
+											color: 'red',
+										}}>
+										{reservation.nbPersSup}
+									</span>
 								</span>
 								<span
 									style={{
@@ -250,21 +272,38 @@ const ReservationId = ({ reservation, client, gite }) => {
 							</div>
 							<div>
 								<span style={{ textAlign: 'left' }}>
-									Supplément par animal 3 € par jour.
+									Supplément par animal{' '}
+									<span
+										style={{
+											color: 'red',
+										}}>
+										3 €
+									</span>{' '}
+									par jour. Pour{' '}
+									<span
+										style={{
+											color: 'red',
+										}}>
+										{reservation.nbChien}
+									</span>
 								</span>
 								<span
 									style={{
 										float: 'right',
 										backgroundColor: 'yellow',
 									}}>
-									{/* {reservation.} */}
+									{reservation.mtAnimaux},00 €
 								</span>
 							</div>
 							<div>
 								<span style={{ textAlign: 'left' }}>
 									Forfait lits faits à l'arrivée :{' '}
-									{gite.ftLit}
-									€/personne
+									<span
+										style={{
+											color: 'red',
+										}}>
+										{gite.ftLit},00 €/personne
+									</span>
 								</span>
 								<span
 									style={{
@@ -274,47 +313,92 @@ const ReservationId = ({ reservation, client, gite }) => {
 									{reservation.totalFtLit},00 €
 								</span>
 							</div>
+
 							<div>
-								<span style={{ textAlign: 'left' }}>
-									Taxes diverses calculées sur Nbre de
-									personnes de + de 18 ans :{' '}
-									{reservation.nbEnf} Nbre nuitées :
-									{reservation.nbNuites}
-								</span>
 								<span
 									style={{
-										float: 'right',
-										backgroundColor: 'yellow',
+										position: 'relative',
+										left: '870px',
+										fontWeight: 'bold',
 									}}>
-									{/* {reservation.} */}
-								</span>
-							</div>
-							<div>
-								<span style={{ textAlign: 'right' }}>
-									Réglement à transmettre avec votre contrat
-									signé (selon les modalités ci-après) à titre
-									d'acompte :
+									Soit la somme de:
 								</span>
 								<span
 									style={{
 										float: 'right',
 										backgroundColor: 'yellow',
+										fontWeight: 'bold',
 									}}>
 									{reservation.resteAPayer},00 €
 								</span>
 							</div>
 							<div>
-								<span style={{ textAlign: 'left' }}>
-									soit par virement (IBAN dans partie
-									société), ou chèque à l'ordre de SAS WAO, ou
-									chèques vacances (envoi au siège social)
+								<span
+									style={{
+										position: 'relative',
+										left: '350px',
+										fontWeight: 'bold',
+									}}>
+									Réglement à transmettre avec votre contrat
+									signé (selon les modalités ci-après){' '}
+									<span
+										style={{
+											color: 'red',
+											textDecoration: 'underline',
+										}}>
+										à titre d'acompte
+									</span>
+									:
 								</span>
 								<span
 									style={{
 										float: 'right',
 										backgroundColor: 'yellow',
 									}}>
-									{/* {reservation.} Voir pour montant de l'acompte */}
+									{reservation.acompte},00 €
+								</span>
+							</div>
+							<div>
+								<span style={{ textAlign: 'left' }}>
+									soit par virement (IBAN dans partie
+									société), ou chèque à l'ordre de{' '}
+									<span
+										style={{
+											color: 'red',
+											fontWeight: 'bold',
+											textDecoration: 'underline',
+										}}>
+										SAS WAO
+									</span>
+									, ou chèques vacances (envoi au siège
+									social)
+								</span>
+							</div>
+							<div>
+								<span style={{ textAlign: 'left' }}>
+									Taxes diverses calculées sur le nombre
+									d'adultes, soit :{' '}
+									<span
+										style={{
+											color: 'red',
+										}}>
+										{reservation.nbPers - reservation.nbEnf}{' '}
+									</span>
+									pour{' '}
+									<span
+										style={{
+											color: 'red',
+										}}>
+										{reservation.nbNuites}{' '}
+									</span>
+									nuitées
+								</span>
+								<span
+									style={{
+										float: 'right',
+										backgroundColor: 'yellow',
+									}}>
+									{/* {reservation.} */},00 €
 								</span>
 							</div>
 							<div>
@@ -324,10 +408,21 @@ const ReservationId = ({ reservation, client, gite }) => {
 								</span>
 								<span
 									style={{
-										float: 'right',
-										backgroundColor: 'yellow',
+										position: 'relative',
+										left: '260px',
+										fontWeight: 'bold',
 									}}>
-									{/* {reservation.} */}
+									solde à régler à votre arrivée :
+								</span>
+								<span
+									style={{
+										float: 'right',
+										backgroundColor: '#FFB6C1',
+									}}>
+									{reservation.resteAPayer -
+										reservation.acompte +
+										reservation.taxeSejour}
+									,00 €
 								</span>
 							</div>
 							<div>
@@ -351,7 +446,7 @@ const ReservationId = ({ reservation, client, gite }) => {
 								}}>
 								La réservation deviendra effective dès lors que
 								le locataire aura retourné un exemplaire daté et
-								signé du présent contrat avant le 04/05/2020
+								signé du présent contrat avant le (DATE A VOIR)
 								accompagné du chèque. Au-delà de cette date, la
 								réservation sera caduque et le propriétaire
 								disposera librement du logement.

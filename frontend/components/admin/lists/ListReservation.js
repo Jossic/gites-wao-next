@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ListReservation = ({ reservations, newReservation, gites, router }) => {
+const ListReservation = ({ reservations, newReservations, gites, router }) => {
 	const classes = useStyles();
 
 	const token = getCookie('token');
@@ -273,8 +273,8 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 				</Snackbar>
 			)}
 			<p style={{ color: 'white' }}>
-				{newReservation > 0
-					? `Vous avez ${newReservation} nouvelles réservations !`
+				{newReservations > 0
+					? `Vous avez ${newReservations} nouvelles réservations !`
 					: `Aucune nouvelle réservation !`}
 			</p>
 			<MUIDataTable

@@ -126,14 +126,14 @@ const Changelog = () => {
 			</Typography>
 			<ul>
 				<li>
+					<span className={classes.root}>Changed</span> 02/03/2021 -
+					17:00 - Affichage du listing des équipements corrigé
+				</li>
+				<li>
 					<span className={classes.root}>Changed</span> Gestion des
 					réservations - Tri sur date de réservation et sur status
 				</li>
 				{/*<li>
-					<span className={classes.root}>Changed</span> Rendu de
-					l'utilisateur dans le haut
-				</li>
-				<li>
 					<span className={classes.root}>Changed</span> Page reserver
 				</li>
 				<li>
