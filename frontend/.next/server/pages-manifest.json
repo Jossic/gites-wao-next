@@ -2,11 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/admin/gites/[id]": "pages/admin/gites/[id].js",
-  "/admin/changelog": "pages/admin/changelog.js",
-  "/admin/gites": "pages/admin/gites.js",
-  "/404": "pages/404.js",
   "/reservation": "pages/reservation.js",
-  "/admin/gestionDivers": "pages/admin/gestionDivers.js",
-  "/admin/gestionDivers/partenaires": "pages/admin/gestionDivers/partenaires.js"
+  "/admin/reservation/[id]": "pages/admin/reservation/[id].js"
 }

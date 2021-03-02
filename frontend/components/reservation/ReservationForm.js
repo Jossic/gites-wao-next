@@ -15,6 +15,9 @@ import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import { useEffect, useState, useRef } from 'react';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { useForm, Controller } from 'react-hook-form';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import { DateRangePicker } from 'react-date-range';
 import {
 	Checkbox,
 	Container,
@@ -232,6 +235,7 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = useState(0);
 	const { control, register, handleSubmit } = useForm({
+		reValidateMode: 'onChange',
 		shouldUnregister: false,
 		defaultValues: {
 			gite: 'manola',
@@ -250,6 +254,16 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 		},
 	});
 
+	const [state, setState] = useState([
+		{
+			startDate: new Date(),
+			endDate: new Date(),
+			key: 'selection',
+		},
+	]);
+
+	const [dateArrivee, setDateArrivee] = useState();
+
 	const [loading, setLoading] = useState(false);
 
 	const reRef = useRef();
@@ -260,6 +274,7 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 
 	const handleDateChangeArrivee = (date) => {
 		setSelectedDateArrivee(date);
+		setSelectedDateDepart(date);
 	};
 	const [selectedDateDepart, setSelectedDateDepart] = useState();
 
@@ -323,7 +338,7 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 				<TextField
 					inputRef={register}
 					name='nbPers'
-					id='standard-number'
+					id='nbPers'
 					label='Nombre de personnes total'
 					type='number'
 					InputLabelProps={{
@@ -333,7 +348,7 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 				<TextField
 					inputRef={register}
 					name='nbEnf'
-					id='standard-number'
+					id='nbEnf'
 					label='Dont enfants de moins de 18 ans'
 					type='number'
 					InputLabelProps={{
@@ -341,7 +356,38 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 					}}
 				/>
 			</Grid>
-			<MuiPickersUtilsProvider utils={DateFnsUtils}>
+			{/* 
+			<FormControl className={classes.formControl}>
+				<InputLabel
+					shrink
+					id='demo-simple-select-placeholder-label-label'>
+					Dates de séjout
+				</InputLabel>
+				<Controller
+					control={control}
+					name='dates'
+					as={
+						<DateRangePicker
+							onChange={(item) => setState([item.selection])}
+							showSelectionPreview={true}
+							moveRangeOnFirstSelection={false}
+							// months={2}
+							ranges={state}
+							direction='horizontal'
+						/>
+					}
+				/>
+			</FormControl> */}
+
+			<DateRangePicker
+				onChange={(item) => setState([item.selection])}
+				showSelectionPreview={true}
+				moveRangeOnFirstSelection={false}
+				// months={2}
+				ranges={state}
+				direction='horizontal'
+			/>
+			{/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
 				<Grid container justify='space-around'>
 					<KeyboardDatePicker
 						inputRef={register}
@@ -373,7 +419,7 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 						}}
 					/>
 				</Grid>
-			</MuiPickersUtilsProvider>
+			</MuiPickersUtilsProvider> */}
 		</div>
 	);
 	const infoComp = () => (
@@ -446,7 +492,7 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 					<TextField
 						inputRef={register}
 						name='nbChien'
-						id='standard-number'
+						id='chien'
 						label='Nombre de chien ? (3€/jour/animal)'
 						type='number'
 						InputLabelProps={{
@@ -481,7 +527,7 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 						<TextField
 							inputRef={register}
 							name='infoCompl'
-							id='standard-number'
+							id='infoCompl'
 							label='Informations complémentaires / Questions :'
 							multiline
 							rows={3}
@@ -540,7 +586,7 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 				<TextField
 					inputRef={register}
 					name='nom'
-					id='standard-number'
+					id='nom'
 					label='Nom'
 					InputLabelProps={{
 						shrink: true,
@@ -549,7 +595,7 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 				<TextField
 					inputRef={register}
 					name='prenom'
-					id='standard-number'
+					id='prenom'
 					label='Prénom'
 					InputLabelProps={{
 						shrink: true,
@@ -559,8 +605,8 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 			<Grid container justify='space-around'>
 				<TextField
 					inputRef={register}
-					name='adresse'
-					id='standard-number'
+					name='prenom'
+					id='prenom'
 					label='Adresse'
 					InputLabelProps={{
 						shrink: true,
@@ -569,7 +615,7 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 				<TextField
 					inputRef={register}
 					name='cp'
-					id='standard-number'
+					id='cp'
 					label='Code Postal'
 					InputLabelProps={{
 						shrink: true,
@@ -578,7 +624,7 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 				<TextField
 					inputRef={register}
 					name='ville'
-					id='standard-number'
+					id='ville'
 					label='Ville'
 					InputLabelProps={{
 						shrink: true,
@@ -618,7 +664,7 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 				<TextField
 					inputRef={register}
 					name='tel'
-					id='standard-number'
+					id='tel'
 					label='Téléphone'
 					InputLabelProps={{
 						shrink: true,
@@ -627,7 +673,7 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 				<TextField
 					inputRef={register}
 					name='mail'
-					id='standard-number'
+					id='mail'
 					label='Email'
 					type='mail'
 					InputLabelProps={{
