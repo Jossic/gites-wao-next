@@ -350,7 +350,7 @@ const sendContract = asyncHandler(async (req, res) => {
 
 		sendEmailWithNodemailer(req, res, emailData);
 		reservation.status = 'Contrat envoyé';
-		reservation.dateEnvoiContrat = Date.now();
+		reservation.dateContrat = Date.now();
 		await reservation.save();
 		res.json({
 			message: 'Message et contrat envoyé au locataire',

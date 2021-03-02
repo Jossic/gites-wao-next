@@ -228,7 +228,7 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 					// console.log('au dessus du map', reservations);
 
 					for (const reservation of reservations) {
-						console.log('dans le for ', reservation.status);
+						// console.log('dans le for ', reservation.status);
 						if (row[3] === reservation.status) {
 							return {
 								className: classes.nouveau,

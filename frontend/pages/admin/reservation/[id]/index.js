@@ -343,7 +343,10 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 							</AppBar>
 							<form onSubmit={handleSubmit(onSubmit)}>
 								<TabPanel value={value} index={0}>
-									<FormStatus preloadedValues={reservation} />
+									<FormStatus
+										generateContract={generateContract}
+										preloadedValues={reservation}
+									/>
 								</TabPanel>
 								<TabPanel value={value} index={1}>
 									<FormPaiements />

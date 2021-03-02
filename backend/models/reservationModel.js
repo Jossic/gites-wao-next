@@ -13,7 +13,6 @@ const reservationSchema = mongoose.Schema(
 		dateArrivee: { type: Date, required: true },
 		heureArrivee: { type: Date },
 		dateDepart: { type: Date, required: true },
-		dateEnvoiContrat: { type: Date },
 		heureDepart: { type: Date },
 		nbNuites: { type: Number },
 		status: { type: String, default: 'Nouvelle réservation' },
@@ -37,6 +36,7 @@ const reservationSchema = mongoose.Schema(
 		mtCaution: { type: Number, default: 350 },
 		commentaire: { type: String },
 		pdfLink: { type: String },
+		contratRemisPar: { type: String },
 	},
 	{
 		timestamps: true,

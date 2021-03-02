@@ -48,10 +48,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const FormStatus = ({ preloadedValues }) => {
+const FormStatus = ({ preloadedValues, generateContract }) => {
 	const [selectedDateRes, setSelectedDateRes] = React.useState();
 	const [selectedDateContrat, setSelectedDateContrat] = React.useState();
-
+	console.log(preloadedValues.dateContrat);
 	const handleDateChangeRes = (date) => {
 		setSelectedDateRes(date);
 	};
@@ -61,6 +61,7 @@ const FormStatus = ({ preloadedValues }) => {
 	};
 	const token = getCookie('token');
 	const classes = useStyles();
+
 	const { control, register, handleSubmit } = useForm({
 		defaultValues: preloadedValues,
 	});
@@ -173,6 +174,33 @@ const FormStatus = ({ preloadedValues }) => {
 						/>
 					</FormControl>
 
+					{preloadedValues.status === 'Acompte/Contrat reçu' && (
+						<FormControl className={classes.formControl}>
+							<InputLabel
+								shrink
+								id='demo-simple-select-placeholder-label-label'>
+								Contrat reçu par :
+							</InputLabel>
+
+							<Controller
+								control={control}
+								name='contratRemisPar'
+								as={
+									<Select id='status-select'>
+										<MenuItem value='Mail'>Mail</MenuItem>
+										<MenuItem value='Main propre'>
+											Main propre
+										</MenuItem>
+										<MenuItem value='Courrier'>
+											Courrier
+										</MenuItem>
+										<MenuItem value='Autre'>Autre</MenuItem>
+									</Select>
+								}
+							/>
+						</FormControl>
+					)}
+
 					<FormControl className={classes.formControl}>
 						<TextField
 							inputRef={register}
@@ -209,7 +237,8 @@ const FormStatus = ({ preloadedValues }) => {
 									disableToolbar
 									variant='inline'
 									name='dateContrat'
-									format='MM/dd/yyyy'
+									disabled
+									format='dd/MM/yyyy'
 									margin='normal'
 									id='date-picker-inline'
 									label='Date de génération du contrat'
@@ -222,11 +251,15 @@ const FormStatus = ({ preloadedValues }) => {
 							</MuiPickersUtilsProvider>
 						</FormControl>
 					) : (
-						<Button variant='contained' color='secondary'>
+						<Button
+							onClick={generateContract}
+							variant='contained'
+							color='secondary'>
 							Générer le contrat
 						</Button>
 					)}
 				</Grid>
+
 				<Button
 					type='submit'
 					variant='contained'
