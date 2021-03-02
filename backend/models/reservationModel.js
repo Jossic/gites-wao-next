@@ -35,6 +35,7 @@ const reservationSchema = mongoose.Schema(
 		totalTfMenage: { type: Number },
 		mtCaution: { type: Number, default: 350 },
 		commentaire: { type: String },
+		pdfLink: { type: String },
 	},
 	{
 		timestamps: true,

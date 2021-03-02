@@ -8,11 +8,34 @@ dayjs.extend(isBetween);
 import Gite from '../models/giteModel.js';
 import sendEmailWithNodemailer from '../utils/email.js';
 import { calculTarifDeBase } from '../utils/calculTarif.js';
-import PDFDocument from 'pdfkit';
 import fs from 'fs';
-import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import puppeteer from 'puppeteer';
+import dotenv from 'dotenv';
 import Blob from 'blob';
+import AWS from 'aws-sdk';
+import multer from 'multer';
+import multerS3 from 'multer-s3';
+
+dotenv.config();
+
+AWS.config.getCredentials(function (err) {
+	if (err) console.log(err.stack);
+	// credentials not loaded
+	else {
+		// console.log('Access key:', AWS.config.credentials.accessKeyId);
+		// console.log('Region: ', AWS.config.region);
+	}
+});
+
+const accessKeyId = process.env.ACCESS_KEY_ID;
+const secretAccessKey = process.env.SECRET_ACCESS_KEY;
+
+// console.log(process.env.BUCKET_NAME);
+const s3 = new AWS.S3({
+	apiVersion: '2006-03-01',
+	accessKeyId,
+	secretAccessKey,
+});
 
 // @desc      Fetch all reservations
 // @route     GET /api/reservation
@@ -274,20 +297,31 @@ const createContract = asyncHandler(async (req, res) => {
 			},
 		});
 
+		let params;
+
+		params = {
+			Bucket: 'gites-wao',
+			ACL: 'public-read',
+			Key: pathPDF,
+			Body: pdf,
+			ContentType: 'application/pdf',
+			ContentDisposition: 'inline',
+		};
+		s3.upload(params, async (err, data) => {
+			if (err) {
+				console.log('erreur =>', err);
+				return;
+			} else {
+				reservation.pdfLink = data.Location;
+				const updatedReservation = await reservation.save();
+				res.json({
+					updatedReservation,
+					message: 'Génération du contrat effectuée',
+				});
+			}
+		});
+
 		await browser.close();
-		var data = fs.readFileSync(`./${pathPDF}`);
-
-		// console.log('pdf >', pdf);
-
-		// const blobPDF = new Blob([pdf], { type: 'application/pdf' });
-		// console.log('blobPDF >', blobPDF);
-
-		// res.contentType('application/pdf');
-		// res.sendFile(pathPDF, options);
-
-		const options = { root: './' };
-		res.contentType('application/pdf');
-		res.send(data);
 	})();
 });
 

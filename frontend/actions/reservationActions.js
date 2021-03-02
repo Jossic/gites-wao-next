@@ -17,15 +17,15 @@ export const createReservation = (reservation) => {
 };
 export const createContract = (reservation) => {
 	return fetch(`${API}/reservation/contract/${reservation}`, {
-		method: 'GET',
+		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
 			// Authorization: `Bearer ${token}`,
 		},
 	})
 		.then((response) => {
-			console.log('response action', response);
-			return response.blob();
+			// return response.blob();
+			return response.json();
 		})
 		.catch((err) => console.log(err));
 };

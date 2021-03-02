@@ -19,14 +19,6 @@ import ContactMailIcon from '@material-ui/icons/ContactMail';
 import HouseIcon from '@material-ui/icons/House';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import React from 'react';
-import Blob from 'blob';
-
-import dynamic from 'next/dynamic';
-
-const PdfViewer = dynamic(
-	() => import('../../../../components/admin/PDFViewer'),
-	{ ssr: false }
-);
 import {
 	Grid,
 	Paper,
@@ -147,15 +139,16 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 	const generateContract = () => {
 		setLoading(true);
 		createContract(reservation._id).then((result) => {
-			console.log('log', URL.createObjectURL(result));
+			console.log('log', result.updatedReservation.pdfLink);
 			if (result.error) {
 				setLoading(false);
 				snackbarShowMessage(`${result.error}`);
 			} else {
-				setPdf(URL.createObjectURL(result));
+				setPdf(result.updatedReservation.pdfLink);
 				setLoading(false);
 				snackbarShowMessage(`${result.message}`, 'success');
 				setOpen(true);
+				console.log('pdf', pdf);
 				// setTimeout(() => {
 				// 	Router.reload();
 				// }, 3000);
@@ -367,14 +360,27 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 							timeout: 500,
 						}}>
 						<Fade in={open}>
-							<div className={classes.paper}>
-								<h2 id='transition-modal-title'>
-									Transition modal
-								</h2>
-								<p id='transition-modal-description'>
-									<PdfViewer file={pdf}></PdfViewer>
-
-									{/* <iframe src={pdf} /> */}
+							<div
+								className={classes.paper}
+								style={{ width: '70%', height: '90%' }}>
+								<h4 id='transition-modal-title'>
+									Contrat de location pour la réservation #
+									{reservation._id} de {client.nom}{' '}
+									{client.prenom}
+								</h4>
+								<p
+									id='transition-modal-description'
+									style={{ width: '100%', height: '95%' }}>
+									<embed
+										style={{
+											width: '100%',
+											height: '100%',
+										}}
+										type='application/pdf'
+										src={pdf}
+										// width='600'
+										// height='600'
+									/>
 								</p>
 							</div>
 						</Fade>
