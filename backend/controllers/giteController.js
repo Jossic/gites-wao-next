@@ -232,11 +232,11 @@ const updateGite = asyncHandler(async (req, res) => {
 
 	if (gite) {
 		let arrayOfEquipementExterieur =
-			equipementExterieur && equipementExterieur.split(',');
+			gite.equipementExterieur && equipementExterieur.split(',');
 		let arrayOfEquipementInterieur =
-			equipementInterieur && equipementInterieur.split(',');
+			gite.equipementInterieur && equipementInterieur.split(',');
 		let arrayOfEquipementPiscine =
-			equipementPiscine && equipementPiscine.split(',');
+			gite.equipementPiscine && equipementPiscine.split(',');
 
 		nom && (gite.nom = nom);
 		adresse && (gite.adresse = adresse);

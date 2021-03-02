@@ -4,6 +4,7 @@ import { withRouter } from 'next/router';
 import {
 	createContract,
 	listeOneReservation,
+	sendContract,
 } from '../../../../actions/reservationActions';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
@@ -19,6 +20,7 @@ import ContactMailIcon from '@material-ui/icons/ContactMail';
 import HouseIcon from '@material-ui/icons/House';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import React from 'react';
+import EmailIcon from '@material-ui/icons/Email';
 import {
 	Grid,
 	Paper,
@@ -156,6 +158,24 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 		});
 	};
 
+	const envoiContract = () => {
+		setLoading(true);
+		sendContract(reservation._id, token).then((result) => {
+			console.log('log', result);
+			if (result.error) {
+				setLoading(false);
+				snackbarShowMessage(`${result.error}`);
+			} else {
+				setLoading(false);
+				snackbarShowMessage(`${result.message}`, 'success');
+				setOpen(false);
+				// setTimeout(() => {
+				// 	Router.reload();
+				// }, 3000);
+			}
+		});
+	};
+
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
 	};
@@ -183,6 +203,7 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 			<AdminHeader>
 				<Admin>
 					{/* Fil d'ariane */}
+					{loading && <CircularProgress />}
 					<Grid container>
 						<Grid item>
 							<Typography variant='h5' style={{ margin: '10px' }}>
@@ -209,11 +230,7 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 								color='secondary'
 								aria-label='contained primary button group'>
 								<Button onClick={generateContract}>
-									{loading ? (
-										<CircularProgress />
-									) : (
-										'Générer Contrat'
-									)}
+									Générer Contrat
 								</Button>
 								<Button>Générer Facture</Button>
 								<Button>Mail plateforme</Button>
@@ -363,11 +380,29 @@ const ReservationId = ({ reservation, router, snackbarShowMessage }) => {
 							<div
 								className={classes.paper}
 								style={{ width: '70%', height: '90%' }}>
-								<h4 id='transition-modal-title'>
-									Contrat de location pour la réservation #
-									{reservation._id} de {client.nom}{' '}
-									{client.prenom}
-								</h4>
+								<Grid
+									container
+									direction='row'
+									justify='space-between'
+									alignItems='flex-start'
+									style={{ marginBottom: '10px' }}>
+									<Grid>
+										<h4 id='transition-modal-title'>
+											Contrat pour la réservation #
+											{reservation._id} de {client.nom}{' '}
+											{client.prenom}
+										</h4>
+									</Grid>
+									<Grid>
+										<Button
+											onClick={envoiContract}
+											variant='contained'
+											color='primary'
+											style={{}}>
+											<EmailIcon /> Envoyer
+										</Button>
+									</Grid>
+								</Grid>
 								<p
 									id='transition-modal-description'
 									style={{ width: '100%', height: '95%' }}>

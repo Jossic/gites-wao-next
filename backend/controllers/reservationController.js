@@ -6,15 +6,12 @@ import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween.js';
 dayjs.extend(isBetween);
 import Gite from '../models/giteModel.js';
+import Mailer from '../models/mailerModel.js';
 import sendEmailWithNodemailer from '../utils/email.js';
 import { calculTarifDeBase } from '../utils/calculTarif.js';
-import fs from 'fs';
 import puppeteer from 'puppeteer';
 import dotenv from 'dotenv';
-import Blob from 'blob';
 import AWS from 'aws-sdk';
-import multer from 'multer';
-import multerS3 from 'multer-s3';
 
 dotenv.config();
 
@@ -255,7 +252,7 @@ const createReservation = async (req, res) => {
 };
 
 // @desc      Generate a contract
-// @route     POST /api/reservation/contract/:reservation
+// @route     PUT /api/reservation/contract/:reservation
 // @access    Private/Admin
 const createContract = asyncHandler(async (req, res) => {
 	// const { _id } = req.params.reservation;
@@ -325,6 +322,45 @@ const createContract = asyncHandler(async (req, res) => {
 	})();
 });
 
+// @desc      Put a reservation to contract send & send mail
+// @route     PUT /api/reservation/contract/:reservation/send
+// @access    Private/Admin
+const sendContract = asyncHandler(async (req, res) => {
+	const reservation = await Reservation.findById(req.params.reservation);
+	console.log('reservation ->', reservation);
+	const mailer = await Mailer.findById('603e2e3d73b6664300191e19');
+	const client = await Client.findById(reservation.client);
+
+	if (reservation) {
+		const emailData = {
+			from: process.env.NODE_MAILER_USER,
+			to: client.mail,
+			cc: 'gites.wao@gmail.com',
+			subject: `${process.env.APP_NAME} | ${mailer.sujet}`,
+			html: mailer.corps,
+			attachments: [
+				{
+					filename: 'Contrat de location',
+					href: reservation.pdfLink,
+					content: 'Votre demande de reservation',
+					contentType: 'application/pdf',
+				},
+			],
+		};
+
+		sendEmailWithNodemailer(req, res, emailData);
+		reservation.status = 'Contrat envoyé';
+		reservation.dateEnvoiContrat = Date.now();
+		await reservation.save();
+		res.json({
+			message: 'Message et contrat envoyé au locataire',
+		});
+	} else {
+		return res.json({
+			error: err,
+		});
+	}
+});
 // @desc      Delete a reservation
 // @route     GET /api/reservation
 // @access    Private/Admin
@@ -375,4 +411,5 @@ export {
 	getReservationById,
 	removeReservation,
 	updateReservation,
+	sendContract,
 };

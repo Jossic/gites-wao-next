@@ -73,7 +73,7 @@ const ListMailer = ({ mailers, router, snackbarShowMessage }) => {
 			options: {
 				filter: true,
 				sort: true,
-				display: false,
+				display: true,
 			},
 		},
 		{

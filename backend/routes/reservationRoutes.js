@@ -8,6 +8,7 @@ import {
 	removeReservation,
 	updateReservation,
 	getNumberOfNewReservation,
+	sendContract,
 } from '../controllers/reservationController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
@@ -17,6 +18,12 @@ router.get('/reservation/:id/contract', getReservationById);
 router.put('/reservation/contract/:reservation', createContract);
 
 //Admin
+router.put(
+	'/reservation/contract/:reservation/send',
+	protect,
+	admin,
+	sendContract
+);
 router.get('/reservation/count', getNumberOfNewReservation);
 router.get('/reservation', protect, admin, getAllReservations);
 router.get('/reservation/:id', protect, admin, getReservationById);

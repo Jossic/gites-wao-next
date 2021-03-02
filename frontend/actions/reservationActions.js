@@ -15,12 +15,28 @@ export const createReservation = (reservation) => {
 		})
 		.catch((err) => console.log(err));
 };
+
 export const createContract = (reservation) => {
 	return fetch(`${API}/reservation/contract/${reservation}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
 			// Authorization: `Bearer ${token}`,
+		},
+	})
+		.then((response) => {
+			// return response.blob();
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
+export const sendContract = (reservation, token) => {
+	return fetch(`${API}/reservation/contract/${reservation}/send`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
 		},
 	})
 		.then((response) => {

@@ -87,7 +87,13 @@ const Changelog = () => {
 			</Typography>
 			<ul>
 				<li>
-					<span className={classes.root}>Added</span> 24/02/2020 -
+					<span className={classes.root}>Added</span> 02/03/2021 -
+					11:30 - Affichage du pdf lors du clic pour la génération du
+					contrat et envoi du mail avec le contrat en pièce jointe au
+					client.
+				</li>
+				<li>
+					<span className={classes.root}>Added</span> 24/02/2021 -
 					21:46 - Dans la partie gîte, ajout d'un 5eme onglet pour
 					ajouter certaines informations personnalisées sur le contrat
 				</li>

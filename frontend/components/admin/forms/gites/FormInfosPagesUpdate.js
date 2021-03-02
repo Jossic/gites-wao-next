@@ -1,9 +1,12 @@
 import { Button, TextField } from '@material-ui/core';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
-const FormInfosPages = ({ classes, register, gite }) => {
+const FormInfosPages = ({ classes, register, preloadedValues }) => {
 	const [title, setTitle] = useState(70);
 	const [mdesc, setMdesc] = useState(160);
+	preloadedValues.equipementExterieur = preloadedValues.equipementExterieur.toString();
+	console.log('values', preloadedValues);
 
 	return (
 		<>

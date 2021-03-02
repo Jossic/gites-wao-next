@@ -152,11 +152,11 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 				sort: true,
 				customBodyRender: (value, tableMeta, updateValue) => {
 					// console.log(value);
-					// console.log(tableMeta.rowData[5]);
+					// console.log(tableMeta.rowData[6]);
 					return (
 						<>
 							<AfficheDate value={value} />
-							<AfficheDate value={tableMeta.rowData[5]} />
+							<AfficheDate value={tableMeta.rowData[6]} />
 						</>
 					);
 				},
@@ -220,10 +220,16 @@ const ListReservation = ({ reservations, newReservation, gites, router }) => {
 		selectableRows: 'none',
 		setRowProps: (row) => {
 			//ajouter style selon le status
+			// console.log('row', row);
+
 			for (const gite of gites) {
+				// console.log('row[2].props.value', row[2].props.value);
 				if (row[2].props.value === gite._id) {
+					// console.log('au dessus du map', reservations);
+
 					for (const reservation of reservations) {
-						if (reservation.status == 'Nouvelle réservation') {
+						console.log('dans le for ', reservation.status);
+						if (row[3] === reservation.status) {
 							return {
 								className: classes.nouveau,
 								style: {
