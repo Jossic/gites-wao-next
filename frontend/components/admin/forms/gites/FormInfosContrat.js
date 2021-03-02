@@ -77,9 +77,13 @@ const FormInfosContrat = ({ snackbarShowMessage, preloadedValues, router }) => {
 					/>
 				</FormControl>
 				<FormControl className={classes.formControl}>
-					<InputLabel style={{ margin: '20px 10px 10px 15px' }}>
-						Partie principales caractéristiques de la ségination des
-						lieux
+					<InputLabel
+						style={{
+							margin: '10px 15px 10px 15px',
+							fontWeight: 'bold',
+							fontSize: '20px',
+						}}>
+						Principales caractéristiques
 					</InputLabel>
 					{/* // Utilisation avec les deltas
 					 <Controller
@@ -113,8 +117,13 @@ const FormInfosContrat = ({ snackbarShowMessage, preloadedValues, router }) => {
 				</FormControl>
 				{/* // Haut droit bas gauche */}
 				<FormControl className={classes.formControl}>
-					<InputLabel style={{ margin: '20px 10px 10px 15px' }}>
-						Partie situation du logement
+					<InputLabel
+						style={{
+							margin: '10px 10px 10px 15px',
+							fontWeight: 'bold',
+							fontSize: '20px',
+						}}>
+						Situation du logement
 					</InputLabel>
 					{/* <Controller
 						control={control}
@@ -147,8 +156,13 @@ const FormInfosContrat = ({ snackbarShowMessage, preloadedValues, router }) => {
 					/>
 				</FormControl>
 				<FormControl className={classes.formControl}>
-					<InputLabel style={{ margin: '20px 10px 10px 15px' }}>
-						Partie descriptif du logement{' '}
+					<InputLabel
+						style={{
+							margin: '10px 10px 10px 15px',
+							fontWeight: 'bold',
+							fontSize: '20px',
+						}}>
+						Descriptif du logement{' '}
 					</InputLabel>
 					{/* <Controller
 						control={control}

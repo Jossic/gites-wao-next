@@ -1,4 +1,4 @@
-import { FormControlLabel, Switch, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { useState } from 'react';
 
 const FormInfosPages = ({ classes, register }) => {
