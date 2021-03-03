@@ -267,25 +267,30 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 		setValue,
 		getValues,
 		errors,
+		formState,
 	} = useForm({
-		mode: 'onTouched',
+		mode: 'onChange',
 		reValidateMode: 'onChange',
 		shouldUnregister: false,
 		defaultValues: {
 			// nbPers: 10,
 			// nbEnf: 5,
-			nbChien: 1,
-			litFait: true,
-			newsletter: true,
-			nom: 'Lapierre',
-			prenom: 'Jossic',
-			adresse: '18 rue test',
-			cp: '51000',
-			ville: 'maVille',
-			tel: '06 15 55 55 55',
-			mail: 'jossic.lapierre@gmail.com',
+			// nbChien: 1,
+			// litFait: true,
+			// newsletter: true,
+			// nom: 'Lapierre',
+			// prenom: 'Jossic',
+			// adresse: '18 rue test',
+			// cp: '51000',
+			// ville: 'maVille',
+			// tel: '06 15 55 55 55',
+			// mail: 'jossic.lapierre@gmail.com',
 		},
 	});
+
+	const { isValid } = formState;
+
+	console.log('formulaire est :', isValid);
 
 	const isBreakpoint = useMediaQuery(768);
 
@@ -351,6 +356,14 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					</InputLabel>
 					<Controller
 						control={control}
+						rules={{ required: 'Le gite est obligatoire' }}
+						helperText={
+							errors.gite && (
+								<span style={{ color: 'red' }}>
+									{errors.gite.message}
+								</span>
+							)
+						}
 						name='gite'
 						as={
 							<Select id='gite-select'>
@@ -371,7 +384,13 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					id='nbPers'
 					label='Nombre de personnes total'
 					type='number'
-					helperText={errors.nbPers && errors.nbPers.message}
+					helperText={
+						errors.nbPers && (
+							<span style={{ color: 'red' }}>
+								{errors.nbPers.message}
+							</span>
+						)
+					}
 					InputLabelProps={{
 						shrink: true,
 					}}
@@ -572,10 +591,18 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					<InputLabel
 						shrink
 						id='demo-simple-select-placeholder-label-label'>
-						Civilité
+						Civilité*
 					</InputLabel>
 					<Controller
 						control={control}
+						rules={{ required: 'La civilité est obligatoire' }}
+						helperText={
+							errors.civilite && (
+								<span style={{ color: 'red' }}>
+									{errors.civilite.message}
+								</span>
+							)
+						}
 						name='civilite'
 						as={
 							<Select id='civilite-select'>
@@ -610,7 +637,7 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					inputRef={register({ required: 'Le nom est obligatoire' })}
 					name='nom'
 					id='nom'
-					label='Nom'
+					label='Nom*'
 					helperText={
 						errors.nom && (
 							<span style={{ color: 'red' }}>
@@ -635,7 +662,7 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					}
 					name='prenom'
 					id='prenom'
-					label='Prénom'
+					label='Prénom*'
 					InputLabelProps={{
 						shrink: true,
 					}}
@@ -655,7 +682,7 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					}
 					name='adresse'
 					id='adresse'
-					label='Adresse'
+					label='Adresse*'
 					InputLabelProps={{
 						shrink: true,
 					}}
@@ -673,7 +700,7 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					}
 					name='cp'
 					id='cp'
-					label='Code Postal'
+					label='Code Postal*'
 					InputLabelProps={{
 						shrink: true,
 					}}
@@ -691,7 +718,7 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					}
 					name='ville'
 					id='ville'
-					label='Ville'
+					label='Ville*'
 					InputLabelProps={{
 						shrink: true,
 					}}
@@ -700,11 +727,19 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					<InputLabel
 						shrink
 						id='demo-simple-select-placeholder-label-label'>
-						Pays
+						Pays*
 					</InputLabel>
 
 					<Controller
 						control={control}
+						rules={{ required: 'Le pays est obligatoire' }}
+						helperText={
+							errors.pays && (
+								<span style={{ color: 'red' }}>
+									{errors.pays.message}
+								</span>
+							)
+						}
 						name='pays'
 						as={
 							<Select id='pays-select'>
@@ -747,7 +782,7 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					}
 					name='mail'
 					id='mail'
-					label='Email'
+					label='Email*'
 					type='mail'
 					InputLabelProps={{
 						shrink: true,
@@ -760,6 +795,9 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 		<p>
 			{/* {JSON.stringify(getValues())} */}
 			<h3>Récapitulatif de la location</h3>
+			<span style={{ fontStyle: 'italic', fontSize: '0.8rem' }}>
+				Un texte en rouge signifie que le champs à mal été renseigné
+			</span>
 			<Grid
 				container
 				direction='row'
@@ -768,7 +806,16 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 				<Grid item>
 					<p>Location :</p>
 					<ul>
-						<li>Le gite : {getValues().gite}</li>
+						<li>
+							Le gite :{' '}
+							{!getValues().gite ? (
+								<span style={{ color: 'red' }}>
+									Gîte manquant
+								</span>
+							) : (
+								getValues().gite
+							)}
+						</li>
 						<li>
 							Du{' '}
 							{dayjs(getValues().dateArrivee).format(
@@ -778,9 +825,29 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 							{dayjs(getValues().dateDepart).format('DD/MM/YYYY')}
 						</li>
 						<li>
-							Pour {getValues().nbPers} personnes dont{' '}
-							{getValues().nbEnf} enfant(s) ainsi que{' '}
-							{getValues().nbChien} animaux
+							Pour{' '}
+							{!getValues().nbPers ? (
+								<span style={{ color: 'red' }}>
+									Nombre de personnes manquant
+								</span>
+							) : (
+								getValues().nbPers
+							)}{' '}
+							personnes dont{' '}
+							{!getValues().nbEnf ? (
+								<span style={{ color: 'red' }}>
+									Nombre d'enfant manquant
+								</span>
+							) : (
+								getValues().nbEnf
+							)}{' '}
+							enfant(s){' '}
+							{getValues().nbChien && (
+								<span>
+									<br /> ainsi que {getValues().nbChien}{' '}
+									animaux
+								</span>
+							)}
 						</li>
 						<li>
 							Options :{' '}
@@ -793,13 +860,59 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					<p>Vos informations :</p>
 					<ul>
 						<li>
-							{getValues().civilite} {getValues().nom}{' '}
-							{getValues().prenom}
+							{!getValues().civilite ? (
+								<span style={{ color: 'red' }}>
+									Civilité manquant
+								</span>
+							) : (
+								getValues().civilite
+							)}{' '}
+							{!getValues().nom ? (
+								<span style={{ color: 'red' }}>
+									Nom manquant
+								</span>
+							) : (
+								getValues().nom
+							)}{' '}
+							{!getValues().prenom ? (
+								<span style={{ color: 'red' }}>
+									Prénom manquant
+								</span>
+							) : (
+								getValues().prenom
+							)}
 						</li>
 						<li>
-							{getValues().adresse} <br />
-							{getValues().cp} {getValues().ville},{' '}
-							{getValues().pays}
+							{!getValues().adresse ? (
+								<span style={{ color: 'red' }}>
+									Adresse manquante
+								</span>
+							) : (
+								getValues().adresse
+							)}{' '}
+							<br />
+							{!getValues().cp ? (
+								<span style={{ color: 'red' }}>
+									Code postal manquant
+								</span>
+							) : (
+								getValues().cp
+							)}{' '}
+							{!getValues().ville ? (
+								<span style={{ color: 'red' }}>
+									Ville manquante
+								</span>
+							) : (
+								getValues().ville
+							)}
+							,{' '}
+							{!getValues().pays ? (
+								<span style={{ color: 'red' }}>
+									Pays manquant
+								</span>
+							) : (
+								getValues().pays
+							)}
 						</li>
 						<li>
 							Téléphone : {getValues().tel} <br />
@@ -903,6 +1016,7 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 									type='submit'
 									variant='contained'
 									color='primary'
+									disabled={!isValid}
 									className={classes.button}>
 									Valider
 								</Button>
