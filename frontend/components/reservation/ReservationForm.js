@@ -260,7 +260,7 @@ const useMediaQuery = (width) => {
 const ReservationForm = ({ snackbarShowMessage, gites }) => {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = useState(0);
-	const { control, register, handleSubmit, setValue } = useForm({
+	const { control, register, handleSubmit, setValue, getValues } = useForm({
 		reValidateMode: 'onChange',
 		shouldUnregister: false,
 		defaultValues: {
@@ -681,7 +681,77 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 			</Grid>
 		</div>
 	);
-	const recap = () => <p>JSON.stringify()</p>;
+	const recap = () => (
+		<p>
+			{/* {JSON.stringify(getValues())} */}
+			<h3>Récapitulatif de la location</h3>
+			<Grid
+				container
+				direction='row'
+				justify='space-evenly'
+				alignItems='flex-start'>
+				<Grid item>
+					<p>Location :</p>
+					<ul>
+						<li>Le gite : {getValues().gite}</li>
+						<li>
+							Du{' '}
+							{dayjs(getValues().dateArrivee).format(
+								'DD/MM/YYYY'
+							)}{' '}
+							au{' '}
+							{dayjs(getValues().dateDepart).format('DD/MM/YYYY')}
+						</li>
+						<li>
+							Pour {getValues().nbPers} personnes dont{' '}
+							{getValues().nbEnf} enfant(s) ainsi que{' '}
+							{getValues().nbChien} animaux
+						</li>
+						<li>
+							Options :{' '}
+							{getValues().litFait && 'Lits fait : Oui,'}{' '}
+							{getValues().newsletter && 'Newsletter : Oui'}
+						</li>
+					</ul>
+				</Grid>
+				<Grid item>
+					<p>Vos informations :</p>
+					<ul>
+						<li>
+							{getValues().civilite} {getValues().nom}{' '}
+							{getValues().prenom}
+						</li>
+						<li>
+							{getValues().adresse} <br />
+							{getValues().cp} {getValues().ville},{' '}
+							{getValues().pays}
+						</li>
+						<li>
+							Téléphone : {getValues().tel} <br />
+							Mail : {getValues().mail}
+						</li>
+					</ul>
+				</Grid>
+			</Grid>
+			<Grid
+				container
+				direction='column'
+				justify='flex-start'
+				alignItems='center'>
+				{console.log(getValues().infoCompl)}
+				{getValues().infoCompl !== '' && (
+					<>
+						<Grid>
+							<p>Votre message :</p>{' '}
+						</Grid>
+						<Grid>
+							<p>{getValues().infoCompl}</p>
+						</Grid>
+					</>
+				)}
+			</Grid>
+		</p>
+	);
 
 	function getStepContent(step) {
 		switch (step) {
@@ -742,18 +812,26 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 						))}
 					</Stepper>
 					<div>
-						{activeStep === steps.length ? (
-							<div>
+						{activeStep + 1 === steps.length ? (
+							<>
 								{/* Voir pout ajouter isSubmited === true */}
 								<Typography className={classes.instructions}>
-									Votre demande a bien été prise en compte
+									{recap()}
 								</Typography>
 								<Button
-									onClick={handleReset}
+									disabled={activeStep === 0}
+									onClick={handleBack}
 									className={classes.button}>
-									Recommencer
+									Retour
 								</Button>
-							</div>
+								<Button
+									type='submit'
+									variant='contained'
+									color='primary'
+									className={classes.button}>
+									Valider
+								</Button>
+							</>
 						) : (
 							<div>
 								<Typography className={classes.instructions}>
@@ -766,23 +844,13 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 										className={classes.button}>
 										Retour
 									</Button>
-									{activeStep === steps.length - 1 ? (
-										<Button
-											type='submit'
-											variant='contained'
-											color='primary'
-											className={classes.button}>
-											Valider
-										</Button>
-									) : (
-										<Button
-											variant='contained'
-											color='primary'
-											onClick={handleNext}
-											className={classes.button}>
-											Suivant
-										</Button>
-									)}
+									<Button
+										variant='contained'
+										color='primary'
+										onClick={handleNext}
+										className={classes.button}>
+										Suivant
+									</Button>
 								</div>
 							</div>
 						)}
