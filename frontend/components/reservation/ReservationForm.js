@@ -15,9 +15,11 @@ import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import { useEffect, useState, useRef } from 'react';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { useForm, Controller } from 'react-hook-form';
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
-import { DateRangePicker } from 'react-date-range';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
+import { DateRange } from 'react-date-range';
+import { startOfWeek } from 'date-fns';
+import fr from 'date-fns/locale/fr';
 import dayjs from 'dayjs';
 import {
 	Checkbox,
@@ -34,11 +36,6 @@ import {
 	CircularProgress,
 } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-	MuiPickersUtilsProvider,
-	KeyboardDatePicker,
-} from '@material-ui/pickers';
 import { createReservation } from '../../actions/reservationActions';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { RECAPTCHA_SECRET_KEY } from '../../config';
@@ -232,14 +229,13 @@ function getSteps() {
 	];
 }
 
-const ReservationForm = ({ snackbarShowMessage }) => {
+const ReservationForm = ({ snackbarShowMessage, gites }) => {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = useState(0);
 	const { control, register, handleSubmit, setValue } = useForm({
 		reValidateMode: 'onChange',
 		shouldUnregister: false,
 		defaultValues: {
-			gite: 'manola',
 			nbPers: 10,
 			nbEnf: 5,
 			nbChien: 1,
@@ -255,10 +251,11 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 		},
 	});
 
-	// const [dateDebut, setDateDebut] = useState();
-	// const [dateFin, setDateFin] = useState();
+	const dateOptions = { locale: fr };
+	startOfWeek(new Date(), dateOptions);
 
-	// console.log(state);
+	// const [locale, setLocale] = React.useState('fr');
+
 	const [state, setState] = useState([
 		{
 			startDate: new Date(),
@@ -280,34 +277,16 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 		);
 	};
 
-	useEffect(() => {
-		listDesGites();
-	}, []);
-
 	React.useEffect(() => {
 		register('dateArrivee'); // custom register
 		register('dateDepart'); // custom register
 	}, [register]);
-
-	const [dateArrivee, setDateArrivee] = useState();
 
 	const [loading, setLoading] = useState(false);
 
 	const reRef = useRef();
 
 	const steps = getSteps();
-
-	const [selectedDateArrivee, setSelectedDateArrivee] = useState();
-
-	const handleDateChangeArrivee = (date) => {
-		setSelectedDateArrivee(date);
-		setSelectedDateDepart(date);
-	};
-	const [selectedDateDepart, setSelectedDateDepart] = useState();
-
-	const handleDateChangeDepart = (date) => {
-		setSelectedDateDepart(date);
-	};
 
 	const handleNext = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -319,18 +298,6 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 
 	const handleReset = () => {
 		setActiveStep(0);
-	};
-
-	const [gites, setGites] = useState([]);
-
-	const listDesGites = () => {
-		listGitesNoms().then((data) => {
-			if (data.error) {
-				console.log(error);
-			} else {
-				setGites(...gites, data);
-			}
-		});
 	};
 
 	const infoLoc = () => (
@@ -390,7 +357,7 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 					control={control}
 					name='dates'
 					as={
-						<DateRangePicker
+						<DateRange 
 							onChange={(item) => setState([item.selection])}
 							showSelectionPreview={true}
 							moveRangeOnFirstSelection={false}
@@ -402,50 +369,18 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 				/>
 			</FormControl> */}
 
-			<DateRangePicker
+			<DateRange
+				className={classes.calendrier}
 				onChange={(item) => handleChange(item)}
 				// onChange={(item) => setState([item.selection])}
-				// onChange={(item) => console.log('item', item)}
 				showSelectionPreview={true}
 				name='dateDF'
 				moveRangeOnFirstSelection={false}
-				// months={2}
+				months={2}
+				locale={fr}
 				ranges={state}
 				direction='horizontal'
 			/>
-			{/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-				<Grid container justify='space-around'>
-					<KeyboardDatePicker
-						inputRef={register}
-						margin='normal'
-						id='date-picker-dialog'
-						name='dateArrivee'
-						label="Date d'arrivée"
-						format='MM/dd/yyyy'
-						defaultValue=''
-						value={selectedDateArrivee}
-						onChange={handleDateChangeArrivee}
-						KeyboardButtonProps={{
-							'aria-label': 'change date',
-						}}
-					/>
-
-					<KeyboardDatePicker
-						inputRef={register}
-						margin='normal'
-						id='date-picker-dialog'
-						name='dateDepart'
-						label='Date de départ'
-						format='MM/dd/yyyy'
-						defaultValue=''
-						value={selectedDateDepart}
-						onChange={handleDateChangeDepart}
-						KeyboardButtonProps={{
-							'aria-label': 'change date',
-						}}
-					/>
-				</Grid>
-			</MuiPickersUtilsProvider> */}
 		</div>
 	);
 	const infoComp = () => (
