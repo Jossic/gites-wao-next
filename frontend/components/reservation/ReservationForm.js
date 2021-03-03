@@ -611,6 +611,13 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					name='nom'
 					id='nom'
 					label='Nom'
+					helperText={
+						errors.nom && (
+							<span style={{ color: 'red' }}>
+								{errors.nom.message}
+							</span>
+						)
+					}
 					InputLabelProps={{
 						shrink: true,
 					}}
@@ -619,6 +626,13 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					inputRef={register({
 						required: 'Le prénom est obligatoire',
 					})}
+					helperText={
+						errors.prenom && (
+							<span style={{ color: 'red' }}>
+								{errors.prenom.message}
+							</span>
+						)
+					}
 					name='prenom'
 					id='prenom'
 					label='Prénom'
@@ -632,6 +646,13 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					inputRef={register({
 						required: "L'adresse est obligatoire",
 					})}
+					helperText={
+						errors.adresse && (
+							<span style={{ color: 'red' }}>
+								{errors.adresse.message}
+							</span>
+						)
+					}
 					name='adresse'
 					id='adresse'
 					label='Adresse'
@@ -643,6 +664,13 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					inputRef={register({
 						required: 'Le code postal est obligatoire',
 					})}
+					helperText={
+						errors.cp && (
+							<span style={{ color: 'red' }}>
+								{errors.cp.message}
+							</span>
+						)
+					}
 					name='cp'
 					id='cp'
 					label='Code Postal'
@@ -654,6 +682,13 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					inputRef={register({
 						required: 'La ville est obligatoire',
 					})}
+					helperText={
+						errors.ville && (
+							<span style={{ color: 'red' }}>
+								{errors.ville.message}
+							</span>
+						)
+					}
 					name='ville'
 					id='ville'
 					label='Ville'
@@ -703,6 +738,13 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 				/>
 				<TextField
 					inputRef={register({ required: 'Le mail est obligatoire' })}
+					helperText={
+						errors.mail && (
+							<span style={{ color: 'red' }}>
+								{errors.mail.message}
+							</span>
+						)
+					}
 					name='mail'
 					id='mail'
 					label='Email'
