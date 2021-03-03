@@ -1,8 +1,16 @@
 import Head from 'next/head';
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '../../components/layout/Layout';
 import { API, DOMAIN, APP_NAME } from '../../config';
-import { listGiteDetails, listPhotosByNom } from '../../actions/giteActions';
+import { AutoRotatingCarousel } from 'material-auto-rotating-carousel';
+import { Slide } from 'material-auto-rotating-carousel';
+
+import { red, blue, green } from '@material-ui/core/colors';
+import {
+	listGiteDetails,
+	listGitesNoms,
+	listPhotosByNom,
+} from '../../actions/giteActions';
 import Image from 'next/image';
 import { Jumbotron } from 'reactstrap';
 import { Carousel } from 'react-bootstrap';
@@ -10,7 +18,7 @@ import ContactForm from '../../components/ContactForm';
 import { listReviewsBySlug } from '../../actions/reviewActions';
 import Note from '../../components/admin/Note';
 
-const Gite = React.forwardRef(({ gite, photos, reviews }, ref) => {
+const Gite = ({ gite, photos, reviews }) => {
 	const head = () => (
 		<Head>
 			<title>
@@ -45,6 +53,11 @@ const Gite = React.forwardRef(({ gite, photos, reviews }, ref) => {
 		return { __html: gite.videoLink };
 	};
 
+	const [state, setState] = useState({ open: false });
+	const handleClick = () => {
+		setState({ open: true });
+	};
+
 	const jumbotron = () => (
 		<section>
 			<div className='container'>
@@ -69,19 +82,35 @@ const Gite = React.forwardRef(({ gite, photos, reviews }, ref) => {
 			return photo.sectionAssociee === section;
 		});
 		return filteredPhotos.map((photo, i) => (
-			<Carousel.Item key={i} ref={ref}>
-				<Image
-					className='d-block w-100'
-					src={photo.location}
-					alt={photo.alt}
-					width={500}
-					height={375}
-				/>
-				<Carousel.Caption>
-					<h4>{photo.titreCarousel}</h4>
-					<p>{photo.texteCarousel}</p>
-				</Carousel.Caption>
-			</Carousel.Item>
+			<Slide
+				media={
+					<Image
+						// className='d-block w-100'
+						src={photo.location}
+						alt={photo.alt}
+						width={500}
+						height={375}
+					/>
+				}
+				mediaBackgroundStyle={{ backgroundColor: red[400] }}
+				style={{ backgroundColor: red[600] }}
+				title={photo.titreCarousel}
+				subtitle={photo.texteCarousel}
+			/>
+
+			// <Carousel.Item key={i}>
+			// 	<Image
+			// 		className='d-block w-100'
+			// 		src={photo.location}
+			// 		alt={photo.alt}
+			// 		width={500}
+			// 		height={375}
+			// 	/>
+			// 	<Carousel.Caption>
+			// 		<h4>{photo.titreCarousel}</h4>
+			// 		<p>{photo.texteCarousel}</p>
+			// 	</Carousel.Caption>
+			// </Carousel.Item>
 		));
 	};
 
@@ -91,7 +120,16 @@ const Gite = React.forwardRef(({ gite, photos, reviews }, ref) => {
 				<h2 className='text-center'>Partie extérieur</h2>
 				<div className='row'>
 					<div className='col-md-6'>
-						<Carousel>{carousel('exterieur')}</Carousel>
+						<AutoRotatingCarousel
+							label='Get started'
+							open={state.open}
+							onClose={() => setState({ open: false })}
+							onStart={() => setState({ open: false })}
+							style={{ position: 'absolute' }}>
+							{carousel('exterieur')}
+						</AutoRotatingCarousel>
+
+						{/* <Carousel>{carousel('exterieur')}</Carousel> */}
 					</div>
 					<div className='col-md-6'>{gite.texteExterieur}</div>
 				</div>
@@ -214,7 +252,7 @@ const Gite = React.forwardRef(({ gite, photos, reviews }, ref) => {
 				<hr />
 				{sectionPiscine()}
 				<hr />
-				{console.log(reviews)}
+				{/* {console.log(reviews)} */}
 				{sectionReviews()}
 				<hr />
 				{sectionVideoContact()}
@@ -225,18 +263,18 @@ const Gite = React.forwardRef(({ gite, photos, reviews }, ref) => {
 			</Layout>
 		</>
 	);
-});
+};
 
 export async function getStaticPaths() {
 	//lister les noms de gites
+	const gitesNom = await listGitesNoms();
 	return {
-		paths: [
-			{ params: { slug: 'manola' } },
-			{ params: { slug: 'brinchette' } },
-			{ params: { slug: 'lauberoye' } },
-			{ params: { slug: 'petit-nay' } },
-		],
-		fallback: true,
+		paths: gitesNom.map((nom) => {
+			return {
+				params: { id: nom._id, slug: nom.slug },
+			};
+		}),
+		fallback: false,
 	};
 }
 

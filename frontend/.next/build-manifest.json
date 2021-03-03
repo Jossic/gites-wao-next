@@ -24,10 +24,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/reservation/[id]": [
+    "/gite/[slug]": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/reservation/[id].js"
+      "static/chunks/pages/gite/[slug].js"
     ],
     "/reservation": [
       "static/chunks/main.js",
