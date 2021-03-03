@@ -1,4 +1,3 @@
-import { listGitesNoms } from '../../actions/giteActions';
 import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -12,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import HouseIcon from '@material-ui/icons/House';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { useForm, Controller } from 'react-hook-form';
 import 'react-date-range/dist/styles.css';
@@ -218,6 +217,9 @@ const useStyles = makeStyles((theme) => ({
 	selectEmpty: {
 		marginTop: theme.spacing(2),
 	},
+	// calendrier: {
+	// 	backgroundColor: 'gray',
+	// },
 }));
 
 function getSteps() {
@@ -228,6 +230,32 @@ function getSteps() {
 		'Récapitulatif',
 	];
 }
+
+const useMediaQuery = (width) => {
+	const [targetReached, setTargetReached] = useState(false);
+
+	const updateTarget = useCallback((e) => {
+		if (e.matches) {
+			setTargetReached(true);
+		} else {
+			setTargetReached(false);
+		}
+	}, []);
+
+	useEffect(() => {
+		const media = window.matchMedia(`(max-width: ${width}px)`);
+		media.addListener(updateTarget);
+
+		// Check on mount (callback is not called until a change occurs)
+		if (media.matches) {
+			setTargetReached(true);
+		}
+
+		return () => media.removeListener(updateTarget);
+	}, []);
+
+	return targetReached;
+};
 
 const ReservationForm = ({ snackbarShowMessage, gites }) => {
 	const classes = useStyles();
@@ -250,6 +278,8 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 			mail: 'jossic.lapierre@gmail.com',
 		},
 	});
+
+	const isBreakpoint = useMediaQuery(768);
 
 	const dateOptions = { locale: fr };
 	startOfWeek(new Date(), dateOptions);
@@ -346,41 +376,48 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					}}
 				/>
 			</Grid>
-			{/* 
-			<FormControl className={classes.formControl}>
-				<InputLabel
-					shrink
-					id='demo-simple-select-placeholder-label-label'>
-					Dates de séjout
-				</InputLabel>
-				<Controller
-					control={control}
-					name='dates'
-					as={
-						<DateRange 
-							onChange={(item) => setState([item.selection])}
-							showSelectionPreview={true}
-							moveRangeOnFirstSelection={false}
-							// months={2}
-							ranges={state}
-							direction='horizontal'
-						/>
-					}
-				/>
-			</FormControl> */}
 
-			<DateRange
-				className={classes.calendrier}
-				onChange={(item) => handleChange(item)}
-				// onChange={(item) => setState([item.selection])}
-				showSelectionPreview={true}
-				name='dateDF'
-				moveRangeOnFirstSelection={false}
-				months={2}
-				locale={fr}
-				ranges={state}
-				direction='horizontal'
-			/>
+			{isBreakpoint ? (
+				<Grid
+					container
+					direction='row'
+					justify='center'
+					alignItems='center'
+					style={{ paddingTop: '20px' }}>
+					<DateRange
+						className={classes.calendrier}
+						onChange={(item) => handleChange(item)}
+						// onChange={(item) => setState([item.selection])}
+						showSelectionPreview={true}
+						name='dateDF'
+						moveRangeOnFirstSelection={false}
+						months={1}
+						locale={fr}
+						ranges={state}
+						direction='horizontal'
+					/>
+				</Grid>
+			) : (
+				<Grid
+					container
+					direction='row'
+					justify='center'
+					alignItems='center'
+					style={{ paddingTop: '20px' }}>
+					<DateRange
+						className={classes.calendrier}
+						onChange={(item) => handleChange(item)}
+						// onChange={(item) => setState([item.selection])}
+						showSelectionPreview={true}
+						name='dateDF'
+						moveRangeOnFirstSelection={false}
+						months={2}
+						locale={fr}
+						ranges={state}
+						direction='horizontal'
+					/>
+				</Grid>
+			)}
 		</div>
 	);
 	const infoComp = () => (
