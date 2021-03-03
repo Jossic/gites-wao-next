@@ -18,6 +18,7 @@ import { useForm, Controller } from 'react-hook-form';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker } from 'react-date-range';
+import dayjs from 'dayjs';
 import {
 	Checkbox,
 	Container,
@@ -234,7 +235,7 @@ function getSteps() {
 const ReservationForm = ({ snackbarShowMessage }) => {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = useState(0);
-	const { control, register, handleSubmit } = useForm({
+	const { control, register, handleSubmit, setValue } = useForm({
 		reValidateMode: 'onChange',
 		shouldUnregister: false,
 		defaultValues: {
@@ -254,6 +255,10 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 		},
 	});
 
+	// const [dateDebut, setDateDebut] = useState();
+	// const [dateFin, setDateFin] = useState();
+
+	// console.log(state);
 	const [state, setState] = useState([
 		{
 			startDate: new Date(),
@@ -261,6 +266,28 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 			key: 'selection',
 		},
 	]);
+
+	const handleChange = (item) => {
+		setState([item.selection]);
+
+		setValue(
+			'dateArrivee',
+			dayjs(item.selection.startDate).format('MM/DD/YYYY')
+		);
+		setValue(
+			'dateDepart',
+			dayjs(item.selection.endDate).format('MM/DD/YYYY')
+		);
+	};
+
+	useEffect(() => {
+		listDesGites();
+	}, []);
+
+	React.useEffect(() => {
+		register('dateArrivee'); // custom register
+		register('dateDepart'); // custom register
+	}, [register]);
 
 	const [dateArrivee, setDateArrivee] = useState();
 
@@ -305,10 +332,6 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 			}
 		});
 	};
-
-	useEffect(() => {
-		listDesGites();
-	}, []);
 
 	const infoLoc = () => (
 		<div className=''>
@@ -380,8 +403,11 @@ const ReservationForm = ({ snackbarShowMessage }) => {
 			</FormControl> */}
 
 			<DateRangePicker
-				onChange={(item) => setState([item.selection])}
+				onChange={(item) => handleChange(item)}
+				// onChange={(item) => setState([item.selection])}
+				// onChange={(item) => console.log('item', item)}
 				showSelectionPreview={true}
+				name='dateDF'
 				moveRangeOnFirstSelection={false}
 				// months={2}
 				ranges={state}
