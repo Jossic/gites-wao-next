@@ -13,7 +13,7 @@ import HouseIcon from '@material-ui/icons/House';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import { useEffect, useState, useCallback, useRef } from 'react';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, appendErrors } from 'react-hook-form';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { DateRange } from 'react-date-range';
@@ -260,12 +260,20 @@ const useMediaQuery = (width) => {
 const ReservationForm = ({ snackbarShowMessage, gites }) => {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = useState(0);
-	const { control, register, handleSubmit, setValue, getValues } = useForm({
+	const {
+		control,
+		register,
+		handleSubmit,
+		setValue,
+		getValues,
+		errors,
+	} = useForm({
+		mode: 'onTouched',
 		reValidateMode: 'onChange',
 		shouldUnregister: false,
 		defaultValues: {
-			nbPers: 10,
-			nbEnf: 5,
+			// nbPers: 10,
+			// nbEnf: 5,
 			nbChien: 1,
 			litFait: true,
 			newsletter: true,
@@ -356,21 +364,38 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					/>
 				</FormControl>
 				<TextField
-					inputRef={register}
+					inputRef={register({
+						required: 'Le nombre de personnes est obligatoire',
+					})}
 					name='nbPers'
 					id='nbPers'
 					label='Nombre de personnes total'
 					type='number'
+					helperText={errors.nbPers && errors.nbPers.message}
 					InputLabelProps={{
 						shrink: true,
 					}}
 				/>
+				{/* {errors.nbPers && (
+					<span style={{ color: 'red', fontSize: '10px' }}>
+						{errors.nbPers.message}
+					</span>
+				)} */}
 				<TextField
-					inputRef={register}
+					inputRef={register({
+						required: "Le nombre d'enfants est obligatoire",
+					})}
 					name='nbEnf'
 					id='nbEnf'
 					label='Dont enfants de moins de 18 ans'
 					type='number'
+					helperText={
+						errors.nbEnf && (
+							<span style={{ color: 'red' }}>
+								{errors.nbEnf.message}
+							</span>
+						)
+					}
 					InputLabelProps={{
 						shrink: true,
 					}}
@@ -582,7 +607,7 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 				</FormControl>
 
 				<TextField
-					inputRef={register}
+					inputRef={register({ required: 'Le nom est obligatoire' })}
 					name='nom'
 					id='nom'
 					label='Nom'
@@ -591,7 +616,9 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					}}
 				/>
 				<TextField
-					inputRef={register}
+					inputRef={register({
+						required: 'Le prénom est obligatoire',
+					})}
 					name='prenom'
 					id='prenom'
 					label='Prénom'
@@ -602,16 +629,20 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 			</Grid>
 			<Grid container justify='space-around'>
 				<TextField
-					inputRef={register}
-					name='prenom'
-					id='prenom'
+					inputRef={register({
+						required: "L'adresse est obligatoire",
+					})}
+					name='adresse'
+					id='adresse'
 					label='Adresse'
 					InputLabelProps={{
 						shrink: true,
 					}}
 				/>
 				<TextField
-					inputRef={register}
+					inputRef={register({
+						required: 'Le code postal est obligatoire',
+					})}
 					name='cp'
 					id='cp'
 					label='Code Postal'
@@ -620,7 +651,9 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					}}
 				/>
 				<TextField
-					inputRef={register}
+					inputRef={register({
+						required: 'La ville est obligatoire',
+					})}
 					name='ville'
 					id='ville'
 					label='Ville'
@@ -669,7 +702,7 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					}}
 				/>
 				<TextField
-					inputRef={register}
+					inputRef={register({ required: 'Le mail est obligatoire' })}
 					name='mail'
 					id='mail'
 					label='Email'
