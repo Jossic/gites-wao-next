@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Stepper from '@material-ui/core/Stepper';
+import { addDays } from 'date-fns';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Check from '@material-ui/icons/Check';
@@ -273,18 +274,18 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 		reValidateMode: 'onChange',
 		shouldUnregister: false,
 		defaultValues: {
-			// nbPers: 10,
-			// nbEnf: 5,
-			// nbChien: 1,
-			// litFait: true,
-			// newsletter: true,
-			// nom: 'Lapierre',
-			// prenom: 'Jossic',
-			// adresse: '18 rue test',
-			// cp: '51000',
-			// ville: 'maVille',
-			// tel: '06 15 55 55 55',
-			// mail: 'jossic.lapierre@gmail.com',
+			nbPers: 10,
+			nbEnf: 5,
+			nbChien: 1,
+			litFait: true,
+			newsletter: true,
+			nom: 'Lapierre',
+			prenom: 'Jossic',
+			adresse: '18 rue test',
+			cp: '51000',
+			ville: 'maVille',
+			tel: '06 15 55 55 55',
+			mail: 'jossic.lapierre@gmail.com',
 		},
 	});
 
@@ -395,11 +396,7 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 						shrink: true,
 					}}
 				/>
-				{/* {errors.nbPers && (
-					<span style={{ color: 'red', fontSize: '10px' }}>
-						{errors.nbPers.message}
-					</span>
-				)} */}
+
 				<TextField
 					inputRef={register({
 						required: "Le nombre d'enfants est obligatoire",
@@ -430,6 +427,7 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 					style={{ paddingTop: '20px' }}>
 					<DateRange
 						className={classes.calendrier}
+						minDate={addDays(new Date(), 0)}
 						onChange={(item) => handleChange(item)}
 						// onChange={(item) => setState([item.selection])}
 						showSelectionPreview={true}
@@ -453,6 +451,7 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 						onChange={(item) => handleChange(item)}
 						// onChange={(item) => setState([item.selection])}
 						showSelectionPreview={true}
+						minDate={addDays(new Date(), 0)}
 						name='dateDF'
 						moveRangeOnFirstSelection={false}
 						months={2}
@@ -817,12 +816,23 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 							)}
 						</li>
 						<li>
-							Du{' '}
-							{dayjs(getValues().dateArrivee).format(
-								'DD/MM/YYYY'
-							)}{' '}
-							au{' '}
-							{dayjs(getValues().dateDepart).format('DD/MM/YYYY')}
+							{getValues().dateArrivee ===
+							getValues().dateDepart ? (
+								<span style={{ color: 'red' }}>
+									Les dates ne peuvent pas être identiques
+								</span>
+							) : (
+								<span>
+									Du{' '}
+									{dayjs(getValues().dateArrivee).format(
+										'DD/MM/YYYY'
+									)}{' '}
+									au{' '}
+									{dayjs(getValues().dateDepart).format(
+										'DD/MM/YYYY'
+									)}
+								</span>
+							)}
 						</li>
 						<li>
 							Pour{' '}
