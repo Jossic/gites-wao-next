@@ -1,7 +1,7 @@
 # gites-wao-next
 
 ##frontend
-npm i next react react-dom reactstrap bootstrap google-map-react axios js-cookie isomorphic-fetch react-pro-sidebar react-hook-form react-bootstrap react-google-recaptcha @material-ui/core @material-ui/icons mui-datatables dayjs react-quill react-render-html swiper
+npm i next react react-dom reactstrap bootstrap google-map-react axios js-cookie isomorphic-fetch react-pro-sidebar react-hook-form react-bootstrap react-google-recaptcha @material-ui/core @material-ui/icons mui-datatables dayjs react-quill react-render-html swiper sass
 
 
 ##backend
