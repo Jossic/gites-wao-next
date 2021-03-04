@@ -3,6 +3,12 @@ import Head from 'next/head';
 import '../styles/globals.css';
 import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// Import Swiper styles
+import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
+import 'swiper/components/pagination/pagination.scss';
+import 'swiper/components/scrollbar/scrollbar.scss';
+
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -25,6 +31,15 @@ export default function App({ Component, pageProps }) {
 					content='width=device-width, initial-scale=1.0'
 				/>
 
+				{/* Swiper */}
+				<link
+					rel='stylesheet'
+					href='https://unpkg.com/swiper/swiper-bundle.css'
+				/>
+				<link
+					rel='stylesheet'
+					href='https://unpkg.com/swiper/swiper-bundle.min.css'
+				/>
 				<link rel='stylesheet' href='/styles/globals.css' />
 				<link
 					rel='stylesheet'
@@ -61,6 +76,9 @@ export default function App({ Component, pageProps }) {
 				integrity='sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=='
 				crossOrigin='anonymous'
 			/>
+			{/* Swiper */}
+			<script src='https://unpkg.com/swiper/swiper-bundle.js'></script>
+			<script src='https://unpkg.com/swiper/swiper-bundle.min.js'></script>
 		</>
 	);
 }

@@ -29,6 +29,7 @@ class MyDocument extends Document {
 						name='theme-color'
 						content={darkTheme.palette.primary.main}
 					/>
+
 					<link
 						rel='shortcut icon'
 						href='https://gites-wao.s3.eu-west-3.amazonaws.com/IN4K3cR3kF-wao-transparent.png'

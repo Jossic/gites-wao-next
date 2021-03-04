@@ -126,6 +126,12 @@ const Changelog = () => {
 			</Typography>
 			<ul>
 				<li>
+					<span className={classes.root}>Changed</span> 03/03/2021 -
+					22:30 - Contrôles sur la soumission du formulaire de
+					réservation ajouté avec récapitulatif final à mettre en
+					forme
+				</li>
+				<li>
 					<span className={classes.root}>Changed</span> 02/03/2021 -
 					17:00 - Affichage du listing des équipements corrigé
 				</li>
@@ -146,6 +152,11 @@ const Changelog = () => {
 					To fixe
 				</Typography>
 
+				<li>
+					<span className={classes.root}>To fixe</span> Formulaire de
+					réservation, enpécher la soumission si certaines conditions
+					ne sont pas remplies.
+				</li>
 				<li>
 					<span className={classes.root}>To fixe</span> Gestion des
 					réservations - Corriger le tri sur client et sur gîte

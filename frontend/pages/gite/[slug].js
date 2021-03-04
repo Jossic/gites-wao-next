@@ -2,10 +2,12 @@ import Head from 'next/head';
 import React, { useState } from 'react';
 import Layout from '../../components/layout/Layout';
 import { API, DOMAIN, APP_NAME } from '../../config';
-import { AutoRotatingCarousel } from 'material-auto-rotating-carousel';
-import { Slide } from 'material-auto-rotating-carousel';
+// import Swiper core and required modules
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
-import { red, blue, green } from '@material-ui/core/colors';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 import {
 	listGiteDetails,
 	listGitesNoms,
@@ -58,6 +60,8 @@ const Gite = ({ gite, photos, reviews }) => {
 		setState({ open: true });
 	};
 
+	const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
 	const jumbotron = () => (
 		<section>
 			<div className='container'>
@@ -82,21 +86,20 @@ const Gite = ({ gite, photos, reviews }) => {
 			return photo.sectionAssociee === section;
 		});
 		return filteredPhotos.map((photo, i) => (
-			<Slide
-				media={
-					<Image
-						// className='d-block w-100'
-						src={photo.location}
-						alt={photo.alt}
-						width={500}
-						height={375}
-					/>
-				}
-				mediaBackgroundStyle={{ backgroundColor: red[400] }}
-				style={{ backgroundColor: red[600] }}
-				title={photo.titreCarousel}
-				subtitle={photo.texteCarousel}
-			/>
+			<SwiperSlide
+			// mediaBackgroundStyle={{ backgroundColor: red[400] }}
+			// style={{ backgroundColor: red[600] }}
+			// title={photo.titreCarousel}
+			// subtitle={photo.texteCarousel}
+			>
+				<Image
+					// className='d-block w-100'
+					src={photo.location}
+					alt={photo.alt}
+					width={500}
+					height={375}
+				/>
+			</SwiperSlide>
 
 			// <Carousel.Item key={i}>
 			// 	<Image
@@ -120,14 +123,18 @@ const Gite = ({ gite, photos, reviews }) => {
 				<h2 className='text-center'>Partie extérieur</h2>
 				<div className='row'>
 					<div className='col-md-6'>
-						<AutoRotatingCarousel
-							label='Get started'
-							open={state.open}
-							onClose={() => setState({ open: false })}
-							onStart={() => setState({ open: false })}
-							style={{ position: 'absolute' }}>
+						<Swiper
+							spaceBetween={50}
+							slidesPerView={1}
+							navigation
+							pagination={{ clickable: true }}
+							scrollbar={{ draggable: true }}
+							onSwiper={setThumbsSwiper}
+							watchSlidesVisibility
+							watchSlidesProgress
+							onSlideChange={() => console.log('slide change')}>
 							{carousel('exterieur')}
-						</AutoRotatingCarousel>
+						</Swiper>
 
 						{/* <Carousel>{carousel('exterieur')}</Carousel> */}
 					</div>
@@ -144,7 +151,18 @@ const Gite = ({ gite, photos, reviews }) => {
 				<div className='row'>
 					<div className='col-md-6'>{gite.texteInterieur}</div>
 					<div className='col-md-6'>
-						<Carousel>{carousel('interieur')}</Carousel>
+						<Swiper
+							spaceBetween={50}
+							slidesPerView={1}
+							navigation
+							pagination={{ clickable: true }}
+							scrollbar={{ draggable: true }}
+							onSwiper={setThumbsSwiper}
+							watchSlidesVisibility
+							watchSlidesProgress
+							onSlideChange={() => console.log('slide change')}>
+							{carousel('interieur')}
+						</Swiper>
 					</div>
 				</div>
 			</section>
@@ -157,7 +175,16 @@ const Gite = ({ gite, photos, reviews }) => {
 				<h2 className='text-center'>Partie piscine</h2>
 				<div className='row'>
 					<div className='col-md-6'>
-						<Carousel>{carousel('piscine')}</Carousel>
+						<Swiper
+							spaceBetween={50}
+							slidesPerView={1}
+							navigation
+							pagination={{ clickable: true }}
+							scrollbar={{ draggable: true }}
+							onSwiper={(swiper) => console.log(swiper)}
+							onSlideChange={() => console.log('slide change')}>
+							{carousel('piscine')}
+						</Swiper>
 					</div>
 					<div className='col-md-6'>{gite.textePiscine}</div>
 				</div>
