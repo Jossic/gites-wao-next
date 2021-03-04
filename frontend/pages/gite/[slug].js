@@ -165,7 +165,11 @@ const Gite = ({ gite, photos, reviews }) => {
 						{carousel('exterieur')}
 					</Swiper>
 				</Grid>
-				<Grid item md={6} xs={12}>
+				<Grid
+					item
+					md={6}
+					xs={12}
+					style={{ paddingLeft: '20px', paddingRight: '20px' }}>
 					<Typography variant='body1' component='p'>
 						{gite.texteExterieur}
 					</Typography>
@@ -188,14 +192,23 @@ const Gite = ({ gite, photos, reviews }) => {
 
 	const sectionInterieur = () => (
 		<Paper style={{ padding: '10px', marginTop: '10px' }}>
-			<h2 className='text-center'>Intérieur</h2>
+			<Typography
+				variant='h3'
+				component='h2'
+				style={{ textAlign: 'center', marginBottom: '10px' }}>
+				Intérieur
+			</Typography>
 			<Grid
 				container
 				direction='row'
 				justify='space-around'
 				alignItems='flex-start'
 				spacing={3}>
-				<Grid item md={6} xs={12}>
+				<Grid
+					item
+					md={6}
+					xs={12}
+					style={{ paddingLeft: '20px', paddingRight: '20px' }}>
 					<Typography variant='body1' component='p'>
 						{gite.texteInterieur}
 					</Typography>
@@ -244,7 +257,13 @@ const Gite = ({ gite, photos, reviews }) => {
 
 	const sectionPiscine = () => (
 		<Paper style={{ padding: '10px', marginTop: '10px' }}>
-			<h2 className='text-center'>Piscine</h2>
+			<Typography
+				variant='h3'
+				component='h2'
+				style={{ textAlign: 'center', marginBottom: '10px' }}>
+				Piscine
+			</Typography>
+
 			<Grid
 				container
 				direction='row'
@@ -274,7 +293,11 @@ const Gite = ({ gite, photos, reviews }) => {
 						{carousel('piscine')}
 					</Swiper>
 				</Grid>
-				<Grid item md={6} xs={12}>
+				<Grid
+					item
+					md={6}
+					xs={12}
+					style={{ paddingLeft: '20px', paddingRight: '20px' }}>
 					<Typography variant='body1' component='p'>
 						{gite.textePiscine}
 					</Typography>
