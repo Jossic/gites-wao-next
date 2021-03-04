@@ -3,11 +3,17 @@ import React, { useState } from 'react';
 import Layout from '../../components/layout/Layout';
 import { API, DOMAIN, APP_NAME } from '../../config';
 // import Swiper core and required modules
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, {
+	Navigation,
+	Pagination,
+	Scrollbar,
+	A11y,
+	Controller,
+	Thumbs,
+} from 'swiper';
 
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Controller, Thumbs]);
 import {
 	listGiteDetails,
 	listGitesNoms,
@@ -60,7 +66,9 @@ const Gite = ({ gite, photos, reviews }) => {
 		setState({ open: true });
 	};
 
-	const [thumbsSwiper, setThumbsSwiper] = useState(null);
+	const [thumbsSwiperExt, setThumbsSwiperExt] = useState(null);
+	const [thumbsSwiperInt, setThumbsSwiperInt] = useState(null);
+	const [thumbsSwiperPis, setThumbsSwiperPis] = useState(null);
 
 	const jumbotron = () => (
 		<section>
@@ -87,33 +95,18 @@ const Gite = ({ gite, photos, reviews }) => {
 		});
 		return filteredPhotos.map((photo, i) => (
 			<SwiperSlide
-			// mediaBackgroundStyle={{ backgroundColor: red[400] }}
-			// style={{ backgroundColor: red[600] }}
-			// title={photo.titreCarousel}
-			// subtitle={photo.texteCarousel}
-			>
+				key={`slide-${i}`}
+				tag='li'
+				style={{ listStyle: 'none' }}>
 				<Image
 					// className='d-block w-100'
 					src={photo.location}
 					alt={photo.alt}
+					style={{ listStyle: 'none' }}
 					width={500}
 					height={375}
 				/>
 			</SwiperSlide>
-
-			// <Carousel.Item key={i}>
-			// 	<Image
-			// 		className='d-block w-100'
-			// 		src={photo.location}
-			// 		alt={photo.alt}
-			// 		width={500}
-			// 		height={375}
-			// 	/>
-			// 	<Carousel.Caption>
-			// 		<h4>{photo.titreCarousel}</h4>
-			// 		<p>{photo.texteCarousel}</p>
-			// 	</Carousel.Caption>
-			// </Carousel.Item>
 		));
 	};
 
@@ -124,19 +117,26 @@ const Gite = ({ gite, photos, reviews }) => {
 				<div className='row'>
 					<div className='col-md-6'>
 						<Swiper
-							spaceBetween={50}
+							id='mainExt'
+							spaceBetween={0}
 							slidesPerView={1}
+							thumbs={{ swiper: thumbsSwiperExt }}
 							navigation
 							pagination={{ clickable: true }}
 							scrollbar={{ draggable: true }}
-							onSwiper={setThumbsSwiper}
+							onSwiper={setThumbsSwiperExt}
 							watchSlidesVisibility
 							watchSlidesProgress
 							onSlideChange={() => console.log('slide change')}>
 							{carousel('exterieur')}
 						</Swiper>
-
-						{/* <Carousel>{carousel('exterieur')}</Carousel> */}
+						<Swiper
+							id='thumbsExt'
+							spaceBetween={5}
+							slidesPerView={5}
+							onSwiper={setThumbsSwiperExt}>
+							{carousel('exterieur')}
+						</Swiper>
 					</div>
 					<div className='col-md-6'>{gite.texteExterieur}</div>
 				</div>
@@ -152,15 +152,27 @@ const Gite = ({ gite, photos, reviews }) => {
 					<div className='col-md-6'>{gite.texteInterieur}</div>
 					<div className='col-md-6'>
 						<Swiper
-							spaceBetween={50}
+							id='mainInt'
+							spaceBetween={0}
 							slidesPerView={1}
+							thumbs={{ swiper: thumbsSwiperInt }}
 							navigation
 							pagination={{ clickable: true }}
 							scrollbar={{ draggable: true }}
-							onSwiper={setThumbsSwiper}
+							onSwiper={setThumbsSwiperInt}
 							watchSlidesVisibility
 							watchSlidesProgress
+							onReachEnd={(swiper) => (swiper.activeIndex = 0)}
 							onSlideChange={() => console.log('slide change')}>
+							{carousel('interieur')}
+						</Swiper>
+						<Swiper
+							id='thumbsInt'
+							spaceBetween={5}
+							slidesPerView={5}
+							watchSlidesVisibility
+							watchSlidesProgress
+							onSwiper={setThumbsSwiperInt}>
 							{carousel('interieur')}
 						</Swiper>
 					</div>
@@ -176,13 +188,24 @@ const Gite = ({ gite, photos, reviews }) => {
 				<div className='row'>
 					<div className='col-md-6'>
 						<Swiper
-							spaceBetween={50}
+							id='mainPis'
+							spaceBetween={0}
 							slidesPerView={1}
+							thumbs={{ swiper: thumbsSwiperPis }}
 							navigation
 							pagination={{ clickable: true }}
 							scrollbar={{ draggable: true }}
-							onSwiper={(swiper) => console.log(swiper)}
+							onSwiper={setThumbsSwiperPis}
+							watchSlidesVisibility
+							watchSlidesProgress
 							onSlideChange={() => console.log('slide change')}>
+							{carousel('piscine')}
+						</Swiper>
+						<Swiper
+							id='thumbsPis'
+							spaceBetween={5}
+							slidesPerView={5}
+							onSwiper={setThumbsSwiperPis}>
 							{carousel('piscine')}
 						</Swiper>
 					</div>
