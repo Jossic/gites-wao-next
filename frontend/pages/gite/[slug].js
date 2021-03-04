@@ -115,7 +115,6 @@ const Gite = ({ gite, photos, reviews }) => {
 					src={photo.location}
 					alt={photo.alt}
 					style={{ listStyle: 'none' }}
-					srcSet
 					layout='responsive'
 					width={500}
 					height={375}
@@ -320,32 +319,42 @@ const Gite = ({ gite, photos, reviews }) => {
 
 	const carouselReviews = () =>
 		reviews.map((review, i) => (
-			<Carousel.Item key={i}>
-				<Image
-					className='d-block w-100'
-					src={'/images/grey.jpg'}
-					alt={'texte'}
-					width={2000}
-					height={800}
-				/>
-				<Carousel.Caption>
-					<p style={{ marginTop: '-250px' }}>{review.commentaire}</p>
+			<SwiperSlide
+				key={`slide-${i}`}
+				style={{ border: '1px solid #717171', margin: '8px' }}>
+				<div style={{ margin: '5px' }}>
+					<p>{review.commentaire}</p>
 					<hr />
 					<p>
 						<Note value={review.note} />
 					</p>
 					<h4>{review.client}</h4>
-				</Carousel.Caption>
-			</Carousel.Item>
+				</div>
+			</SwiperSlide>
 		));
 
 	const sectionReviews = () => (
 		<Paper style={{ padding: '10px', marginTop: '10px' }}>
-			<h2 className='text-center'>
+			<Typography
+				variant='h3'
+				component='h2'
+				style={{ textAlign: 'center', marginBottom: '10px' }}>
 				Ce que nos clients disent de ce gîte
-			</h2>
-
-			<Carousel>{carouselReviews()}</Carousel>
+			</Typography>
+			<Swiper
+				id='mainPis'
+				style={{ padding: '10px' }}
+				spaceBetween={20}
+				slidesPerView={3}
+				navigation
+				pagination={{ clickable: true }}
+				scrollbar={{ draggable: true }}
+				onSwiper={() => console.log('swipe')}
+				watchSlidesVisibility
+				watchSlidesProgress
+				onSlideChange={() => console.log('slide change')}>
+				{carouselReviews()}
+			</Swiper>
 		</Paper>
 	);
 
