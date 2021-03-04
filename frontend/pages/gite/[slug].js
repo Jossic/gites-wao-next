@@ -4,6 +4,7 @@ import Layout from '../../components/layout/Layout';
 import { API, DOMAIN, APP_NAME } from '../../config';
 // import Swiper core and required modules
 import { Swiper, SwiperSlide } from 'swiper/react';
+
 import SwiperCore, {
 	Navigation,
 	Pagination,
@@ -20,13 +21,26 @@ import {
 	listPhotosByNom,
 } from '../../actions/giteActions';
 import Image from 'next/image';
-import { Jumbotron } from 'reactstrap';
 import { Carousel } from 'react-bootstrap';
 import ContactForm from '../../components/ContactForm';
 import { listReviewsBySlug } from '../../actions/reviewActions';
 import Note from '../../components/admin/Note';
+import { Paper, Container, Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		flexGrow: 1,
+	},
+	paper: {
+		padding: theme.spacing(2),
+		textAlign: 'center',
+		color: theme.palette.text.secondary,
+	},
+}));
 
 const Gite = ({ gite, photos, reviews }) => {
+	const classes = useStyles();
 	const head = () => (
 		<Head>
 			<title>
@@ -72,20 +86,18 @@ const Gite = ({ gite, photos, reviews }) => {
 
 	const jumbotron = () => (
 		<section>
-			<div className='container'>
-				<Jumbotron>
-					<h1 className='display-3'>
-						Présentation du gîte {gite.nom}
-					</h1>
-					<p className='lead'>{gite.presGiteSEO}</p>
-					<hr className='my-2' />
-					<p>
-						It uses utility classes for typography and spacing to
-						space content out within the larger container.
-					</p>
-					<p className='lead'></p>
-				</Jumbotron>
-			</div>
+			<Paper
+				className={classes.paper}
+				style={{ padding: '10px', marginTop: '10px' }}>
+				<h1 className='display-3'>Présentation du gîte {gite.nom}</h1>
+				<p className='lead'>{gite.presGiteSEO}</p>
+				<hr className='my-2' />
+				<p>
+					It uses utility classes for typography and spacing to space
+					content out within the larger container.
+				</p>
+				<p className='lead'></p>
+			</Paper>
 		</section>
 	);
 
@@ -103,6 +115,8 @@ const Gite = ({ gite, photos, reviews }) => {
 					src={photo.location}
 					alt={photo.alt}
 					style={{ listStyle: 'none' }}
+					srcSet
+					layout='responsive'
 					width={500}
 					height={375}
 				/>
@@ -111,108 +125,174 @@ const Gite = ({ gite, photos, reviews }) => {
 	};
 
 	const sectionExterieur = () => (
-		<div className='container'>
-			<section>
-				<h2 className='text-center'>Partie extérieur</h2>
-				<div className='row'>
-					<div className='col-md-6'>
-						<Swiper
-							id='mainExt'
-							spaceBetween={0}
-							slidesPerView={1}
-							thumbs={{ swiper: thumbsSwiperExt }}
-							navigation
-							pagination={{ clickable: true }}
-							scrollbar={{ draggable: true }}
-							onSwiper={setThumbsSwiperExt}
-							watchSlidesVisibility
-							watchSlidesProgress
-							onSlideChange={() => console.log('slide change')}>
-							{carousel('exterieur')}
-						</Swiper>
-						<Swiper
-							id='thumbsExt'
-							spaceBetween={5}
-							slidesPerView={5}
-							onSwiper={setThumbsSwiperExt}>
-							{carousel('exterieur')}
-						</Swiper>
-					</div>
-					<div className='col-md-6'>{gite.texteExterieur}</div>
-				</div>
-			</section>
-		</div>
+		<Paper
+			style={{
+				padding: '10px',
+				marginTop: '10px',
+			}}>
+			<Typography
+				variant='h3'
+				component='h2'
+				style={{ textAlign: 'center', marginBottom: '10px' }}>
+				Extérieur
+			</Typography>
+			<Grid
+				container
+				direction='row'
+				justify='space-around'
+				alignItems='flex-start'
+				spacing={3}>
+				<Grid item md={6} xs={12}>
+					<Swiper
+						id='mainExt'
+						spaceBetween={0}
+						slidesPerView={1}
+						thumbs={{ swiper: thumbsSwiperExt }}
+						navigation
+						pagination={{ clickable: true }}
+						scrollbar={{ draggable: true }}
+						onSwiper={setThumbsSwiperExt}
+						watchSlidesVisibility
+						watchSlidesProgress
+						onSlideChange={() => console.log('slide change')}>
+						{carousel('exterieur')}
+					</Swiper>
+					<Swiper
+						id='thumbsExt'
+						spaceBetween={5}
+						slidesPerView={5}
+						onSwiper={setThumbsSwiperExt}>
+						{carousel('exterieur')}
+					</Swiper>
+				</Grid>
+				<Grid item md={6} xs={12}>
+					<Typography variant='body1' component='p'>
+						{gite.texteExterieur}
+					</Typography>
+					<hr />
+					<Typography
+						variant='h6'
+						component='h3'
+						style={{ marginBottom: '10px' }}>
+						Liste des equipements :
+					</Typography>
+					<ul>
+						{gite.equipementExterieur.map((equipement) => (
+							<li>{equipement}</li>
+						))}
+					</ul>
+				</Grid>
+			</Grid>
+		</Paper>
 	);
 
 	const sectionInterieur = () => (
-		<div className='container'>
-			<section>
-				<h2 className='text-center'>Partie intérieur</h2>
-				<div className='row'>
-					<div className='col-md-6'>{gite.texteInterieur}</div>
-					<div className='col-md-6'>
-						<Swiper
-							id='mainInt'
-							spaceBetween={0}
-							slidesPerView={1}
-							thumbs={{ swiper: thumbsSwiperInt }}
-							navigation
-							pagination={{ clickable: true }}
-							scrollbar={{ draggable: true }}
-							onSwiper={setThumbsSwiperInt}
-							watchSlidesVisibility
-							watchSlidesProgress
-							onReachEnd={(swiper) => (swiper.activeIndex = 0)}
-							onSlideChange={() => console.log('slide change')}>
-							{carousel('interieur')}
-						</Swiper>
-						<Swiper
-							id='thumbsInt'
-							spaceBetween={5}
-							slidesPerView={5}
-							watchSlidesVisibility
-							watchSlidesProgress
-							onSwiper={setThumbsSwiperInt}>
-							{carousel('interieur')}
-						</Swiper>
-					</div>
-				</div>
-			</section>
-		</div>
+		<Paper style={{ padding: '10px', marginTop: '10px' }}>
+			<h2 className='text-center'>Intérieur</h2>
+			<Grid
+				container
+				direction='row'
+				justify='space-around'
+				alignItems='flex-start'
+				spacing={3}>
+				<Grid item md={6} xs={12}>
+					<Typography variant='body1' component='p'>
+						{gite.texteInterieur}
+					</Typography>
+					<hr />
+					<Typography
+						variant='h6'
+						component='h3'
+						style={{ marginBottom: '10px' }}>
+						Liste des equipements :
+					</Typography>
+					<ul>
+						{gite.equipementInterieur.map((equipement) => (
+							<li>{equipement}</li>
+						))}
+					</ul>
+				</Grid>
+				<Grid item md={6} xs={12}>
+					<Swiper
+						id='mainInt'
+						spaceBetween={0}
+						slidesPerView={1}
+						thumbs={{ swiper: thumbsSwiperInt }}
+						navigation
+						pagination={{ clickable: true }}
+						scrollbar={{ draggable: true }}
+						onSwiper={setThumbsSwiperInt}
+						watchSlidesVisibility
+						watchSlidesProgress
+						onReachEnd={(swiper) => (swiper.activeIndex = 0)}
+						onSlideChange={() => console.log('slide change')}>
+						{carousel('interieur')}
+					</Swiper>
+					<Swiper
+						id='thumbsInt'
+						spaceBetween={5}
+						slidesPerView={5}
+						watchSlidesVisibility
+						watchSlidesProgress
+						onSwiper={setThumbsSwiperInt}>
+						{carousel('interieur')}
+					</Swiper>
+				</Grid>
+			</Grid>
+		</Paper>
 	);
 
 	const sectionPiscine = () => (
-		<div className='container'>
-			<section>
-				<h2 className='text-center'>Partie piscine</h2>
-				<div className='row'>
-					<div className='col-md-6'>
-						<Swiper
-							id='mainPis'
-							spaceBetween={0}
-							slidesPerView={1}
-							thumbs={{ swiper: thumbsSwiperPis }}
-							navigation
-							pagination={{ clickable: true }}
-							scrollbar={{ draggable: true }}
-							onSwiper={setThumbsSwiperPis}
-							watchSlidesVisibility
-							watchSlidesProgress
-							onSlideChange={() => console.log('slide change')}>
-							{carousel('piscine')}
-						</Swiper>
-						<Swiper
-							id='thumbsPis'
-							spaceBetween={5}
-							slidesPerView={5}
-							onSwiper={setThumbsSwiperPis}>
-							{carousel('piscine')}
-						</Swiper>
-					</div>
-					<div className='col-md-6'>{gite.textePiscine}</div>
-				</div>
-			</section>
-		</div>
+		<Paper style={{ padding: '10px', marginTop: '10px' }}>
+			<h2 className='text-center'>Piscine</h2>
+			<Grid
+				container
+				direction='row'
+				justify='space-around'
+				alignItems='flex-start'
+				spacing={3}>
+				<Grid item md={6} xs={12}>
+					<Swiper
+						id='mainPis'
+						spaceBetween={0}
+						slidesPerView={1}
+						thumbs={{ swiper: thumbsSwiperPis }}
+						navigation
+						pagination={{ clickable: true }}
+						scrollbar={{ draggable: true }}
+						onSwiper={setThumbsSwiperPis}
+						watchSlidesVisibility
+						watchSlidesProgress
+						onSlideChange={() => console.log('slide change')}>
+						{carousel('piscine')}
+					</Swiper>
+					<Swiper
+						id='thumbsPis'
+						spaceBetween={5}
+						slidesPerView={5}
+						onSwiper={setThumbsSwiperPis}>
+						{carousel('piscine')}
+					</Swiper>
+				</Grid>
+				<Grid item md={6} xs={12}>
+					<Typography variant='body1' component='p'>
+						{gite.textePiscine}
+					</Typography>
+					<hr />
+					<Typography
+						variant='h6'
+						component='h3'
+						style={{ marginBottom: '10px' }}>
+						Liste des equipements :
+					</Typography>
+					<ul>
+						{gite.equipementPiscine.map((equipement) => (
+							<li>{equipement}</li>
+						))}
+					</ul>
+				</Grid>
+			</Grid>
+		</Paper>
 	);
 
 	const carouselReviews = () =>
@@ -237,44 +317,43 @@ const Gite = ({ gite, photos, reviews }) => {
 		));
 
 	const sectionReviews = () => (
-		<div className='container'>
-			<section>
-				<h2 className='text-center'>
-					Ce que nos clients disent de ce gîte
-				</h2>
+		<Paper style={{ padding: '10px', marginTop: '10px' }}>
+			<h2 className='text-center'>
+				Ce que nos clients disent de ce gîte
+			</h2>
 
-				<Carousel>{carouselReviews()}</Carousel>
-			</section>
-		</div>
+			<Carousel>{carouselReviews()}</Carousel>
+		</Paper>
 	);
 
 	const sectionVideoContact = () => (
-		<div className='container'>
-			<section>
-				<div className='row'>
-					<div className='col-md-6'>
-						<h2 className='text-center'>Tour du gîte en vidéo</h2>
-						<div
-							className='mt-5'
-							dangerouslySetInnerHTML={afficheVideo()}
-						/>
-					</div>
-					<div className='col-md-6'>
-						<h2 className='text-center'>Ecrivez-nous !</h2>
-						<ContactForm />
-					</div>
-				</div>
-			</section>
-		</div>
+		<Paper style={{ padding: '10px', marginTop: '10px' }}>
+			<Grid
+				container
+				direction='row'
+				justify='space-around'
+				alignItems='flex-start'
+				spacing={3}>
+				<Grid item md={6} xs={12}>
+					<h2 className='text-center'>Tour du gîte en vidéo</h2>
+					<div
+						className='mt-5'
+						dangerouslySetInnerHTML={afficheVideo()}
+					/>
+				</Grid>
+				<Grid item md={6} xs={12}>
+					<h2 className='text-center'>Ecrivez-nous !</h2>
+					<ContactForm />
+				</Grid>
+			</Grid>
+		</Paper>
 	);
 
 	const sectionCalendrier = () => (
-		<div className='container text-center'>
-			<section>
-				<h2 className='text-center'>Calendrier des disponibilités</h2>
-				<div dangerouslySetInnerHTML={afficheCalendrier()} />
-			</section>
-		</div>
+		<Paper style={{ padding: '10px', marginTop: '10px' }}>
+			<h2 className='text-center'>Calendrier des disponibilités</h2>
+			<div dangerouslySetInnerHTML={afficheCalendrier()} />
+		</Paper>
 	);
 
 	const sectionMap = () => (
@@ -292,24 +371,26 @@ const Gite = ({ gite, photos, reviews }) => {
 		<>
 			{head()}
 			<Layout>
-				{/* <h2>Infos du gite</h2> */}
-				{/* {JSON.stringify(gite)} */}
-				{jumbotron()}
-				<hr />
-				{sectionExterieur()}
-				<hr />
-				{sectionInterieur()}
-				<hr />
-				{sectionPiscine()}
-				<hr />
-				{/* {console.log(reviews)} */}
-				{sectionReviews()}
-				<hr />
-				{sectionVideoContact()}
-				<hr />
-				{sectionCalendrier()}
-				<hr />
-				{sectionMap()}
+				<Container>
+					{/* <h2>Infos du gite</h2> */}
+					{/* {JSON.stringify(gite)} */}
+					{jumbotron()}
+					<hr />
+					{sectionExterieur()}
+					<hr />
+					{sectionInterieur()}
+					<hr />
+					{sectionPiscine()}
+					<hr />
+					{/* {console.log(reviews)} */}
+					{sectionReviews()}
+					<hr />
+					{sectionVideoContact()}
+					<hr />
+					{sectionCalendrier()}
+					<hr />
+					{sectionMap()}
+				</Container>
 			</Layout>
 		</>
 	);
