@@ -90,8 +90,19 @@ const Gite = ({ gite, photos, reviews }) => {
 			<Paper
 				className={classes.paper}
 				style={{ padding: '10px', marginTop: '10px' }}>
-				<h1 className='display-3'>Présentation du gîte {gite.nom}</h1>
-				<p className='lead'>{gite.presGiteSEO}</p>
+				<Typography
+					variant='h2'
+					component='h1'
+					style={{ color: `${gite.couleur1}` }}>
+					Présentation du gîte {gite.nom}
+				</Typography>
+				<Typography
+					variant='subtitle1'
+					component='p'
+					style={{ color: `${gite.couleur1}` }}>
+					{gite.presGiteSEO}
+				</Typography>
+
 				<hr className='my-2' />
 				<p>{gite.texte}</p>
 				<p className='lead'></p>
@@ -437,14 +448,12 @@ const Gite = ({ gite, photos, reviews }) => {
 	);
 
 	const sectionMap = () => (
-		<div className='container text-center'>
-			<section>
-				<h2 className='text-center'>
-					Itinéraire conseillé depuis votre position
-				</h2>
-				<p>Affiche la map ici</p>
-			</section>
-		</div>
+		<Paper style={{ padding: '10px', marginTop: '10px' }}>
+			<h2 className='text-center'>
+				Itinéraire conseillé depuis votre position
+			</h2>
+			<p>Affiche la map ici</p>
+		</Paper>
 	);
 
 	return (
