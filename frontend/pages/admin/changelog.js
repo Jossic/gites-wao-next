@@ -22,7 +22,10 @@ const Changelog = () => {
 			<span className={classes.root}>Removed</span> 
 			<span className={classes.root}>Fixed</span>  */}
 			<ul>
-				<Typography variant='h4' component='h4'>
+				<Typography
+					variant='h4'
+					component='h4'
+					style={{ marginBottom: '10px' }}>
 					Unreleased
 				</Typography>
 
@@ -82,7 +85,10 @@ const Changelog = () => {
 					des réservation / clients)
 				</li>
 			</ul>
-			<Typography variant='h4' component='h4'>
+			<Typography
+				variant='h4'
+				component='h4'
+				style={{ marginBottom: '10px' }}>
 				New functionnality
 			</Typography>
 			<ul>
@@ -121,10 +127,22 @@ const Changelog = () => {
 					pastille nouveau message.
 				</li>
 			</ul>
-			<Typography variant='h4' component='h4'>
+			<Typography
+				variant='h4'
+				component='h4'
+				style={{ marginBottom: '10px' }}>
 				Updated
 			</Typography>
 			<ul>
+				<li>
+					<span className={classes.root}>Changed</span> 04/03/2021 -
+					17:00 - Correction de l'affichage du footer en bas de page
+				</li>
+				<li>
+					<span className={classes.root}>Changed</span> 04/03/2021 -
+					16:00 - Mise à jour de la page des gîtes, affichage de
+					toutes les informations
+				</li>
 				<li>
 					<span className={classes.root}>Changed</span> 03/03/2021 -
 					22:30 - Contrôles sur la soumission du formulaire de
@@ -148,15 +166,18 @@ const Changelog = () => {
 			</ul>
 
 			<ul>
-				<Typography variant='h4' component='h4'>
+				<Typography
+					variant='h4'
+					component='h4'
+					style={{ marginBottom: '10px' }}>
 					To fixe
 				</Typography>
 
-				<li>
+				{/* <li>
 					<span className={classes.root}>To fixe</span> Formulaire de
 					réservation, enpécher la soumission si certaines conditions
 					ne sont pas remplies.
-				</li>
+				</li> */}
 				<li>
 					<span className={classes.root}>To fixe</span> Gestion des
 					réservations - Corriger le tri sur client et sur gîte

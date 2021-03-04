@@ -503,7 +503,7 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 										defaultValue={false}
 									/>
 								}
-								label='Abritel'
+								label='Plateforme'
 							/>
 							<FormControlLabel
 								control={
@@ -513,7 +513,7 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 										defaultValue={false}
 									/>
 								}
-								label='Leboncoin'
+								label='Aucun contact'
 							/>
 							<FormControlLabel
 								control={
@@ -566,6 +566,7 @@ const ReservationForm = ({ snackbarShowMessage, gites }) => {
 				<Grid container>
 					<FormControl className={classes.formControl}>
 						<TextField
+							style={{ width: '100%' }}
 							inputRef={register}
 							name='infoCompl'
 							id='infoCompl'

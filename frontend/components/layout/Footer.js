@@ -49,8 +49,7 @@ const Footer = () => {
 					container
 					direction='row'
 					justify='space-around'
-					alignItems='center'
-					style={{ border: '10px red solid', width: '100%' }}>
+					alignItems='center'>
 					<Grid item xs={12} sm={6}>
 						<Typography variant='h4' component='h3' gutterBottom>
 							N'hésitez pas à nous contacter

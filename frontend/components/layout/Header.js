@@ -85,7 +85,7 @@ const Header = () => {
 						<Link href='/tarifs'>
 							<NavItem>
 								<NavLink style={{ cursor: 'pointer' }}>
-									Tarifs
+									Devis
 								</NavLink>
 							</NavItem>
 						</Link>

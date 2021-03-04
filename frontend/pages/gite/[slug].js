@@ -200,7 +200,8 @@ const Gite = ({ gite, photos, reviews }) => {
 						onSwiper={setThumbsSwiperExt}
 						watchSlidesVisibility
 						watchSlidesProgress
-						onSlideChange={() => console.log('slide change')}>
+						// onSlideChange={() => console.log('slide change')}
+					>
 						{carousel('exterieur')}
 					</Swiper>
 					<Swiper
@@ -216,7 +217,10 @@ const Gite = ({ gite, photos, reviews }) => {
 					md={6}
 					xs={12}
 					style={{ paddingLeft: '20px', paddingRight: '20px' }}>
-					<Typography variant='body1' component='p'>
+					<Typography
+						variant='body1'
+						component='p'
+						style={{ textAlign: 'center' }}>
 						{gite.texteExterieur}
 					</Typography>
 					<hr />
@@ -224,7 +228,7 @@ const Gite = ({ gite, photos, reviews }) => {
 						variant='h6'
 						component='h3'
 						style={{ marginBottom: '10px' }}>
-						Liste des equipements :
+						Liste des équipements :
 					</Typography>
 					<ul>
 						{gite.equipementExterieur.map((equipement) => (
@@ -259,7 +263,10 @@ const Gite = ({ gite, photos, reviews }) => {
 					md={6}
 					xs={12}
 					style={{ paddingLeft: '20px', paddingRight: '20px' }}>
-					<Typography variant='body1' component='p'>
+					<Typography
+						variant='body1'
+						component='p'
+						style={{ textAlign: 'center' }}>
 						{gite.texteInterieur}
 					</Typography>
 					<hr />
@@ -267,7 +274,7 @@ const Gite = ({ gite, photos, reviews }) => {
 						variant='h6'
 						component='h3'
 						style={{ marginBottom: '10px' }}>
-						Liste des equipements :
+						Liste des équipements :
 					</Typography>
 					<ul>
 						{gite.equipementInterieur.map((equipement) => (
@@ -288,7 +295,8 @@ const Gite = ({ gite, photos, reviews }) => {
 						watchSlidesVisibility
 						watchSlidesProgress
 						onReachEnd={(swiper) => (swiper.activeIndex = 0)}
-						onSlideChange={() => console.log('slide change')}>
+						// onSlideChange={() => console.log('slide change')}
+					>
 						{carousel('interieur')}
 					</Swiper>
 					<Swiper
@@ -336,7 +344,8 @@ const Gite = ({ gite, photos, reviews }) => {
 						onSwiper={setThumbsSwiperPis}
 						watchSlidesVisibility
 						watchSlidesProgress
-						onSlideChange={() => console.log('slide change')}>
+						// onSlideChange={() => console.log('slide change')}
+					>
 						{carousel('piscine')}
 					</Swiper>
 					<Swiper
@@ -352,7 +361,10 @@ const Gite = ({ gite, photos, reviews }) => {
 					md={6}
 					xs={12}
 					style={{ paddingLeft: '20px', paddingRight: '20px' }}>
-					<Typography variant='body1' component='p'>
+					<Typography
+						variant='body1'
+						component='p'
+						style={{ textAlign: 'center' }}>
 						{gite.textePiscine}
 					</Typography>
 					<hr />
@@ -360,7 +372,7 @@ const Gite = ({ gite, photos, reviews }) => {
 						variant='h6'
 						component='h3'
 						style={{ marginBottom: '10px' }}>
-						Liste des equipements :
+						Liste des équipements :
 					</Typography>
 					<ul>
 						{gite.equipementPiscine.map((equipement) => (
@@ -411,7 +423,8 @@ const Gite = ({ gite, photos, reviews }) => {
 				onSwiper={() => console.log('swipe')}
 				watchSlidesVisibility
 				watchSlidesProgress
-				onSlideChange={() => console.log('slide change')}>
+				// onSlideChange={() => console.log('slide change')}
+			>
 				{carouselReviews()}
 			</Swiper>
 		</Paper>

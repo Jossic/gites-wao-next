@@ -353,9 +353,9 @@ const FormLocation = ({ preloadedValues }) => {
 											defaultValue={false}
 										/>
 									}
-									label='Abritel'
+									label='Plateforme'
 								/>
-								<FormControlLabel
+								{/* <FormControlLabel
 									control={
 										<Checkbox
 											name='contactLeboncoin'
@@ -364,7 +364,7 @@ const FormLocation = ({ preloadedValues }) => {
 										/>
 									}
 									label='Leboncoin'
-								/>
+								/> */}
 								<FormControlLabel
 									control={
 										<Checkbox
