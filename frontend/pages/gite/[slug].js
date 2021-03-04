@@ -117,17 +117,40 @@ const Gite = ({ gite, photos, reviews }) => {
 					width={500}
 					height={375}
 				/>
-				<span style={{ position: 'relative', bottom: '30px' }}>
+				{/* <span style={{ position: 'relative', bottom: '30px' }}>
 					Texte
-				</span>
-				{/* <Paper>
+				</span> */}
+				<div
+					class='carousel-caption d-none d-md-block'
+					style={{ backgroundColor: 'rgba(72,72,72,0.6' }}>
 					<Typography variant='h5' component='h5'>
 						{photo.titreCarousel}
 					</Typography>
 					<Typography variant='body1' component='p'>
 						{photo.texteCarousel}
 					</Typography>
-				</Paper> */}
+				</div>
+			</SwiperSlide>
+		));
+	};
+	const vignette = (section) => {
+		const filteredPhotos = photos.filter((photo) => {
+			return photo.sectionAssociee === section;
+		});
+		return filteredPhotos.map((photo, i) => (
+			<SwiperSlide
+				key={`slide-${i}`}
+				tag='li'
+				style={{ listStyle: 'none' }}>
+				<Image
+					// className='d-block w-100'
+					src={photo.location}
+					alt={photo.alt}
+					style={{ listStyle: 'none' }}
+					layout='responsive'
+					width={500}
+					height={375}
+				/>
 			</SwiperSlide>
 		));
 	};
@@ -174,7 +197,7 @@ const Gite = ({ gite, photos, reviews }) => {
 						spaceBetween={5}
 						slidesPerView={5}
 						onSwiper={setThumbsSwiperExt}>
-						{carousel('exterieur')}
+						{vignette('exterieur')}
 					</Swiper>
 				</Grid>
 				<Grid
@@ -264,7 +287,7 @@ const Gite = ({ gite, photos, reviews }) => {
 						watchSlidesVisibility
 						watchSlidesProgress
 						onSwiper={setThumbsSwiperInt}>
-						{carousel('interieur')}
+						{vignette('interieur')}
 					</Swiper>
 				</Grid>
 			</Grid>
@@ -310,7 +333,7 @@ const Gite = ({ gite, photos, reviews }) => {
 						spaceBetween={5}
 						slidesPerView={5}
 						onSwiper={setThumbsSwiperPis}>
-						{carousel('piscine')}
+						{vignette('piscine')}
 					</Swiper>
 				</Grid>
 				<Grid
