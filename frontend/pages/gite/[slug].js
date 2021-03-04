@@ -80,6 +80,7 @@ const Gite = ({ gite, photos, reviews }) => {
 		setState({ open: true });
 	};
 
+	const couleurGite = gite.couleur1;
 	const [thumbsSwiperExt, setThumbsSwiperExt] = useState(null);
 	const [thumbsSwiperInt, setThumbsSwiperInt] = useState(null);
 	const [thumbsSwiperPis, setThumbsSwiperPis] = useState(null);
@@ -92,10 +93,7 @@ const Gite = ({ gite, photos, reviews }) => {
 				<h1 className='display-3'>Présentation du gîte {gite.nom}</h1>
 				<p className='lead'>{gite.presGiteSEO}</p>
 				<hr className='my-2' />
-				<p>
-					It uses utility classes for typography and spacing to space
-					content out within the larger container.
-				</p>
+				<p>{gite.texte}</p>
 				<p className='lead'></p>
 			</Paper>
 		</section>
@@ -119,6 +117,17 @@ const Gite = ({ gite, photos, reviews }) => {
 					width={500}
 					height={375}
 				/>
+				<span style={{ position: 'relative', bottom: '30px' }}>
+					Texte
+				</span>
+				{/* <Paper>
+					<Typography variant='h5' component='h5'>
+						{photo.titreCarousel}
+					</Typography>
+					<Typography variant='body1' component='p'>
+						{photo.texteCarousel}
+					</Typography>
+				</Paper> */}
 			</SwiperSlide>
 		));
 	};
@@ -132,7 +141,11 @@ const Gite = ({ gite, photos, reviews }) => {
 			<Typography
 				variant='h3'
 				component='h2'
-				style={{ textAlign: 'center', marginBottom: '10px' }}>
+				style={{
+					textAlign: 'center',
+					marginBottom: '10px',
+					backgroundColor: `${gite.couleur1}`,
+				}}>
 				Extérieur
 			</Typography>
 			<Grid
@@ -194,7 +207,11 @@ const Gite = ({ gite, photos, reviews }) => {
 			<Typography
 				variant='h3'
 				component='h2'
-				style={{ textAlign: 'center', marginBottom: '10px' }}>
+				style={{
+					textAlign: 'center',
+					marginBottom: '10px',
+					backgroundColor: `${gite.couleur1}`,
+				}}>
 				Intérieur
 			</Typography>
 			<Grid
@@ -259,7 +276,11 @@ const Gite = ({ gite, photos, reviews }) => {
 			<Typography
 				variant='h3'
 				component='h2'
-				style={{ textAlign: 'center', marginBottom: '10px' }}>
+				style={{
+					textAlign: 'center',
+					marginBottom: '10px',
+					backgroundColor: `${gite.couleur1}`,
+				}}>
 				Piscine
 			</Typography>
 
@@ -338,7 +359,11 @@ const Gite = ({ gite, photos, reviews }) => {
 			<Typography
 				variant='h3'
 				component='h2'
-				style={{ textAlign: 'center', marginBottom: '10px' }}>
+				style={{
+					textAlign: 'center',
+					marginBottom: '10px',
+					backgroundColor: `${gite.couleur1}`,
+				}}>
 				Ce que nos clients disent de ce gîte
 			</Typography>
 			<Swiper
